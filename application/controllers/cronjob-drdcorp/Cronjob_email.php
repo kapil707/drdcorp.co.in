@@ -18,6 +18,11 @@ class Cronjob_email extends CI_Controller
 		echo "send email";
 	}
 	
+	public function test()
+	{
+		echo "hello";
+	}
+
 	public function test_email()
 	{
 		$email = $this->phpmailer_lib->load();
