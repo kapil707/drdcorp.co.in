@@ -1,6 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 /*
 | -------------------------------------------------------------------
 | AUTO-LOADER
@@ -29,7 +28,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | 7. Models
 |
 */
-
 /*
 | -------------------------------------------------------------------
 |  Auto-load Packages
@@ -40,7 +38,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $autoload['packages'] = array();
-
 /*
 | -------------------------------------------------------------------
 |  Auto-load Libraries
@@ -58,8 +55,7 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array('email');
-
+$autoload['libraries'] = array('database', 'email', 'session','form_validation','breadcrumbs','pagination');
 /*
 | -------------------------------------------------------------------
 |  Auto-load Drivers
@@ -80,7 +76,6 @@ $autoload['libraries'] = array('email');
 |
 */
 $autoload['drivers'] = array();
-
 /*
 | -------------------------------------------------------------------
 |  Auto-load Helper Files
@@ -89,8 +84,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array();
-
+$autoload['helper'] = array('url', 'file', 'security');
 /*
 | -------------------------------------------------------------------
 |  Auto-load Config files
@@ -104,7 +98,6 @@ $autoload['helper'] = array();
 |
 */
 $autoload['config'] = array();
-
 /*
 | -------------------------------------------------------------------
 |  Auto-load Language files
@@ -118,7 +111,6 @@ $autoload['config'] = array();
 |
 */
 $autoload['language'] = array();
-
 /*
 | -------------------------------------------------------------------
 |  Auto-load Models
@@ -132,4 +124,4 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array();
+$autoload['model'] = array('Scheme_Model','Admin_Model','Image_Model');

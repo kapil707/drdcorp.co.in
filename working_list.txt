@@ -1,0 +1,24 @@
+UPDATE tbl_item
+SET time = TIME(FROM_UNIXTIME(timestamp));
+
+/******git**********/
+git pull 
+git add "-A"
+git commit -m "add"
+git pull
+git push
+
+git add "-A"
+git commit -m "add"
+
+git branch -M backup-24-11-08
+git push -u origin backup-24-11-08
+
+/*******************/
+tbl_slider1 -> tbl_slider
+tbl_medicine_menu_nnn -> tbl_medicine_menu - no need
+tbl_home_nnn -> tbl_home
+tbl_division_category_nnn -> tbl_division_category - no need
+tbl_division_wise_nnn -> tbl_division_wise
+tbl_item_category_nnn -> tbl_item_category
+tbl_item -> tbl_item_wise
