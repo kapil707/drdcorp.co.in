@@ -2,11 +2,16 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Cronjob_email extends CI_Controller 
 {
-	// public function __construct(){
-	// 	parent::__construct();
-	// 	// Load model
-	// 	//$this->load->model("model-drdcorp/EmailModel");
-	// }
+	public $email;
+	public $phpmailer_lib;
+	
+	public function __construct(){
+		parent::__construct();
+		
+		$this->load->library('phpmailer_lib');
+		// Load model
+		//$this->load->model("model-drdcorp/EmailModel");
+	}
 	
 	public function send_email() {
 		$this->EmailModel->send_email();
@@ -15,7 +20,6 @@ class Cronjob_email extends CI_Controller
 	
 	public function test_email()
 	{
-		$this->load->library('phpmailer_lib');
 		$email = $this->phpmailer_lib->load();
 		
 		$subject = "drd local test ok";

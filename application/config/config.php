@@ -1,15 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-date_default_timezone_set('Asia/Kolkata');
-setlocale(LC_MONETARY, 'en_IN');
-//session_start();
-//error_reporting(0);
-define("api_url","http://49.205.182.192:7272/");
-//define("api_url","https://2f7985e091f4.ngrok.io/drd_local_server/corporate_api/");
-define("server_type","0"); // 0 ka maltb ha same server or 1 ka matlb ha alg server say
-define("site_v","41");
-define("img_url_site","https://www.drdweb.co.in/");
-define("main_site","https://www.drdistributor.com/");
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
@@ -31,10 +21,9 @@ define("main_site","https://www.drdistributor.com/");
 | If you need to allow multiple domains, remember that this file is still
 | a PHP script and you can easily do that on your own.
 |
-*//*
+*/
 define('APP_URL', ($_SERVER['SERVER_PORT'] == 443 ? 'https' : 'http') . "://{$_SERVER['SERVER_NAME']}".str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']));
-$config['base_url'] = APP_URL;*/
-$config['base_url'] = "https://www.drdweb.co.in/";
+$config['base_url'] = APP_URL;
 /*
 |--------------------------------------------------------------------------
 | Index File
