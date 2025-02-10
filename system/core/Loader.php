@@ -50,7 +50,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @link		https://codeigniter.com/userguide3/libraries/loader.html
  */
 class CI_Loader {
-
+	public $input;
+	public $lang;
+	public $security;
+	public $router;
+	public $output;
+	public $uri;
+	public $utf8;
+	public $log;
+	public $config;
+	public $hooks;
+	public $benchmark;
+	public $load;
 	// All these are set automatically. Don't mess with them.
 	/**
 	 * Nesting level of the output buffering mechanism
