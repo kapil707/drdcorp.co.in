@@ -4,7 +4,7 @@ class Cronjob_email extends CI_Controller
 {
 	public $email;
 	public $phpmailer_lib;
-	
+
 	public function __construct(){
 		parent::__construct();
 		
@@ -37,7 +37,7 @@ class Cronjob_email extends CI_Controller
 		$email->AddAddress($email1);
 		
 		$email->Subject   	= $subject;
-		$email->Body 		= $message;
+		$email->Body 		= $message . time();
 
 		$email->IsHTML(true);
 
