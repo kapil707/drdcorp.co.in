@@ -2,12 +2,9 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 class CorprateReport extends CI_Model
 {
-    protected $db; // इसे पहले ही डिफाइन कर दें
-
-    public function __construct() {
-        parent::__construct();
-        $this->db = $this->load->database(); // या ऑटो-लोड से लोड करें
-    }
+	public function __construct(){
+		parent::__construct();
+	}
 
 	function sendReport() {
 		$this->db->select('tbl_corporate.memail, stock_and_sales_analysis_daily_email, item_wise_report_daily_email, chemist_wise_report_daily_email, tbl_corporate_other.status, tbl_corporate.compcode, tbl_corporate.company_full_name, tbl_corporate.division, tbl_corporate.id, tbl_corporate_other.id as id1, tbl_corporate.code');
