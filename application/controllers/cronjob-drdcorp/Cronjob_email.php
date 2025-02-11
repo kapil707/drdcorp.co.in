@@ -10,7 +10,7 @@ class Cronjob_email extends CI_Controller
 		
 		$this->load->library('phpmailer_lib');
 		// Load model
-		//$this->load->model("model-drdcorp/EmailModel");
+		$this->load->model("model-drdcorp/CorprateReport");
 	}
 	
 	public function send_email() {
@@ -20,6 +20,7 @@ class Cronjob_email extends CI_Controller
 	
 	public function test()
 	{
+		$this->CorprateReport->sendReport();
 		echo "hello";
 	}
 
