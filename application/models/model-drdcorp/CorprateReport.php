@@ -11,7 +11,7 @@ class CorprateReport extends CI_Model
         $this->db->from('tbl_corporate');
         $this->db->join('tbl_corporate_other', 'tbl_corporate.code = tbl_corporate_other.code');
         $this->db->where('tbl_corporate_other.daily_status', 0);
-        $this->db->limit(100);
+        $this->db->limit(10);
 
         $query = $this->db->get();
         $result = $query->result();
