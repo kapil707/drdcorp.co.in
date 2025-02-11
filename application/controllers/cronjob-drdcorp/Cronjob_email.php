@@ -70,7 +70,7 @@ class Cronjob_email extends CI_Controller
 		$email = $this->phpmailer_lib->load();
 		
 		$subject = "drd local test ok";
-		$message = "drd local test ok";
+		$message = $this->get_body();
 		
 		$addreplyto 		= "application@drdistributor.com";
 		$addreplyto_name 	= "Vipul DRD";
@@ -104,5 +104,27 @@ class Cronjob_email extends CI_Controller
 		}
 		echo "<pre>";
 		print_r($email);
+	}
+
+	public function get_body(){
+
+		$today_date = date("d-M-y");
+		
+		$file_name1 = "ChemistWiseReport-1493-.xlsx";
+		$folder_dt = date('Y-m-d');
+		if($file_name1){
+			$file_name1 = "corporate_report/".$folder_dt."/".$file_name1;
+			$url1 = "https://www.drdcorp.co.in/".$file_name1;
+			$url1 = "<a href='".$url1."'>".$file_name_1."</a><br><br>";
+		}
+
+		$subject = "Daily Report (".$today_date.") ".ucwords(strtolower($company_full_name))." (".$user_division.")";
+		$message = "Sir<br>It is the sales data as you have sought<br>";
+		$message.= $url1;
+		//$message.= $url2;
+		//$message.= $url3;
+		$message.= "Please download the file as in the links above for your reference.<br>Thanks and regards<br><br>D.R. Distributors Pvt Ltd<br>Notice & Disclaimer - This email and any files transmitted with it contain Proprietary, privileged and confidential information and/or information protected by intellectual property rights and is only for the use of the intended recipient of this message. If you are not the intended recipient, please delete or destroy this and all copies of this message along with the attachments immediately. You are hereby notified and directed that (1) if you are not the named and intended addressee you shall not disseminate, distribute or copy this e-mail, and (2) any offer for product/service shall be subject to a final evaluation of relevant patent status. Company cannot guarantee that e-mail communications are secure or error-free, as information could be intercepted, corrupted, amended, lost, destroyed, arrive late or incomplete, or may contain viruses. Company does not accept responsibility for any loss or damage arising from the use of this email or attachments.";
+
+		return $message;
 	}
 }
