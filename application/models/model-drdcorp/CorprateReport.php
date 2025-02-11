@@ -11,14 +11,15 @@ class CorprateReport extends CI_Model
         $this->db->from('tbl_corporate');
         $this->db->join('tbl_corporate_other', 'tbl_corporate.code = tbl_corporate_other.code');
         $this->db->where('tbl_corporate_other.daily_status', 0);
-        $this->db->limit(1);
+        $this->db->limit(100);
 
         $query = $this->db->get();
         $result = $query->result();
 		foreach($result as $row)
 		{
 			/************************************************/
-			echo $memail         = $row->memail;
+			echo $memail = $row->memail;
+            echo "<br>";
 		}
 	}
 }
