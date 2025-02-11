@@ -2,8 +2,12 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 class CorprateReport extends CI_Model
 {
+    private $db; // Explicitly define $db
 	public function __construct(){
 		parent::__construct();
+        
+        $this->load->database(); // Database लोड करें
+        $this->db = $this->load->database('default', TRUE); // सही तरीका
 	}
 
 	function sendReport() {
