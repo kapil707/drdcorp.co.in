@@ -58,7 +58,7 @@ class CorprateReport extends CI_Model
 		$addreplyto_name 	= "Vipul DRD";
 		$server_email 		= "application@drdistributor.com";
 		//$server_email 	= "send@drdindia.com";
-		$server_email_name 	= "DRD TEST";
+		$server_email_name 	= "DRD Corporate Report";
 		$email1 			= "kapil707sharma@gmail.com";
 		
 		$email->AddReplyTo($addreplyto,$addreplyto_name);
