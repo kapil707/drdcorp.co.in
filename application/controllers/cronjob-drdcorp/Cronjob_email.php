@@ -110,7 +110,7 @@ class Cronjob_email extends CI_Controller
 
 		$today_date = date("d-M-y");
 		
-		$file_name_1 = "ChemistWiseReport-1493-.xlsx";
+		$file_name_1 = "ChemistWiseReport-2251-ZU.xlsx";
 		$folder_dt = date('Y-m-d');
 		if($file_name_1){
 			$file_name1 = "corporate_report/".$folder_dt."/".$file_name_1;
