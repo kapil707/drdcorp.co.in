@@ -118,6 +118,9 @@ class Cronjob_email extends CI_Controller
 			$url1 = "<a href='".$url1."'>".$file_name_1."</a><br><br>";
 		}
 
+		$company_full_name = "test";
+		$user_division = "xx";
+
 		$subject = "Daily Report (".$today_date.") ".ucwords(strtolower($company_full_name))." (".$user_division.")";
 		$message = "Sir<br>It is the sales data as you have sought<br>";
 		$message.= $url1;
