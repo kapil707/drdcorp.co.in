@@ -49,9 +49,8 @@ class CorporateReport extends CI_Model
 	}
 
 	function sendReport() {
-		$this->db->select('tbl_corporate.memail, stock_and_sales_analysis_daily_email, item_wise_report_daily_email, chemist_wise_report_daily_email, tbl_corporate_other.status, tbl_corporate.compcode, tbl_corporate.company_full_name, tbl_corporate.division, tbl_corporate.id, tbl_corporate_other.id as id1, tbl_corporate.code');
-        $this->db->from('tbl_corporate');
-        $this->db->join('tbl_corporate_other', 'tbl_corporate.code = tbl_corporate_other.code');
+		$this->db->select('*');
+        $this->db->from('tbl_corporate_report');
         $this->db->where('tbl_corporate_other.daily_status', 0);
         $this->db->limit(10);
 
@@ -64,37 +63,34 @@ class CorporateReport extends CI_Model
             $code       = $row->code;
             $compcode   = $row->compcode;
             $division   = $row->division;
-            $company_full_name = $row->company_full_name;
+            $company_name = $row->company_full_name;
             
-            $this->get_body($email,$code,$compcode,$division,$company_full_name);
+            $this->get_body($date,$email,$code,$compcode,$division,$name,$company_name,$file1,$file2,$file3);
 		}
 	}
 
-    public function get_body($email,$code,$compcode,$division,$company_full_name){
+    public function get_body($date,$email,$code,$compcode,$division,$name,$company_name,$file1,$file2,$file3) {
 
 		$today_date = date("d-M-y");		
-		$folder_dt = "2025-02-11";//date('Y-m-d');
+		$folder_dt = date('Y-m-d');
 
 		$file_name1 = "ChemistWiseReport.xlsx";
-		$file_name_1 = "ChemistWiseReport-$code-$compcode-$division.xlsx";
+		$file_name_path1 = "ChemistWiseReport-$code-$compcode-$division.xlsx";
 		$file_name2 = "ItemWiseReport.xlsx";
-		$file_name_2 = "ItemWiseReport-$code-$compcode-$division.xlsx";
+		$file_name_path2 = "ItemWiseReport-$code-$compcode-$division.xlsx";
 		$file_name3 = "SaleAndStockAnalysis.xlsx";
-		$file_name_3 = "SaleAndStockAnalysis-$code-$compcode-$division.xlsx";
-		if($file_name_1){
-			$file = "corporate_report/".$folder_dt."/".$file_name_1;
-			$url1 = "https://www.drdcorp.co.in/".$file;
-			$url1 = "<a href='".$url1."'>".$file_name1."</a><br><br>";
+		$file_name_path3 = "SaleAndStockAnalysis-$code-$compcode-$division.xlsx";
+		if($file1==1){
+			$url = "https://www.drdcorp.co.in/corporate_report/".$folder_dt."/".$file_name_path1;
+			$url1 = "<a href='".$url."'>".$file_name1."</a><br><br>";
 		}
-		if($file_name_2){
-			$file = "corporate_report/".$folder_dt."/".$file_name_2;
-			$url2 = "https://www.drdcorp.co.in/".$file;
-			$url2 = "<a href='".$url2."'>".$file_name2."</a><br><br>";
+		if($file2==1){
+			$url = "https://www.drdcorp.co.in/corporate_report/".$folder_dt."/".$file_name_path2;
+			$url2 = "<a href='".$url."'>".$file_name2."</a><br><br>";
 		}
-		if($file_name_3){
-			$file = "corporate_report/".$folder_dt."/".$file_name_3;
-			$url3 = "https://www.drdcorp.co.in/".$file;
-			$url3 = "<a href='".$url3."'>".$file_name3."</a><br><br>";
+		if($file3==1){
+			$url = "https://www.drdcorp.co.in/corporate_report/".$folder_dt."/".$file_name_path13;
+			$url3 = "<a href='".$url."'>".$file_name3."</a><br><br>";
 		}
 
 		$subject = "Daily Report (".$today_date.") ".ucwords(strtolower($company_full_name))." (".$division.")";

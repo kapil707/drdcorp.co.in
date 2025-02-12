@@ -32,6 +32,7 @@ class ExeCorporate extends CI_Controller
 				$code = $record['code'];
 				$compcode = $record['compcode'];
 				$name = $record['name'];
+				$email = $record['email'];
 				$mobile = $record['mobile'];
 				$company_name = $record['company_name'];
 
@@ -48,6 +49,7 @@ class ExeCorporate extends CI_Controller
 					'code' => $code,
 					'compcode' => $compcode,
 					'name' => $name,
+					'email' => $email,
 					'mobile' => $mobile,
 					'company_name' => $company_name,
 					'item_wise_report_daily_email' => $item_wise_report_daily_email,
