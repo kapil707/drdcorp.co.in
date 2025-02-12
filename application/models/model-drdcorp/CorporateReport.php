@@ -15,6 +15,30 @@ class CorporateReport extends CI_Model
 		return $this->db->get($tbl)->row();	
 	}
 
+	function InsertRecoreds($tbl,$dt)
+	{
+		if($this->db->insert($tbl,$dt))
+		{
+			return $this->db->insert_id();
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function UpdateRecoreds($tbl,$dt,$where)
+	{
+		if($this->db->update($tbl,$dt,$where))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 	public function FolderCreate()
 	{
 		$vdt   = date("Y-m-d");

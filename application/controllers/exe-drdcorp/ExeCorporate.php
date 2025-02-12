@@ -42,15 +42,15 @@ class ExeCorporate extends CI_Controller
 
 				if (!empty($code)) {
 					// Check karo agar record already exist karta hai
-					$existing_record = $this->Scheme_Model->CheckRecoreds("tbl_corporate_report", array('code' => $code));
+					$existing_record = $this->CorporateReport->CheckRecoreds("tbl_corporate_report", array('code' => $code));
 			
 					if ($existing_record) {
 						// Agar record exist karta hai to update karo
 						$where = array('code' => $code);
-						$this->Scheme_Model->edit_fun("tbl_corporate_report", $dt, $where);
+						$this->CorporateReport->UpdateRecoreds("tbl_corporate_report", $dt, $where);
 					} else {
 						// Agar record exist nahi karta hai to insert karo
-						$this->Scheme_Model->insert_fun("tbl_corporate_report", $dt);
+						$this->CorporateReport->InsertRecoreds("tbl_corporate_report", $dt);
 					}
 				}
 			}
