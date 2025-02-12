@@ -6,6 +6,15 @@ class CorprateReport extends CI_Model
 		parent::__construct();
 	}
 
+	public function FolderCreate()
+	{
+		$vdt   = date("Y-m-d");
+
+		if (!file_exists('corporate_report/'.$vdt)) {
+			mkdir('corporate_report/'.$vdt, 0777, true);
+		}
+	}
+
 	function sendReport() {
 		$this->db->select('tbl_corporate.memail, stock_and_sales_analysis_daily_email, item_wise_report_daily_email, chemist_wise_report_daily_email, tbl_corporate_other.status, tbl_corporate.compcode, tbl_corporate.company_full_name, tbl_corporate.division, tbl_corporate.id, tbl_corporate_other.id as id1, tbl_corporate.code');
         $this->db->from('tbl_corporate');

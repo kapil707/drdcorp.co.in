@@ -17,6 +17,12 @@ class Cronjob_email extends CI_Controller
 		$this->EmailModel->send_email();
 		echo "send email";
 	}
+
+	public function folder_create()
+	{
+		$this->CorprateReport->FolderCreate();
+		echo "Folder created";
+	}
 	
 	public function test()
 	{
