@@ -2,8 +2,11 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 class CorporateReport extends CI_Model
 {
+	public $myemail;
 	public function __construct(){
 		parent::__construct();
+		
+		$this->myemail = $this->phpmailer_lib->load();
 	}
 
 	function CheckRecoreds($tbl,$where)
@@ -112,7 +115,7 @@ class CorporateReport extends CI_Model
 
     public function test_email($email,$subject,$message)
 	{
-		$email = $this->phpmailer_lib->load();
+		$email = $this->myemail;
 		
 		$addreplyto 		= "application@drdistributor.com";
 		$addreplyto_name 	= "Vipul DRD";
