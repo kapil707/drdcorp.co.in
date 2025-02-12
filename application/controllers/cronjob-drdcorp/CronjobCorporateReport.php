@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Cronjob_corporate_report extends CI_Controller 
+class CronjobCorporateReport extends CI_Controller 
 {
 	public $email;
 	public $phpmailer_lib;
