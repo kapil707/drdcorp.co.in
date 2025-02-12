@@ -125,7 +125,7 @@ class CorporateReport extends CI_Model
 		$email->AddAddress($email1);
 		
 		$email->Subject   	= $subject;
-		$email->Body 		= $message . time();
+		$email->Body 		= $message;
 
 		$email->IsHTML(true);
 
@@ -143,7 +143,7 @@ class CorporateReport extends CI_Model
 			echo 'Message could not be sent.';
 			echo 'Mailer Error: ' . $email->ErrorInfo;
 		}
-		echo "<pre>";
-		print_r($email);
+		//echo "<pre>";
+		//print_r($email);
 	}
 }
