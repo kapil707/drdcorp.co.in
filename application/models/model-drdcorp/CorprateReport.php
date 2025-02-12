@@ -33,23 +33,26 @@ class CorprateReport extends CI_Model
 		$today_date = date("d-M-y");		
 		$folder_dt = "2025-02-11";//date('Y-m-d');
 
+		$file_name1 = "ChemistWiseReport.xlsx";
 		$file_name_1 = "ChemistWiseReport-$code-$compcode-$division.xlsx";
+		$file_name2 = "ItemWiseReport.xlsx";
 		$file_name_2 = "ItemWiseReport-$code-$compcode-$division.xlsx";
+		$file_name3 = "SaleAndStockAnalysis.xlsx";
 		$file_name_3 = "SaleAndStockAnalysis-$code-$compcode-$division.xlsx";
 		if($file_name_1){
-			$file_name1 = "corporate_report/".$folder_dt."/".$file_name_1;
-			$url1 = "https://www.drdcorp.co.in/".$file_name1;
-			$url1 = "<a href='".$url1."'>".$file_name_1."</a><br><br>";
+			$file = "corporate_report/".$folder_dt."/".$file_name_1;
+			$url1 = "https://www.drdcorp.co.in/".$file;
+			$url1 = "<a href='".$url1."'>".$file_name1."</a><br><br>";
 		}
 		if($file_name_2){
-			$file_name2 = "corporate_report/".$folder_dt."/".$file_name_2;
-			$url2 = "https://www.drdcorp.co.in/".$file_name2;
-			$url2 = "<a href='".$url2."'>".$file_name_2."</a><br><br>";
+			$file = "corporate_report/".$folder_dt."/".$file_name_2;
+			$url2 = "https://www.drdcorp.co.in/".$file;
+			$url2 = "<a href='".$url2."'>".$file_name2."</a><br><br>";
 		}
 		if($file_name_3){
-			$file_name3 = "corporate_report/".$folder_dt."/".$file_name_3;
-			$url3 = "https://www.drdcorp.co.in/".$file_name3;
-			$url3 = "<a href='".$url3."'>".$file_name_3."</a><br><br>";
+			$file = "corporate_report/".$folder_dt."/".$file_name_3;
+			$url3 = "https://www.drdcorp.co.in/".$file;
+			$url3 = "<a href='".$url3."'>".$file_name3."</a><br><br>";
 		}
 
 		$subject = "Daily Report (".$today_date.") ".ucwords(strtolower($company_full_name))." (".$division.")";
