@@ -33,7 +33,8 @@ class ExeCorporate extends CI_Controller
 				$compcode = $record['compcode'];
 				$name = $record['name'];
 				$mobile = $record['mobile'];
-				$company_full_name = $record['company_full_name'];
+				$company_name = $record['company_name'];
+
 				$item_wise_report_daily_email = $record['item_wise_report_daily_email'];
 				$chemist_wise_report_daily_email = $record['chemist_wise_report_daily_email'];
 				$stock_and_sales_analysis_daily_email = $record['stock_and_sales_analysis_daily_email'];
@@ -46,6 +47,15 @@ class ExeCorporate extends CI_Controller
 				$dt = array(
 					'code' => $code,
 					'compcode' => $compcode,
+					'name' => $name,
+					'mobile' => $mobile,
+					'company_name' => $company_name,
+					'item_wise_report_daily_email' => $item_wise_report_daily_email,
+					'chemist_wise_report_daily_email' => $chemist_wise_report_daily_email,
+					'stock_and_sales_analysis_daily_email' => $stock_and_sales_analysis_daily_email,
+					'item_wise_report_monthly_email' => $item_wise_report_monthly_email,
+					'chemist_wise_report_monthly_email' => $chemist_wise_report_monthly_email,
+					'stock_and_sales_analysis_report_monthly_email' => $stock_and_sales_analysis_report_monthly_email,
 					'insert_time' => $insert_time,
 				);
 
