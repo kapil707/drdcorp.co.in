@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Cronjob_email extends CI_Controller 
+class Cronjob_corporate_report extends CI_Controller 
 {
 	public $email;
 	public $phpmailer_lib;
@@ -10,23 +10,18 @@ class Cronjob_email extends CI_Controller
 		
 		$this->load->library('phpmailer_lib');
 		// Load model
-		$this->load->model("model-drdcorp/CorprateReport");
-	}
-	
-	public function send_email() {
-		$this->EmailModel->send_email();
-		echo "send email";
+		$this->load->model("model-drdcorp/CorporateReport");
 	}
 
 	public function folder_create()
 	{
-		$this->CorprateReport->FolderCreate();
+		$this->CorporateReport->FolderCreate();
 		echo "Folder created";
 	}
 	
-	public function test()
+	public function send_email()
 	{
-		$this->CorprateReport->sendReport();
+		$this->CorporateReport->sendReport();
 		echo "hello";
 	}
 
