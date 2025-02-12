@@ -51,7 +51,7 @@ class CorporateReport extends CI_Model
 	function sendReport() {
 		$this->db->select('*');
         $this->db->from('tbl_corporate_report');
-        $this->db->where('tbl_corporate_other.report_status', 0);
+        $this->db->where('report_status', 0);
         $this->db->limit(10);
 
         $query = $this->db->get();
