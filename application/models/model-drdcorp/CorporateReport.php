@@ -59,11 +59,12 @@ class CorporateReport extends CI_Model
 		foreach($result as $row)
 		{
 			/************************************************/
-			$email     = $row->email;
-            $code       = $row->code;
-            $compcode   = $row->compcode;
-            $division   = $row->division;
-            $company_name = $row->company_name;
+			$email     		= $row->email;
+            $code       	= $row->code;
+            $compcode   	= $row->compcode;
+            $division   	= $row->division;
+            $company_name 	= $row->company_name;
+			$name 			= $row->name;
 
 			$file1 = $file2 = $file3 = "1";
 			$date = date('Y-m-d');
