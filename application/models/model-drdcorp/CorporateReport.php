@@ -72,7 +72,7 @@ class CorporateReport extends CI_Model
 
 			$dt = array('report_status'=>1);
 			$where = array('code'=>$code);
-			$this->CorporateReport->UpdateRecoreds("tbl_corporate_report", $dt, $where);
+			$this->UpdateRecoreds("tbl_corporate_report", $dt, $where);
 		}
 	}
 
