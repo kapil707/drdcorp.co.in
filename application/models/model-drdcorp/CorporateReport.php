@@ -51,7 +51,7 @@ class CorporateReport extends CI_Model
 	function sendReport() {
 		$this->db->select('*');
         $this->db->from('tbl_corporate_report');
-        $this->db->where('report_status', 0);
+        $this->db->where('tbl_corporate_other.report_status', 0);
         $this->db->limit(10);
 
         $query = $this->db->get();
@@ -59,11 +59,11 @@ class CorporateReport extends CI_Model
 		foreach($result as $row)
 		{
 			/************************************************/
-			$email     		= $row->email;
-            $code       	= $row->code;
-            $compcode   	= $row->compcode;
-            $division   	= $row->division;
-            $company_name 	= $row->company_name;
+			$email     = $row->email;
+            $code       = $row->code;
+            $compcode   = $row->compcode;
+            $division   = $row->division;
+            $company_name = $row->company_name;
 
 			$file1 = $file2 = $file3 = "1";
 			$date = date('Y-m-d');
@@ -113,9 +113,9 @@ class CorporateReport extends CI_Model
 	{
 		$email = $this->phpmailer_lib->load();
 		
-		$addreplyto 		= "application@drdcorp.co.in";
-		$addreplyto_name 	= "Vipul Gupta";
-		$server_email 		= "application@drdcorp.co.in";
+		$addreplyto 		= "application@drdistributor.com";
+		$addreplyto_name 	= "Vipul DRD";
+		$server_email 		= "application@drdistributor.com";
 		//$server_email 	= "send@drdindia.com";
 		$server_email_name 	= "DRD Corporate Report";
 		$email1 			= "kapildrd@gmail.com";
@@ -125,7 +125,7 @@ class CorporateReport extends CI_Model
 		$email->AddAddress($email1);
 		
 		$email->Subject   	= $subject;
-		$email->Body 		= $message;
+		$email->Body 		= $message . time();
 
 		$email->IsHTML(true);
 
@@ -139,6 +139,7 @@ class CorporateReport extends CI_Model
 
 		if($email->send()){
 			echo 'Message has been sent';
+			echo "<br>";
 		}else{
 			echo 'Message could not be sent.';
 			echo 'Mailer Error: ' . $email->ErrorInfo;
