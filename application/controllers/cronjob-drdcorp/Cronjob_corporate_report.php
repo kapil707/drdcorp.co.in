@@ -9,7 +9,7 @@ class Cronjob_corporate_report extends CI_Controller
 		parent::__construct();
 		
 		$this->load->library('phpmailer_lib');
-		// Load model
+		//Load model
 		$this->load->model("model-drdcorp/CorporateReport");
 	}
 

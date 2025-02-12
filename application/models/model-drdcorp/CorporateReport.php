@@ -6,6 +6,15 @@ class CorporateReport extends CI_Model
 		parent::__construct();
 	}
 
+	function CheckRecoreds($tbl,$where)
+	{
+		if($where!="")
+		{
+			$this->db->where($where);
+		}
+		return $this->db->get($tbl)->row();	
+	}
+
 	public function FolderCreate()
 	{
 		$vdt   = date("Y-m-d");
