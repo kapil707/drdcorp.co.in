@@ -129,7 +129,7 @@ class CorporateReport extends CI_Model
 		$email->AddAddress($email1);
 		
 		$email->Subject   	= $subject;
-		$email->Body 		= $message . time();
+		$email->Body 		= $message;
 
 		$email->IsHTML(true);
 
