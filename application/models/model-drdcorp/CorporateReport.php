@@ -79,10 +79,6 @@ class CorporateReport extends CI_Model
 			$date 			= $row->date;
             
             $this->get_body($date,$report_type,$email,$code,$compcode,$division,$name,$company_name,$file1,$file2,$file3);
-
-			$dt = array('email_status'=>1);
-			$where = array('code'=>$code);
-			$this->UpdateRecoreds("tbl_corporate_report", $dt, $where);
 		}
 	}
 
@@ -186,12 +182,18 @@ class CorporateReport extends CI_Model
 		$email->Port       = 465; // SMTP Port
 
 		if($email->send()){
-			echo 'Message has been sent';
+			$message_status = 'Message has been sent';
 			echo "<br>";
 		}else{
-			echo 'Message could not be sent.';
+			$message_status = 'Message could not be sent.';
 			echo 'Mailer Error: ' . $email->ErrorInfo;
 		}
+		echo $message_status;
+
+
+		$dt = array('email_status'=>1,'message_status'=>$message_status,'subject'=>$subject,'message'=>$message);
+		$where = array('code'=>$code);
+		$this->UpdateRecoreds("tbl_corporate_report", $dt, $where);
 		//echo "<pre>";
 		//print_r($email);
 	}
