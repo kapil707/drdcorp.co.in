@@ -31,7 +31,7 @@ class ExeCorporate extends CI_Controller
 				
 				$report_type = $record['report_type'];
 				$code = $record['code'];
-				$compcode = $record['compcode'];
+				/*$compcode = $record['compcode'];
 				$division = $record['division'];
 				$company_name = $record['company_name'];
 				$name = $record['name'];
@@ -39,7 +39,7 @@ class ExeCorporate extends CI_Controller
 				$file1 = $record['file1'];
 				$file2 = $record['file2'];
 				$file3 = $record['file3'];
-				$date = $record['date'];
+				$date = $record['date'];*/
 
 				$insert_time = date('Y-m-d,H:i');
 
