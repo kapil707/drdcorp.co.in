@@ -39,6 +39,7 @@ class ExeCorporate extends CI_Controller
 				$file1 = $record['file1'];
 				$file2 = $record['file2'];
 				$file3 = $record['file3'];
+				$date = $record['date'];
 
 				$insert_time = date('Y-m-d,H:i');
 
@@ -53,6 +54,7 @@ class ExeCorporate extends CI_Controller
 					'file1' => $file1,
 					'file2' => $file2,
 					'file3' => $file3,
+					'date' => $date,
 					'insert_time' => $insert_time,
 				);
 
