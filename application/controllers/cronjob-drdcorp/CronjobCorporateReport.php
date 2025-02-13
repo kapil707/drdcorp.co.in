@@ -22,7 +22,7 @@ class CronjobCorporateReport extends CI_Controller
 	public function send_email()
 	{
 		$this->CorporateReport->sendReport();
-		echo "hello";
+		echo "<br>send email";
 	}
 
 	public function test_email()
