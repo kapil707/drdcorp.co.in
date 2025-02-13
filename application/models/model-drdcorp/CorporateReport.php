@@ -69,10 +69,24 @@ class CorporateReport extends CI_Model
             $company_name 	= $row->company_name;
 			$name 			= $row->name;
 
-			$file1 = $file2 = $file3 = "1";
-			$date = date('Y-m-d');
+			$stock_and_sales_analysis_daily_email = $row->stock_and_sales_analysis_daily_email;
+			$item_wise_report_daily_email = 
+			$row->item_wise_report_daily_email;
+			$chemist_wise_report_daily_email = $row->chemist_wise_report_daily_email;
+			
+			$file1 = $file2 = $file3 = 0;
+			$report_type = "daily";
+			if($stock_and_sales_analysis_daily_email==1){
+				$file1 = 1;
+			}
+			if($item_wise_report_daily_email==1){
+				$file2= 1;
+			}
+			if($chemist_wise_report_daily_email==1){
+				$file3= 1;
+			}
             
-            $this->get_body($date,$email,$code,$compcode,$division,$name,$company_name,$file1,$file2,$file3);
+            $this->get_body($date,$report_type,$email,$code,$compcode,$division,$name,$company_name,$file1,$file2,$file3);
 
 			$dt = array('report_status'=>1);
 			$where = array('code'=>$code);
@@ -80,17 +94,17 @@ class CorporateReport extends CI_Model
 		}
 	}
 
-    public function get_body($date,$email,$code,$compcode,$division,$name,$company_name,$file1,$file2,$file3) {
+    public function get_body($date,$report_type,$email,$code,$compcode,$division,$name,$company_name,$file1,$file2,$file3) {
 
 		$today_date = date("d-M-y");		
-		$folder_dt = date('Y-m-d');
+		$folder_dt = $date;
 
-		$file_name1 = "ChemistWiseReport.xlsx";
-		$file_name_path1 = "ChemistWiseReport-$code-$compcode-$division.xlsx";
+		$file_name1 = "SaleAndStockAnalysis.xlsx";
+		$file_name_path1 = "SaleAndStockAnalysis-$report_type-$code-$compcode-$division.xlsx";
 		$file_name2 = "ItemWiseReport.xlsx";
-		$file_name_path2 = "ItemWiseReport-$code-$compcode-$division.xlsx";
-		$file_name3 = "SaleAndStockAnalysis.xlsx";
-		$file_name_path3 = "SaleAndStockAnalysis-$code-$compcode-$division.xlsx";
+		$file_name_path2 = "ItemWiseReport-$report_type-$code-$compcode-$division.xlsx";
+		$file_name3 = "ChemistWiseReport.xlsx";
+		$file_name_path3 = "ChemistWiseReport-$report_type-$code-$compcode-$division.xlsx";
 		if($file1==1){
 			$url = "https://www.drdcorp.co.in/corporate_report/".$folder_dt."/".$file_name_path1;
 			$url1 = "<a href='".$url."'>".$file_name1."</a><br><br>";
@@ -105,7 +119,7 @@ class CorporateReport extends CI_Model
 		}
 
 		$subject = "Daily Report (".$today_date.") ".ucwords(strtolower($company_name))." (".$division.")";
-		$message = "Sir $name,<br>It is the sales data as you have sought<br>";
+		$message = "Sir ".ucwords(strtolower($name)).",<br><br>It is the sales data as you have sought<br>";
 		$message.= $url1;
 		$message.= $url2;
 		$message.= $url3;
