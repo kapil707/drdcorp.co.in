@@ -55,7 +55,7 @@ class CorporateReport extends CI_Model
 	function sendReport() {
 		$this->db->select('*');
         $this->db->from('tbl_corporate_report');
-        $this->db->where('report_status', 0);
+        $this->db->where('email_status', 0);
         $this->db->limit(10);
 
         $query = $this->db->get();
@@ -63,29 +63,17 @@ class CorporateReport extends CI_Model
 		foreach($result as $row)
 		{
 			/************************************************/
+			$report_type 	= $row->report_type;
 			$email     		= $row->email;
             $code       	= $row->code;
             $compcode   	= $row->compcode;
             $division   	= $row->division;
             $company_name 	= $row->company_name;
 			$name 			= $row->name;
-
-			$stock_and_sales_analysis_daily_email = $row->stock_and_sales_analysis_daily_email;
-			$item_wise_report_daily_email = 
-			$row->item_wise_report_daily_email;
-			$chemist_wise_report_daily_email = $row->chemist_wise_report_daily_email;
-			
-			$file1 = $file2 = $file3 = 0;
-			$report_type = "daily";
-			if($stock_and_sales_analysis_daily_email==1){
-				$file1 = 1;
-			}
-			if($item_wise_report_daily_email==1){
-				$file2= 1;
-			}
-			if($chemist_wise_report_daily_email==1){
-				$file3= 1;
-			}
+			$file1 			= $row->file1;
+			$file2 			= $row->file2;
+			$file3 			= $row->file3;
+			$date 			= $row->date;
             
             $this->get_body($date,$report_type,$email,$code,$compcode,$division,$name,$company_name,$file1,$file2,$file3);
 
