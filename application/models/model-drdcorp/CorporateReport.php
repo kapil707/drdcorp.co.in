@@ -5,9 +5,9 @@ class CorporateReport extends CI_Model
 	public $myemail;
 	public function __construct(){
 		parent::__construct();
-		
+
 		$this->load->database(); 
-		$this->myemail = $this->phpmailer_lib->load();
+		//$this->myemail = $this->phpmailer_lib->load();
 	}
 
 	function CheckRecoreds($tbl,$where)
