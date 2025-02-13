@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class CorporateReport extends CI_Model
 {
 	public $myemail;
+	public $db;
 	public function __construct(){
 		parent::__construct();
 		
