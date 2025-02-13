@@ -113,6 +113,45 @@ class CorporateReport extends CI_Model
 		$this->test_email($email,$subject,$message);
 	}
 
+	public function SendEmail($email,$subject,$message)
+	{
+		$email = $this->myemail;
+		
+		$addreplyto 		= "vipul@drdindia.com";
+		$addreplyto_name 	= "Vipul Gupta";
+		$server_email 		= "report@drdcorp.co.in";
+		//$server_email 	= "send@drdindia.com";
+		$server_email_name 	= "DRD Corporate Report";
+		$email1 			= "kapildrd@gmail.com";
+		
+		$email->AddReplyTo($addreplyto,$addreplyto_name);
+		$email->SetFrom($server_email,$server_email_name);
+		$email->AddAddress($email1);
+		
+		$email->Subject   	= $subject;
+		$email->Body 		= $message;
+
+		$email->IsHTML(true);
+
+		$email->isSMTP();
+		// $email->Host       = 'mail.drdcorp.co.in'; // SMTP Server
+		// $email->SMTPAuth   = true; // Enable SMTP Authentication
+		// $email->Username   = 'report@drdcorp.co.in'; // SMTP Username
+		// $email->Password   = 'Kapil1234!@#$'; // SMTP Password
+		// $email->SMTPSecure = 'ssl'; // Use SSL (as your SMTP port is 465)
+		// $email->Port       = 465; // SMTP Port
+
+		if($email->send()){
+			echo 'Message has been sent';
+			echo "<br>";
+		}else{
+			echo 'Message could not be sent.';
+			echo 'Mailer Error: ' . $email->ErrorInfo;
+		}
+		//echo "<pre>";
+		//print_r($email);
+	}
+
     public function test_email($email,$subject,$message)
 	{
 		$email = $this->myemail;
