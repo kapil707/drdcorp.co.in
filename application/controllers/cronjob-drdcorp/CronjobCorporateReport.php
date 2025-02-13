@@ -90,7 +90,7 @@ class CronjobCorporateReport extends CI_Controller
 
 		$email->IsHTML(true);
 
-		$email->isSMTP();
+		//$email->isSMTP();
 		// $email->Host       = 'mail.drdcorp.co.in'; // SMTP Server
 		// $email->SMTPAuth   = true; // Enable SMTP Authentication
 		// $email->Username   = 'report@drdcorp.co.in'; // SMTP Username
