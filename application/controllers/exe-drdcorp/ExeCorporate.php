@@ -50,16 +50,16 @@ class ExeCorporate extends CI_Controller
 
 				if (!empty($code)) {
 					// Check karo agar record already exist karta hai
-					//$existing_record = $this->CorporateReport->CheckRecoreds("tbl_corporate_report", array('code' => $code));
+					$existing_record = $this->CorporateReport->CheckRecoreds("tbl_corporate_report", array('code' => $code));
 			
-					/*if ($existing_record) {
+					if ($existing_record) {
 						// Agar record exist karta hai to update karo
 						$where = array('code' => $code);
 						$this->CorporateReport->UpdateRecoreds("tbl_corporate_report", $dt, $where);
-					} else {*/
+					} else {
 						// Agar record exist nahi karta hai to insert karo
 						$this->CorporateReport->InsertRecoreds("tbl_corporate_report", $dt);
-					//}
+					}
 				}
 			}
 			$commaSeparatedString = implode(',', $code_array);
