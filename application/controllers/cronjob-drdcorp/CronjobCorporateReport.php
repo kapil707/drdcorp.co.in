@@ -115,8 +115,8 @@ class CronjobCorporateReport extends CI_Controller
 		$subject = "drd local test ok";
 		$message = "drd local test ok";
 		
-		$addreplyto 		= "application@drdistributor.com";
-		$addreplyto_name 	= "Vipul DRD";
+		$addreplyto 		= "vipul@drdindia.com";
+		$addreplyto_name 	= "Vipul Gupta";
 		$server_email 		= "report@drdcorp.co.in";
 		//$server_email 	= "send@drdindia.com";
 		$server_email_name 	= "DRD TEST";
@@ -130,15 +130,6 @@ class CronjobCorporateReport extends CI_Controller
 		$email->Body 		= $message . time();
 
 		$email->IsHTML(true);
-
-		//$email->isSMTP();
-		// $email->Host       = 'mail.drdcorp.co.in'; // SMTP Server
-		// $email->SMTPAuth   = true; // Enable SMTP Authentication
-		// $email->Username   = 'report@drdcorp.co.in'; // SMTP Username
-		// $email->Password   = 'Kapil1234!@#$'; // SMTP Password
-		// $email->SMTPSecure = 'ssl'; // Use SSL (as your SMTP port is 465)
-		// $email->Port       = 465; // SMTP Port
-
 		if($email->send()){
 			echo 'Message has been sent';
 		}else{
