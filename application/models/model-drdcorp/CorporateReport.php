@@ -53,6 +53,9 @@ class CorporateReport extends CI_Model
 	}
 
 	function sendReport() {
+
+		$this->myemail = $this->phpmailer_lib->load();
+
 		$this->db->select('*');
         $this->db->from('tbl_corporate_report');
         $this->db->where('email_status', 0);
