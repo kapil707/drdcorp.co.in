@@ -46,16 +46,6 @@ class ExeCorporate extends CI_Controller
 				$dt = array(
 					'report_type' => $report_type,
 					'code' => $code,
-					'compcode' => $compcode,
-					'division' => $division,
-					'company_name' => $company_name,
-					'name' => $name,
-					'email' => $email,
-					'file1' => $file1,
-					'file2' => $file2,
-					'file3' => $file3,
-					'date' => $date,
-					'insert_time' => $insert_time,
 				);
 
 				if (!empty($code)) {
