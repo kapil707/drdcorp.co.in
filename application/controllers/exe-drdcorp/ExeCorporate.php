@@ -5,7 +5,7 @@ class ExeCorporate extends CI_Controller
 	public function __construct(){
 		parent::__construct();
 		//Load model
-		$this->load->model("model-drdcorp/CorporateReport");
+		//$this->load->model("model-drdcorp/CorporateReport");
 	}
 	public function upload()
 	{
