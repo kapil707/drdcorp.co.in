@@ -2,7 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 class CorporateReport extends CI_Model
 {
-	public $myemail;
 	public function __construct(){
 		parent::__construct();
 
@@ -53,8 +52,6 @@ class CorporateReport extends CI_Model
 	}
 
 	function sendReport() {
-
-		$this->myemail = $this->phpmailer_lib->load();
 
 		$this->db->select('*');
         $this->db->from('tbl_corporate_report');
@@ -121,7 +118,7 @@ class CorporateReport extends CI_Model
 
 	public function SendEmail($email,$subject,$message)
 	{
-		$email = $this->myemail;
+		$email = $this->phpmailer_lib->load();
 		
 		$addreplyto 		= "vipul@drdindia.com";
 		$addreplyto_name 	= "Vipul Gupta";
