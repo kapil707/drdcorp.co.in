@@ -72,11 +72,11 @@ class CronjobCorporateReport extends CI_Controller
 		$email = $this->phpmailer_lib->load();
 		
 		$subject = "drd local test ok";
-		$message = $this->get_body();
+		$message = "drd local test ok";
 		
-		$addreplyto 		= "application@drdistributor.com";
+		$addreplyto 		= "report@drdcorp.co.in";
 		$addreplyto_name 	= "Vipul DRD";
-		$server_email 		= "application@drdistributor.com";
+		$server_email 		= "report@drdcorp.co.in";
 		//$server_email 	= "send@drdindia.com";
 		$server_email_name 	= "DRD TEST";
 		$email1 			= "kapil707sharma@gmail.com";
@@ -91,12 +91,12 @@ class CronjobCorporateReport extends CI_Controller
 		$email->IsHTML(true);
 
 		$email->isSMTP();
-		$email->Host       = 'mail.drdcorp.co.in'; // SMTP Server
-		$email->SMTPAuth   = true; // Enable SMTP Authentication
-		$email->Username   = 'report@drdcorp.co.in'; // SMTP Username
-		$email->Password   = 'Kapil1234!@#$'; // SMTP Password
-		$email->SMTPSecure = 'ssl'; // Use SSL (as your SMTP port is 465)
-		$email->Port       = 465; // SMTP Port
+		// $email->Host       = 'mail.drdcorp.co.in'; // SMTP Server
+		// $email->SMTPAuth   = true; // Enable SMTP Authentication
+		// $email->Username   = 'report@drdcorp.co.in'; // SMTP Username
+		// $email->Password   = 'Kapil1234!@#$'; // SMTP Password
+		// $email->SMTPSecure = 'ssl'; // Use SSL (as your SMTP port is 465)
+		// $email->Port       = 465; // SMTP Port
 
 		if($email->send()){
 			echo 'Message has been sent';
