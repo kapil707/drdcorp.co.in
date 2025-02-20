@@ -76,16 +76,19 @@ class CorporateReport extends CI_Model
 			$file1 			= $row->file1;
 			$file2 			= $row->file2;
 			$file3 			= $row->file3;
+			$from_date 		= $row->from_date;
+			$to_date 		= $row->to_date;
 			$folder_date 	= $row->folder_date;
 			$file_name 		= $row->file_name;
             
-            $this->get_body($date,$report_type,$email,$code,$compcode,$division,$name,$company_name,$file1,$file2,$file3,$folder_date,$file_name);
+            $this->get_body($date,$report_type,$email,$code,$compcode,$division,$name,$company_name,$file1,$file2,$file3,$from_date,$to_date,$folder_date,$file_name);
 		}
 	}
 
-    public function get_body($date,$report_type,$email,$code,$compcode,$division,$name,$company_name,$file1,$file2,$file3,$folder_date,$file_name) {
+    public function get_body($date,$report_type,$email,$code,$compcode,$division,$name,$company_name,$file1,$file2,$file3,$from_date,$to_date,$folder_date,$file_name) {
 
-		$today_date = date("d-M-y");
+		$from_date = date("d-M-y", strtotime($from_date));
+		$to_date = date("d-M-y", strtotime($to_date));
 
 		$file_name1 = "SaleAndStockAnalysis.xlsx";
 		$file_name_path1 = "SaleAndStockAnalysis-$file_name.xlsx";
@@ -98,15 +101,17 @@ class CorporateReport extends CI_Model
 			$url1 = "<a href='".$url."'>".$file_name1."</a><br><br>";
 		}
 		if($file2==1){
-			$url = "https://www.drdcorp.co.in/corporate_report/".$folder_dt."/".$file_name_path2;
+			$url = "https://www.drdcorp.co.in/corporate_report/".$folder_date."/".$file_name_path2;
 			$url2 = "<a href='".$url."'>".$file_name2."</a><br><br>";
 		}
 		if($file3==1){
-			$url = "https://www.drdcorp.co.in/corporate_report/".$folder_dt."/".$file_name_path13;
+			$url = "https://www.drdcorp.co.in/corporate_report/".$folder_date."/".$file_name_path13;
 			$url3 = "<a href='".$url."'>".$file_name3."</a><br><br>";
 		}
 
-		$subject = "Daily Report (".$today_date.") ".ucwords(strtolower($company_name))." (".$division.")";
+		if($from_date==$to_date){
+			$subject = "Daily Report (".$from_date.") ".ucwords(strtolower($company_name))." (".$division.")";
+		}
 		$message = "Sir ".ucwords(strtolower($name)).",<br><br>It is the sales data as you have sought<br>";
 		$message.= $url1;
 		$message.= $url2;
