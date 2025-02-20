@@ -76,25 +76,25 @@ class CorporateReport extends CI_Model
 			$file1 			= $row->file1;
 			$file2 			= $row->file2;
 			$file3 			= $row->file3;
-			$date 			= $row->date;
+			$folder_date 	= $row->folder_date;
+			$file_name 		= $row->file_name;
             
-            $this->get_body($date,$report_type,$email,$code,$compcode,$division,$name,$company_name,$file1,$file2,$file3);
+            $this->get_body($date,$report_type,$email,$code,$compcode,$division,$name,$company_name,$file1,$file2,$file3,$folder_date,$file_name);
 		}
 	}
 
-    public function get_body($date,$report_type,$email,$code,$compcode,$division,$name,$company_name,$file1,$file2,$file3) {
+    public function get_body($date,$report_type,$email,$code,$compcode,$division,$name,$company_name,$file1,$file2,$file3,$folder_date,$file_name) {
 
-		$today_date = date("d-M-y");		
-		$folder_dt = $date;
+		$today_date = date("d-M-y");
 
 		$file_name1 = "SaleAndStockAnalysis.xlsx";
-		$file_name_path1 = "SaleAndStockAnalysis-$report_type-$code-$compcode-$division.xlsx";
+		$file_name_path1 = "SaleAndStockAnalysis-$file_name.xlsx";
 		$file_name2 = "ItemWiseReport.xlsx";
-		$file_name_path2 = "ItemWiseReport-$report_type-$code-$compcode-$division.xlsx";
+		$file_name_path2 = "ItemWiseReport-$file_name.xlsx";
 		$file_name3 = "ChemistWiseReport.xlsx";
-		$file_name_path3 = "ChemistWiseReport-$report_type-$code-$compcode-$division.xlsx";
+		$file_name_path3 = "ChemistWiseReport-$file_name.xlsx";
 		if($file1==1){
-			$url = "https://www.drdcorp.co.in/corporate_report/".$folder_dt."/".$file_name_path1;
+			$url = "https://www.drdcorp.co.in/corporate_report/".$folder_date."/".$file_name_path1;
 			$url1 = "<a href='".$url."'>".$file_name1."</a><br><br>";
 		}
 		if($file2==1){
