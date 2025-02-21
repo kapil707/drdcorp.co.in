@@ -130,10 +130,12 @@ class CorporateReport extends CI_Model
 		$server_email 		= "report@drdcorp.co.in";
 		$server_email_name 	= "DRD Corporate Report";
 		$email1 			= "kapildrd@gmail.com";
+		$email_bcc 			= "kapil707sharma@gmail.com";
 		
 		$email->AddReplyTo($addreplyto,$addreplyto_name);
 		$email->SetFrom($server_email,$server_email_name);
 		$email->AddAddress($email1);
+		$email->addBcc($email_bcc);
 		
 		$email->Subject   	= $subject;
 		$email->Body 		= $message;
