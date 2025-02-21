@@ -121,7 +121,7 @@ class CorporateReport extends CI_Model
 		$this->SendEmail($email,$subject,$message,$code);
 	}
 
-	public function SendEmail($email,$subject,$message,$code)
+	public function SendEmail($user_email,$subject,$message,$code)
 	{
 		$email = $this->myemail;
 		
@@ -129,12 +129,12 @@ class CorporateReport extends CI_Model
 		$addreplyto_name 	= "Vipul Gupta";
 		$server_email 		= "report@drdcorp.co.in";
 		$server_email_name 	= "DRD Corporate Report";
-		$email1 			= "kapildrd@gmail.com";
-		$email_bcc 			= "kapil707sharma@gmail.com";
+		$user_email 		= "kapildrd@gmail.com";
+		$email_bcc 			= "application@drdindia.com";
 		
 		$email->AddReplyTo($addreplyto,$addreplyto_name);
 		$email->SetFrom($server_email,$server_email_name);
-		$email->AddAddress($email1);
+		$email->AddAddress($user_email);
 		$email->addBcc($email_bcc);
 		
 		$email->Subject   	= $subject;
