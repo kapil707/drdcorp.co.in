@@ -110,7 +110,7 @@ class CorporateReport extends CI_Model
 		if($from_date==$to_date){
 			$subject = "Daily Report (".$from_date.") ".ucwords(strtolower($company_name))." (".$division.")";
 		}
-		$message = "Sir ".ucwords(strtolower($name)).",<br><br>It is the sales data as you have sought<br>";
+		$message = "Hello Sir/Madam ".ucwords(strtolower($name)).",<br><br>It is the sales data as you have sought<br>";
 		$message.= $url1;
 		$message.= $url2;
 		$message.= $url3;
