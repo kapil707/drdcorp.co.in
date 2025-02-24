@@ -54,8 +54,6 @@ class CorporateReport extends CI_Model
 
 	function sendReport() {
 
-		$this->myemail = $this->phpmailer_lib->load();
-
 		$this->db->select('*');
         $this->db->from('tbl_corporate_report');
         $this->db->where('email_status', 0);
@@ -113,9 +111,9 @@ class CorporateReport extends CI_Model
 			$subject = "Daily Report (".$from_date.") ".ucwords(strtolower($company_name))." (".$division.")";
 		}
 		$message = "Sir ".ucwords(strtolower($name)).",<br><br>It is the sales data as you have sought<br>";
-		$message.= $url1;
-		$message.= $url2;
-		$message.= $url3;
+		//$message.= $url1;
+		//$message.= $url2;
+		//$message.= $url3;
 		$message.= "Please download the file as in the link above for your reference.<br>Thanks and regards<br><br>D.R. Distributors Pvt Ltd<br>Notice & Disclaimer - This email and any files transmitted with it contain Proprietary, privileged and confidential information and/or information protected by intellectual property rights and is only for the use of the intended recipient of this message. If you are not the intended recipient, please delete or destroy this and all copies of this message along with the attachments immediately. You are hereby notified and directed that (1) if you are not the named and intended addressee you shall not disseminate, distribute or copy this e-mail, and (2) any offer for product/service shall be subject to a final evaluation of relevant patent status. Company cannot guarantee that e-mail communications are secure or error-free, as information could be intercepted, corrupted, amended, lost, destroyed, arrive late or incomplete, or may contain viruses. Company does not accept responsibility for any loss or damage arising from the use of this email or attachments.";
 		
 		$this->SendEmail($email,$subject,$message,$code);
@@ -123,13 +121,13 @@ class CorporateReport extends CI_Model
 
 	public function SendEmail($user_email,$subject,$message,$code)
 	{
-		$email = $this->myemail;
+		$email = $this->phpmailer_lib->load();
 		
 		$addreplyto 		= "vipul@drdindia.com";
 		$addreplyto_name 	= "Vipul Gupta";
 		$server_email 		= "report@drdcorp.co.in";
 		$server_email_name 	= "DRD Corporate Report";
-		$user_email 		= "kapildrd@gmail.com";
+		//$user_email 		= "kapildrd@gmail.com";
 		$email_bcc 			= "application@drdindia.com";
 		
 		$email->AddReplyTo($addreplyto,$addreplyto_name);
