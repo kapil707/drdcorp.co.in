@@ -103,7 +103,7 @@ class CorporateReport extends CI_Model
 			$url2 = "<a href='".$url."'>".$file_name2."</a><br><br>";
 		}
 		if($file3==1){
-			$url = "https://www.drdcorp.co.in/corporate_report/".$folder_date."/".$file_name_path13;
+			$url = "https://www.drdcorp.co.in/corporate_report/".$folder_date."/".$file_name_path3;
 			$url3 = "<a href='".$url."'>".$file_name3."</a><br><br>";
 		}
 
