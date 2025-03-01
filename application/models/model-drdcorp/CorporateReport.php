@@ -107,6 +107,7 @@ class CorporateReport extends CI_Model
 			$url3 = "<a href='".$url."'>".$file_name3."</a><br><br>";
 		}
 
+		$subject = "Monthly Report (".$from_date.") ".ucwords(strtolower($company_name))." (".$division.")";
 		if($from_date==$to_date){
 			$subject = "Daily Report (".$from_date.") ".ucwords(strtolower($company_name))." (".$division.")";
 		}
