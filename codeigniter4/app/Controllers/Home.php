@@ -2,8 +2,6 @@
 
 namespace App\Controllers;
 
-use DateTime;
-
 class Home extends BaseController
 {
     public function index(): string
@@ -11,13 +9,7 @@ class Home extends BaseController
         //return view('welcome_message');
 
         echo "work";
-		$start_date = $end_date = date('d-m-Y');
-
-		$start_date = DateTime::createFromFormat('d-m-Y', $start_date);
-		$end_date 	= DateTime::createFromFormat('d-m-Y', $end_date);
-
-		$start_date = $start_date->format('d/m/Y');
-		$end_date 	= $end_date->format('d/m/Y');
+		$start_date = $end_date = date('d/m/Y');
 
 		$sender_name_place = "Online%20Details";
 
