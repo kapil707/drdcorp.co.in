@@ -13,7 +13,7 @@ class CronjobBank extends CI_Controller
 		$curl = curl_init();
 
 		curl_setopt_array($curl, array(
-		CURLOPT_URL => 'http://192.46.214.43:5000/get_messages_by_status?start_date=10/03/2025&end_date=10/03/2025&group=Online Details&status=true',
+		CURLOPT_URL => 'http://192.46.214.43:5000/get_messages_by_status?start_date=10/03/2025&end_date=10/03/2025&group=Online%20Details&status=true',
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_ENCODING => '',
 		CURLOPT_MAXREDIRS => 10,
