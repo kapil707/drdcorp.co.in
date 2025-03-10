@@ -1,113 +1,48 @@
 <div class="row">
 	<?php /* <meta http-equiv="refresh" content="30" />*/ ?>
-    <div class="col-xs-12" style="margin-bottom:5px;">
-		<?php /* ?>
+    <div class="col-xs-12" style="margin-bottom:5px;">		<?php /* ?>
     	<a href="add">
             <button type="submit" class="btn btn-info">
                 Add
             </button>
-        </a>
-		<?php */ ?>
+        </a>		<?php */ ?>
    	</div>
     <div class="col-xs-12">
 	<style>
        /* Set the size of the div element that contains the map */
       #map {
-        height: 500px;  /* The height is 400 pixels */
+        height: 600px;  /* The height is 400 pixels */
         width: 100%;  /* The width is the width of the web page */
        }
-    </style>
-	<form method="get">
-		<div class="form-group">
-			<div class="col-sm-4">
-				<div class="col-sm-6 text-right">
-					<label class="control-label" for="form-field-1">
-						Select date
-					</label>
-				</div>
-				<div class="col-sm-6" id="data_5">
-					<div class='input-group date input-daterange'>
-						<input type='text' class="form-control" value="<?= $vdt; ?>" name="vdt" />
-						<span class="input-group-addon">
-						<span class="glyphicon glyphicon-calendar"></span>
-						</span>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-4">
-				<div class="col-sm-6 text-right">
-					<label class="control-label" for="form-field-1">
-					Select Users
-					</label>
-				</div>
-				<div class="col-sm-6">
-					<select name="altercode" id="altercode" data-placeholder="Select Status" class="chosen-select" >
-						<?php foreach($dropdown as $row) { ?>
-						<option value="<?php echo $row->altercode; ?>" <?php if($row->altercode==$altercode) { ?> selected <?php } ?>>
-						<?php echo $row->name; ?> (<?php echo $row->altercode; ?>)
-						</option>
-						<?php } ?>
-					</select>
-				</div>
-			</div>
-			<div class="col-xs-2">
-				<button type="submit" class="btn btn-primary block full-width m-b" name="Submit" value="Submit">Submit</button>
-			</div>
-			<div class="col-xs-2">
-				<button type="submit" class="btn btn-primary block full-width m-b" name="Notification" value="Notification">Notification</button>
-			</div>
-		</div>
-	</form>
-	<div id="map"></div>
-<script>
+    </style>		
+        <div id="map"></div>
+    <script>
 setTimeout(function(){
   initMap();
-}, 60000);
+}, 600000000000000);
 // Initialize and add the map
 function initMap() {
-	// The location of Uluru
-	var locations = [
-		<?php
-		$i = 1;
-		if(empty($altercode))
-		{ 
-			foreach($dropdown as $row) 
-			{
-				$row->name = $row->name." - (". $row->altercode.") <br> Date / Time:-".$row->date.",".$row->time; ?>
-				
-				["<?= $row->name; ?>", <?= $row->latitude; ?>, <?= $row->longitude; ?>, <?= $i; ?>],
-				<?php 
-				$i++;
-			} 
-			$latitude = "28.5183163";
-			$longitude = "77.279475";?>
-			['DRD Office', <?= $latitude;?>, <?= $longitude;?>, <?= $i; ?>] 
-		<?php 
-		
-		} else {
-			
-			foreach($result as $row) {
-				if ($i == 1) {
-					$row1 = $this->db->query("SELECT * FROM `tbl_master` where altercode='$row->user_altercode' order by id asc")->row();
-				}
-				$row1->name = $row1->name." - (". $row1->altercode.") <br> Date / Time:-".$row->date.",".$row->time;
-				if ($i == 1) 
-				{ ?>
-					["<?= $row1->name; ?>", <?= $row->latitude; ?>, <?= $row->longitude; ?>, <?= $i; ?>],
-					<?php 
-				} 
-				$i++;
-			}
-			?>
-			["<?= $row1->name; ?>", <?= $row->latitude; ?>, <?= $row->longitude; ?>, <?= $i; ?>],
-			<?php
-			$latitude  = $row->latitude;
-			$longitude = $row->longitude;
-		} ?>
-	];
+  // The location of Uluru
+   var locations = [
+   <?php
+   $i = 1;
+   
+   $result = $this->db->query("SELECT * FROM `tbl_tracking` WHERE `id`='$id'")->result();   
+   foreach($result as $row) { 
+		$row->name = $row->user_name1." - (". $row->user_phone1.") <br> Time:-".$row->time."--".$row->date;
+	?>
+		["<?= $row->name; ?>", <?= $row->latitude; ?>, <?= $row->longitude; ?>, <?= $i; ?>],
+   <?php 
+   $i++;
+   } 
+    
+   $latitude = $row->latitude;
+   $longitude = $row->longitude;?>
+	["<?= $row->name; ?>", <?= $row->latitude; ?>, <?= $row->longitude; ?>, <?= $i; ?>],
+    ];
 
     var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 12,
+      zoom: 18,
       center: new google.maps.LatLng(<?= $latitude;?>, <?= $longitude;?>),
       mapTypeId: google.maps.MapTypeId.ROADMAP
     });
@@ -116,41 +51,11 @@ function initMap() {
 
     var marker, i;
 
-    
-
-    for (i = 0; i < locations.length; i++) {
-      if(i!=0)
-      {  
-        const icon = {
-                url: "https://drdweb.co.in/img_v31/marker_b.png", // url
-                scaledSize: new google.maps.Size(30, 30), // scaled size
-                origin: new google.maps.Point(0,0), // origin
-                anchor: new google.maps.Point(0, 0) // anchor
-          };
-          marker = new google.maps.Marker({
-          position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-          map: map,
-          icon:icon
-        });
-      }
-      if(i==0)
-      {
-        const icon2 = {
-              url: "https://drdweb.co.in/img_v31/marker_a.png", // url
-              scaledSize: new google.maps.Size(30, 30), // scaled size
-              origin: new google.maps.Point(0,0), // origin
-              anchor: new google.maps.Point(0, 0) // anchor
-        };
-        marker = new google.maps.Marker({
-          position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-          map: map,
-          icon:icon2
-        });
-      }
-      
-      
-
-      
+    for (i = 0; i < locations.length; i++) {  
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+        map: map
+      });
 
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
@@ -159,27 +64,10 @@ function initMap() {
         }
       })(marker, i));
     }
-	<?php
-		if(!empty($altercode)){ ?>
-		var flightPlanCoordinates = [
-			<?php
-			foreach($result as $row) { ?>
-        {lat: <?= $row->latitude; ?>, lng: <?= $row->longitude; ?>},
-			<?php } ?>
-		];
-        var flightPath = new google.maps.Polyline({
-          path: flightPlanCoordinates,
-          geodesic: true,
-          strokeColor: '#FF0000',
-          strokeOpacity: 1.0,
-          strokeWeight: 2
-        });
-
-        flightPath.setMap(map);
-		<?php } ?>
+	
 setTimeout(function(){
 initMap();
-}, 60000);
+}, 600000000);
 }
     </script>
     <!--Load the API from the specified URL
@@ -192,4 +80,97 @@ initMap();
     src="https://maps.googleapis.com/maps/api/js?key=<?=$mapapikey ?>&callback=initMap">
     </script>
     </div>
+		<div class="col-xs-12"><br><br>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover dataTables-example">
+                <thead>
+                    <tr>
+                    	<th>
+                        	Sno.
+                        </th>
+						<th>
+                        	Name
+                        </th>
+						<th>
+                        	View Info
+                        </th>
+						<th>
+                        	Wake Up
+                        </th>
+                    </tr>
+                </thead>
+				<tbody>
+                <?php
+				$i=1;
+                foreach ($result as $row)
+                {
+					?>
+                    <tr id="row_<?= $row->id; ?>">
+                    	<td>
+                        	<?= $i++; ?>
+                        </td>
+ 						<td>
+                        	<?= $row->name; ?>
+                        </td>
+						<td>
+							<a href="<?= base_url()?>admin/<?= $Page_name; ?>/view2/<?= $row->id; ?>">
+							View Info</a>
+                        </td>
+						<td>
+							<a onClick="wakeup('<?= $row->id; ?>');" href="#">
+							Wake Up </a>
+                        </td>
+                    </tr>
+                    <?php
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
+<script>
+function create_copy_order(id)
+{
+	if (confirm('Are you sure Resend?')) { 
+		order_id = $(".order_id_"+id).val();
+		$.ajax({
+		type       : "POST",
+		data       :  {order_id:order_id},
+		url        : "<?= base_url()?>admin/<?= $Page_name; ?>/create_copy_order",
+		success    : function(data){
+				if(data!="")
+				{
+					java_alert_function("success","Created Successfully");
+				}
+				else
+				{
+					java_alert_function("error","Something Wrong")
+				}
+			}
+		});
+	}
+}
+
+function wakeup(id)
+{
+	if (confirm('Are you sure wakeup?')) { 
+		order_id = $(".order_id_"+id).val();
+		$.ajax({
+		type       : "POST",
+		data       :  {id:id},
+		url        : "<?= base_url()?>admin/<?= $Page_name; ?>/wakeup",
+		success    : function(data){
+				if(data!="")
+				{
+					java_alert_function("success","Successfully");
+				}
+				else
+				{
+					java_alert_function("error","Something Wrong")
+				}
+			}
+		});
+	}
+}
+</script>

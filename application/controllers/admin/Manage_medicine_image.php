@@ -1,0 +1,502 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+class Manage_medicine_image extends CI_Controller {
+	var $Page_title = "Manage Medicine Image";
+	var $Page_name  = "manage_medicine_image";
+	var $Page_view  = "manage_medicine_image";
+	var $Page_menu  = "manage_medicine_image";
+	var $page_controllers = "manage_medicine_image";
+	var $Page_tbl   = "tbl_medicine_image";
+	public function index()
+	{
+		$page_controllers = $this->page_controllers;
+		redirect("admin/$page_controllers/view");
+	}	
+	public function add()
+	{
+		error_reporting(0);
+		/******************session***********************/
+		$user_id = $this->session->userdata("user_id");
+		$user_type = $this->session->userdata("user_type");
+		/******************session***********************/
+		
+		$Page_title = $this->Page_title;
+		$Page_name 	= $this->Page_name;
+		$Page_view 	= $this->Page_view;
+		$Page_menu 	= $this->Page_menu;
+		$Page_tbl 	= $this->Page_tbl;
+		$page_controllers 	= $this->page_controllers;
+		
+		$this->Admin_Model->permissions_check_or_set($Page_title,$Page_name,$user_type);
+		
+		$data['title1'] = $Page_title." || Add";
+		$data['title2'] = "Add";
+		$data['Page_name'] = $Page_name;
+		$data['Page_menu'] = $Page_menu;		
+		$this->breadcrumbs->push("Admin","admin/");
+		$this->breadcrumbs->push("$Page_title","admin/$page_controllers/");
+		$this->breadcrumbs->push("Add","admin/$page_controllers/add");
+		
+		$tbl = $Page_tbl;
+		
+		$data['url_path'] 	= base_url()."uploads/$page_controllers/photo/resize/";
+		$upload_path 		= "./uploads/$page_controllers/photo/main/";
+		$upload_resize 		= "./uploads/$page_controllers/photo/resize/";
+		
+		$system_ip = $this->input->ip_address();
+		extract($_POST);
+		if(isset($Submit))
+		{
+			$i_code = $find_medicine_id;
+			$message_db = "";
+			$time = time();
+			$date = date("Y-m-d",$time);
+			
+			if (!empty($_FILES["image1"]["name"]))
+			{
+				$_FILES["image1"]["name"] = $i_code."-image1.jpg";
+				
+				$this->Image_Model->uploadTo = $upload_path;
+				$image1 = $this->Image_Model->upload($_FILES['image1']);
+				$image1 = str_replace($upload_path,"",$image1);
+				
+				$this->Image_Model->newPath = $upload_resize;
+				$this->Image_Model->newWidth = 512;
+				$this->Image_Model->newHeight = 512;
+				$this->Image_Model->resize();
+			}		
+			else
+			{
+				$image1 = "";
+			}
+			if (!empty($_FILES["image2"]["name"]))
+			{
+				$_FILES["image2"]["name"] = $i_code."-image2.jpg";
+				
+				$this->Image_Model->uploadTo = $upload_path;
+				$image2 = $this->Image_Model->upload($_FILES['image2']);
+				$image2 = str_replace($upload_path,"",$image2);
+				
+				$this->Image_Model->newPath = $upload_resize;
+				$this->Image_Model->newWidth = 512;
+				$this->Image_Model->newHeight = 512;
+				$this->Image_Model->resize();
+			}		
+			else
+			{
+				$image2 = "";
+			}
+			if (!empty($_FILES["image3"]["name"]))
+			{
+				$_FILES["image3"]["name"] = $i_code."-image3.jpg";
+				
+				$this->Image_Model->uploadTo = $upload_path;
+				$image3 = $this->Image_Model->upload($_FILES['image3']);
+				$image3 = str_replace($upload_path,"",$image3);
+				
+				$this->Image_Model->newPath = $upload_resize;
+				$this->Image_Model->newWidth = 512;
+				$this->Image_Model->newHeight = 512;
+				$this->Image_Model->resize();
+			}		
+			else
+			{
+				$image3 = "";
+			}
+			if (!empty($_FILES["image4"]["name"]))
+			{
+				$_FILES["image4"]["name"] = $i_code."-image4.jpg";
+				
+				$this->Image_Model->uploadTo = $upload_path;
+				$image4 = $this->Image_Model->upload($_FILES['image4']);
+				$image4 = str_replace($upload_path,"",$image4);
+				
+				$this->Image_Model->newPath = $upload_resize;
+				$this->Image_Model->newWidth = 512;
+				$this->Image_Model->newHeight = 512;
+				$this->Image_Model->resize();
+			}		
+			else
+			{
+				$image4 = "";
+			}
+			
+			$result = "";
+			$dt = array(
+				'i_code'=>$i_code,
+				'featured'=>$featured,
+				'image1'=>$image1,
+				'image2'=>$image2,
+				'image3'=>$image3,
+				'image4'=>$image4,
+				'title'=>$title,
+				'description'=>$description,
+				'date'=>$date,
+				'time'=>$time,
+			);
+			$result = $this->Scheme_Model->insert_fun($tbl,$dt);
+			$property_title = base64_decode($property_title);
+			if($result)
+			{
+				$this->db->query("update tbl_medicine set upload_status=0 where i_code='$i_code'");
+				
+				$message_db = "($property_title) -  Add Successfully.";
+				$message = "Add Successfully.";
+				$this->session->set_flashdata("message_type","success");
+			}
+			else
+			{
+				$message_db = "($property_title) - Not Add.";
+				$message = "Not Add.";
+				$this->session->set_flashdata("message_type","error");
+			}
+			if($message_db!="")
+			{
+				$message = $Page_title." - ".$message;
+				$message_db = $Page_title." - ".$message_db;
+				$this->session->set_flashdata("message_footer","yes");
+				$this->session->set_flashdata("full_message",$message);
+				$this->Admin_Model->Add_Activity_log($message_db);
+				if($result)
+				{
+					redirect(base_url()."admin/$page_controllers/view");
+				}
+			}
+		}
+		
+		$this->load->view("admin/header_footer/header",$data);
+		$this->load->view("admin/$Page_view/add",$data);
+		$this->load->view("admin/header_footer/footer",$data);
+		$this->load->view("admin/manage_medicine/find_medicine",$data);
+	}
+	public function view()
+	{
+		error_reporting(0);
+		/******************session***********************/
+		$user_id = $this->session->userdata("user_id");
+		$user_type = $this->session->userdata("user_type");
+		/******************session***********************/
+		
+		$Page_title = $this->Page_title;
+		$Page_name 	= $this->Page_name;
+		$Page_view 	= $this->Page_view;
+		$Page_menu 	= $this->Page_menu;
+		$Page_tbl 	= $this->Page_tbl;
+		$page_controllers 	= $this->page_controllers;
+		
+		$this->Admin_Model->permissions_check_or_set($Page_title,$Page_name,$user_type);
+		
+		$data['title1'] = $Page_title." || View";
+		$data['title2'] = "View";
+		$data['Page_name'] = $Page_name;
+		$data['Page_menu'] = $Page_menu;		
+		$this->breadcrumbs->push("Admin","admin/");
+		$this->breadcrumbs->push("$Page_title","admin/$page_controllers/");
+		$this->breadcrumbs->push("View","admin/$page_controllers/view");
+		
+		$tbl = $Page_tbl;
+		
+		$data['url_path'] 	= base_url()."uploads/$page_controllers/photo/resize/";
+		$upload_path 		= "./uploads/$page_controllers/photo/main/";
+		$upload_resize 		= "./uploads/$page_controllers/photo/resize/";
+		
+		extract($_POST);
+		if(isset($Delete))
+		{	
+			/*$where = array('id'=>$delete_id,'status'=>"5",'school_id'=>$school_id);
+			$this->Scheme_Model->delete_fun($tbl,$where);
+			
+			$where = array('id'=>$delete_id,'school_id'=>$school_id);					
+			$dt = array('status'=>"5");
+			$this->Scheme_Model->edit_fun($tbl,$dt,$where);	*/		
+		}
+
+		/*$query = $this->db->query("SELECT t1.item_name,t2.* FROM tbl_medicine as t1 inner JOIN $tbl as t2 on t1.i_code = t2.itemid ");
+  		$data["result"] = $query->result();*/
+		$this->load->view("admin/header_footer/header",$data);
+		$this->load->view("admin/$Page_view/view",$data);
+		$this->load->view("admin/header_footer/footer",$data);
+		$this->load->view("admin/$Page_view/footer2",$data);
+	}
+	public function edit($id)
+	{
+		error_reporting(0);
+		/******************session***********************/
+		$user_id = $this->session->userdata("user_id");
+		$user_type = $this->session->userdata("user_type");
+		/******************session***********************/
+		
+		$Page_title = $this->Page_title;
+		$Page_name 	= $this->Page_name;
+		$Page_view 	= $this->Page_view;
+		$Page_menu 	= $this->Page_menu;
+		$Page_tbl 	= $this->Page_tbl;
+		$page_controllers 	= $this->page_controllers;
+		
+		$this->Admin_Model->permissions_check_or_set($Page_title,$Page_name,$user_type);
+		
+		$data['title1'] = $Page_title." || Edit";
+		$data['title2'] = "Edit";
+		$data['Page_name'] = $Page_name;
+		$data['Page_menu'] = $Page_menu;		
+		$this->breadcrumbs->push("Edit","admin/");
+		$this->breadcrumbs->push("$Page_title","admin/$page_controllers/");
+		$this->breadcrumbs->push("Edit","admin/$page_controllers/edit");
+		
+		$tbl = $Page_tbl;
+		
+		$data['url_path'] 	= base_url()."uploads/$page_controllers/photo/resize/";
+		$data['url_path'] 	= "https://www.drdweb.co.in/medicine_image/";
+		$upload_path 		= "./uploads/$page_controllers/photo/main/";
+		$upload_resize 		= "./uploads/$page_controllers/photo/resize/";
+		
+		extract($_POST);
+		if(isset($Submit))
+		{
+			$i_code = $find_medicine_id;
+			$message_db = "";
+			$time = time();
+			$date = date("Y-m-d",$time);
+			$where = array('id'=>$id);
+			if (!empty($_FILES["image1"]["name"]))
+			{
+				$_FILES["image1"]["name"] = $i_code."-image1.jpg";
+				
+				$this->Image_Model->uploadTo = $upload_path;
+				$image1 = $this->Image_Model->upload($_FILES['image1']);
+				$image1 = str_replace($upload_path,"",$image1);
+				
+				$this->Image_Model->newPath = $upload_resize;
+				$this->Image_Model->newWidth = 512;
+				$this->Image_Model->newHeight = 512;
+				$this->Image_Model->resize();
+			}		
+			else
+			{
+				$image1 = $old_image1;
+			}
+			if (!empty($_FILES["image2"]["name"]))
+			{
+				$_FILES["image2"]["name"] = $i_code."-image2.jpg";
+				
+				$this->Image_Model->uploadTo = $upload_path;
+				$image2 = $this->Image_Model->upload($_FILES['image2']);
+				$image2 = str_replace($upload_path,"",$image2);
+				
+				$this->Image_Model->newPath = $upload_resize;
+				$this->Image_Model->newWidth = 512;
+				$this->Image_Model->newHeight = 512;
+				$this->Image_Model->resize();
+			}		
+			else
+			{
+				$image2 = $old_image2;
+			}
+			if (!empty($_FILES["image3"]["name"]))
+			{
+				$_FILES["image3"]["name"] = $i_code."-image3.jpg";
+				
+				$this->Image_Model->uploadTo = $upload_path;
+				$image3 = $this->Image_Model->upload($_FILES['image3']);
+				$image3 = str_replace($upload_path,"",$image3);
+				
+				$this->Image_Model->newPath = $upload_resize;
+				$this->Image_Model->newWidth = 512;
+				$this->Image_Model->newHeight = 512;
+				$this->Image_Model->resize();
+			}		
+			else
+			{
+				$image3 = $old_image3;
+			}
+			if (!empty($_FILES["image4"]["name"]))
+			{
+				$_FILES["image4"]["name"] = $i_code."-image4.jpg";
+				
+				$this->Image_Model->uploadTo = $upload_path;
+				$image4 = $this->Image_Model->upload($_FILES['image4']);
+				$image4 = str_replace($upload_path,"",$image4);
+				
+				$this->Image_Model->newPath = $upload_resize;
+				$this->Image_Model->newWidth = 512;
+				$this->Image_Model->newHeight = 512;
+				$this->Image_Model->resize();
+			}		
+			else
+			{
+				$image4 = $old_image4;
+			}
+			
+			$result = "";
+			$dt = array(
+				'i_code'=>$i_code,
+				'featured'=>$featured,
+				'image1'=>$image1,
+				'image2'=>$image2,
+				'image3'=>$image3,
+				'image4'=>$image4,
+				'title'=>$title,
+				'description'=>$description,
+				'date'=>$date,
+				'time'=>$time,
+			);
+			$result = $this->Scheme_Model->edit_fun($tbl,$dt,$where);
+			$change_text = $old_property_title." - ($change_text)";				
+			if($result)
+			{
+				$this->db->query("update tbl_medicine set upload_status=0 where i_code='$i_code'");
+				
+				$message_db = "$change_text - Edit Successfully.";
+				$message = "Edit Successfully.";
+				$this->session->set_flashdata("message_type","success");
+			}
+			else
+			{
+				$message_db = "$change_text - Not Add.";
+				$message = "Not Add.";
+				$this->session->set_flashdata("message_type","error");
+			}
+			if($message_db!="")
+			{
+				$message = $Page_title." - ".$message;
+				$message_db = $Page_title." - ".$message_db;
+				$this->session->set_flashdata("message_footer","yes");
+				$this->session->set_flashdata("full_message",$message);
+				$this->Admin_Model->Add_Activity_log($message_db);
+				if($result)
+				{
+					//redirect(current_url());
+					redirect(base_url()."admin/".$page_controllers."/edit/".$id."?pg=".$_GET["pg"]);
+				}
+			}
+		}
+		
+		$query = $this->db->query("select * from $tbl where id='$id'");
+  		$data["result"] = $query->result();
+		$data["id"] = $id;
+		
+		$this->load->view("admin/header_footer/header",$data);
+		$this->load->view("admin/$Page_view/edit",$data);
+		$this->load->view("admin/header_footer/footer",$data);
+		$this->load->view("admin/manage_medicine/find_medicine",$data);
+	}
+	
+	
+	public function delete_rec()
+	{
+		$id = $_POST["id"];
+		$Page_title = $this->Page_title;
+		$Page_tbl = $this->Page_tbl;
+		
+		$page_controllers 	= $this->page_controllers;
+		$upload_path 		= "./uploads/$page_controllers/photo/main/";
+		$upload_resize 		= "./uploads/$page_controllers/photo/resize/";
+		
+		$row = $this->db->query("select * from $Page_tbl where id='$id'")->row();
+		if($row->id!="")
+		{
+			unlink($upload_path.$row->image);
+			unlink($upload_resize.$row->image);
+		}
+		
+		$result = $this->db->query("delete from $Page_tbl where id='$id'");
+		if($result)
+		{
+			$message = "Delete Successfully.";
+		}
+		else
+		{
+			$message = "Not Delete.";
+		}
+		$message = $Page_title." - ".$message;
+		$this->Admin_Model->Add_Activity_log($message);
+		echo "ok";
+	}
+	
+	public function delete_photo()
+	{
+		$id 		= $_POST["id"];
+		$Page_title = $this->Page_title;
+		$Page_tbl 	= $this->Page_tbl;
+		
+		$page_controllers 	= $this->page_controllers;
+		$upload_path 		= "./uploads/$page_controllers/photo/main/";
+		$upload_resize 		= "./uploads/$page_controllers/photo/resize/";
+		
+		$row = $this->db->query("select * from $Page_tbl where id='$id'")->row();
+		if($row->id!="")
+		{
+			$message = "Delete Photo Successfully.";
+			unlink($upload_path.$row->image);
+			unlink($upload_resize.$row->image);
+		}
+		else
+		{
+			$message = "Photo Not Update.";
+		}
+		$message = $Page_title." - ".$message;
+		$this->Admin_Model->Add_Activity_log($message);
+		echo "ok";
+	}
+	
+	public function view_api() {		
+
+		$jsonArray = array();
+		$items = "";
+		$i = 1;
+		$Page_tbl = $this->Page_tbl;
+
+		$result = $this->db->query("SELECT t1.item_name,t1.i_code,t2.* FROM tbl_medicine as t1 inner JOIN $this->Page_tbl as t2 on t1.i_code = t2.i_code");
+		$result = $result->result();
+		foreach($result as $row) {
+
+			$sr_no = $i++;
+			$id = $row->id;
+
+			$item_code = $row->i_code;
+			$url = "https://www.drdistributor.com/md/$item_code";
+			$item_name = "<a href='".$url."' target='_blank'>$row->item_name</a>";
+
+			$image1 = "https://www.drdweb.co.in/medicine_image/".$row->image1;
+			$image2 = "https://www.drdweb.co.in/medicine_image/".$row->image2;
+			$image3 = "https://www.drdweb.co.in/medicine_image/".$row->image3;
+			$image4 = "https://www.drdweb.co.in/medicine_image/".$row->image4;
+
+			/*$new_title = str_replace(" ","-",strtolower($item_category));
+			$url = "https://www.drdistributor.com/c/$new_title";
+			$item_category = "<a href='".$url."' target='_blank'>$item_category</a>";*/
+			
+			$datetime = date("d-M-y @ H:i:s", $row->time);
+
+			$dt = array(
+				'sr_no' => $sr_no,
+				'id' => $id,
+				'item_name' => $item_name,
+				'item_code' => $item_code,
+				'image1' => $image1,
+				'image2' => $image2,
+				'image3' => $image3,
+				'image4' => $image4,
+				'datetime'=>$datetime,
+			);
+			$jsonArray[] = $dt;
+		}
+		if(!empty($jsonArray)){
+			$items = $jsonArray;
+			$response = array(
+				'success' => "1",
+				'message' => 'Data load successfully',
+				'items' => $items,
+			);
+		}else{
+			$response = array(
+				'success' => "0",
+				'message' => '502 error',
+			);
+		}
+		
+        // Send JSON response
+        header('Content-Type: application/json');
+        echo json_encode($response);
+	}
+}

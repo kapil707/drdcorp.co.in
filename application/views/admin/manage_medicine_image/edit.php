@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-xs-12">
-        <a href="<?php echo base_url(); ?>admin/<?= $Page_name ?>/view?pg=<?= $_GET["pg"]; ?>#row_<?=$id ?>">
-		<button type="button" class="btn btn-w-m btn-info"><< Back</button>
+        <a href="<?php echo base_url(); ?>admin/<?= $Page_name ?>/view">
+			<button type="button" class="btn btn-w-m btn-info"><< Back</button>
 		</a>
 	</div>
     <div class="col-xs-12">
@@ -10,31 +10,38 @@
         <?php
         foreach ($result as $row)
         { ?>
-			<input type="hidden" id="old_image" name="old_image" value="<?= $row->image?>"/>
+			<input type="hidden" id="old_image1" name="old_image1" value="<?= $row->image1?>"/>
             <input type="hidden" id="old_image2" name="old_image2" value="<?= $row->image2?>"/>
             <input type="hidden" id="old_image3" name="old_image3" value="<?= $row->image3?>"/>
             <input type="hidden" id="old_image4" name="old_image4" value="<?= $row->image4?>"/>
            	<div class="form-group">				
 				<div class="col-sm-6">
-                    <div class="col-sm-4 text-right">
+				   <div class="col-sm-4 text-right">
                         <label class="control-label" for="form-field-1">
-                            Select Item
+                            Select Medicine
                         </label>
                     </div>
                     <div class="col-sm-8">
-                        <input type="hidden" id="i_code" name="i_code" value="<?= $i_code = $row->itemid?>"/>
+						<input type="hidden" id="find_medicine_id" name="find_medicine_id" value="<?= $row->i_code?>" />
+
 						<?php 
-						$row1 =  $this->db->query ("select item_name,item_code from tbl_medicine where i_code='$i_code'")->row();
+						$medicine_name = "";
+						$row1 = $this->db->query ("select item_name,i_code from tbl_medicine where i_code='$row->i_code'")->row();
+						if(!empty($row1)){
+							$medicine_name = $row1->item_name."($row1->i_code)";
+						}
 						?>
-						<input type="text" class="form-control" id="item_name" name="item_name"tabindex="1" onkeydown="call_search_item()" onkeyup="call_search_item()" placeholder="Select Item" autocomplete="off" value="<?= $row1->item_name?> (<?= $row1->item_code?>)" />
-						<div class="call_search_item_result" style="position: absolute;z-index: 1;background: white;width: 300px;"></div>
+
+						<input type="text" class="form-control" id="medicine_name" name="medicine_name" tabindex="1" placeholder="Enter Medicine" autocomplete="off" value="<?= $medicine_name?>" />
+
+						<div class="find_medicine_result"></div>
                     </div>
                     <div class="help-inline col-sm-12 has-error">
                         <span class="help-block reset middle">
-                            <?= form_error('itemid'); ?>
+                            
                         </span>
                     </div>
-                </div>	
+                </div>
             </div>   
             <div class="form-group">
                 <div class="col-sm-6">
@@ -74,18 +81,18 @@
                 <div class="col-sm-6">
                     <div class="col-sm-4 text-right">
                         <label class="control-label" for="form-field-1">
-                            Image
+                            Image1
                         </label>
                     </div>
                     <div class="col-sm-6">
-                        <input type="file" class="form-control" id="form-field-1" placeholder="image" name="image" />
+                        <input type="file" class="form-control" id="form-field-1" placeholder="image1" name="image1" />
                     </div>
                     <div class="col-sm-2 img_id_image">
-                    	<img src="<?= $url_path ?><?= $row->image; ?>" class="img-responsive" alt />
+                    	<img src="<?= $url_path ?><?= $row->image1; ?>" class="img-responsive" alt />
                     </div>
                     <div class="help-inline col-sm-12 has-error">
                         <span class="help-block reset middle">  
-                            <?= form_error('image'); ?>
+                            <?= form_error('image1'); ?>
                         </span>
                     </div>
               	</div>
@@ -170,7 +177,7 @@
                         </span>
                     </div>
                 </div>
-				<div class="col-sm-6">
+				<?php /* <div class="col-sm-6">
                     <div class="col-sm-4 text-right">
                         <label class="control-label" for="form-field-1">
                             Status
@@ -191,7 +198,7 @@
                             <?= form_error('status'); ?>
                         </span>
                     </div>
-                </div>
+                </div> */ ?>
 			</div>
             
             <div class="space-4"></div>

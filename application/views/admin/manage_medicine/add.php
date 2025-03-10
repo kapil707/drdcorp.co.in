@@ -5,79 +5,62 @@
     <div class="col-xs-12">
         <!-- PAGE CONTENT BEGINS -->
         <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data">
-			<div class="form-group">				
-				<div class="col-sm-6">
-                    <div class="col-sm-4 text-right">
-                        <label class="control-label" for="form-field-1">
-                            Select Company
-                        </label>
-                    </div>
-                    <div class="col-sm-8">
-						<input type="hidden" id="compid" name="compid"/>
-						<input type="text" class="form-control" id="company_name" name="company_name" tabindex="1" onkeydown="call_search_company()" onkeyup="call_search_company()" placeholder="Select Company" autocomplete="off" />
-						<div class="call_search_company_result" style="position: absolute;z-index: 1;background: white;width: 300px;"></div>
-                    </div>
-                    <div class="help-inline col-sm-12 has-error">
-                        <span class="help-block reset middle">
-                            <?= form_error('compid'); ?>
-                        </span>
-                    </div>
-                </div>
-				<div class="col-sm-6">
-                    <div class="col-sm-4 text-right">
-                        <label class="control-label" for="form-field-1">
-                            Select Company Division
-                        </label>
-                    </div>
-                    <div class="col-sm-8 division_div">                        
-						<select name="division" id="division" class="form-control">
-							<option value="">
-								Select Company Division
-							</option>
-						</select>
-                    </div>
-                    <div class="help-inline col-sm-12 has-error">
-                        <span class="help-block reset middle">
-                            <?= form_error('division'); ?>
-                        </span>
-                    </div>
-                </div>
-			</div>
 			<div class="form-group">
 				<div class="col-sm-6">
                     <div class="col-sm-4 text-right">
                         <label class="control-label" for="form-field-1">
-                            Show Company Name
+                            Select Medicine
                         </label>
                     </div>
                     <div class="col-sm-8">
-						<input type="text" class="form-control" id="name" name="name" placeholder="Show Company Name" />
+						<input type="hidden" id="find_medicine_id" name="find_medicine_id" value="" />
+
+						<input type="text" class="form-control" id="medicine_name" name="medicine_name" tabindex="1" placeholder="Enter Medicine" autocomplete="off" value="" />
+
+						<div class="find_medicine_result"></div>
                     </div>
                     <div class="help-inline col-sm-12 has-error">
                         <span class="help-block reset middle">
-                            <?= form_error('name'); ?>
+                            
                         </span>
                     </div>
                 </div>
-				<div class="col-sm-6">
+            </div>
+            <div class="form-group">
+                <div class="col-sm-6">
                     <div class="col-sm-4 text-right">
                         <label class="control-label" for="form-field-1">
-							Short Order
+                        Title
                         </label>
                     </div>
-                    <div class="col-sm-8">
-						<input type="number" class="form-control" id="short_order" name="short_order" placeholder="Short Order" />
+                    <div class="col-sm-6">
+                        <textarea type="text" class="form-control" id="form-field-1" placeholder="Title" name="title" value=""></textarea>
                     </div>
                     <div class="help-inline col-sm-12 has-error">
-                        <span class="help-block reset middle">
-                            <?= form_error('short_order'); ?>
+                        <span class="help-block reset middle">  
+                            <?= form_error('title'); ?>
                         </span>
                     </div>
-                </div>
-			</div>
-			
-			<div class="form-group">	
+              	</div>
                 <div class="col-sm-6">
+                    <div class="col-sm-4 text-right">
+                        <label class="control-label" for="form-field-1">
+                            Description
+                        </label>
+                    </div>
+                    <div class="col-sm-6">
+                        <textarea type="text" class="form-control" id="form-field-1" placeholder="Description" name="description" value=""></textarea>
+                    </div>
+                    <div class="help-inline col-sm-12 has-error">
+                        <span class="help-block reset middle">  
+                            <?= form_error('description'); ?>
+                        </span>
+                    </div>
+              	</div>
+            </div>
+
+            <div class="form-group">
+				<div class="col-sm-6">
                     <div class="col-sm-4 text-right">
                         <label class="control-label" for="form-field-1">
                             Image
@@ -92,7 +75,77 @@
                         </span>
                     </div>
               	</div>
-				
+                <div class="col-sm-6">
+                    <div class="col-sm-4 text-right">
+                        <label class="control-label" for="form-field-1">
+                            Image2
+                        </label>
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="file" class="form-control" id="form-field-1" placeholder="Image2" name="image2" />
+                    </div>
+                    <div class="help-inline col-sm-12 has-error">
+                        <span class="help-block reset middle">  
+                            <?= form_error('image2'); ?>
+                        </span>
+                    </div>
+              	</div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-6">
+                    <div class="col-sm-4 text-right">
+                        <label class="control-label" for="form-field-1">
+                            Image3
+                        </label>
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="file" class="form-control" id="form-field-1" placeholder="Image3" name="image3" />
+                    </div>
+                    <div class="help-inline col-sm-12 has-error">
+                        <span class="help-block reset middle">  
+                            <?= form_error('imag3'); ?>
+                        </span>
+                    </div>
+              	</div>
+                <div class="col-sm-6">
+                    <div class="col-sm-4 text-right">
+                        <label class="control-label" for="form-field-1">
+                            Image4
+                        </label>
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="file" class="form-control" id="form-field-1" placeholder="Image4" name="image4" />
+                    </div>
+                    <div class="help-inline col-sm-12 has-error">
+                        <span class="help-block reset middle">  
+                            <?= form_error('image4'); ?>
+                        </span>
+                    </div>
+              	</div>
+            </div>
+			<div class="form-group">
+				<div class="col-sm-6">
+                    <div class="col-sm-4 text-right">
+                        <label class="control-label" for="form-field-1">
+                            Featured
+                        </label>
+                    </div>
+                    <div class="col-sm-8">
+                        <select name="featured" id="featured" class="form-control">
+							<option value="1" <?php if(set_value('featured')==1) { ?> selected <?php } ?>>
+								Yes
+							</option>
+							<option value="0" <?php if(set_value('featured')==0) { ?> selected <?php } ?>>
+								No
+							</option>
+						</select>
+                    </div>
+                    <div class="help-inline col-sm-12 has-error">
+                        <span class="help-block reset middle">  
+                            <?= form_error('featured'); ?>
+                        </span>
+                    </div>
+                </div>
 				<div class="col-sm-6">
                     <div class="col-sm-4 text-right">
                         <label class="control-label" for="form-field-1">
@@ -137,49 +190,3 @@
         <!-- PAGE CONTENT ENDS -->
     </div><!-- /.col -->
 </div><!-- /.row -->
-<script>
-function call_search_company()
-{	
-	company_name = $("#company_name").val();
-	$(".call_search_company_result").html("Loading....");
-	if(company_name=="")
-	{
-		$(".call_search_company_result").html("");
-	}
-	else
-	{
-		$.ajax({
-		type       : "POST",
-		data       :  {company_name:company_name},
-		url        : "<?= base_url()?>admin/<?= $Page_name?>/call_search_company",
-		cache	   : false,
-		success    : function(data){
-			$(".call_search_company_result").html(data);
-			}
-		});
-	}
-}
-function addcompany(id,name)
-{
-	name = atob(name);
-	$("#compid").val(id);
-	$("#company_name").val(name);
-	$("#name").val(name);
-	$(".call_search_company_result").html("");
-	get_company_division();
-}
-function get_company_division()
-{	
-	compid = $("#compid").val();
-	$(".division_div").html("Loading....");
-	$.ajax({
-	type       : "POST",
-	data       :  {compid:compid},
-	url        : "<?= base_url()?>admin/<?= $Page_name?>/get_company_division",
-	cache	   : false,
-	success    : function(data){
-		$(".division_div").html(data);
-		}
-	});
-}
-</script>

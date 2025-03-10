@@ -1,6 +1,6 @@
 <div class="row">
 	<?php
-	$date_range = "";
+	//$date_range = "";
 	if(isset($_GET["date-range"])){
 		$date_range = $_GET["date-range"];
 	}

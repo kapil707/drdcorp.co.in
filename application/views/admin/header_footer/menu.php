@@ -25,7 +25,7 @@
                     </ul>
                 </div>
                 <div class="logo-element">
-                    DRD
+                    RE+
                 </div>
             </li>
             <li <?php if($Page_menu=="dashboard") { ?> class="active" <?php } ?>>
@@ -34,370 +34,31 @@
                 <span class="nav-label">Dashboard</span>
                 </a>
             </li>
-			
-			<?php
-			$user_type = $this->session->userdata("user_type");			
-			$menu = $this->db->query("select DISTINCT tbl_permission_settings.page_type,sorting_order from tbl_permission_settings,tbl_permission_page where tbl_permission_settings.page_type=tbl_permission_page.page_type and user_type='$user_type' and (tbl_permission_settings.page_type='manage_android_info' or tbl_permission_settings.page_type='manage_allbiker_map' or tbl_permission_settings.page_type='manage_android') GROUP BY tbl_permission_settings.page_type,sorting_order order by sorting_order asc")->result();
-			if(!empty($menu)){
-			?>
-			<li <?php if($Page_menu=="manage_android_info" || $Page_menu=="manage_allbiker_map" || $Page_menu=="manage_android") { ?> class="active" <?php } ?>>
-				<a href="#">
-					<span class="nav-label">
-						<i class="fa fa-th-large"></i>
-						Manage Android
-					</span><span class="fa arrow"></span>
-				</a>
-				<ul class="nav nav-second-level collapse">
-					<?php 
-					foreach($menu as $mymenu){
-					if($mymenu->page_type=="manage_android_info") { ?>
-					<li><a href="<?= base_url()?>admin/manage_android_info/view">Android Users</a>
-					</li>
-					<?php } 
-					if($mymenu->page_type=="manage_allbiker_map") { ?>
-					<li><a href="<?= base_url()?>admin/manage_allbiker_map/view">Rider Users Treck</a>
-					</li>
-					<?php } 
-					if($mymenu->page_type=="manage_android") { ?>
-					<li><a href="<?= base_url()?>admin/manage_android/add/android_mobile">Android Mobile</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_android/add/android_email">Android Email</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_android/add/android_whatsapp">Android Whatsapp</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_android/add/force_update_title">Android Force Update Title</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_android/add/force_update_message">Android Force Update Message</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_android/add/force_update">Android Force Update</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_android/add/android_versioncode">Android Version</a>
-					</li>
-					<?php } 
-					}?>
-				</ul>
-			</li>
-			<?php } 
-			$menu = $this->db->query("select DISTINCT tbl_permission_settings.page_type,sorting_order from tbl_permission_settings,tbl_permission_page where tbl_permission_settings.page_type=tbl_permission_page.page_type and user_type='$user_type' and (tbl_permission_settings.page_type='manage_notification' or tbl_permission_settings.page_type='manage_notification_broadcast' or tbl_permission_settings.page_type='manage_notification_email' or tbl_permission_settings.page_type='manage_notification_whatsapp' or tbl_permission_settings.page_type='manage_notification_whatsapp_group' or tbl_permission_settings.page_type='manage_notification_email_setting' or tbl_permission_settings.page_type='manage_notification_email_cc') GROUP BY tbl_permission_settings.page_type,sorting_order order by sorting_order asc")->result();
-			if(!empty($menu)){
-			?>
-			<li <?php foreach($menu as $mymenu){ if($Page_menu==$mymenu->page_type) { ?> class="active" <?php } }?>>
-				<a href="#">
-					<span class="nav-label">
-						<i class="fa fa-th-large"></i>
-						Manage Notification
-					</span><span class="fa arrow"></span>
-				</a>
-				<ul class="nav nav-second-level collapse">
-				<?php 
-				foreach($menu as $mymenu){
-					$row = $this->db->query("select page_title from  tbl_permission_page where page_type='$mymenu->page_type'")->row();
-					?>
-					<li><a href="<?= base_url()?>admin/<?php echo $mymenu->page_type ?>/view" <?php if($Page_menu==$mymenu->page_type) { ?> class="active" <?php }  ?>><?php echo $row->page_title;?></a>
-					</li> 
-				<?php } ?>
-				</ul>
-			</li>
-			<?php } 
-			$menu = $this->db->query("select DISTINCT tbl_permission_settings.page_type,sorting_order from tbl_permission_settings,tbl_permission_page where tbl_permission_settings.page_type=tbl_permission_page.page_type and user_type='$user_type' and (tbl_permission_settings.page_type='manage_bank_statment' or tbl_permission_settings.page_type='manage_bank_chemist' or tbl_permission_settings.page_type='manage_bank_whatsapp' or tbl_permission_settings.page_type='manage_bank_sms' or tbl_permission_settings.page_type='manage_bank_processing') GROUP BY tbl_permission_settings.page_type,sorting_order order by sorting_order asc")->result();
-			if(!empty($menu)){
-			?>
-			<li <?php foreach($menu as $mymenu){ if($Page_menu==$mymenu->page_type) { ?> class="active" <?php } }?>>
-				<a href="#">
-					<span class="nav-label">
-						<i class="fa fa-th-large"></i>
-						Manage Bank
-					</span><span class="fa arrow"></span>
-				</a>
-				<ul class="nav nav-second-level collapse">
-				<?php 
-				foreach($menu as $mymenu){
-					$row = $this->db->query("select page_title from  tbl_permission_page where page_type='$mymenu->page_type'")->row();
-					?>
-					<li><a href="<?= base_url()?>admin/<?php echo $mymenu->page_type ?>/view" <?php if($Page_menu==$mymenu->page_type) { ?> class="active" <?php }  ?>><?php echo $row->page_title;?></a>
-					</li> 
-				<?php } ?>
-				</ul>
-			</li>
-			<?php } 
-			$menu = $this->db->query("select DISTINCT tbl_permission_settings.page_type,sorting_order from tbl_permission_settings,tbl_permission_page where tbl_permission_settings.page_type=tbl_permission_page.page_type and user_type='$user_type' and (tbl_permission_settings.page_type='manage_user_chemist' or tbl_permission_settings.page_type='manage_user_corporate' or tbl_permission_settings.page_type='manage_user_salesman' or tbl_permission_settings.page_type='manage_user_chemist_request' or tbl_permission_settings.page_type='manage_user_active') GROUP BY tbl_permission_settings.page_type,sorting_order order by sorting_order asc")->result();
-			if(!empty($menu)){
-			?>
-			<li <?php foreach($menu as $mymenu){ if($Page_menu==$mymenu->page_type) { ?> class="active" <?php } }?>>
-				<a href="#">
-					<span class="nav-label">
-						<i class="fa fa-th-large"></i>
-						Manage User
-					</span><span class="fa arrow"></span>
-				</a>
-				<ul class="nav nav-second-level collapse">
-				<?php 
-				foreach($menu as $mymenu){
-					$row = $this->db->query("select page_title from  tbl_permission_page where page_type='$mymenu->page_type'")->row();
-					?>
-					<li><a href="<?= base_url()?>admin/<?php echo $mymenu->page_type ?>/view" <?php if($Page_menu==$mymenu->page_type) { ?> class="active" <?php }  ?>><?php echo $row->page_title;?></a>
-					</li> 
-				<?php } ?>
-				</ul>
-			</li>
-			<?php } 
-			$menu = $this->db->query("select DISTINCT tbl_permission_settings.page_type,sorting_order from tbl_permission_settings,tbl_permission_page where tbl_permission_settings.page_type=tbl_permission_page.page_type and user_type='$user_type' and (tbl_permission_settings.page_type='manage_medicine' or tbl_permission_settings.page_type='manage_company_discount' or tbl_permission_settings.page_type='manage_medicine_image' or tbl_permission_settings.page_type='manage_medicine_info2' or tbl_permission_settings.page_type='manage_top_search' or tbl_permission_settings.page_type='manage_top_search_by_chemist' or tbl_permission_settings.page_type='manage_medicine_use') GROUP BY tbl_permission_settings.page_type,sorting_order order by sorting_order asc")->result();
-			if(!empty($menu)){
-			?>
-			<li <?php foreach($menu as $mymenu){ if($Page_menu==$mymenu->page_type) { ?> class="active" <?php } }?>>
-				<a href="#">
-					<span class="nav-label">
-						<i class="fa fa-th-large"></i>
-						Manage Medicine
-					</span><span class="fa arrow"></span>
-				</a>
-				<ul class="nav nav-second-level collapse">
-				<?php 
-				foreach($menu as $mymenu){
-					$row = $this->db->query("select page_title from  tbl_permission_page where page_type='$mymenu->page_type'")->row();
-					?>
-					<li><a href="<?= base_url()?>admin/<?php echo $mymenu->page_type ?>/view" <?php if($Page_menu==$mymenu->page_type) { ?> class="active" <?php }  ?>><?php echo $row->page_title;?></a>
-					</li> 
-				<?php } ?>
-				</ul>
-			</li>
-			<?php }
-			$menu = $this->db->query("select DISTINCT tbl_permission_settings.page_type,sorting_order from tbl_permission_settings,tbl_permission_page where tbl_permission_settings.page_type=tbl_permission_page.page_type and user_type='$user_type' and (tbl_permission_settings.page_type='manage_master' or tbl_permission_settings.page_type='manage_master_attendance' or tbl_permission_settings.page_type='manage_master_delivery' or tbl_permission_settings.page_type='manage_master_delivery_done' or tbl_permission_settings.page_type='manage_master_firebase_token' or tbl_permission_settings.page_type='manage_master_meter' or tbl_permission_settings.page_type='manage_master_tracking') GROUP BY tbl_permission_settings.page_type,sorting_order order by sorting_order asc")->result();
-			if(!empty($menu)){
-			?>
-			<li <?php foreach($menu as $mymenu){ 
-			if(strtolower($Page_menu)==strtolower($mymenu->page_type)) { ?> class="active" <?php } }?>>
-				<a href="#">
-					<span class="nav-label">
-						<i class="fa fa-th-large"></i>
-						Manage Master App
-					</span><span class="fa arrow"></span>
-				</a>
-				<ul class="nav nav-second-level collapse">
-				<?php 
-				foreach($menu as $mymenu){
-					$row = $this->db->query("select page_title from  tbl_permission_page where page_type='$mymenu->page_type'")->row();
-					?>
-					<li><a href="<?= base_url()?>admin/<?php echo $mymenu->page_type ?>/view" <?php if(strtolower($Page_menu)==strtolower($mymenu->page_type)) { ?> class="active" <?php } ?>><?php echo $row->page_title;?></a>
-					</li> 
-				<?php } ?>
-				</ul>
-			</li>
-			<?php } 
-			$menu = $this->db->query("select DISTINCT tbl_permission_settings.page_type,sorting_order from tbl_permission_settings,tbl_permission_page where tbl_permission_settings.page_type=tbl_permission_page.page_type and user_type='$user_type' and (tbl_permission_settings.page_type='manage_import' or tbl_permission_settings.page_type='manage_fail_log' or tbl_permission_settings.page_type='manage_stock_available' or tbl_permission_settings.page_type='manage_stock_available_by_chemist' or tbl_permission_settings.page_type='manage_stock_price_low' or tbl_permission_settings.page_type='manage_stock_low' or tbl_permission_settings.page_type='manage_daily_report') GROUP BY tbl_permission_settings.page_type,sorting_order order by sorting_order asc")->result();
-			if(!empty($menu)){
-			?>
-			<li <?php foreach($menu as $mymenu){ if($Page_menu==$mymenu->page_type) { ?> class="active" <?php } }?>>
-				<a href="#">
-					<span class="nav-label">
-						<i class="fa fa-th-large"></i>
-						Manage Stock
-					</span><span class="fa arrow"></span>
-				</a>
-				<ul class="nav nav-second-level collapse">
-				<?php 
-				foreach($menu as $mymenu){
-					$row = $this->db->query("select page_title from  tbl_permission_page where page_type='$mymenu->page_type'")->row();
-					?>
-					<li><a href="<?= base_url()?>admin/<?php echo $mymenu->page_type ?>/view" <?php if($Page_menu==$mymenu->page_type) { ?> class="active" <?php } ?>><?php echo $row->page_title;?></a>
-					</li> 
-				<?php } ?>
-				</ul>
-			</li>
-			<?php }
-			$menu = $this->db->query("select DISTINCT tbl_permission_settings.page_type,sorting_order from tbl_permission_settings,tbl_permission_page where tbl_permission_settings.page_type=tbl_permission_page.page_type and user_type='$user_type' and (tbl_permission_settings.page_type='manage_order' or tbl_permission_settings.page_type='manage_order_max') GROUP BY tbl_permission_settings.page_type,sorting_order order by sorting_order asc")->result();
-			if(!empty($menu)){
-			?>
-			<li <?php foreach($menu as $mymenu){ if($Page_menu==$mymenu->page_type) { ?> class="active" <?php } }?>>
-				<a href="#">
-					<span class="nav-label">
-						<i class="fa fa-th-large"></i>
-						Manage Order
-					</span><span class="fa arrow"></span>
-				</a>
-				<ul class="nav nav-second-level collapse">
-				<?php 
-				foreach($menu as $mymenu){
-					$row = $this->db->query("select page_title from  tbl_permission_page where page_type='$mymenu->page_type'")->row();
-					?>
-					<li><a href="<?= base_url()?>admin/<?php echo $mymenu->page_type ?>/view" <?php if($Page_menu==$mymenu->page_type) { ?> class="active" <?php } ?>><?php echo $row->page_title;?></a>
-					</li> 
-				<?php } ?>
-				</ul>
-			</li>
-			<?php }
-			$menu = $this->db->query("select DISTINCT tbl_permission_settings.page_type,sorting_order from tbl_permission_settings,tbl_permission_page where tbl_permission_settings.page_type=tbl_permission_page.page_type and user_type='$user_type' and ( tbl_permission_settings.page_type='manage_invoice') GROUP BY tbl_permission_settings.page_type,sorting_order order by sorting_order asc")->result();
-			if(!empty($menu)){
-			?>
-			<li <?php foreach($menu as $mymenu){ if($Page_menu==$mymenu->page_type) { ?> class="active" <?php } }?>>
-				<a href="#">
-					<span class="nav-label">
-						<i class="fa fa-th-large"></i>
-						Manage Invoice
-					</span><span class="fa arrow"></span>
-				</a>
-				<ul class="nav nav-second-level collapse">
-				<?php 
-				foreach($menu as $mymenu){
-					$row = $this->db->query("select page_title from  tbl_permission_page where page_type='$mymenu->page_type'")->row();
-					?>
-					<li><a href="<?= base_url()?>admin/<?php echo $mymenu->page_type ?>/view" <?php if($Page_menu==$mymenu->page_type) { ?> class="active" <?php } ?>><?php echo $row->page_title;?></a>
-					</li> 
-				<?php } ?>
-				</ul>
-			</li>
-			<?php }
-			$menu = $this->db->query("select DISTINCT tbl_permission_settings.page_type,sorting_order from tbl_permission_settings,tbl_permission_page where tbl_permission_settings.page_type=tbl_permission_page.page_type and user_type='$user_type' and (tbl_permission_settings.page_type='manage_home' or  tbl_permission_settings.page_type='manage_medicine_menu' or tbl_permission_settings.page_type='manage_slider' or tbl_permission_settings.page_type='manage_item' or tbl_permission_settings.page_type='manage_item_category' or tbl_permission_settings.page_type='manage_company_division' or tbl_permission_settings.page_type='manage_company_division_category') GROUP BY tbl_permission_settings.page_type,sorting_order order by sorting_order asc")->result();
-			if(!empty($menu)){?>
-				<li <?php if($Page_menu=="manage_home" || $Page_menu=="manage_medicine_menu" || $Page_menu=="manage_slider" || $Page_menu=="manage_item" || $Page_menu=="manage_item_category" || $Page_menu=="manage_company_division" || $Page_menu=="manage_company_division_category") { ?> class="active" <?php } ?>>
-				<a href="#">
-					<span class="nav-label">
-						<i class="fa fa-th-large"></i>
-							Manage Home
-						</span>
-					<span class="fa arrow"></span>
-				</a>
-				<ul class="nav nav-second-level collapse">
-					<?php
-					foreach($menu as $mymenu){
-						$row = $this->db->query("select page_title from  tbl_permission_page where page_type='$mymenu->page_type'")->row();
-						?>
-						<li>
-							<a href="<?= base_url()?>admin/<?php echo $mymenu->page_type ?>/view" <?php if($Page_menu==$mymenu->page_type) { ?> class="active" <?php }  ?>><?php echo $row->page_title;?></a>
-						</li>
-					<?php } ?>
-				</ul>
-			</li>
-			<?php }
-			$menu = $this->db->query("select DISTINCT tbl_permission_settings.page_type,sorting_order from tbl_permission_settings,tbl_permission_page where tbl_permission_settings.page_type=tbl_permission_page.page_type and user_type='$user_type' and (tbl_permission_settings.page_type='manage_website' or tbl_permission_settings.page_type='manage_email') GROUP BY tbl_permission_settings.page_type,sorting_order order by sorting_order asc")->result();
-			if(!empty($menu)){
-			?>
-			<li <?php if($Page_menu=="manage_website" || $Page_menu=="manage_email") { ?> class="active" <?php } ?>>
-				<a href="#">
-					<span class="nav-label">
-						<i class="fa fa-th-large"></i>
-						Manage Settings
-					</span><span class="fa arrow"></span>
-				</a>	
-				<ul class="nav nav-second-level collapse">
-				<?php 
-				foreach($menu as $mymenu){ ?>
-					<?php if($mymenu->page_type=="manage_website") { ?>
-					<li><a href="<?= base_url()?>admin/manage_website/add/title">Title</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/title2">Title2</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/logo">Logo</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/icon">Icon</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/defaultpassword">Default Password</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/mapapikey">Map Api Key</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/whatsapp_deviceid">Whatsapp Deviceid</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/whatsapp_key">Whatsapp Key</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/whatsapp_group1">Whatsapp Group1</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/whatsapp_group2">Whatsapp Group2</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/whatsapp_group3">Whatsapp Group3</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/under_construction">Under Construction</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/under_construction_message">Under Construction Message</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/medicine_icon">Medicine icon</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/corporate_url">Corporate Url</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/corporate_url_local">Corporate Url Local</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/default_title_text">Default Title Text</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/email_footer_text">Email Footer Text</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/whatsapp_footer_text">WhatsApp Footer Text</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/login_details_text">Login Details Text</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/default_place_order_text">Default Place Order Text</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/place_order_message">Place Order Message</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/terms_of_services">Terms of services</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/privacy_policy">Privacy policy</a>
-					</li>
-					<?php }
-					if($mymenu->page_type=="manage_email") { ?>
-					<li><a href="<?= base_url()?>admin/manage_email/view">Email Setting</a>
-					</li>
-					<?php } }?>
-				</ul>
-			</li>
-			<?php } 
-			$menu = $this->db->query("select DISTINCT tbl_permission_settings.page_type,sorting_order from tbl_permission_settings,tbl_permission_page where tbl_permission_settings.page_type=tbl_permission_page.page_type and user_type='$user_type' and (tbl_permission_settings.page_type='profile_management' or tbl_permission_settings.page_type='manage_users' or tbl_permission_settings.page_type='manage_user_type') GROUP BY tbl_permission_settings.page_type,sorting_order order by sorting_order asc")->result();
-			if(!empty($menu)){ ?>
-			<li <?php if($Page_menu=="profile_management" || $Page_menu=="manage_users" || $Page_menu=="manage_user_type") { ?> class="active" <?php } ?>>
-				<a href="#">
-					<span class="nav-label">
-						<i class="fa fa-th-large"></i>
-						Manage Othres
-					</span><span class="fa arrow"></span>
-				</a>
-				<ul class="nav nav-second-level collapse">	
-				<?php 
-				foreach($menu as $mymenu){
-					if($mymenu->page_type=="profile_management") { ?>			
-					<li><a href="<?= base_url()?>admin/profile_management/permission_settings">Profile Management</a>
-					</li>
-					<?php }
-					if($mymenu->page_type=="manage_users") { ?>
-					<li><a href="<?= base_url()?>admin/manage_users/view">Users</a></li>
-					<?php }
-					if($mymenu->page_type=="manage_user_type") { ?>
-					<li><a href="<?= base_url()?>admin/manage_user_type/view">User Type</a>
-					</li>
-					<?php } } ?>
-					<li><a href="<?= base_url()?>admin/logout">Logout</a>
-					</li>
-				</ul>
-			</li>
-			<?php } 
-			$menu = $this->db->query("select DISTINCT tbl_permission_settings.page_type,sorting_order from tbl_permission_settings,tbl_permission_page where tbl_permission_settings.page_type=tbl_permission_page.page_type and user_type='$user_type' and (tbl_permission_settings.page_type='manage_website_seo' or tbl_permission_settings.page_type='manage_seo') GROUP BY tbl_permission_settings.page_type,sorting_order order by sorting_order asc")->result();
-			if(!empty($menu)){
-			?>
-			<li <?php if($Page_menu=="manage_website_seo" || $Page_menu=="manage_seo") { ?> class="active" <?php } ?>>
-				<a href="#">
-					<span class="nav-label">
-						<i class="fa fa-th-large"></i>
-						Manage Settings Seo
-					</span><span class="fa arrow"></span>
-				</a>	
-				<ul class="nav nav-second-level collapse">
-				<?php 
-				foreach($menu as $mymenu){ ?>
-					<?php if($mymenu->page_type=="manage_website_seo") { ?>
-					<li><a href="<?= base_url()?>admin/manage_website_seo/add/seo_author">Author</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website_seo/add/seo_description">Description</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website_seo/add/seo_keywords">Keywords</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website_seo/add/seo_google">Google Tag</a>
-					</li>
-					<?php } ?>
-					<?php if($mymenu->page_type=="manage_seo") { ?>
-					<li><a href="<?= base_url()?>admin/manage_seo">Seo Pages</a>
-					<?php } ?>
-					</li>
-				<?php } ?>
-				</ul>
-			</li>
-			<?php } ?>
-		</ul>
-    </div>
+            <?php
+			$user_type = $this->session->userdata("user_type");
+			$query = $this->db->query("select DISTINCT tbl_permission_settings.page_type from tbl_permission_settings,tbl_permission_page where tbl_permission_settings.page_type=tbl_permission_page.page_type and user_type='$user_type' order by sorting_order asc");
+			$menu = $query->result();
+			foreach($menu as $mymenu)			{ 								$menu1 = $this->db->query("select * from tbl_permission_page where  page_type='$mymenu->page_type' order by sorting_order asc")->row();				
+				if($mymenu->page_type=="manage_website" || $mymenu->page_type=="manage_setting" || $mymenu->page_type=="manage_invoice_setting" || $mymenu->page_type=="manage_price" || $mymenu->page_type=="manage_buttons" || $mymenu->page_type=="manage_payumoney" || $mymenu->page_type=="manage_fb_google"){
+				if($mymenu->page_type=="manage_website"){				?>				<li <?php if($Page_name=="manage_website") { ?> class="active" <?php } ?>>					<a href="#">					<?php if(base64_decode($menu1->fafa_icon)==""){ ?>					<i class="fa fa-th-large"></i>					<?php } else { ?>					<?= base64_decode($menu1->fafa_icon); ?>					<?php } ?>					Manage Website
+					<span class="fa arrow"></span></a>					<ul class="nav nav-second-level collapse">						<li <?php if($Page_menu=="title") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_website/add/title">Title</a></li>						<li <?php if($Page_menu=="logo") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_website/add/logo">Logo</a></li>						<li <?php if($Page_menu=="icon") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_website/add/icon">Icon</a></li>						<li <?php if($Page_menu=="topphone") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_website/add/topphone">Top Phone</a></li>						<li <?php if($Page_menu=="topemail") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_website/add/topemail">Top Email</a></li>						 <li <?php if($Page_menu=="toptext") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_website/add/toptext">Top Text</a></li>						<li <?php if($Page_menu=="footeraboutus") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_website/add/footeraboutus">Footer About Us</a></li>						<li <?php if($Page_menu=="footeraddress") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_website/add/footeraddress">Footer Address</a></li>						<li <?php if($Page_menu=="footeremail") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_website/add/footeremail">Footer Email</a></li>						<li <?php if($Page_menu=="footerphone") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_website/add/footerphone">Footer Phone</a></li>						<li <?php if($Page_menu=="footercopyright") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_website/add/footercopyright">Footer Copy Right</a></li>						<li <?php if($Page_menu=="footerimage") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_website/add/footerimage">Footer Image</a></li>						<li <?php if($Page_menu=="facebook") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_website/add/facebook">Facebook</a></li>						<li <?php if($Page_menu=="twitter") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_website/add/twitter">Twitter</a></li>						<li <?php if($Page_menu=="googleplus") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_website/add/googleplus">Google +</a></li>						<li <?php if($Page_menu=="skype") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_website/add/skype">Skype</a></li>						<li <?php if($Page_menu=="instagram") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_website/add/instagram">Instagram</a></li>						<li <?php if($Page_menu=="whatsapp") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_website/add/whatsapp">whatsapp</a></li>						<li <?php if($Page_menu=="youtube") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_website/add/youtube">youtube</a></li>						<li <?php if($Page_menu=="linkedin") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_website/add/linkedin">linkedin</a></li>						<li <?php if($Page_menu=="android") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_website/add/android">android</a></li>						<li <?php if($Page_menu=="apple") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_website/add/apple">apple</a></li>						<li <?php if($Page_menu=="meta_title") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_website/add/meta_title">Meta Title</a></li>						<li <?php if($Page_menu=="meta_keywords") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_website/add/meta_keywords">Meta Keywords</a></li>						<li <?php if($Page_menu=="meta_discription") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_website/add/meta_discription">Meta Discription</a></li>						<li <?php if($Page_menu=="customer_care") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_website/add/customer_care">Customer Care</a></li>						<li <?php if($Page_menu=="store_timings") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_website/add/store_timings">Store Timings</a></li>						<li <?php if($Page_menu=="othercss") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_website/add/othercss">Other Css</a></li>						<li <?php if($Page_menu=="othercss2") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_website/add/othercss2">Other Css 2</a></li>						<li <?php if($Page_menu=="google_analytics") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_website/add/google_analytics">Google Analytics</a></li>						<li <?php if($Page_menu=="android_url_code") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_website/add/android_url_code">Android Url Code (off android menu)</a></li>												<li <?php if($Page_menu=="default_btn_color_bg") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_website/add/default_btn_color_bg">Default Btn Color Bg</a></li>												<li <?php if($Page_menu=="default_btn_color_text") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_website/add/default_btn_color_text">Default Btn Color Text</a></li>					</ul>				</li>				<?php				}				if($mymenu->page_type=="manage_setting"){				?>				 <li <?php if($Page_name=="manage_setting") { ?> class="active" <?php } ?>>					<a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Manage Paytm</span><span class="fa arrow"></span></a>					<ul class="nav nav-second-level collapse">											<li <?php if($Page_menu=="paytm_merchantMid") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_setting/add/paytm_merchantMid">Paytm MerchantMid</a></li>						<li <?php if($Page_menu=="paytm_merchantKey") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_setting/add/paytm_merchantKey">Paytm MerchantKey</a></li>						<li <?php if($Page_menu=="paytm_channelId") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_setting/add/paytm_channelId">Paytm ChannelId</a></li>						<li <?php if($Page_menu=="paytm_custId") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_setting/add/paytm_custId">Paytm CustId</a></li>						<li <?php if($Page_menu=="paytm_website") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_setting/add/paytm_website">Paytm Website</a></li>						<li <?php if($Page_menu=="paytm_industryTypeId") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_setting/add/paytm_industryTypeId">Paytm IndustryTypeId</a></li>					</ul>				</li>				<?php 				}				if($mymenu->page_type=="manage_payumoney"){				?>				 <li <?php if($Page_name=="manage_payumoney") { ?> class="active" <?php } ?>>					<a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Manage Payumoney</span><span class="fa arrow"></span></a>					<ul class="nav nav-second-level collapse">						<li <?php if($Page_menu=="merchant_key") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_payumoney/add/merchant_key">Merchant Key</a></li>						<li <?php if($Page_menu=="merchant_salt") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_payumoney/add/merchant_salt">Merchant Salt</a></li>					</ul>				</li>				<?php 				}								if($mymenu->page_type=="manage_invoice_setting"){?>					<li <?php if($Page_name=="manage_invoice_setting") { ?> class="active" <?php } ?>>					<a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Manage Invoice Setting</span><span class="fa arrow"></span></a>						<ul class="nav nav-second-level collapse">							<li <?php if($Page_menu=="orderid") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_invoice_setting/add/orderid">Order Id</a></li>							<li <?php if($Page_menu=="invoice_name") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_invoice_setting/add/invoice_name">Invoice Name</a></li>							<li <?php if($Page_menu=="invoice_title") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_invoice_setting/add/invoice_title">Invoice Title</a></li>							<li <?php if($Page_menu=="invoice_logo") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_invoice_setting/add/invoice_logo">Invoice Logo</a></li>							<li <?php if($Page_menu=="invoice_email") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_invoice_setting/add/invoice_email">Invoice Email</a></li>							<li <?php if($Page_menu=="invoice_address") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_invoice_setting/add/invoice_address">Invoice Address</a></li>							<li <?php if($Page_menu=="invoice_footer") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_invoice_setting/add/invoice_footer">Invoice Footer</a></li>						</ul>					</li>				<?php 				}								if($mymenu->page_type=="manage_fb_google"){?>				 <li <?php if($Page_name=="manage_fb_google") { ?> class="active" <?php } ?>>					<a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Manage Facebook / Google Api</span><span class="fa arrow"></span></a>					<ul class="nav nav-second-level collapse">						<li <?php if($Page_menu=="google_clientId") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_fb_google/add/google_clientId">Google clientId</a></li>						<li <?php if($Page_menu=="google_clientSecret") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_fb_google/add/google_clientSecret">Google clientSecret</a></li>						<li <?php if($Page_menu=="google_appname") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_fb_google/add/google_appname">Google AppName</a></li>						<li <?php if($Page_menu=="fb_app_id") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_fb_google/add/fb_app_id">Facebook App ID</a></li>						<li <?php if($Page_menu=="price_icon") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_fb_google/add/fb_app_secret">Facebook App Secret</a></li>					</ul>				</li>				<?php }				if($mymenu->page_type=="manage_price"){?>				 <li <?php if($Page_name=="manage_price") { ?> class="active" <?php } ?>>					<a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Manage Price</span><span class="fa arrow"></span></a>					<ul class="nav nav-second-level collapse">						<li <?php if($Page_menu=="price_title") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_price/add/price_title">Price Title</a></li>						<li <?php if($Page_menu=="price_today") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_price/add/price_today">Price Today</a></li>						<li <?php if($Page_menu=="price_icon") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_price/add/price_icon">Price Icon</a></li>					</ul>				</li>				<?php }				if($mymenu->page_type=="manage_buttons"){?>				 <li <?php if($Page_name=="manage_buttons") { ?> class="active" <?php } ?>>					<a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Manage Buttons</span><span class="fa arrow"></span></a>					<ul class="nav nav-second-level collapse">						<li <?php if($Page_menu=="add_to_cart_bg") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_buttons/add/add_to_cart_bg">Add To Cart BG</a></li>						<li <?php if($Page_menu=="add_to_cart_text") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_buttons/add/add_to_cart_text">Add To Cart Text</a></li>						<li <?php if($Page_menu=="remove_from_cart_bg") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_buttons/add/remove_from_cart_bg">Remove From Cart BG</a></li>						<li <?php if($Page_menu=="remove_from_cart_text") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_buttons/add/remove_from_cart_text">Remove From Cart Text</a></li>						<li <?php if($Page_menu=="buy_now_cart_bg") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_buttons/add/buy_now_cart_bg">Buy Now Cart BG</a></li>						<li <?php if($Page_menu=="buy_now_cart_text") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_buttons/add/buy_now_cart_text">Buy Now Cart Text</a></li>											<li <?php if($Page_menu=="out_of_stock_cart_bg") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_buttons/add/out_of_stock_cart_bg">Out Of Stock Cart BG</a></li>						<li <?php if($Page_menu=="out_of_stock_cart_text") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_buttons/add/out_of_stock_cart_text">Out Of Stock Cart Text</a></li>											<li <?php if($Page_menu=="options_cart_bg") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_buttons/add/options_cart_bg">Options Cart BG</a></li>						<li <?php if($Page_menu=="options_cart_text") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_buttons/add/options_cart_text">Options Cart Text</a></li>											<li <?php if($Page_menu=="view_product_cart_bg") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_buttons/add/view_product_cart_bg">View Product Cart BG</a></li>						<li <?php if($Page_menu=="view_product_cart_text") { ?> class="active" <?php } ?>><a href="<?= base_url()?>admin/manage_buttons/add/view_product_cart_text">View Product Cart Text</a></li>					</ul>				</li>				<?php 				}
+			}
+			else			{				if($this->Admin_Model->permissions_check_menu($mymenu->page_type)==1){
+				?> 
+				<li <?php if($Page_menu==$mymenu->page_type) { ?> class="active" <?php } ?>>				
+                <a href="<?= base_url()?>admin/<?php echo $mymenu->page_type ?>">				<?php if(base64_decode($menu1->fafa_icon)==""){ ?>
+                <i class="fa fa-th-large"></i>				<?php } else { ?>				<?= base64_decode($menu1->fafa_icon); ?>				<?php } ?>
+                <span class="nav-label">
+				<?= $menu1->page_title;	?>
+				</span> 
+                </a>
+            </li>
+            <?php }				} 		}?>
+			
+			
+			
+			
+			
+
+    </div>
 </nav>

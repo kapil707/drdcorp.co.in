@@ -1,6 +1,8 @@
 <div class="row">
 	<div class="col-xs-12">
-		<button type="button" class="btn btn-w-m btn-info" onclick="goBack();"><< Back</button>
+        <a href="<?php echo base_url(); ?>admin/<?= $Page_name ?>/view?pg=<?= $_GET["pg"]; ?>#row_<?=$id ?>">
+		<button type="button" class="btn btn-w-m btn-info"><< Back</button>
+		</a>
 	</div>
     <div class="col-xs-12">
         <!-- PAGE CONTENT BEGINS -->
@@ -8,94 +10,74 @@
         <?php
         foreach ($result as $row)
         { ?>
-            <input type="hidden" class="old_image" name="old_image" value="<?= $row->image; ?>" />
+			<input type="hidden" id="old_image" name="old_image" value="<?= $row->image?>"/>
+            <input type="hidden" id="old_image2" name="old_image2" value="<?= $row->image2?>"/>
+            <input type="hidden" id="old_image3" name="old_image3" value="<?= $row->image3?>"/>
+            <input type="hidden" id="old_image4" name="old_image4" value="<?= $row->image4?>"/>
            	<div class="form-group">				
 				<div class="col-sm-6">
-                    <div class="col-sm-4 text-right">
+				   <div class="col-sm-4 text-right">
                         <label class="control-label" for="form-field-1">
-                            Select Company
+                            Select Medicine
                         </label>
                     </div>
                     <div class="col-sm-8">
-						<input type="hidden" id="compid" name="compid" value="<?= $compid = $row->compcode?>" />
+						<input type="hidden" id="find_medicine_id" name="find_medicine_id" value="<?= $row->item_code?>" />
+
 						<?php 
-						$row1 =  $this->db->query ("select company_name from tbl_medicine where compcode='$compid'")->row();
+						$medicine_name = "";
+						$row1 = $this->db->query ("select item_name,i_code from tbl_medicine where i_code='$row->item_code'")->row();
+						if(!empty($row1)){
+							$medicine_name = $row1->item_name."($row1->i_code)";
+						}
 						?>
-						<input type="text" class="form-control" id="company_name" name="company_name" tabindex="1" onkeydown="call_search_company()" onkeyup="call_search_company()" placeholder="Select Company" autocomplete="off"value="<?= $row1->company_name?>" />
-						<div class="call_search_company_result" style="position: absolute;z-index: 1;background: white;width: 300px;"></div>
+
+						<input type="text" class="form-control" id="medicine_name" name="medicine_name" tabindex="1" placeholder="Enter Medicine" autocomplete="off" value="<?= $medicine_name?>" />
+
+						<div class="find_medicine_result"></div>
                     </div>
                     <div class="help-inline col-sm-12 has-error">
                         <span class="help-block reset middle">
-                            <?= form_error('compid'); ?>
+                            
                         </span>
                     </div>
                 </div>
-				<div class="col-sm-6">
+            </div>   
+            <div class="form-group">
+                <div class="col-sm-6">
                     <div class="col-sm-4 text-right">
                         <label class="control-label" for="form-field-1">
-                            Select Company Division
+                            Title
                         </label>
                     </div>
-                    <div class="col-sm-8 division_div">                        
-						<select name="division" id="division" class="form-control">
-							<option value="">
-								Select Company Division
-							</option>
-							<?php
-							$result1 =  $this->db->query ("select DISTINCT division from tbl_medicine where compcode='$compid' order by division asc")->result();
-							foreach($result1 as $row1)
-							{
-								$division = $row1->division;
-								?>
-								<option value="<?= $division ?>" <?php if($division==$row->division) { ?>selected <?php } ?>>
-									<?= $division ?>
-								</option>
-								<?php
-							}?>
-						</select>
+                    <div class="col-sm-6">
+                        <textarea type="text" class="form-control" id="form-field-1" placeholder="Title" name="title" value=""><?= $row->title?></textarea>
                     </div>
                     <div class="help-inline col-sm-12 has-error">
-                        <span class="help-block reset middle">
-                            <?= form_error('division'); ?>
+                        <span class="help-block reset middle">  
+                            <?= form_error('title'); ?>
                         </span>
                     </div>
-                </div>
-			</div>
-			
-			<div class="form-group">
-				<div class="col-sm-6">
+              	</div>
+
+                <div class="col-sm-6">
                     <div class="col-sm-4 text-right">
                         <label class="control-label" for="form-field-1">
-                            Show Company Name
+                            Description
                         </label>
                     </div>
-                    <div class="col-sm-8">
-						<input type="text" class="form-control" id="name" name="name" placeholder="Show Company Name" value="<?= $row->company_full_name;?>" />
+                    <div class="col-sm-6">
+                        <textarea type="text" class="form-control" id="form-field-1" placeholder="Description" name="description" value=""><?= $row->description?></textarea>
                     </div>
                     <div class="help-inline col-sm-12 has-error">
-                        <span class="help-block reset middle">
-                            <?= form_error('name'); ?>
+                        <span class="help-block reset middle">  
+                            <?= form_error('description'); ?>
                         </span>
                     </div>
-                </div>
-				<div class="col-sm-6">
-                    <div class="col-sm-4 text-right">
-                        <label class="control-label" for="form-field-1">
-							Short Order
-                        </label>
-                    </div>
-                    <div class="col-sm-8">
-						<input type="number" class="form-control" id="short_order" name="short_order" placeholder="Short Order" value="<?= $row->short_order;?>" />
-                    </div>
-                    <div class="help-inline col-sm-12 has-error">
-                        <span class="help-block reset middle">
-                            <?= form_error('short_order'); ?>
-                        </span>
-                    </div>
-                </div>
-			</div>
-            
-            <div class="form-group">				
+              	</div>
+            </div>
+        
+            <div class="form-group">
                 <div class="col-sm-6">
                     <div class="col-sm-4 text-right">
                         <label class="control-label" for="form-field-1">
@@ -106,10 +88,7 @@
                         <input type="file" class="form-control" id="form-field-1" placeholder="image" name="image" />
                     </div>
                     <div class="col-sm-2 img_id_image">
-                    	<img src="<?= $url_path ?><?= $row->image; ?>" class="img-responsive" />
-                    	<?php if($row->image!="default.jpg") { ?>
-                    	<Br /><a href="javascript:void(0)" onclick="delete_photo('<?= $row->image; ?>','image')" class="btn-white btn btn-xs">Delete</i></a>
-                        <?php } ?>
+                    	<img src="<?= $url_path ?><?= $row->image; ?>" class="img-responsive" alt />
                     </div>
                     <div class="help-inline col-sm-12 has-error">
                         <span class="help-block reset middle">  
@@ -117,7 +96,87 @@
                         </span>
                     </div>
               	</div>
-				
+                <div class="col-sm-6">
+                    <div class="col-sm-4 text-right">
+                        <label class="control-label" for="form-field-1">
+                            Image2
+                        </label>
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="file" class="form-control" id="form-field-1" placeholder="Image2" name="image2" />
+                    </div>
+                    <div class="col-sm-2 img_id_image">
+                    	<img src="<?= $url_path ?><?= $row->image2; ?>" class="img-responsive" alt />
+                    </div>
+                    <div class="help-inline col-sm-12 has-error">
+                        <span class="help-block reset middle">  
+                            <?= form_error('image2'); ?>
+                        </span>
+                    </div>
+              	</div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-6">
+                    <div class="col-sm-4 text-right">
+                        <label class="control-label" for="form-field-1">
+                            Image3
+                        </label>
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="file" class="form-control" id="form-field-1" placeholder="Image3" name="image3" />
+                    </div>
+                    <div class="col-sm-2 img_id_image">
+                    	<img src="<?= $url_path ?><?= $row->image3; ?>" class="img-responsive" alt />
+                    </div>
+                    <div class="help-inline col-sm-12 has-error">
+                        <span class="help-block reset middle">  
+                            <?= form_error('imag3'); ?>
+                        </span>
+                    </div>
+              	</div>
+                <div class="col-sm-6">
+                    <div class="col-sm-4 text-right">
+                        <label class="control-label" for="form-field-1">
+                            Image4
+                        </label>
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="file" class="form-control" id="form-field-1" placeholder="Image4" name="image4" />
+                    </div>
+                    <div class="col-sm-2 img_id_image">
+                    	<img src="<?= $url_path ?><?= $row->image4; ?>" class="img-responsive" alt />
+                    </div>
+                    <div class="help-inline col-sm-12 has-error">
+                        <span class="help-block reset middle">  
+                            <?= form_error('image4'); ?>
+                        </span>
+                    </div>
+              	</div>
+            </div>
+
+			<div class="form-group">
+				<div class="col-sm-6">
+                    <div class="col-sm-4 text-right">
+                        <label class="control-label" for="form-field-1">
+                            Featured
+                        </label>
+                    </div>
+                    <div class="col-sm-8">
+                        <select name="featured" id="featured" class="form-control">
+							<option value="1" <?php if(set_value('featured')==1) { ?> selected <?php } ?>>
+								Yes
+							</option>
+							<option value="0" <?php if(set_value('featured')==0) { ?> selected <?php } ?>>
+								No
+							</option>
+						</select>
+                    </div>
+                    <div class="help-inline col-sm-12 has-error">
+                        <span class="help-block reset middle">  
+                            <?= form_error('featured'); ?>
+                        </span>
+                    </div>
+                </div>
 				<div class="col-sm-6">
                     <div class="col-sm-4 text-right">
                         <label class="control-label" for="form-field-1">
@@ -147,13 +206,13 @@
             <div class="clearfix form-actions">
                 <div class="col-md-offset-3 col-md-9">
                     <button type="submit" class="btn btn-info" name="Submit">
-                        <i class="ace-icon fa fa-check bigger-110"></i>
+                        <em class="ace-icon fa fa-check bigger-110"></em>
                         Submit
                     </button>
 
                     &nbsp; &nbsp; &nbsp;
                     <button class="btn" type="reset">
-                        <i class="ace-icon fa fa-undo bigger-110"></i>
+                        <em class="ace-icon fa fa-undo bigger-110"></em>
                         Reset
                     </button>
                 </div>
@@ -164,47 +223,61 @@
     </div><!-- /.col -->
 </div><!-- /.row -->
 <script>
-function call_search_company()
-{	
-	company_name = $("#company_name").val();
-	$(".call_search_company_result").html("Loading....");
-	if(company_name=="")
+var delete_rec1 = 0;
+function delete_photo(id)
+{
+	if (confirm('Are you sure Delete?')) { 
+	if(delete_rec1==0)
 	{
-		$(".call_search_company_result").html("");
+		delete_rec1 = 1;
+		$.ajax({
+			type       : "POST",
+			data       :  { id : id ,} ,
+			url        : "<?= base_url()?>admin/<?= $Page_name; ?>/delete_photo",
+			success    : function(data){
+					if(data!="")
+					{
+						java_alert_function("success","Delete Successfully");
+						$("#row_"+id).hide("500");
+					}					
+					else
+					{
+						java_alert_function("error","Something Wrong")
+					}
+					delete_rec1 = 0;
+				}
+			});
+		}
+	}
+}
+</script>
+<script>
+function call_search_item()
+{	
+	item_name = $("#item_name").val();
+	$(".call_search_item_result").html("Loading....");
+	if(item_name=="")
+	{
+		$(".call_search_item_result").html("");
 	}
 	else
 	{
 		$.ajax({
 		type       : "POST",
-		data       :  {company_name:company_name},
-		url        : "<?= base_url()?>admin/<?= $Page_name?>/call_search_company",
+		data       :  {item_name:item_name},
+		url        : "<?= base_url()?>admin/<?= $Page_name?>/call_search_item",
 		cache	   : false,
 		success    : function(data){
-			$(".call_search_company_result").html(data);
+			$(".call_search_item_result").html(data);
 			}
 		});
 	}
 }
-function addcompany(id,name)
+function additem(i_code,name)
 {
 	name = atob(name);
-	$("#compid").val(id);
-	$("#company_name").val(name);
-	$(".call_search_company_result").html("");
-	get_company_division();
-}
-function get_company_division()
-{	
-	compid = $("#compid").val();
-	$(".division_div").html("Loading....");
-	$.ajax({
-	type       : "POST",
-	data       :  {compid:compid},
-	url        : "<?= base_url()?>admin/<?= $Page_name?>/get_company_division",
-	cache	   : false,
-	success    : function(data){
-		$(".division_div").html(data);
-		}
-	});
+	$("#i_code").val(i_code);
+	$("#item_name").val(name);
+	$(".call_search_item_result").html("");
 }
 </script>

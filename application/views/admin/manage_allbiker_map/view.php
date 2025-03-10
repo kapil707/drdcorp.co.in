@@ -1,50 +1,146 @@
 <div class="row">
-    <div class="col-xs-12" style="margin-bottom:5px;">
-		<a href="view2" class="btn btn-w-m btn-info">
-			View all Users
-		</a>
+	<?php /* <meta http-equiv="refresh" content="30" />*/ ?>
+    <div class="col-xs-12" style="margin-bottom:5px;">		<?php /* ?>
+    	<a href="add">
+            <button type="submit" class="btn btn-info">
+                Add
+            </button>
+        </a>		<?php */ ?>
    	</div>
-	<form method="get">
-		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-			<div class="form-group nk-datapk-ctm form-elet-mg" id="data_1">
-				<div class="input-group date nk-int-st">
-					<label>Select Date</label>
-					<input type="date" class="form-control" value="<?= $vdt1; ?>" name="vdt">
+    <div class="col-xs-12">
+	<style>
+       /* Set the size of the div element that contains the map */
+      #map {
+        height: 600px;  /* The height is 400 pixels */
+        width: 100%;  /* The width is the width of the web page */
+       }
+    </style>
+		<form method="get">
+			<div class="form-group">
+				<div class="col-xs-2">
+					<input type="text" class="form-control" placeholder="altercode" required name="altercode" value="<?= $_GET['altercode']; ?>">
+				</div>
+				<div class="col-xs-2">
+					<div class="input-group clockpicker" data-autoclose="true">
+						<input type="text" class="form-control" placeholder="time1" required name="time1" value="<?= $_GET['time1']; ?>">
+						<span class="input-group-addon">
+							<span class="fa fa-clock-o"></span>
+						</span>
+					</div>
+				</div>
+				<div class="col-xs-2">
+					<div class="input-group clockpicker" data-autoclose="true">
+						<input type="text" class="form-control" placeholder="time2" required name="time2" value="<?= $_GET['time2']; ?>">
+						<span class="input-group-addon">
+							<span class="fa fa-clock-o"></span>
+						</span>
+					</div>
+				</div>
+				<div class="col-xs-2">
+					 <div class="form-group" id="data_1">
+						<div class="input-group date">
+							<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+							<input type="text" class="form-control" placeholder="date" required name="date" value="<?= $_GET['date']; ?>">
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-2">
+					<button type="submit" class="btn btn-primary block full-width m-b" name="Submit" value="Submit">Submit</button>
 				</div>
 			</div>
-		</div>
-		<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 text-right">
-			<button type="submit" name="submit" class="btn btn-success notika-btn-success waves-effect" value="submit">Submit</button>
-		</div>
-	</form>
-    <div class="col-xs-12">
+		</form>
+        <div id="map"></div>
+    <script>
+setTimeout(function(){
+  initMap();
+}, 600000000000000);
+// Initialize and add the map
+function initMap() {
+  // The location of Uluru
+   var locations = [
+   <?php
+   $i = 1;
+   
+   $result = $this->db->query("SELECT * FROM `tbl_tracking` WHERE `longitude`!=''")->result();   
+   foreach($result as $row) { 
+		$row->name = $row->user_name1." - (". $row->user_phone1.") <br> Time:-".$row->time."--".$row->date;
+	?>
+		["<?= $row->name; ?>", <?= $row->latitude; ?>, <?= $row->longitude; ?>, <?= $i; ?>],
+   <?php 
+   $i++;
+   } 
+   $latitude = "29.6060703";
+   $longitude = "74.2884948";
+   
+   if($_GET["altercode"]==""){
+   ?>
+		['Sky Channel Office', <?= $latitude;?>, <?= $longitude;?>, <?= $i; ?>]
+   <?php }else {  
+	   $latitude = $row->latitude;
+	   $longitude = $row->longitude;?>
+		["<?= $row->user_name1; ?>", <?= $row->latitude; ?>, <?= $row->longitude; ?>, <?= $i; ?>],
+   <?php } ?>
+    ];
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 16,
+      center: new google.maps.LatLng(<?= $latitude;?>, <?= $longitude;?>),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    var infowindow = new google.maps.InfoWindow();
+
+    var marker, i;
+
+    for (i = 0; i < locations.length; i++) {  
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+        map: map
+      });
+
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infowindow.setContent(locations[i][0]);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+    }
+	
+setTimeout(function(){
+initMap();
+}, 600000000);
+}
+    </script>
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+    -->
+	<?php $mapapikey =  $this->Scheme_Model->get_website_data("mapapikey") ;?>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=<?=$mapapikey ?>&callback=initMap">
+    </script>
+    </div>
+		<div class="col-xs-12"><br><br>
         <div class="table-responsive">
-			Total Records : <?php echo $count_records ?> / <?= count($result) + ($_GET["pg"]) ?>
-			<?php /*<table class="table table-striped table-bordered table-hover dataTables-example">*/ ?>
-			<table class="table table-striped table-bordered table-hover">
+            <table class="table table-striped table-bordered table-hover dataTables-example">
                 <thead>
                     <tr>
                     	<th>
                         	Sno.
                         </th>
 						<th>
-							Name (Altercode)
-						</th>
+                        	Name
+                        </th>
 						<th>
-							Date
-						</th>
+                        	View Info
+                        </th>
 						<th>
-							Time
-						</th>
-						<th>
-							Notification
-						</th>
-						<th>
-							View In Map
-						</th>
+                        	Wake Up
+                        </th>
                     </tr>
                 </thead>
-                <tbody>
+				<tbody>
                 <?php
 				$i=1;
                 foreach ($result as $row)
@@ -54,136 +150,68 @@
                     	<td>
                         	<?= $i++; ?>
                         </td>
-						<td>
-                        	<?= $row->name;?>
-							(<?= $row->altercode;?>)
+ 						<td>
+                        	<?= $row->name; ?>
                         </td>
 						<td>
-                        	<?= $row->date;?>
+							<a href="<?= base_url()?>admin/<?= $Page_name; ?>/view2/<?= $row->id; ?>">
+							View Info</a>
                         </td>
 						<td>
-							<?= $row->time;?>
+							<a onClick="wakeup('<?= $row->id; ?>');" href="#">
+							Wake Up </a>
                         </td>
-						<td>
-							<form method="post">
-							<input type="hidden" value="<?php echo $row->altercode;?>" name="altercode">
-                        	<button type="submit" class="btn btn-primary block full-width m-b" name="Notification" value="Notification">Notification</button>
-							</form>
-                        </td>
-						<td>
-                        	<div class="btn-group">
-								<a href="view2/?altercode=<?= $row->altercode; ?>" class="btn-white btn btn-xs">View</a>
-							</div>
-                        </td>
-					</tr>
+                    </tr>
                     <?php
                     }
                     ?>
                 </tbody>
             </table>
-			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<ul class="pagination">
-    <li class="startcss1 disabled"><span class="">First</span></li>
-    <li class="startcss2 disabled"><span class="">Prev</span></li>
-<?php
-$endcss = "class='disabled'";
-for($i=0;$i<($count_records);$i= 100 + $i){
-	$showone = 0;
-	if($i==0 && $per_page!=0){
-
-
-		?>
-		<li class="<?php if(ceil($per_page/100)==ceil($i/100)){ echo "active";} ?>"><a rel="noopener" href="javascript:void(0);" class="for_per" ford="<?php echo ceil($i/100) ?>" per_page="<?php echo ceil($i/100)*100 ?>" ><?php echo ceil($i/100)+1 ?></a></li>
-		<script>
-			$(".startcss1").removeClass("disabled");
-			$(".startcss2").removeClass("disabled");
-
-			$(".startcss1").html('<a rel="noopener" href="javascript:void(0)" class="fast" per_page="0">First</a>');
-			$(".startcss2").html('<a rel="noopener" href="javascript:void(0)" class="previous" per_page="<?php echo $per_page - 100 ?>">Prev</a>');
-		</script>
-		<?php
-		$showone = 1;
-	}
-	
-	if($i==$per_page-100 && $showone == 0){
-		?>
-		<li class="<?php if(ceil($per_page/100)==ceil($i/100)){ echo "active";} ?>"><a rel="noopener" href="javascript:void(0);" class="for_per" ford="<?php echo ceil($i/100) ?>" per_page="<?php echo ceil($i/100)*100 ?>" ><?php echo $lastval = ceil($i/100)+1 ?></a></li>
-		<?php
-	}
-	
-	if($i==$per_page){
-		?>
-		<li class="<?php if(ceil($per_page/100)==ceil($i/100)){ echo "active";} ?>"><a rel="noopener" href="javascript:void(0);" class="for_per" ford="<?php echo ceil($i/100) ?>" per_page="<?php echo ceil($i/100)*100 ?>" ><?php echo $lastval1 = ceil($i/100)+1 ?></a></li>
-		<?php
-	}
-	
-	if($i==$per_page+100){
-		$endcss = "";
-		?>
-		<li class="<?php if(ceil($per_page/100)==ceil($i/100)){ echo "active";} ?>"><a rel="noopener" href="javascript:void(0);" class="for_per" ford="<?php echo ceil($i/100) ?>" per_page="<?php echo ceil($i/100)*100 ?>" ><?php echo $lastval2 = ceil($i/100)+1 ?></a></li>
-		<?php
-	}
-}
-
-if(ceil($i/100)==$lastval || ceil($i/100)==$lastval1 || ceil($i/100)==$lastval2){}else{
-	?>
-	<li class="<?php if(ceil($per_page/100)==ceil($i/100)){ echo "active";} ?>"><a rel="noopener" href="javascript:void(0);" class="for_per" ford="<?php echo ceil($i/100) ?>" per_page="<?php echo ceil($count_records/100)*100 - 100; ?>" ><?php echo ceil($i/100)?></a></li>
-	<?php
-}
-$last = $next = '';
-
-if($endcss == ''){
-	$last = 'last';
-	$next = 'next';
-}
-       /*echo $per_page;
-    for($i=0;$i<ceil($count_records/100);$i++){
-
-  if($i<=ceil($per_page/100)+10&&$i>=ceil($per_page/100)){
-       if($i==0){ ?>
-      <li class="<?php if(ceil($per_page/100)==$i){ echo "active";} ?>"><a rel="noopener" href="javascript:void(0);" class="for_per" ford="<?php echo $i ?>" per_page="<?php echo "0"; ?>" ><?php echo "1" ?>xx</a></li>
-      <?php  }else{ ?>
-     <li class="<?php if(ceil($per_page/100)==$i){ echo "active";} ?>"><a rel="noopener" href="javascript:void(0);" class="for_per"  ford="<?php echo $i ?>" per_page="<?php echo $i*100; ?>" ><?php echo $i+1 ?>yy</a></li>
-     <?php   }
-    	?>
-   
-    
-    <?php } ?>
-    
-
-
-    <?php }*/ ?>
-    
-    <li <?php /* class="<?php if($per_page >= $count_records){ echo 'disabled'; } ?>"*/ ?> <?=$endcss; ?>>
-        <a rel="noopener" href="javascript:void(0);" class="<?= $next?>" per_page="<?php echo $per_page + 100; ?>">Next</a>
-    </li>
-    <li <?=$endcss; ?>><a rel="noopener" href="javascript:void(0)" class="<?= $last?>" per_page="<?php echo ceil($count_records/100)*100 - 100; ?>">Last</a></li>
-</ul>
         </div>
     </div>
 </div>
 <script>
-$(".for_per,.previous,.next,.last,.fast").click(function(){
-	for_per=$(this).attr("ford");
-	per_page=$(this).attr("per_page");
-	url="<?php echo base_url() ?>admin/<?= $Page_name; ?>/view?pg="+per_page+"&vdt=<?php echo $vdt1 ?>&submit=submit";
-	window.location.href=url;
-  
-  });
-  $(".page_btn").click(function(){
-  	//alert("ok");
- // per_page="<?php echo $per_page ?>";
-// for_per=$(this).attr("ford");
-  //per_page=$(this).attr("per_page");
- page_no=$('.page_no').val();
+function create_copy_order(id)
+{
+	if (confirm('Are you sure Resend?')) { 
+		order_id = $(".order_id_"+id).val();
+		$.ajax({
+		type       : "POST",
+		data       :  {order_id:order_id},
+		url        : "<?= base_url()?>admin/<?= $Page_name; ?>/create_copy_order",
+		success    : function(data){
+				if(data!="")
+				{
+					java_alert_function("success","Created Successfully");
+				}
+				else
+				{
+					java_alert_function("error","Something Wrong")
+				}
+			}
+		});
+	}
+}
 
- bysearch=0;
- if(page_no!=""&&page_no!=0){
- 	for_per=page_no-1;
-  per_page=for_per*100;
-  bysearch=1;
- }
- 	url="<?php echo base_url() ?>admin/<?= $Page_name; ?>/view?pg="+per_page+"&vdt=<?php echo $vdt1 ?>&submit=submit";
-	window.location.href=url;
-  });
+function wakeup(id)
+{
+	if (confirm('Are you sure wakeup?')) { 
+		order_id = $(".order_id_"+id).val();
+		$.ajax({
+		type       : "POST",
+		data       :  {id:id},
+		url        : "<?= base_url()?>admin/<?= $Page_name; ?>/wakeup",
+		success    : function(data){
+				if(data!="")
+				{
+					java_alert_function("success","Successfully");
+				}
+				else
+				{
+					java_alert_function("error","Something Wrong")
+				}
+			}
+		});
+	}
+}
 </script>
