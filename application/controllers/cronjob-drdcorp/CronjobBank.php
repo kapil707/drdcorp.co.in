@@ -9,6 +9,7 @@ class CronjobBank extends CI_Controller
 	}
 
 	public function insert_whatsapp(){
+		echo "work";
 		$curl = curl_init();
 
 		curl_setopt_array($curl, array(
@@ -29,7 +30,7 @@ class CronjobBank extends CI_Controller
 
 		curl_close($curl);
 		echo $response;
-
+		echo "work2";
 		print_r($response);
 	}
 	
