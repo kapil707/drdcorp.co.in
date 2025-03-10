@@ -21,7 +21,7 @@ class CronjobBank extends CI_Controller
 		$sender_name_place = "Online%20Details";
 
 		//Created a GET API
-		echo $url = "http://192.46.214.43:5000/messages?from=$start_date&to=$end_date&sender_name_place=$sender_name_place&status=false";
+		echo $url = "http://192.46.214.43:5000/messages?start_date=$start_date&end_date=$end_date&sender_name_place=$sender_name_place&status=false";
 		$parmiter = '';
 		$curl = curl_init();
 		
