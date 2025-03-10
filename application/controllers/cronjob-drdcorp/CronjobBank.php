@@ -383,172 +383,156 @@ class CronjobBank extends CI_Controller
 			echo "<br>".$text;
 
 			preg_match("/FROM\s+(.+?)\s+CITI/", $text, $matches);
-			if (!empty($matches) && empty($from_value)){
+			if (!empty($matches) && empty($received_from)){
 				$received_from = trim($matches[1]);
 				//$from_value = "<b>find2: ".$received_from."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
-				$from_value = $received_from;
 				$statment_type = 1;
 				echo "<br>1</br>";
 			}
 			
 			preg_match("/FROM\s+(.+?)\s*+PAYMENT/", $text, $matches);
-			if (!empty($matches) && empty($from_value)){
+			if (!empty($matches) && empty($received_from)){
 				$received_from = trim($matches[1]);
 				//$from_value = "<b>find2: ".$received_from."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
-				$from_value = $received_from;
 				$statment_type = 2;
 				echo "<br>2</br>";
 			}
 
 			preg_match("/FROM\s+(.+?)\s+SENT/", $text, $matches);
-			if (!empty($matches) && empty($from_value)){
+			if (!empty($matches) && empty($received_from)){
 				$received_from = trim($matches[1]);
 				//$from_value = "<b>find2: ".$received_from."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
-				$from_value = $received_from;
 				$statment_type = 3;
 				echo "<br>3</br>";
 			}
 
 			preg_match("/FROM\s+(.+?)\s+UPI/", $text, $matches);
-			if (!empty($matches) && empty($from_value)){
+			if (!empty($matches) && empty($received_from)){
 				$received_from = trim($matches[1]);
 				//$from_value = "<b>find2: ".$received_from."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
-				$from_value = $received_from;
 				$statment_type = 4;
 				echo "<br>4</br>";
 			}
 
 			preg_match("/FROM\s+(.+?)\s+REF/", $text, $matches);
-			if (!empty($matches) && empty($from_value)){
+			if (!empty($matches) && empty($received_from)){
 				$received_from = trim($matches[1]);
 				//$from_value = "<b>find2: ".$received_from."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
-				$from_value = $received_from;
 				$statment_type = 5;
 				echo "<br>5</br>";
 			}
 
 			preg_match("/FROM\s+(.+?)\s+PAY/", $text, $matches);
-			if (!empty($matches) && empty($from_value)){
+			if (!empty($matches) && empty($received_from)){
 				$received_from = trim($matches[1]);
 				//$from_value = "<b>find2: ".$received_from."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
-				$from_value = $received_from;
 				$statment_type = 6;
 				echo "<br>6</br>";
 			}
 			
 			preg_match("/FROM\s+(\d+)@\s+(\w+)/", $text, $matches);
-			if (!empty($matches) && empty($from_value)){
+			if (!empty($matches) && empty($received_from)){
 				$received_from = trim($matches[1])."@".trim($matches[2]);
 				$received_from = str_replace("'", "", $received_from);
 				$received_from = str_replace(" ", "", $received_from);
 				$received_from = str_replace("\n", "", $received_from);
 				//$from_value = "<b>find: ".$received_from."</b>"; // Output: 97926121865@PAYTM SAMEER S O KALLU NA
-				$from_value = $received_from;
 				$statment_type = 7;
 				echo "<br>7</br>";
 			}
 			
 			preg_match("/FROM\s+(\d+)\s+@\s*(\w+)/", $text, $matches);
-			if (!empty($matches) && empty($from_value)){
+			if (!empty($matches) && empty($received_from)){
 				$received_from = trim($matches[1])."@".trim($matches[2]);
 				$received_from = str_replace("'", "", $received_from);
 				$received_from = str_replace(" ", "", $received_from);
 				$received_from = str_replace("\n", "", $received_from);
 				//$from_value = "<b>find2: ".$received_from."</b>"; // Output: 97926121865@PAYTM SAMEER S O KALLU NA
-				$from_value = $received_from;
 				$statment_type = 8;
 				echo "<br>8</br>";
 			}
 
 			preg_match("/FROM\s+(\w+)\d+@\s*(\w+)/", $text, $matches);
-			if (!empty($matches) && empty($from_value)){
+			if (!empty($matches) && empty($received_from)){
 				$received_from = trim($matches[1])."@".trim($matches[2]);
 				$received_from = str_replace("'", "", $received_from);
 				$received_from = str_replace(" ", "", $received_from);
 				$received_from = str_replace("\n", "", $received_from);
 				//$from_value = "<b>find3: ".$received_from."</b>"; // Output: 97926121865@PAYTM SAMEER S O KALLU NA
-				$from_value = $received_from;
 				$statment_type = 9;
 				echo "<br>9</br>";
 			}
 
 			preg_match("/FROM\s+([^\s@]+)\s+@\s*(\w+)/", $text, $matches);
-			if (!empty($matches) && empty($from_value)){
+			if (!empty($matches) && empty($received_from)){
 				$received_from = trim($matches[1])."@".trim($matches[2]);
 				$received_from = str_replace("'", "", $received_from);
 				$received_from = str_replace(" ", "", $received_from);
 				$received_from = str_replace("\n", "", $received_from);
 				//$from_value = "<b>find4: ".$received_from."</b>"; // Output: 97926121865@PAYTM SAMEER S O KALLU NA
-				$from_value = $received_from;
 				$statment_type = 10;
 				echo "<br>10</br>";
 			}
 
 			preg_match("/FROM\s+([^\@]+)@\s*(\w+)/", $text, $matches);
-			if (!empty($matches) && empty($from_value)){
+			if (!empty($matches) && empty($received_from)){
 				$received_from = trim($matches[1])."@".trim($matches[2]);
 				$received_from = str_replace("'", "", $received_from);
 				$received_from = str_replace(" ", "", $received_from);
 				$received_from = str_replace("\n", "", $received_from);
 				//$from_value = "<b>find5: ".$received_from."</b>"; // Output: 97926121865@PAYTM SAMEER S O KALLU NA
-				$from_value = $received_from;
 				$statment_type = 11;
 				echo "<br>11</br>";
 			}
 
 			preg_match("/FROM\s+(.*?)\s+PUNBQ/", $text, $matches);
-			if (!empty($matches) && empty($from_value)){
+			if (!empty($matches) && empty($received_from)){
 				$received_from = trim($matches[1]);
 				//$received_from = str_replace("'", "", $received_from);
 				//$received_from = str_replace(" ", "", $received_from);
 				//$received_from = str_replace("\n", "", $received_from);
 				//$from_value = "<b>find6: ".$received_from."</b>"; // Output: 97926121865@PAYTM SAMEER S O KALLU NA
-				$from_value = $received_from;
 				$statment_type = 12;
 				echo "<br>12</br>";
 			}
 
 			preg_match("/FROM\s+([\w\s]+)\s+[A-Z0-9]+\s+REF NO/", $text, $matches);
-			if (!empty($matches) && empty($from_value)){
+			if (!empty($matches) && empty($received_from)){
 				$received_from = trim($matches[1]);
 				//$received_from = str_replace("'", "", $received_from);
 				//$received_from = str_replace(" ", "", $received_from);
 				//$received_from = str_replace("\n", "", $received_from);
 				//$from_value = "<b>find6: ".$received_from."</b>"; // Output: 97926121865@PAYTM SAMEER S O KALLU NA
-				$from_value = $received_from;
 				$statment_type = 13;
 				echo "<br>13</br>";
 			}
 
 			preg_match("/FROM\s+(.*?)\s+CITI0000/", $text, $matches);
-			if (!empty($matches) && empty($from_value)){
+			if (!empty($matches) && empty($received_from)){
 				$received_from = trim($matches[1]);
 				//$received_from = str_replace("'", "", $received_from);
 				//$received_from = str_replace(" ", "", $received_from);
 				//$received_from = str_replace("\n", "", $received_from);
 				//$from_value = "<b>find6: ".$received_from."</b>"; // Output: 97926121865@PAYTM SAMEER S O KALLU NA
-				$from_value = $received_from;
 				$statment_type = 14;
 				echo "<br>14</br>";
 			}
 
 			preg_match("/FROM\s+(.*)/", $text, $matches);
-			if (!empty($matches) && empty($from_value)){
+			if (!empty($matches) && empty($received_from)){
 				$received_from = trim($matches[1]);
 				//$received_from = str_replace("'", "", $received_from);
 				//$received_from = str_replace(" ", "", $received_from);
 				//$received_from = str_replace("\n", "", $received_from);
 				//$from_value = "<b>find6: ".$received_from."</b>"; // Output: 97926121865@PAYTM SAMEER S O KALLU NA
-				$from_value = $received_from;
 				$statment_type = 15;
 				echo "<br>15</br>";
 			}
 
-			echo $from_value."<br>";
+			echo $received_from."<br>";
 			//die();
 
 			$statment_id = $row->id;
-			$received_from = $from_value;
 			if(!empty($received_from)){
 				$row_new = $this->BankModel->select_query("select id,type,status,received_from from tbl_bank_processing where upi_no='$upi_no'");
 				$row_new = $row_new->row();
@@ -587,7 +571,6 @@ class CronjobBank extends CI_Controller
 						'statment_id'=>$statment_id,
 					);
 					$this->BankModel->edit_fun("tbl_bank_processing", $dt,$where);
-					
 				}
 			}
 			/****************************************************** */

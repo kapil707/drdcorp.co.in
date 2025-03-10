@@ -15,10 +15,6 @@ git branch -M backup-24-11-08
 git push -u origin backup-24-11-08
 
 /*******************/
-tbl_slider1 -> tbl_slider
-tbl_medicine_menu_nnn -> tbl_medicine_menu - no need
-tbl_home_nnn -> tbl_home
-tbl_division_category_nnn -> tbl_division_category - no need
-tbl_division_wise_nnn -> tbl_division_wise
-tbl_item_category_nnn -> tbl_item_category
-tbl_item -> tbl_item_wise
+update tbl_sms set status=0 where date='2025-03-10'
+update tbl_statment set status=0
+delete from tbl_bank_processing
