@@ -313,7 +313,7 @@ class CronjobBank extends CI_Controller
 	public function get_statment(){
 
 		//echo " get_statment";
-		$result = $this->BankModel->select_query("select * from tbl_statment where status='0' limit 1");
+		$result = $this->BankModel->select_query("select * from tbl_statment where status='0' limit 100");
 		$result = $result->result();
 		foreach($result as $row){
 		
