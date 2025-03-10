@@ -29,8 +29,6 @@ class CronjobBank extends CI_Controller
 
 		curl_close($curl);
 		echo $response;
-
-		print_r($data1);
 	}
 	
 	public function bank_processing(){
