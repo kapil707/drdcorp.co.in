@@ -10,7 +10,7 @@ class Manage_bank_statment extends CI_Controller {
 	public function __construct()
     {
         parent::__construct();
-		$this->load->model("model-local/BankModel");
+		$this->load->model("model-drdcorp/BankModel");
     }
 	public function index()
 	{

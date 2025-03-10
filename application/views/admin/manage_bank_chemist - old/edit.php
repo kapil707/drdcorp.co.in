@@ -38,7 +38,6 @@
                     </div>
 				</div>
           	</div>
-            
             <div class="space-4"></div>
             <br /><br />
             <div class="clearfix form-actions">
@@ -109,7 +108,6 @@ function change_url()
 	disabled_submit_button();
 	$('.url_error').html("");
 	url1 = $('.url').val();
-	
 	name = url1;
 	name = name.replace(/&/g,'and');
 	name = name.trim(name).replace(/ /g,'-');
@@ -117,7 +115,6 @@ function change_url()
 	$(".url1").html(name)
 	$(".url").val(name)
 	a_href_change(name)
-	
 	$.ajax({
 	type       : "POST",
 	data       :  { url1 : url1,id : '<?= $row->id; ?>',} ,

@@ -74,7 +74,6 @@
 			<input type="text" id="date-range" class="form-control" name="date-range" value="<?php echo $date_range ?>">
 		</div>
 		<div class="col-md-3">
-			
 		</div>
 		<div class="col-md-3">
 			<button type="submit" class="btn btn-info submit_button" name="Submit">
@@ -97,7 +96,6 @@
                 </thead>
 				<tbody>
 				<?php
-					
 				$i= 1;
 				foreach ($result as $entry) {
 					$tr_style = "";
@@ -140,35 +138,28 @@
 					$from_value_find = $entry->from_value_find;
 					/********************************************** */
 					$from_value = $entry->from_value;
-
 					/********************************************** */
 					$from_value_find = preg_quote($from_value_find, '/');
 					$row_from_text_find = preg_replace('/(' . $from_value_find . ')/i', '<span style="background-color: yellow;">$1</span>', $from_value);
-
 					if(empty($from_value)){
 						$row_from_text_find = "N/a";
 					}
-
 					/********************************************** */
 					$row_from_text_logic = $entry->final_find_by;
 					if(!empty($row_from_text_logic)){
 						$row_from_text_logic = " || (<b>$row_from_text_logic</b>)";
 					}
-
 					if(empty($from_value)){
 						$row_from_text_logic = ""; //yha jab work karta ha jab chemist find nahi hua or find me kuch aa raha ha to wo empty ho jaya
 					}
-
 					// chemist find karta ha yha logic
 					/********************************************** */
 					$chemist = $entry->chemist;
-
 					$chemist_array = explode("||", $chemist);
 					$chemist_array = array_unique($chemist_array);
 					// if(count($chemist_array)==1){
 					// 	$singal_chemist_id = $chemist_array[0];
 					// }
-					
 					$row_chemist_id = "";
 					if(!empty($chemist_array)){
 						foreach($chemist_array as $rows){
@@ -179,15 +170,12 @@
 							$row_chemist_id.= " || ";
 						}
 					}
-
 					if(!empty($row_chemist_id)){
 						$row_chemist_id = substr($row_chemist_id, 0, -4);
 					}
-
 					if(empty($chemist_array[0])){
 						$row_chemist_id = "";
 					}
-
 					// invoice say chemist find karta ha yha logic
 					/********************************************** */
 					$find_invoice_chemist_id = $entry->invoice;
@@ -196,37 +184,30 @@
 					foreach($find_invoice_chemist_id_array as $rows){
 						$rows = str_replace('Amt.', 'Rs.', $rows);
 						$rows1 = str_replace('Amt-x.', 'Rs.', $rows);
-
 						$row_find_invoice_all.= $rows1."/-<br>";
-
 						$arr = explode(":-",$rows);
 						$row_invoice_chemist.= $arr[0]." || ";
 					}
 					$row_invoice_chemist = explode(" || ", $row_invoice_chemist);
 					$row_invoice_chemist = array_unique($row_invoice_chemist);
 					$row_invoice_chemist = implode(' || ', $row_invoice_chemist);
-					
 					if(!empty($row_invoice_chemist)){
 						$row_invoice_chemist = substr($row_invoice_chemist, 0, -4);
 					}
-					
 					if(!empty($entry->final_invoice_chemist)) {
 						$find_invoice_chemist_id = $entry->final_invoice;
 						$row_find_invoice_all = $row_invoice_chemist = "";
 						$find_invoice_chemist_id_array = explode(",", $find_invoice_chemist_id);
 						foreach($find_invoice_chemist_id_array as $rows){
 							$rows = str_replace('Amt.', 'Rs.', $rows);
-
 							$row_find_invoice_all.= $rows."/-<br>";
 						}
 						$row_invoice_chemist = $entry->final_invoice_chemist;
 					}
 					/*************************************************/
-
 					if(empty($find_invoice_chemist_id)){
 						$row_find_invoice_all = "N/a";
 					}
-					
 					/********************************************** */
 					$row_whatsapp_id = $entry->whatsapp_message_id;
 					/********************************************** */
@@ -237,7 +218,6 @@
 					/********************************************** */
 					/********************************************** */
 					$final_chemist = $entry->final_chemist;
-
 					$row_find_by_invoice_chemist_id = $entry->invoice;
 					/********************************************** */	
 					$textbox_final_chemist = "";
@@ -272,37 +252,30 @@
 					$row_whatsapp_chemist1 = 
 					$row_whatsapp_chemist1 = str_replace(' ', '', $row_whatsapp_chemist);
 					$row_whatsapp_chemist1 = str_replace('-', '', $row_whatsapp_chemist1);
-
 					if((strtolower($row_chemist_id)==strtolower($row_invoice_chemist)) && (strtolower($row_chemist_id)==strtolower($row_whatsapp_chemist1)) && (!empty($row_chemist_id) && !empty($row_invoice_chemist) && !empty($row_whatsapp_chemist1))){
-
 						$tr_style = "background-color: #1ab394;";
 						$textbox_final_chemist = $row_chemist_id;
 					}
-					
 					// jab koi be chemist find na ho to
 					/********************************************** */
 					if(empty($row_chemist_id)){
 						$row_chemist_id = "N/a";
 					}
-
 					// jab koi be invoice say chemist find na ho to
 					/********************************************** */
 					if(empty($row_find_by_invoice_chemist_id)){
 						$row_find_by_invoice_chemist_id = "N/a";
 					}
-
 					// jab koi be whatapp say chemist find na ho to
 					/********************************************** */
 					if(empty($row_whatsapp_chemist)){
 						$row_whatsapp_chemist = "N/a";
 					}
-
 					// jab koi be whatapp say chemist find na ho to
 					/********************************************** */
 					if(empty($row_whatsapp)){
 						$row_whatsapp = "N/a";
 					}
-
 					// jab user done kar dayta ha to color change hota ha iss say
 					/********************************************** */
 					$done_status = $entry->status;
@@ -334,15 +307,10 @@
 						<td>
 							<div class="td_div">
 								<?= ($row_from_text); ?>
-
 								<input type="hidden" value="<?php echo $from_text ?>" class="text_from_text_<?= ($row_id); ?>">
-
 								<input type="text" value="<?php echo $chemist; ?>" class="form-control myinput1 text_from_text_chemist_id_<?= ($row_id); ?> pg_text_box" style="display:none;">
-
 								<i class="fa fa-check add_from_text_chemist_id_<?= ($row_id); ?>" aria-hidden="true" onclick="add_from_text_chemist_id('<?= ($row_id); ?>')" style="display:none"></i>
-
 								<i class="fa fa-times cancel_from_text_chemist_id_<?= ($row_id); ?>" aria-hidden="true" onclick="cancel_from_text_chemist_id('<?= ($row_id); ?>')" style="display:none"></i>
-								
 								<i class="fa fa-pencil edit_from_text_chemist_id_<?= ($row_id); ?>" aria-hidden="true" onclick="edit_from_text_chemist_id('<?= ($row_id); ?>')"></i>
 							</div>
 							<div class="td_div">
@@ -370,7 +338,6 @@
 						<td>
 							<div class="td_div">
 								<i class="fa fa-refresh row_refresh_id_<?= ($row_id); ?>" aria-hidden="true" onclick="row_refresh('<?= ($row_id); ?>')"></i> Refresh
-								
 								<?php if($entry->recommended){ echo " || <b>Recommended : $entry->recommended</b>"; }?>
 							</div>
 							<div class="td_div">
@@ -385,18 +352,14 @@
 								<b onclick="get_whats_message('<?= ($row_id); ?>','<?= ($row_whatsapp_id); ?>','<?= $row_upi_no; ?>')" data-toggle="modal" data-target="#myModal">WhatsApp : </b>
 								<?= $row_whatsapp_chemist; ?>
 							</div>
-
 							<div class="td_div1">
 								<b style="float: left; margin-right:5px;">Final Chemist : </b>
 								<?php if(empty($textbox_final_chemist) && $row_chemist_id != "N/a"){
 									$textbox_final_chemist = $row_chemist_id;
 								}?>
 								<input type="text" value="<?php echo $textbox_final_chemist ?>" class="form-control text_final_chemist_id_<?= ($row_id); ?> pg_text_box" style="<?php if(!empty($entry->final_chemist)) { ?>display:none;<?php } ?>float: left !important;" placeholder="Chemist Id">
-								
 								<i class="fa fa-check add_final_chemist_<?= ($row_id); ?>" aria-hidden="true" onclick="add_final_chemist('<?= ($row_id); ?>')" style="<?php if(!empty($entry->final_chemist)) { ?>display:none;<?php } ?> float: left;font-size: 20px;"></i>
-
 								<span class="span_final_chemist_<?= ($row_id); ?>" <?php if(empty($entry->final_chemist)) { ?>style="display:none" <?php } ?>><?php echo $final_chemist ?></span>
-
 								<i class="fa fa-pencil edit_final_chemist_<?= ($row_id); ?>" aria-hidden="true" onclick="edit_final_chemist('<?= ($row_id); ?>')" <?php if(empty($entry->final_chemist)) { ?>style="display:none" <?php } ?>></i>
 							</div>
 						</td>
@@ -410,14 +373,12 @@
 <script>
 function add_final_chemist(id){
 	var from_text = $(".text_from_text_"+id).val();
-
 	var chemist_id = $(".text_final_chemist_id_"+id).val();
 	if(chemist_id.trim()==""){
 		alert("Etner any chemist id")
 	}else{
 		$(".text_final_chemist_id_"+id).hide();
 		$(".add_final_chemist_"+id).hide();
-
 		$(".span_final_chemist_"+id).html(chemist_id);
 		$(".span_final_chemist_"+id).show();
 		$(".edit_final_chemist_"+id).show();
@@ -439,14 +400,11 @@ function add_final_chemist(id){
 function edit_final_chemist(id){
 	$(".text_final_chemist_id_"+id).show();
 	$(".add_final_chemist_"+id).show();
-
 	$(".span_final_chemist_"+id).hide();
 	$(".edit_final_chemist_"+id).hide();
 }
-
 function add_from_text_chemist_id(id){
 	var from_text = $(".text_from_text_"+id).val();
-
 	var chemist_id = $(".text_from_text_chemist_id_"+id).val();
 	if(chemist_id.trim()==""){
 		alert("Etner any chemist id")
@@ -466,23 +424,18 @@ function add_from_text_chemist_id(id){
 		});
 	}
 }
-
 function edit_from_text_chemist_id(id){
 	$(".text_from_text_chemist_id_"+id).show();
 	$(".add_from_text_chemist_id_"+id).show();
 	$(".cancel_from_text_chemist_id_"+id).show();
-
 	$(".edit_from_text_chemist_id_"+id).hide();
 }
-
 function cancel_from_text_chemist_id(id){
 	$(".text_from_text_chemist_id_"+id).hide();
 	$(".add_from_text_chemist_id_"+id).hide();
 	$(".cancel_from_text_chemist_id_"+id).hide();
-
 	$(".edit_from_text_chemist_id_"+id).show();
 }
-
 function row_refresh(id){
 	$.ajax({
 		type : "POST",
@@ -530,7 +483,6 @@ function get_whats_message(row_id1,row_whatsapp_id,row_upi_no){
 		timeout: 60000
 	});
 }
-
 function add_whatsapp_chemist_id(){
 	var whatsapp_chemist = $(".text_whatsapp_chemist_id").val();
 	if(whatsapp_chemist.trim()==""){
@@ -555,7 +507,6 @@ function add_whatsapp_chemist_id(){
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog modal-lg">
-
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
@@ -573,15 +524,12 @@ function add_whatsapp_chemist_id(){
 			</tr>
 		</table>
 		<b style="float: left;">Add WhatsApp Chemist : </b>
-								
 		<input type="text" value="<?php echo $textbox_final_chemist ?>" class="form-control text_whatsapp_chemist_id" style="float: left; width: 100px; border-radius: 10px;" placeholder="Chemist Id">
-		
 		<i class="fa fa-check add_whatsapp_chemist_id" aria-hidden="true" onclick="add_whatsapp_chemist_id()" style="float: left;font-size: 20px;"></i>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
-
   </div>
 </div>

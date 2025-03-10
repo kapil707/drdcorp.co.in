@@ -44,7 +44,6 @@
                         </span>
                     </div>
                 </div>
-
 				<div class="col-sm-4">
                     <div class="col-sm-12">
                         <label class="control-label" for="form-field-1">
@@ -68,9 +67,6 @@
                     </div>
                 </div>
           	</div>
-			
-			
-
 			<div class="form-group">
 				<div class="col-sm-4">
                     <div class="col-sm-12">
@@ -88,14 +84,12 @@
 							</option>
 						</select>
                     </div>
-
                     <div class="help-inline col-sm-12 has-error">
                         <span class="help-block reset middle">  
                             <?= form_error('stock_and_sales_analysis_daily_email'); ?>
                         </span>
                     </div>
                 </div>
-			
 				<div class="col-sm-4">
                     <div class="col-sm-12">
                         <label class="control-label" for="form-field-1">
@@ -112,14 +106,12 @@
 							</option>
 						</select>
                     </div>
-
                     <div class="help-inline col-sm-12 has-error">
                         <span class="help-block reset middle">  
                             <?= form_error('item_wise_report_daily_email'); ?>
                         </span>
                     </div>
                 </div>				
-
 				<div class="col-sm-4">
                     <div class="col-sm-12">
                         <label class="control-label" for="form-field-1">
@@ -136,7 +128,6 @@
 							</option>
 						</select>
                     </div>
-
                     <div class="help-inline col-sm-12 has-error">
                         <span class="help-block reset middle">  
                             <?= form_error('chemist_wise_report_daily_email'); ?>
@@ -144,7 +135,6 @@
                     </div>
                 </div>
 			</div>
-			
 			<div class="form-group">
 				<div class="col-sm-4">
                     <div class="col-sm-12">
@@ -162,7 +152,6 @@
 							</option>
 						</select>
                     </div>
-
                     <div class="help-inline col-sm-12 has-error">
                         <span class="help-block reset middle">  
                             <?= form_error('stock_and_sales_analysis_monthly_email'); ?>
@@ -185,14 +174,12 @@
 							</option>
 						</select>
                     </div>
-
                     <div class="help-inline col-sm-12 has-error">
                         <span class="help-block reset middle">  
                             <?= form_error('item_wise_report_monthly_email'); ?>
                         </span>
                     </div>
                 </div>				
-
 				<div class="col-sm-4">
                     <div class="col-sm-12">
                         <label class="control-label" for="form-field-1">
@@ -209,7 +196,6 @@
 							</option>
 						</select>
                     </div>
-
                     <div class="help-inline col-sm-12 has-error">
                         <span class="help-block reset middle">  
                             <?= form_error('chemist_wise_report_monthly_email'); ?>
@@ -217,7 +203,6 @@
                     </div>
                 </div>				
 			</div>
-			
             <div class="space-4"></div>
             <br /><br />
             <div class="clearfix form-actions">

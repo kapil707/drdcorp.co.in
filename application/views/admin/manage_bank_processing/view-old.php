@@ -64,7 +64,6 @@
 			<input type="text" id="date-range" class="form-control" name="date-range" value="<?php echo $date_range ?>">
 		</div>
 		<div class="col-md-3">
-			
 		</div>
 		<div class="col-md-3">
 			<button type="submit" class="btn btn-info submit_button" name="Submit">
@@ -90,15 +89,12 @@
 				function split_csv_values($value) {
 					return array_map('trim', explode(',', $value));
 				}
-				
 				// Process the data
 				$processed_data = [];
-				
 				foreach ($result as $item) {
 					$types = split_csv_values($item->type);
 					$sms_data = [];
 					$statement_data = [];
-
 					foreach ($types as $index => $type) {
 						$type = strtolower(trim($type));
 						if ($type == 'sms') {
@@ -143,19 +139,15 @@
 							];
 						}
 					}
-
 					$processed_data[] = [
 						"upi_no" => $item->upi_no,
 						"sms" => $sms_data,
 						"statement" => $statement_data
 					];
 				}
-				
 				foreach ($processed_data as $entry) {
-
 					$tr_style = "";
 					$chemist_fafa[] = "";
-
 					/********************************************** */
 					$row_id = "";
 					if(!empty($entry['sms']['id'])){
@@ -164,7 +156,6 @@
 					if(!empty($entry['statement']['id'])){
 						$row_id = $entry['statement']['id'];
 					}
-
 					/****************************************************** */
 					$row_status = "<b>Status</b><br>";
 					if(!empty($entry['sms']['status'])){
@@ -173,7 +164,6 @@
 					if(!empty($entry['statement']['status'])){
 						$row_status.= "Bank : ".$entry['statement']['status'];
 					}
-
 					/****************************************************** */
 					$row_date = "<b>Date / Time</b><br>";
 					if(!empty($entry['sms']['time'])){
@@ -200,7 +190,6 @@
 					if(!empty($entry['statement']['amount'])){
 						$row_amount.= "Bank : Rs.".$entry['statement']['amount']."/-";
 					}
-
 					/****************************************************** */
 					$hidden_text_received_from = "";
 					$row_received_from = "<b>From :</b> <br>";
@@ -212,7 +201,6 @@
 						$row_received_from.= "Bank : ".$entry['statement']['received_from']."<br>";
 						$hidden_text_received_from = $entry['statement']['received_from'];
 					}
-					
 					/********************************************** */
 					$process_name = "";
 					if(!empty($entry['sms']['process_name'])){
@@ -221,7 +209,6 @@
 					if(!empty($entry['statement']['process_name'])){
 						$process_name = $entry['statement']['process_name'];
 					}
-
 					/********************************************** */
 					$process_value = "";
 					if(!empty($entry['sms']['process_value'])){
@@ -230,15 +217,12 @@
 					if(!empty($entry['statement']['process_value'])){
 						$process_value = $entry['statement']['process_value'];
 					}
-
 					/********************************************** */
 					$process_name = preg_quote($process_name, '/');
 					$row_received_from_find = preg_replace('/(' . $process_name . ')/i', '<span style="background-color: yellow;">$1</span>', $process_value);
-
 					if(empty($process_value)){
 						$row_received_from_find = "N/a";
 					}
-
 					/********************************************** */
 					$row_received_from_logic = "";
 					if(!empty($entry['sms']['find_by'])){
@@ -247,15 +231,12 @@
 					if(!empty($entry['statement']['find_by'])){
 						$row_received_from_logic = $entry['statement']['find_by'];
 					}
-
 					if(!empty($row_received_from_logic)){
 						$row_received_from_logic = " || (<b>$row_received_from_logic</b>)";
 					}
-
 					if(empty($process_value)){
 						$row_received_from_logic = ""; //yha jab work karta ha jab chemist find nahi hua or find me kuch aa raha ha to wo empty ho jaya
 					}
-
 					// chemist find karta ha yha logic
 					/********************************************** */
 					$find_chemist_id = "";
@@ -265,13 +246,11 @@
 					if(!empty($entry['statement']['find_chemist_id'])){
 						$find_chemist_id = $entry['statement']['find_chemist_id'];
 					}
-
 					$find_chemist_id_array = explode("||", $find_chemist_id);
 					$find_chemist_id_array = array_unique($find_chemist_id_array);					
 					// if(count($find_chemist_id_array)==1){
 					// 	$singal_chemist_id = $find_chemist_id_array[0];
 					// }
-					
 					$row_find_by_chemist_id = "";
 					if(!empty($find_chemist_id_array)){
 						foreach($find_chemist_id_array as $rows){
@@ -282,15 +261,12 @@
 							$row_find_by_chemist_id.= " || ";
 						}
 					}
-
 					if(!empty($row_find_by_chemist_id)){
 						$row_find_by_chemist_id = substr($row_find_by_chemist_id, 0, -4);
 					}
-
 					if(empty($find_chemist_id_array[0])){
 						$row_find_by_chemist_id = "";
 					}
-
 					// invoice say chemist find karta ha yha logic
 					/********************************************** */
 					$find_invoice_chemist_id = "";
@@ -300,28 +276,21 @@
 					if(!empty($entry['statement']['find_invoice_chemist_id'])){
 						$find_invoice_chemist_id = $entry['statement']['find_invoice_chemist_id'];
 					}
-
 					$find_invoice_chemist_id_array = explode("||", $find_invoice_chemist_id);
-
 					$row_find_invoice_all = $row_find_by_invoice_chemist_id = "";
 					foreach($find_invoice_chemist_id_array as $rows){
 						$rows = str_replace('Amt.', 'Rs.', $rows);
 						$rows1 = str_replace('Amt-x.', 'Rs.', $rows);
-
 						$row_find_invoice_all.= $rows1."/-<br>";
-
 						$arr = explode(":-",$rows);
 						$row_find_by_invoice_chemist_id.= $arr[0]." || ";
 					}
-
 					if(empty($find_invoice_chemist_id)){
 						$row_find_invoice_all = "N/a";
 					}
-
 					if(!empty($row_find_by_invoice_chemist_id)){
 						$row_find_by_invoice_chemist_id = substr($row_find_by_invoice_chemist_id, 0, -4);
 					}
-
 					/********************************************** */
 					$row_whatsapp_id = "";
 					if(!empty($entry['sms']['whatsapp_id'])){
@@ -330,7 +299,6 @@
 					if(!empty($entry['statement']['whatsapp_id'])){
 						$row_whatsapp_id = $entry['statement']['whatsapp_id'];
 					}
-
 					/********************************************** */
 					$row_find_by_whatsapp_chemist_id = "";
 					if(!empty($entry['sms']['whatsapp_body'])){
@@ -339,7 +307,6 @@
 					if(!empty($entry['statement']['whatsapp_body'])){
 						$row_find_by_whatsapp_chemist_id = $entry['statement']['whatsapp_body'];
 					}
-
 					/********************************************** */
 					$whatsapp_body2 = "";
 					if(!empty($entry['sms']['whatsapp_body2'])){
@@ -348,7 +315,6 @@
 					if(!empty($entry['statement']['whatsapp_body'])){
 						$whatsapp_body2 = $entry['statement']['whatsapp_body2'];
 					}
-
 					/********************************************** */
 					$done_status = "";
 					if(!empty($entry['sms']['done_status'])){
@@ -357,7 +323,6 @@
 					if(!empty($entry['statement']['done_status'])){
 						$done_status = $entry['statement']['done_status'];
 					}
-
 					/********************************************** */
 					$done_chemist_id = "";
 					if(!empty($entry['sms']['done_chemist_id'])){
@@ -366,7 +331,6 @@
 					if(!empty($entry['statement']['done_chemist_id'])){
 						$done_chemist_id = $entry['statement']['done_chemist_id'];
 					}
-
 					/********************************************** */	
 					$textbox_done_chemist_id = "";
 					$row_find_by = "";
@@ -400,37 +364,30 @@
 					$row_find_by_whatsapp_chemist_id1 = 
 					$row_find_by_whatsapp_chemist_id1 = str_replace(' ', '', $row_find_by_whatsapp_chemist_id);
 					$row_find_by_whatsapp_chemist_id1 = str_replace('-', '', $row_find_by_whatsapp_chemist_id1);
-
 					if((strtolower($row_find_by_chemist_id)==strtolower($row_find_by_invoice_chemist_id)) && (strtolower($row_find_by_chemist_id)==strtolower($row_find_by_whatsapp_chemist_id1)) && (!empty($row_find_by_chemist_id) && !empty($row_find_by_invoice_chemist_id) && !empty($row_find_by_whatsapp_chemist_id1))){
-
 						$tr_style = "background-color: #1ab394;";
 						$textbox_done_chemist_id = $row_find_by_chemist_id;
 					}
-					
 					// jab koi be chemist find na ho to
 					/********************************************** */
 					if(empty($row_find_by_chemist_id)){
 						$row_find_by_chemist_id = "N/a";
 					}
-
 					// jab koi be invoice say chemist find na ho to
 					/********************************************** */
 					if(empty($row_find_by_invoice_chemist_id)){
 						$row_find_by_invoice_chemist_id = "N/a";
 					}
-
 					// jab koi be whatapp say chemist find na ho to
 					/********************************************** */
 					if(empty($row_find_by_whatsapp_chemist_id)){
 						$row_find_by_whatsapp_chemist_id = "N/a";
 					}
-
 					// jab koi be whatapp say chemist find na ho to
 					/********************************************** */
 					if(empty($whatsapp_body2)){
 						$whatsapp_body2 = "N/a";
 					}
-
 					// jab user done kar dayta ha to color change hota ha iss say
 					/********************************************** */
 					if($done_status==1){
@@ -465,15 +422,10 @@
 						<td>
 							<div class="td_div">
 								<?= ($row_received_from); ?>
-
 								<input type="hidden" value="<?php echo $hidden_text_received_from ?>" class="text_received_from_<?= ($row_id); ?>">
-
 								<input type="text" value="<?php echo $find_chemist_id; ?>" class="form-control myinput1 text_received_from_chemist_id_<?= ($row_id); ?>" style="display:none;">
-
 								<i class="fa fa-check add_received_from_chemist_id_<?= ($row_id); ?>" aria-hidden="true" onclick="add_received_from_chemist_id('<?= ($row_id); ?>')" style="display:none"></i>
-
 								<i class="fa fa-times cancel_received_from_chemist_id_<?= ($row_id); ?>" aria-hidden="true" onclick="cancel_received_from_chemist_id('<?= ($row_id); ?>')" style="display:none"></i>
-								
 								<i class="fa fa-pencil edit_received_from_chemist_id_<?= ($row_id); ?>" aria-hidden="true" onclick="edit_received_from_chemist_id('<?= ($row_id); ?>')"></i>
 							</div>
 							<div class="td_div">
@@ -509,16 +461,11 @@
 								<b onclick="get_whats_message('<?= ($row_id); ?>','<?= ($row_whatsapp_id); ?>','<?= $row_upi_no; ?>')" data-toggle="modal" data-target="#myModal">WhatsApp : </b>
 								<?= $row_find_by_whatsapp_chemist_id; ?>
 							</div>
-
 							<div class="td_div1">
 								<b style="float: left;">Add Chemist : </b>
-								
 								<input type="text" value="<?php echo $textbox_done_chemist_id ?>" class="form-control text_done_chemist_id_<?= ($row_id); ?>" style="<?php if($done_status==1) { ?>display:none;<?php } ?> float: left; width: 100px; border-radius: 10px;" placeholder="Chemist Id">
-								
 								<i class="fa fa-check add_done_chemist_id_<?= ($row_id); ?>" aria-hidden="true" onclick="add_done_chemist_id('<?= ($row_id); ?>')" style="<?php if($done_status==1) { ?>display:none;<?php } ?> float: left;font-size: 20px;"></i>
-
 								<span class="span_done_chemist_id_<?= ($row_id); ?>" <?php if($done_status==0 || $done_status==2) { ?>style="display:none" <?php } ?>><?php echo $done_chemist_id ?></span>
-
 								<i class="fa fa-pencil edit_done_chemist_id_<?= ($row_id); ?>" aria-hidden="true" onclick="edit_done_chemist_id('<?= ($row_id); ?>')" <?php if($done_status==0 || $done_status==2) { ?>style="display:none" <?php } ?>></i>
 							</div>
 						</td>
@@ -533,14 +480,12 @@
 function add_done_chemist_id(id){
 	var done_find_by = $(".text_find_by_"+id).val();
 	var received_from = $(".text_received_from_"+id).val();
-
 	var done_chemist_id = $(".text_done_chemist_id_"+id).val();
 	if(done_chemist_id.trim()==""){
 		alert("Etner any chemist id")
 	}else{
 		$(".text_done_chemist_id_"+id).hide();
 		$(".add_done_chemist_id_"+id).hide();
-
 		$(".span_done_chemist_id_"+id).html(done_chemist_id);
 		$(".span_done_chemist_id_"+id).show();
 		$(".edit_done_chemist_id_"+id).show();
@@ -562,14 +507,11 @@ function add_done_chemist_id(id){
 function edit_done_chemist_id(id){
 	$(".text_done_chemist_id_"+id).show();
 	$(".add_done_chemist_id_"+id).show();
-
 	$(".span_done_chemist_id_"+id).hide();
 	$(".edit_done_chemist_id_"+id).hide();
 }
-
 function add_received_from_chemist_id(id){
 	var received_from = $(".text_received_from_"+id).val();
-
 	var chemist_id = $(".text_received_from_chemist_id_"+id).val();
 	if(chemist_id.trim()==""){
 		alert("Etner any chemist id")
@@ -589,23 +531,18 @@ function add_received_from_chemist_id(id){
 		});
 	}
 }
-
 function edit_received_from_chemist_id(id){
 	$(".text_received_from_chemist_id_"+id).show();
 	$(".add_received_from_chemist_id_"+id).show();
 	$(".cancel_received_from_chemist_id_"+id).show();
-
 	$(".edit_received_from_chemist_id_"+id).hide();
 }
-
 function cancel_received_from_chemist_id(id){
 	$(".text_received_from_chemist_id_"+id).hide();
 	$(".add_received_from_chemist_id_"+id).hide();
 	$(".cancel_received_from_chemist_id_"+id).hide();
-
 	$(".edit_received_from_chemist_id_"+id).show();
 }
-
 function row_refresh(id){
 	$.ajax({
 		type : "POST",
@@ -653,7 +590,6 @@ function get_whats_message(row_id1,row_whatsapp_id,row_upi_no){
 		timeout: 60000
 	});
 }
-
 function add_whatapp_chemist_id(){
 	var whatapp_chemist = $(".text_whatapp_chemist_id").val();
 	if(whatapp_chemist.trim()==""){
@@ -678,7 +614,6 @@ function add_whatapp_chemist_id(){
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog modal-lg">
-
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
@@ -696,15 +631,12 @@ function add_whatapp_chemist_id(){
 			</tr>
 		</table>
 		<b style="float: left;">Add WhatsApp Chemist : </b>
-								
 		<input type="text" value="<?php echo $textbox_done_chemist_id ?>" class="form-control text_whatapp_chemist_id" style="float: left; width: 100px; border-radius: 10px;" placeholder="Chemist Id">
-		
 		<i class="fa fa-check add_whatapp_chemist_id" aria-hidden="true" onclick="add_whatapp_chemist_id()" style="float: left;font-size: 20px;"></i>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
-
   </div>
 </div>
