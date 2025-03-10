@@ -23,13 +23,15 @@ class CronjobBank extends CI_Controller
 		//Created a GET API
 		//http://97.74.82.55:5000/messages?from=07/04/2024&to=07/04/2024
 		//http://172.105.50.148:5000/messages?from=07/04/2024&to=07/04/2024
+
+		echo $url = "http://192.46.214.43:5000/messages?from=$start_date&to=$end_date&sender_name_place=$sender_name_place&status=false";
 		$parmiter = '';
 		$curl = curl_init();
 		
 		curl_setopt_array(
 			$curl,
 			array(
-				CURLOPT_URL =>"http://192.46.214.43:5000/messages?from=$start_date&to=$end_date&sender_name_place=$sender_name_place&status=false",
+				CURLOPT_URL =>$url,
 				CURLOPT_RETURNTRANSFER => true,
 				CURLOPT_ENCODING => '',
 				CURLOPT_MAXREDIRS => 0,
