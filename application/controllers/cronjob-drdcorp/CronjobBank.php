@@ -378,6 +378,7 @@ class CronjobBank extends CI_Controller
 			$text = preg_replace('/PUNBY.*?REF NO/', ' REF NO', $text);
 			$text = preg_replace('/INDBN.*?REF NO/', ' REF NO', $text);
 			$text = preg_replace('/ICIN.*?REF NO/', ' REF NO', $text);
+			$text = preg_replace('/YES.*?REF NO/', ' REF NO', $text);
 
 			$text = preg_replace('/SB2.*?-UPI/', ' UPI', $text);
 			echo "<br>".$text;

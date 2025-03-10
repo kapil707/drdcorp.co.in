@@ -16,5 +16,5 @@ git push -u origin backup-24-11-08
 
 /*******************/
 update tbl_sms set status=0 where date='2025-03-10'
-update tbl_statment set status=0
+update tbl_statment set status=0;
 delete from tbl_bank_processing
