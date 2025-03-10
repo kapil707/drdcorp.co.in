@@ -29,7 +29,7 @@ class CronjobBank extends CI_Controller
 		curl_setopt_array(
 			$curl,
 			array(
-				CURLOPT_URL =>"http://192.46.214.43:5000/messages?from=$start_date&to=$end_date&sender_name_place=$sender_name_place",
+				CURLOPT_URL =>"http://192.46.214.43:5000/messages?from=$start_date&to=$end_date&sender_name_place=$sender_name_place&status=false",
 				CURLOPT_RETURNTRANSFER => true,
 				CURLOPT_ENCODING => '',
 				CURLOPT_MAXREDIRS => 0,
