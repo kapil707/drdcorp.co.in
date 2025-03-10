@@ -9,26 +9,35 @@ class CronjobBank extends CI_Controller
 	}
 
 	public function insert_whatsapp(){
+		$parmiter = '';
 		$curl = curl_init();
-
-		curl_setopt_array($curl, array(
-		CURLOPT_URL => 'http://192.46.214.43:5000/get_messages_by_status?start_date=10/03/2025&end_date=10/03/2025&group=Online Details&status=true',
-		CURLOPT_RETURNTRANSFER => true,
-		CURLOPT_ENCODING => '',
-		CURLOPT_MAXREDIRS => 10,
-		CURLOPT_TIMEOUT => 0,
-		CURLOPT_FOLLOWLOCATION => true,
-		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-		CURLOPT_CUSTOMREQUEST => 'GET',
-		CURLOPT_HTTPHEADER => array(
-			'Authorization: Bearer THIRTEENWOLVESWENTHUNTINGBUT10CAMEBACK'
-		),
-		));
+		
+		curl_setopt_array(
+			$curl,
+			array(
+				CURLOPT_URL =>"http://192.46.214.43:5000/get_messages_by_status?start_date=10/03/2025&end_date=10/03/2025&group=Online Details&status=true",
+				CURLOPT_RETURNTRANSFER => true,
+				CURLOPT_ENCODING => '',
+				CURLOPT_MAXREDIRS => 0,
+				CURLOPT_TIMEOUT => 300,
+				CURLOPT_FOLLOWLOCATION => true,
+				CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				CURLOPT_CUSTOMREQUEST => 'GET',
+				CURLOPT_POSTFIELDS => $parmiter,
+				CURLOPT_HTTPHEADER => array(
+					'Content-Type: application/json',
+					'Authorization: Bearer THIRTEENWOLVESWENTHUNTINGBUT10CAMEBACK'
+				),
+			)
+		);
 
 		$response = curl_exec($curl);
-
+		//print_r($response);
 		curl_close($curl);
-		echo $response;
+
+		$data1 = json_decode($response, true); // Convert JSON string to associative array
+
+		print_r($data1);
 	}
 	
 	public function bank_processing(){
