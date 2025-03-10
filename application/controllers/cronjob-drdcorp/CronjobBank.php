@@ -9,6 +9,8 @@ class CronjobBank extends CI_Controller
 	}
 
 	public function insert_whatsapp(){
+		phpinfo();
+		die();
 		echo "work";
 		$start_date = $end_date = date('d-m-Y');
 
