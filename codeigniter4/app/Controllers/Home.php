@@ -32,6 +32,6 @@ class Home extends BaseController
 			die("API call failed.");
 		}
 
-		echo $response;
+		print_r($response);
     }
 }
