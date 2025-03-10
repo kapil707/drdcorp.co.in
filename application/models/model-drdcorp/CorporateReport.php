@@ -79,11 +79,11 @@ class CorporateReport extends CI_Model
 			$folder_date 	= $row->folder_date;
 			$file_name 		= $row->file_name;
             
-            $this->get_body($date,$report_type,$email,$code,$compcode,$division,$name,$company_name,$file1,$file2,$file3,$from_date,$to_date,$folder_date,$file_name);
+            $this->get_body($report_type,$email,$code,$compcode,$division,$name,$company_name,$file1,$file2,$file3,$from_date,$to_date,$folder_date,$file_name);
 		}
 	}
 
-    public function get_body($date,$report_type,$email,$code,$compcode,$division,$name,$company_name,$file1,$file2,$file3,$from_date,$to_date,$folder_date,$file_name) {
+    public function get_body($report_type,$email,$code,$compcode,$division,$name,$company_name,$file1,$file2,$file3,$from_date,$to_date,$folder_date,$file_name) {
 
 		$from_date = date("d-M-y", strtotime($from_date));
 		$to_date = date("d-M-y", strtotime($to_date));
@@ -94,6 +94,7 @@ class CorporateReport extends CI_Model
 		$file_name_path2 = "ItemWiseReport-$file_name.xlsx";
 		$file_name3 = "ChemistWiseReport.xlsx";
 		$file_name_path3 = "ChemistWiseReport-$file_name.xlsx";
+		$url1 = $url2 = $url3 = "";
 		if($file1==1){
 			$url = "https://www.drdcorp.co.in/corporate_report/".$folder_date."/".$file_name_path1;
 			$url1 = "<a href='".$url."'>".$file_name1."</a><br><br>";
