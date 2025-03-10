@@ -10,28 +10,54 @@ class CronjobBank extends CI_Controller
 
 	public function insert_whatsapp(){
 		echo "work";
-		$curl = curl_init();
+		$start_date = $end_date = date('d-m-Y');
 
-		curl_setopt_array($curl, array(
-		CURLOPT_URL => 'http://192.46.214.43:5000/get_messages_by_status?start_date=10/03/2025&end_date=10/03/2025&group=Online%20Details&status=true',
-		CURLOPT_RETURNTRANSFER => true,
-		CURLOPT_ENCODING => '',
-		CURLOPT_MAXREDIRS => 10,
-		CURLOPT_TIMEOUT => 0,
-		CURLOPT_FOLLOWLOCATION => true,
-		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-		CURLOPT_CUSTOMREQUEST => 'GET',
-		CURLOPT_HTTPHEADER => array(
-			'Authorization: Bearer THIRTEENWOLVESWENTHUNTINGBUT10CAMEBACK'
-		),
-		));
+		$start_date = DateTime::createFromFormat('d-m-Y', $start_date);
+		$end_date 	= DateTime::createFromFormat('d-m-Y', $end_date);
+
+		$start_date = $start_date->format('d/m/Y');
+		$end_date 	= $end_date->format('d/m/Y');
+
+		$sender_name_place = "Online%20Details";
+
+		//Created a GET API
+		//http://97.74.82.55:5000/messages?from=07/04/2024&to=07/04/2024
+		//http://172.105.50.148:5000/messages?from=07/04/2024&to=07/04/2024
+		$parmiter = '';
+		$curl = curl_init();
+		
+		curl_setopt_array(
+			$curl,
+			array(
+				CURLOPT_URL =>"http://192.46.214.43:5000/messages?from=$start_date&to=$end_date&sender_name_place=$sender_name_place",
+				CURLOPT_RETURNTRANSFER => true,
+				CURLOPT_ENCODING => '',
+				CURLOPT_MAXREDIRS => 0,
+				CURLOPT_TIMEOUT => 300,
+				CURLOPT_FOLLOWLOCATION => true,
+				CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				CURLOPT_CUSTOMREQUEST => 'GET',
+				CURLOPT_POSTFIELDS => $parmiter,
+				CURLOPT_HTTPHEADER => array(
+					'Content-Type: application/json',
+					'Authorization: Bearer THIRTEENWOLVESWENTHUNTINGBUT10CAMEBACK'
+				),
+			)
+		);
 
 		$response = curl_exec($curl);
-
+		//print_r($response);
 		curl_close($curl);
-		echo $response;
-		echo "work2";
-		print_r($response);
+
+		$data1 = json_decode($response, true); // Convert JSON string to associative array
+	
+		if (isset($data1['messages'])) {
+			foreach ($data1['messages'] as $message) {
+				$body = isset($message['body']) ? $message['body'] : "Body not found";
+
+				$date = isset($message['date']) ? $message['date'] : "Date not found";
+			}
+		}
 	}
 	
 	public function bank_processing(){
