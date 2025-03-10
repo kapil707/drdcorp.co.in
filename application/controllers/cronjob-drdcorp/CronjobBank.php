@@ -9,18 +9,6 @@ class CronjobBank extends CI_Controller
 	}
 
 	public function insert_whatsapp(){
-		$ch = curl_init();
-
-		curl_setopt($ch, CURLOPT_URL, "drdistributor.com");
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		
-		$output = curl_exec($ch);
-		$err = curl_error($ch);
-		
-		print_r($err);
-		echo $output;
-		curl_close($ch);
-		die();
 		echo "work";
 		$start_date = $end_date = date('d-m-Y');
 
