@@ -20,18 +20,9 @@ class CronjobBank extends CI_Controller
 
 		$sender_name_place = "Online%20Details";
 
-		$start_date = $end_date = date('d-m-Y');
-
-		$start_date = DateTime::createFromFormat('d-m-Y', $start_date);
-		$end_date 	= DateTime::createFromFormat('d-m-Y', $end_date);
-
-		$start_date = $start_date->format('d/m/Y');
-		$end_date 	= $end_date->format('d/m/Y');
-
-		$sender_name_place = "Online%20Details";
-
 		//Created a GET API
 		echo $url = "http://192.46.214.43:5000/get_messages_by_status?start_date=$start_date&end_date=$end_date&group=$sender_name_place&status=true";
+		die();
 		$parmiter = '';
 		$curl = curl_init();
 		
