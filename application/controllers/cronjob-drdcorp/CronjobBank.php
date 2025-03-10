@@ -22,7 +22,7 @@ class CronjobBank extends CI_Controller
 
 		//Created a GET API
 		echo $url = "http://192.46.214.43:5000/get_messages_by_status?start_date=$start_date&end_date=$end_date&group=$sender_name_place&status=true";
-		//die();
+
 		// HTTP headers (Authorization)
 		$options = [
 			"http" => [
@@ -39,18 +39,7 @@ class CronjobBank extends CI_Controller
 			die("API call failed.");
 		}
 
-		$data1 = json_decode($response, true); // Convert JSON string to associative array
-		
-		//print_r($data1);
-		if (isset($data1['messages'])) {
-			foreach ($data1['messages'] as $message) {
-				$body = isset($message['body']) ? $message['body'] : "Body not found";
-
-				$date = isset($message['date']) ? $message['date'] : "Date not found";
-
-				echo $body;
-			}
-		}
+		echo $response;
 	}
 	
 	public function bank_processing(){
