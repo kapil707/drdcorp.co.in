@@ -37,7 +37,7 @@ class CronjobBank extends CI_Controller
 
 		$data1 = json_decode($response, true); // Convert JSON string to associative array
 
-		echo $data1;
+		print_r($data1);
 	}
 	
 	public function bank_processing(){
