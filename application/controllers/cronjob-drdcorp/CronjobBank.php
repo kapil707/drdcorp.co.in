@@ -20,8 +20,18 @@ class CronjobBank extends CI_Controller
 
 		$sender_name_place = "Online%20Details";
 
+		$start_date = $end_date = date('d-m-Y');
+
+		$start_date = DateTime::createFromFormat('d-m-Y', $start_date);
+		$end_date 	= DateTime::createFromFormat('d-m-Y', $end_date);
+
+		$start_date = $start_date->format('d/m/Y');
+		$end_date 	= $end_date->format('d/m/Y');
+
+		$sender_name_place = "Online%20Details";
+
 		//Created a GET API
-		echo $url = "http://192.46.214.43:5000/messages?start_date=$start_date&end_date=$end_date&sender_name_place=$sender_name_place&status=false";
+		echo $url = "http://192.46.214.43:5000/get_messages_by_status?start_date=$start_date&end_date=$end_date&group=$sender_name_place&status=true";
 		$parmiter = '';
 		$curl = curl_init();
 		
@@ -49,12 +59,15 @@ class CronjobBank extends CI_Controller
 		curl_close($curl);
 
 		$data1 = json_decode($response, true); // Convert JSON string to associative array
-	
+		
+		//print_r($data1);
 		if (isset($data1['messages'])) {
 			foreach ($data1['messages'] as $message) {
 				$body = isset($message['body']) ? $message['body'] : "Body not found";
 
 				$date = isset($message['date']) ? $message['date'] : "Date not found";
+
+				echo $body;
 			}
 		}
 	}
