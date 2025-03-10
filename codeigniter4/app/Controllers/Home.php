@@ -2,12 +2,13 @@
 
 namespace App\Controllers;
 
+use App\Models\BankModel;
+
 class Home extends BaseController
 {
+    protected $bankModel;
     public function __construct(){
-
-		parent::__construct();
-		$this->load->model("model-drdcorp/BankModel");
+        $this->bankModel = new BankModel();
 	}
     
     public function index()
