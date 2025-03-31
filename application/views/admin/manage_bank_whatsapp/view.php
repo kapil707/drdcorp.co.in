@@ -53,7 +53,7 @@
 		</div>
 		<div class="col-md-3">
 		<?php
-		/*$parmiter = '';
+		$parmiter = '';
 		$curl = curl_init();
 			
 			curl_setopt_array(
@@ -95,7 +95,7 @@
 					}
 				}
 				?>
-			</select> */?>
+			</select>
 		</div>
 		<div class="col-md-3">
 			<button type="submit" class="btn btn-info submit_button" name="Submit">
