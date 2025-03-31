@@ -116,8 +116,9 @@ class BankWhatsAppModel extends CI_Model
 		//SELECT id,vision_text FROM `tbl_whatsapp_message` where upi_no='' and vision_text!='' and date BETWEEN '$start_date' and '$end_date' ORDER BY RAND() limit 100
 		$start_date = date('Y-m-d', strtotime('-3 day'));
 		$end_date = date('Y-m-d');
+		//"SELECT id,vision_text FROM `tbl_whatsapp_message` where status='0' and date BETWEEN '$start_date' and '$end_date' limit 100"
 
-		$result = $this->BankModel->select_query("SELECT id,vision_text FROM `tbl_whatsapp_message` where status='0' and date BETWEEN '$start_date' and '$end_date' limit 100");
+		$result = $this->BankModel->select_query("SELECT id,vision_text FROM `tbl_whatsapp_message` where status='0' limit 1000");
 		$result = $result->result();
 		foreach($result as $row) {
 
