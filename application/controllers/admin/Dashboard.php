@@ -42,43 +42,6 @@ class Dashboard extends CI_Controller {
 
 		$tbl = $Page_tbl;
 
-		if($user_type=="")
-		{
-			$this->session->set_flashdata("message","<p class='font-bold  alert alert-warning m-b-sm'>Your Account Not Approved</p>");	
-
-			$this->session->set_flashdata("message_footer","yes");
-			$this->session->set_flashdata("message_type","warning");
-			$this->session->set_flashdata("full_message","Your Account Not Approved.");
-		}
-		/***********************************************/		
-		$date = date("Y-m-d");	
-				
-		$top_sales_medicine = "";
-		$result = $this->db->query("SELECT DISTINCT tbl_medicine.item_name, COUNT(*) as ct FROM tbl_invoice_item LEFT JOIN tbl_medicine ON tbl_medicine.i_code = tbl_invoice_item.itemc WHERE tbl_invoice_item.date = '$date' GROUP BY tbl_medicine.item_name HAVING COUNT(*) > 1 ORDER BY ct DESC LIMIT 10")->result();
-		foreach($result as $row)
-		{
-			$top_sales_medicine.= "{ y: '$row->item_name', a: $row->ct},";
-		}
-		if ($top_sales_medicine != '') {
-			$top_sales_medicine = substr($top_sales_medicine, 0, -1);
-		}
-		
-		/****************************************************/
-		$top_search_medicine = "";
-		$date = date("Y-m-d");
-		$result = $this->db->query("SELECT DISTINCT item_code, COUNT(*) as ct FROM `tbl_search_logs` where date='$date' and item_code!='' GROUP BY item_code HAVING COUNT(*) > 1 order by ct desc limit 10")->result();
-		foreach($result as $row)
-		{
-			$row1 = $this->db->query("SELECT item_name from tbl_medicine where i_code='$row->item_code'")->row();
-			$top_search_medicine.= "{ y: '$row1->item_name', a: $row->ct},";
-		}
-		if ($top_search_medicine != '') {
-			$top_search_medicine = substr($top_search_medicine, 0, -1);
-		}
-		/****************************************************/
-		$data["top_sales_medicine"] = $top_sales_medicine;
-		$data["top_search_medicine"]= $top_search_medicine;
-
 		$this->load->view('admin/header_footer/header_dashbord',$data);
 		if($user_type=="Super_Admin" || $user_type=="Admin"){
 			$this->load->view("admin/$Page_view/index",$data);
