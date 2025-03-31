@@ -251,7 +251,7 @@ class BankInvoiceModel extends CI_Model
 		);
 
 		$response = curl_exec($curl);
-		//print_r($response);
+		print_r($response);
 		curl_close($curl);
 
 		$data1 = json_decode($response, true);
