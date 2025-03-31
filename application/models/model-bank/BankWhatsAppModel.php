@@ -40,11 +40,12 @@ class BankWhatsAppModel extends CI_Model
 
 		$data1 = json_decode($response, true);
 
-		print_r($data1);
-		die();
+		//print_r($data1);
+		
 		if (isset($data1['messages'])) {
 			foreach ($data1['messages'] as $message) {
-				$message_id = isset($message['message_id']) ? $message['message_id'] : "Body not found";
+				echo $message_id = isset($message['message_id']) ? $message['message_id'] : "Body not found";
+				die();
 				$body = isset($message['body']) ? $message['body'] : "Body not found";
 				$date = isset($message['date']) ? $message['date'] : "Date not found";
 				$extracted_text = isset($message['extracted_text']) ? $message['extracted_text'] : "extracted_text not found";
