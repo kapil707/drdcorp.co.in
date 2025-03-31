@@ -90,6 +90,7 @@ class CronjobBank extends CI_Controller
 						$result = $this->BankModel->select_query("SELECT p.id FROM tbl_bank_processing AS p JOIN tbl_whatsapp_message wm ON p.upi_no = wm.upi_no AND wm.date BETWEEN DATE_SUB(p.date, INTERVAL 1 DAY) AND DATE_ADD(p.date, INTERVAL 1 DAY) WHERE p.whatsapp_id = '' ORDER BY RAND() LIMIT 25");
 						$check_whatsapp_status2 = $result->row();
 						if (!empty($check_whatsapp_status2)) {
+							echo "whatsapp_insert_in_processing<br>";
 							$this->BankWhatsAppModel->whatsapp_insert_in_processing();
 						}else{
 							$this->BankInvoiceModel->get_invoice_find_user();
