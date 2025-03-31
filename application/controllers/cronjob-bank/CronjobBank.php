@@ -13,9 +13,9 @@ class CronjobBank extends CI_Controller
 		$this->load->model("model-bank/BankInvoiceModel");		
 	}
 
-	public function get_invoice_drdweb(){
-		echo "get_invoice_drdweb";
-		$this->BankWhatsAppModel->get_invoice_drdweb();
+	public function get_invoice_or_insert_drdweb(){
+		echo "get_invoice_or_insert_drdweb";
+		$this->BankWhatsAppModel->get_invoice_or_insert_drdweb();
 	}
 
 	public function get_whatsapp_or_insert_drdweb(){
