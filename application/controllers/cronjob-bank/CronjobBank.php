@@ -13,16 +13,19 @@ class CronjobBank extends CI_Controller
 		$this->load->model("model-bank/BankInvoiceModel");		
 	}
 
+	// yha invoice download karta ha drdweb say drdcorp server par
 	public function get_invoice_or_insert_drdweb(){
 		echo "get_invoice_or_insert_drdweb";
 		$this->BankWhatsAppModel->get_invoice_or_insert_drdweb();
 	}
 
+	// yha whatsapp download karta ha drdweb say drdcorp server par
 	public function get_whatsapp_or_insert_drdweb(){
 		echo "get_whatsapp_or_insert_drdweb";
 		$this->BankWhatsAppModel->get_whatsapp_or_insert_drdweb();
 	}
 
+	// yha whatsapp download karta ha rishav server say drdweb server par
 	public function get_whatsapp_or_insert_rishav(){
 		echo "get_whatsapp_or_insert_rishav";
 		$this->BankWhatsAppModel->get_whatsapp_or_insert_rishav();
