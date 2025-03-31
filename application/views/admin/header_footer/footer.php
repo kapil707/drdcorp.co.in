@@ -5,7 +5,7 @@
                 </div>
                 <div class="footer">
                      <div class="pull-right">
-						Powered by Webkings&nbsp; &nbsp; &nbsp; &nbsp; 
+						Powered by Kapil Kumar Sharma&nbsp; &nbsp; &nbsp; &nbsp; 
 					</div>
 					<div>
 						All rights are reserved  &copy; <?php echo date("Y") ?>
