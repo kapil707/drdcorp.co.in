@@ -6,7 +6,7 @@ class BankTest extends CI_Controller
 		$curl = curl_init();
 
 		curl_setopt_array($curl, array(
-		CURLOPT_URL => 'https://www.drdistributor.com/my_api/Api46/get_top_menu_api',
+		CURLOPT_URL => 'https://drdweb.co.in/bank_api/Api01/get_whatsapp_api',
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_ENCODING => '',
 		CURLOPT_MAXREDIRS => 10,
