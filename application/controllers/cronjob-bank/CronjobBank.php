@@ -16,7 +16,7 @@ class CronjobBank extends CI_Controller
 	// yha invoice download karta ha drdweb say drdcorp server par
 	public function get_invoice_or_insert_drdcorp(){
 		echo "get_invoice_or_insert_drdcorp";
-		$this->BankWhatsAppModel->get_invoice_or_insert_drdcorp();
+		$this->BankInvoiceModel->get_invoice_or_insert_drdcorp();
 	}
 
 	// yha whatsapp download karta ha drdweb say drdcorp server par
