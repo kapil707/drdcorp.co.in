@@ -1,5 +1,5 @@
 	<?= $this->session->flashdata('message'); ?>
-	<?php
+	<?php /*
 	if($this->session->userdata('user_type')!="") { ?>
 		<div class="wrapper wrapper-content">
 			<div class="row">
@@ -328,7 +328,7 @@
 				<!-- PAGE CONTENT ENDS -->
 			</div><!-- /.col -->
 		</div>
-	<?php } ?>
+	<?php } */?>
 	
 	<div id="myModal_online_user" class="modal fade" role="dialog">
 		<div class="modal-dialog">
