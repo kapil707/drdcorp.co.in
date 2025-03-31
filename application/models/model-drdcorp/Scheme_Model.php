@@ -1,8 +1,4 @@
 <?php
-ini_set('memory_limit','-1');
-ini_set('post_max_size','100M');
-ini_set('upload_max_filesize','100M');
-ini_set('max_execution_time',36000);
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Scheme_Model extends CI_Model  
 {	
