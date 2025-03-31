@@ -10,6 +10,7 @@ class ExeCronjobBank extends CI_Controller
 
 	public function get_invoice_or_insert_drdcorp(){
 
+		echo "get_invoice_or_insert_drdcorp";
 		//Created a GET API
 		$url = "https://drdweb.co.in/api-bank/Api01/get_invoice_api";
 
@@ -95,6 +96,8 @@ class ExeCronjobBank extends CI_Controller
 	}
 
 	public function get_whatsapp_or_insert_drdcorp(){
+
+		echo "get_whatsapp_or_insert_drdcorp";
 
 		//Created a GET API
 		$url = "https://drdweb.co.in/api-bank/Api01/get_whatsapp_api";
