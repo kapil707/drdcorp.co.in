@@ -13,9 +13,14 @@ class CronjobBank extends CI_Controller
 		$this->load->model("model-bank/BankInvoiceModel");		
 	}
 
-	public function get_whatsapp_or_insert(){
-		echo "get_whatsapp_or_insert";
-		$this->BankWhatsAppModel->get_whatsapp_or_insert();
+	public function get_whatsapp_or_insert_drdweb(){
+		echo "get_whatsapp_or_insert_drdweb";
+		$this->BankWhatsAppModel->get_whatsapp_or_insert_drdweb();
+	}
+
+	public function get_whatsapp_or_insert_rishav(){
+		echo "get_whatsapp_or_insert_rishav";
+		$this->BankWhatsAppModel->get_whatsapp_or_insert_rishav();
 	}
 
 	public function whatsapp_update_upi(){
