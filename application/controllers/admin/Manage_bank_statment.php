@@ -60,6 +60,7 @@ class Manage_bank_statment extends CI_Controller {
 			if (!empty($_FILES["myfile"]["name"])) {
 				$upload_image = "./uploads/$page_controllers/myfile/";
 
+				die();
 				ini_set('upload_max_filesize', '10M');
 				ini_set('post_max_size', '10M');
 				ini_set('max_input_time', 300);
@@ -109,7 +110,6 @@ class Manage_bank_statment extends CI_Controller {
 				if(file_exists($excelFile))
 				{
 					$this->load->library('excel');
-					die();
 					$objPHPExcel = PHPExcel_IOFactory::load($excelFile);
 					foreach ($objPHPExcel->getWorksheetIterator() as $worksheet)
 					{
