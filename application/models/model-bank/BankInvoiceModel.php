@@ -261,7 +261,8 @@ class BankInvoiceModel extends CI_Model
 			foreach ($data1['items'] as $message) {
 				$mtime = isset($message['mtime']);
 				$dispatchtime = isset($message['dispatchtime']);
-				$date = isset($message['date']);
+				echo $date = isset($message['date']);
+				die();
 				$vno = isset($message['vno']);
 				$tagno = isset($message['tagno']);
 				$gstvno = isset($message['gstvno']);
