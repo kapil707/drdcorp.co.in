@@ -2,14 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 class BankTest extends CI_Controller 
 {
-	public function __construct(){
-
-		parent::__construct();
-
-		$this->load->model("model-local/BankModel");
-		//$this->load->model("model-drdweb/InvoiceModel");
-	}
-
 	public function test(){
 		$curl = curl_init();
 
