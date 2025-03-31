@@ -1,5 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+require 'vendor/autoload.php';
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Writer\Xls;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 class Manage_bank_statment extends CI_Controller {
 	var $Page_title = "Manage Bank Statment";
 	var $Page_name  = "manage_bank_statment";
@@ -108,12 +114,16 @@ class Manage_bank_statment extends CI_Controller {
 				$i=1;
 				if(file_exists($excelFile))
 				{
-					$this->excel = new PHPExcel();
+					/*$this->excel = new PHPExcel();
 
 					//$this->load->library('excel');
 					$objPHPExcel = PHPExcel_IOFactory::load($excelFile);
 					foreach ($objPHPExcel->getWorksheetIterator() as $worksheet)
-					{
+					{*/
+					
+					$spreadsheet = IOFactory::load($excelFile);
+					$worksheet = $spreadsheet->getActiveSheet();
+					
 						$highestRow = $worksheet->getHighestRow();
 						for ($row=$start_row; $row<=$highestRow; $row++)
 						{
@@ -157,7 +167,7 @@ class Manage_bank_statment extends CI_Controller {
 							);
 							$this->BankModel->insert_statment("tbl_statment", $dt);
 						}
-					}
+					//}
 				}
 				redirect(base_url()."admin/$page_controllers/view1");
 			}
