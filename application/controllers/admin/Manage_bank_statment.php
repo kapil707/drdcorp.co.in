@@ -64,8 +64,7 @@ class Manage_bank_statment extends CI_Controller {
 				ini_set('post_max_size', '10M');
 				ini_set('max_input_time', 300);
 				ini_set('max_execution_time', 300);
-				die();
-				
+
 				$config['upload_path'] = $upload_image;  // Define the directory where you want to store the uploaded files.
 				$config['allowed_types'] = '*';  // You may want to restrict allowed file types.
 				$config['max_size'] = 0;  // Set to 0 to allow any size.
@@ -73,6 +72,7 @@ class Manage_bank_statment extends CI_Controller {
 				$new_name = time().$_FILES["myfile"]['name'];
 				$config['file_name'] = $new_name;
 		
+				die();
 				$this->load->library('upload', $config);
 		
 				if (!$this->upload->do_upload('myfile')) {
