@@ -11,7 +11,6 @@ class Dashboard extends CI_Controller {
     {
         // Call the Model constructor
         parent::__construct();
-		$this->load->model("model-drdweb/InvoiceModel");
 
 		$user_type = $this->session->userdata("user_type");
 		if(empty($user_type)){
