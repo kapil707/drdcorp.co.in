@@ -1,17 +1,17 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Manage_invoice extends CI_Controller {
-	var $Page_title = "Manage Invoice";
-	var $Page_name  = "manage_invoice";
-	var $Page_view  = "manage_invoice";
-	var $Page_menu  = "manage_invoice";
-	var $page_controllers = "manage_invoice";
+class Manage_bank_invoice extends CI_Controller {
+	var $Page_title = "Manage Bank Invoice";
+	var $Page_name  = "manage_bank_invoice";
+	var $Page_view  = "manage_bank_invoice";
+	var $Page_menu  = "manage_bank_invoice";
+	var $page_controllers = "manage_bank_invoice";
 	var $Page_tbl   = "tbl_invoice";	
 	public function __construct()
     {
         // Call the Model constructor
         parent::__construct();
-		//$this->load->model("model-drdweb/InvoiceModel");
+		$this->load->model("model-bank/BankModel");
     }
 	public function index()
 	{
@@ -63,7 +63,7 @@ class Manage_invoice extends CI_Controller {
 			$items = "";
 			if(!empty($from_date) && !empty($to_date)){
 
-				$result = $this->db->query("SELECT $Page_tbl.*, tbl_chemist.name FROM $Page_tbl LEFT JOIN tbl_chemist ON $Page_tbl.chemist_id = tbl_chemist.altercode WHERE $Page_tbl.date BETWEEN '$from_date' AND '$to_date' ORDER BY $Page_tbl.id DESC");
+				$result = $this->BankModel->select_query("SELECT $Page_tbl.*, tbl_chemist.name FROM $Page_tbl LEFT JOIN tbl_chemist ON $Page_tbl.chemist_id = tbl_chemist.altercode WHERE $Page_tbl.date BETWEEN '$from_date' AND '$to_date' ORDER BY $Page_tbl.id DESC");
 				$result = $result->result();
 
 				foreach($result as $row){
