@@ -397,7 +397,7 @@ class BankProcessingModel extends CI_Model
 		$process_name = $received_from;
 		$process_value = "";
 
-		$rr = $this->db->query("SELECT * FROM `tbl_chemist` WHERE `telephone` like '%$received_from%' ");
+		$rr = $this->BankModel->select_query("SELECT * FROM `tbl_chemist` WHERE `telephone` like '%$received_from%' ");
 		$rr = $rr->result();
 		foreach($rr as $tt){
 			$jsonArray[] = $tt->altercode;
@@ -406,7 +406,7 @@ class BankProcessingModel extends CI_Model
 		}
 
 		if(empty($process_value)){
-			$rr = $this->db->query("SELECT * FROM `tbl_chemist` WHERE `telephone1` like '%$received_from%' ");
+			$rr = $this->BankModel->select_query("SELECT * FROM `tbl_chemist` WHERE `telephone1` like '%$received_from%' ");
 			$rr = $rr->result();
 			foreach($rr as $tt){
 				$jsonArray[] = $tt->altercode;
@@ -416,7 +416,7 @@ class BankProcessingModel extends CI_Model
 		}
 
 		if(empty($process_value)){
-			$rr = $this->db->query("SELECT * FROM `tbl_chemist` WHERE `mobile` like '%$received_from%' ");
+			$rr = $this->BankModel->select_query("SELECT * FROM `tbl_chemist` WHERE `mobile` like '%$received_from%' ");
 			$rr = $rr->result();
 			foreach($rr as $tt){
 				$jsonArray[] = $tt->altercode;
