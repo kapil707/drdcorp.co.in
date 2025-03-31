@@ -224,7 +224,7 @@ class BankInvoiceModel extends CI_Model
 		return $status;
 	}
 
-	public function get_invoice_or_insert_drdweb(){
+	public function get_invoice_or_insert_drdcorp(){
 
 		//Created a GET API
 		$url = "https://drdweb.co.in/bank_api/Api01/get_invoice_api";

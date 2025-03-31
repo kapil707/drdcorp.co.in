@@ -8,7 +8,7 @@ class BankWhatsAppModel extends CI_Model
 		$this->load->model("model-bank/BankModel");
 	}
 
-	public function get_whatsapp_or_insert_drdweb(){
+	public function get_whatsapp_or_insert_drdcorp(){
 
 		//Created a GET API
 		$url = "https://drdweb.co.in/bank_api/Api01/get_whatsapp_api";
