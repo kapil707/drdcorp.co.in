@@ -56,10 +56,7 @@ class BankWhatsAppModel extends CI_Model
 				$timestamp = isset($message['timestamp']) ? $message['timestamp'] : "timestamp not found";
 				$vision_text = isset($message['vision_text']) ? $message['vision_text'] : "vision_text not found";	
 				
-				// Decode "quoted_text" JSON
-				$quoted = json_decode($message["quoted_text"], true);
-				// Extract "wid"
-				$reply_id = isset($quoted['wid']) ? $quoted['wid'] : "0";
+				$reply_id = isset($message["quoted_text"]) ? $message["quoted_text"] : "0";
 
 				//$extracted_text = str_replace("\n", "<br>", $extracted_text);
 				//$vision_text = str_replace("\n", "<br>", $vision_text);
