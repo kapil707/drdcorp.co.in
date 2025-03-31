@@ -259,22 +259,21 @@ class BankInvoiceModel extends CI_Model
 		//print_r($data1);
 		if (isset($data1['items'])) {
 			foreach ($data1['items'] as $message) {
-				$mtime = isset($message['mtime']);
-				$dispatchtime = isset($message['dispatchtime']);
-				echo $date = ($message['date']);
-				die();
-				$vno = isset($message['vno']);
-				$tagno = isset($message['tagno']);
-				$gstvno = isset($message['gstvno']);
-				$pickedby = isset($message['pickedby']);
-				$checkedby = isset($message['checkedby']);
-				$deliverby = isset($message['deliverby']);
-				$amt = isset($message['amt']);
-				$taxamt = isset($message['taxamt']);
-				$acno = isset($message['acno']);
-				$chemist_id = isset($message['chemist_id']);
-				$status = isset($message['status']);
-				$insert_time = isset($message['insert_time']);
+				$mtime = ($message['mtime']);
+				$dispatchtime = ($message['dispatchtime']);
+				$date = ($message['date']);
+				$vno = ($message['vno']);
+				$tagno = ($message['tagno']);
+				$gstvno = ($message['gstvno']);
+				$pickedby = ($message['pickedby']);
+				$checkedby = ($message['checkedby']);
+				$deliverby = ($message['deliverby']);
+				$amt = ($message['amt']);
+				$taxamt = ($message['taxamt']);
+				$acno = ($message['acno']);
+				$chemist_id = ($message['chemist_id']);
+				$status = ($message['status']);
+				$insert_time = ($message['insert_time']);
 
 				$dt = array(
 					'mtime' => $mtime,
