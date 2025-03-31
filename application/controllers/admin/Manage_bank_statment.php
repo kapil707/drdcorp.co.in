@@ -74,7 +74,6 @@ class Manage_bank_statment extends CI_Controller {
 		
 				$this->load->library('upload', $config);
 		
-				die();
 				if (!$this->upload->do_upload('myfile')) {
 					$error = array('error' => $this->upload->display_errors());
 					//$this->load->view('upload_form', $error);
@@ -87,6 +86,7 @@ class Manage_bank_statment extends CI_Controller {
 			}
 			$filename = $image;
 
+			die();
 			if($formet==1){
 				$account_no 			= "A";
 				$branch_no 				= "B";
