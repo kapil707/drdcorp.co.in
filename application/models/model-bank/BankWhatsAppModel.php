@@ -42,8 +42,8 @@ class BankWhatsAppModel extends CI_Model
 
 		//print_r($data1);
 		
-		if (isset($data1['messages'])) {
-			foreach ($data1['messages'] as $message) {
+		if (isset($data1['items'])) {
+			foreach ($data1['items'] as $message) {
 				echo $message_id = isset($message['message_id']) ? $message['message_id'] : "Body not found";
 				die();
 				$body = isset($message['body']) ? $message['body'] : "Body not found";
