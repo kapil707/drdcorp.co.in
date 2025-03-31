@@ -86,7 +86,6 @@ class Manage_bank_statment extends CI_Controller {
 			}
 			$filename = $image;
 
-			die();
 			if($formet==1){
 				$account_no 			= "A";
 				$branch_no 				= "B";
