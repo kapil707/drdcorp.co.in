@@ -265,7 +265,7 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 					}
 					//jab user sirf invoice/whatsapp say or find chemist say milata ha to final textbox me value add hoti ha
 					$row_all_chemist_match = 0;
-					if((strtolower($row_from_text_find_chemist)==strtolower($row_invoice_chemist)) && (strtolower($row_from_text_find_chemist)==strtolower($row_whatsapp_chemist))){
+					if((strtolower($row_from_text_find_chemist)==strtolower($row_invoice_chemist)) && (strtolower($row_from_text_find_chemist)==strtolower($row_whatsapp_chemist)) && !empty($row_from_text_find_chemist) && !empty($row_invoice_chemist) && !empty($row_whatsapp_chemist)){
 
 						$tr_style = "background-color: #1ab394;";
 						$row_all_chemist_match = 1;
