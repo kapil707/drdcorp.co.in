@@ -213,7 +213,8 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 					$row_from_text_find 		= $entry->from_text_find;
 					$row_from_text_find_match 	= $entry->from_text_find_match;
 					$row_from_text_find_chemist = $entry->from_text_find_chemist;
-					$row_final_chemist 	= $entry->final_chemist;
+					$row_final_chemist 			= $entry->final_chemist;
+					$row_final_chemist_textbox	= $entry->final_chemist;
 					/********************************************** */
 					$row_from_text_find_match_value = preg_quote($row_from_text_find_match, '/');
 					$row_from_text_find_match_value = preg_replace('/(' . $row_from_text_find_match_value . ')/i', '<span class="text_find_match">$1</span>', $row_from_text_find);
@@ -235,7 +236,7 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 					$row_whatsapp_number = $entry->whatsapp_number;
 					$row_whatsapp_timestamp = $entry->whatsapp_timestamp;
 					/********************************************** */
-					$textbox_final_chemist = "";
+					
 					$row_find_by = "";
 					$row_find_i = 0;
 					if(!empty($row_chemist_id)){
@@ -259,7 +260,7 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 					$row_whatsapp_chemist1 = str_replace('-', '', $row_whatsapp_chemist1);
 					if((strtolower($row_chemist_id)==strtolower($row_invoice_chemist)) && (strtolower($row_chemist_id)==strtolower($row_whatsapp_chemist1)) && (!empty($row_chemist_id) && !empty($row_invoice_chemist) && !empty($row_whatsapp_chemist1))){
 						$tr_style = "background-color: #1ab394;";
-						$textbox_final_chemist = $row_chemist_id;
+						$row_final_chemist_textbox = $row_chemist_id;
 					}
 
 					if(empty($row_from_text_find_chemist)){
@@ -456,12 +457,7 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 												Edit <i class="fa fa-pencil" aria-hidden="true"></i>
 											</span>
 
-											<?php 
-											if(empty($textbox_final_chemist) && $row_chemist_id != "N/a"){
-												$textbox_final_chemist = $row_chemist_id;
-											}?>
-
-											<input type="text" value="<?php echo $textbox_final_chemist ?>" class="form-control text_final_chemist_id_<?= ($row_id); ?> pg_text_box" style="<?php if(!empty($row_final_chemist)) { ?>display:none;<?php } ?>float: left !important;" placeholder="Chemist Id">
+											<input type="text" value="<?php echo $row_final_chemist_textbox ?>" class="form-control text_final_chemist_id_<?= ($row_id); ?> pg_text_box" style="<?php if(!empty($row_final_chemist)) { ?>display:none;<?php } ?>float: left !important;" placeholder="Chemist Id">
 											
 											<span class="text_find_match add_final_chemist_<?= ($row_id); ?>" onclick="add_final_chemist('<?= ($row_id); ?>')" style="<?php if(!empty($row_final_chemist)) { ?>display:none;<?php } ?>float: left;">
 												Set
