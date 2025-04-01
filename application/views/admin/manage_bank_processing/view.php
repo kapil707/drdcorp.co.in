@@ -184,8 +184,11 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 						$row_process_status_value = "Find From Chemist Done";
 					}
 					if($row_process_status==2){
-						//$row_process_status_value = "Find From Chemist Done";
-					}			
+						$row_process_status_value = "Find From Chemist/WhatsApp Done";
+					}
+					if($row_process_status==3){
+						$row_process_status_value = "Find From Chemist/WhatsApp/Invoice Done";
+					}
 					/****************************************************** */
 					$row_date = "<b>Date : </b>".date("d-M-Y",strtotime($entry->date));
 					/****************************************************** */
