@@ -365,7 +365,9 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 										<b>Find  : </b> 
 										<?php if(!empty($row_from_text_find_match)) { 
 											echo ($row_from_text_find_match_v);
-										} ?>
+										} else {
+											echo "N/a";
+										}?>
 										<?php 
 										if(strtolower($row_from_text)==strtolower($row_from_text_find)){
 											echo $duble_tick;
@@ -374,7 +376,12 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 									</div>
 									<div class="td_div">
 										<b>Find by : </b> 
-										<?= $row_find_by; ?>
+										<?php 
+										if(!empty($row_find_by)) { 
+											echo $row_find_by; 
+										}else{
+											echo "N/a";
+										}?>
 									</div>
 									<div class="td_div1">
 										<?= $row_process_status; ?>
