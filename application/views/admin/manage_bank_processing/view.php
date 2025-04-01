@@ -416,12 +416,13 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 								<div class="col-sm-4 myborder2">
 									<div class="td_div">
 										<b>Find Chemist : </b>
-										<?php if(!emtpy($row_from_text_find_chemist)){
+										<?php 
+										if(!empty($row_from_text_find_chemist))
+										{
 											echo $row_from_text_find_chemist;
 										} else {
 											echo "N/a";
-										}?>
-										<?php
+										}
 										if($row_all_chemist_match==1){
 											echo $duble_tick;
 										}
