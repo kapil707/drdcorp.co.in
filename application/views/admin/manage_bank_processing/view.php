@@ -425,7 +425,11 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 									</div>
 									<div class="td_div">
 										<b>Find Invoice : </b>
-										<?= $row_invoice_chemist ?>
+										<?php if(!emtpy($row_from_text_find_chemist)){
+											echo $row_from_text_find_chemist;
+										} else {
+											echo "N/a";
+										}?>
 
 										<?php
 										if((strtolower($row_invoice_chemist)==strtolower($row_chemist_id)) && $row_invoice_chemist!="N/a"){
