@@ -394,7 +394,7 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 										}?>
 									</div>
 									<div class="td_div1">
-										<?= $row_process_status_value; ?>
+										<b>Status : <?= $row_process_status_value; ?></b>
 									</div>
 								</div>
 
