@@ -362,7 +362,10 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 										<?php } ?>
 									</div>
 									<div class="td_div">
-										<b>Find  : </b> <?= ($row_from_text_find_match); ?>
+										<b>Find  : </b> 
+										<?php if(!empty($row_from_text_find_match)) { ?>
+										<?= ($row_from_text_find_match); ?>
+										<?php } ?>
 										<?php 
 										if(strtolower($row_from_text)==strtolower($row_from_text_find)){
 											echo $duble_tick;
