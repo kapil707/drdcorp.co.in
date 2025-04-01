@@ -309,19 +309,6 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 					if(!empty($row_final_chemist)){
 						$tr_style = "background-color: #4bff97;";
 					}
-					
-					if(empty($row_chemist_id)){
-						$row_chemist_id = "N/a";
-					}
-					if(empty($row_invoice_chemist)){
-						$row_invoice_chemist = "N/a";
-					}
-					if(empty($row_whatsapp_chemist)){
-						$row_whatsapp_chemist = "N/a";
-					}
-					if(empty($row_whatsapp)){
-						$row_whatsapp = "N/a";
-					}
 					?>
 					<tr class="tr_css_<?php echo $row_id; ?>" style="<?php echo $tr_style ?>">
 						<td>
@@ -427,7 +414,8 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 											echo $row_from_text_find_chemist;
 										} else {
 											echo "N/a";
-										}
+										}?>
+										<?php
 										if($row_all_chemist_match==1){
 											echo $duble_tick;
 										}
@@ -435,33 +423,47 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 									</div>
 									<div class="td_div">
 										<b>Find Invoice : </b>
-										<?= $row_invoice_chemist ?>
+										<?php 
+										if(!empty($row_invoice_chemist))
+										{
+											echo $row_invoice_chemist;
+										} else {
+											echo "N/a";
+										}?>
 
 										<?php
-										if((strtolower($row_invoice_chemist)==strtolower($row_chemist_id)) && $row_invoice_chemist!="N/a"){
+										if((strtolower($row_invoice_chemist)==strtolower($row_from_text_find_chemist)) && !empty($row_invoice_chemist)){
 											echo $duble_tick;
 										}
 										?>
 										
-										<?php if($row_invoice_chemist=="N/a" &&$row_invoice_recommended) { 
+										<?php if(empty($row_invoice_chemist) &&!empty($row_invoice_recommended)) { 
 											echo " || <b>Recommended : $row_invoice_recommended </b>";
 										} ?>
 									</div>
 									<div class="td_div">
-										<b onclick="get_whatsapp_message('<?= ($row_id); ?>','<?= ($row_whatsapp_id); ?>','<?= $row_upi_no; ?>')" data-toggle="modal" data-target="#myModal">Find WhatsApp : </b>
-										<?= $row_whatsapp_chemist; ?>
+										<b>Find WhatsApp : </b>
+										
+										<?php 
+										if(!empty($row_whatsapp_chemist))
+										{
+											echo $row_whatsapp_chemist;
+										} else {
+											echo "N/a";
+										}?>
+
 										<?php
-										if((strtolower($row_whatsapp_chemist)==strtolower($row_chemist_id)) && $row_whatsapp_chemist!="N/a"){
+										if((strtolower($row_whatsapp_chemist)==strtolower($row_from_text_find_chemist)) && !empty($row_whatsapp_chemist)){
 											echo $duble_tick;
 										}
 										?>
 										
+										<?php if(empty($row_whatsapp_chemist) &&!empty($row_whatsapp_recommended)) { 
+											echo " || <b>Recommended : $row_whatsapp_recommended </b>";
+										} ?>
+										
 										<?php if(!empty($entry->whatsapp_set_chemist)) { 
 											echo " || <b>Set : $entry->whatsapp_set_chemist </b>";
-										} ?>
-
-										<?php if($row_whatsapp_chemist=="N/a" &&$row_whatsapp_recommended) { 
-											echo " || <b>Recommended : $row_whatsapp_recommended </b>";
 										} ?>
 									</div>
 									<div class="td_div1">
