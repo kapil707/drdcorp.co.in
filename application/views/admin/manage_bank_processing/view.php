@@ -223,7 +223,6 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 					}
 					/********************************************** */
 					$row_chemist_id = $row_from_text_find_chemist;
-					$row_recommended = $entry->recommended;
 					/********************************************** */
 					$row_invoice_chemist = $entry->invoice_chemist;
 					$row_invoice_text = $entry->invoice_text;
@@ -256,8 +255,11 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 					}
 					/********************************************** */
 					//recommended say find_chemist ko set karta ha yha
+					$row_recommended = $entry->recommended;
+					$row_recommended_value = "";
 					if(!empty($row_recommended)){
-						$row_from_text_find_chemist_value = $row_recommended;
+						$row_recommended_value = "<div class='col-sm-12'><b class='blink_me'>Find Chemist ($row_from_text_find_chemist) : Recommended set by invoice or whatsapp : ".$row_recommended."</b></div>";	
+						$row_from_text_find_chemist = $row_recommended;
 					}
 					/********************************************** */
 					//jab user sirf invoice say or find chemist say milata ha to final textbox me value add hoti ha
@@ -328,8 +330,8 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 						<td>
 							<div class="row">
 								<?php
-								if(!empty($row_recommended)){
-								echo "<div class='col-sm-12'><b class='blink_me'>Find Chemist ($row_from_text_find_chemist) : Recommended set by invoice or whatsapp : ".$row_recommended."</b></div>";	
+								if(!empty($row_recommended_value)){
+									echo $row_recommended_value;
 								}?>
 								<div class="col-sm-10">
 									<?php if(!empty($entry->sms_text)) { ?>
@@ -420,9 +422,9 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 									<div class="td_div">
 										<b>Find Chemist : </b>
 										<?php 
-										if(!empty($row_from_text_find_chemist_value))
+										if(!empty($row_from_text_find_chemist))
 										{
-											echo $row_from_text_find_chemist_value;
+											echo $row_from_text_find_chemist;
 										} else {
 											echo "N/a";
 										}
