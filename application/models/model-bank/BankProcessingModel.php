@@ -192,8 +192,8 @@ class BankProcessingModel extends CI_Model
 	}
 
 	public function recommended_to_find(){
-
-		// jab invoice or whatsapp mil jaya but find chemist ek say jada hoya to yha automatick user ko add karta ha
+		
+		// jab invoice or whatsapp mil jaya but find chemist ek say jada hoya to yha automatick user ko add karta ha v153 || v155 = v155
 		$result = $this->BankModel->select_query("SELECT id,invoice_chemist FROM `tbl_bank_processing` WHERE `invoice_chemist`=`whatsapp_chemist` and invoice_chemist!='' and whatsapp_chemist!='' and invoice_chemist!=from_text_find_chemist");
 		$result = $result->result();
 		foreach($result as $row){
@@ -203,9 +203,8 @@ class BankProcessingModel extends CI_Model
 				$chemist_id = $row->invoice_chemist;
 				$where = array('id'=>$id);
 				$dt = array(				
-					'recommended_status'=>'100',	
+					'recommended_status'=>'1',	
 					'recommended'=>$chemist_id,
-					'from_text_find_chemist'=>$chemist_id,
 				);
 				$this->BankModel->edit_fun("tbl_bank_processing", $dt,$where);
 			}
@@ -241,7 +240,7 @@ class BankProcessingModel extends CI_Model
 					$dt = array(
 						'process_status'=>0,
 						'recommended'=>$chemist_id,
-						'recommended_status'=>'1',
+						'recommended_status'=>'2',
 						'whatsapp_id'=>0,
 						'whatsapp_chemist'=>'',
 						'invoice_id'=>'',
@@ -258,13 +257,13 @@ class BankProcessingModel extends CI_Model
 						if(strtolower($myid)==strtolower($recommended))
 						{
 							$chemist_id = $recommended;
-							$recommended_status = 2; //jab 2 user me say kisi ek ko select karta ha to 
+							$recommended_status = 3; //jab 2 user me say kisi ek ko select karta ha to 
 						}
 					}
 
 					if(empty($chemist_id)){
 						$chemist_id = $recommended;
-						$recommended_status = 3; //jab user galt aa raha ho to 
+						$recommended_status = 4; //jab user galt aa raha ho to 
 					}
 
 					if(!empty($chemist_id)){
@@ -276,7 +275,6 @@ class BankProcessingModel extends CI_Model
 						$dt = array(					
 							'recommended'=>$chemist_id,
 							'recommended_status'=>$recommended_status,
-							'from_text_find_chemist'=>$chemist_id,
 							'whatsapp_chemist'=>$chemist_id,
 							'invoice_chemist'=>$chemist_id,
 						);
