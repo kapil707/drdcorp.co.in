@@ -305,7 +305,6 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 					if(!empty($row_recommended)){
 						$tr_style = "background-color: #80e3ff;";
 					}
-
 					if(!empty($row_final_chemist)){
 						$tr_style = "background-color: #4bff97;";
 					}
