@@ -222,8 +222,6 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 						$row_from_text_find_match_value = "N/a";
 					}
 					/********************************************** */
-					$row_chemist_id = $row_from_text_find_chemist;
-					/********************************************** */
 					$row_invoice_chemist = $entry->invoice_chemist;
 					$row_invoice_text = $entry->invoice_text;
 					$row_invoice_recommended = $entry->invoice_recommended;
@@ -238,7 +236,7 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 					
 					$row_find_by = "";
 					$row_find_i = 0;
-					if(!empty($row_chemist_id)){
+					if(!empty($row_from_text_find_chemist)){
 						$row_find_by.= "Chemist,";
 						$row_find_i++;
 					}
@@ -511,7 +509,7 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 								<?php if($row_whatsapp_text!="") { ?>
 								<div class="col-sm-12">
 									<b onclick="get_whatsapp_message('<?= ($row_id); ?>','<?= ($row_whatsapp_id); ?>','<?= $row_upi_no; ?>')" data-toggle="modal" data-target="#myModal">
-									<span class='<?php if((strtolower($row_whatsapp_chemist)==strtolower($row_chemist_id)) && $row_whatsapp_chemist!="N/a"){ echo "text_find_match"; } if(strtolower($row_whatsapp_chemist)!=strtolower($row_chemist_id)) { echo "text_find_match_not blink_me_white"; }?>'>WhatsApp-Text :</span></b>
+									<span class='<?php if((strtolower($row_whatsapp_chemist)==strtolower($row_from_text_find_chemist)) && $row_whatsapp_chemist!="N/a"){ echo "text_find_match"; } if(strtolower($row_whatsapp_chemist)!=strtolower($row_from_text_find_chemist)) { echo "text_find_match_not blink_me_white"; }?>'>WhatsApp-Text :</span></b>
 									Number : <?= ($row_whatsapp_number); ?>,
 									Date / Time : <?= date('d-M-y \a\t H:i:s',$row_whatsapp_timestamp) ?><br><b>Message :</b> <?= ($row_whatsapp_text); ?>
 								</div>
