@@ -421,68 +421,72 @@ class BankWhatsAppModel extends CI_Model
 
 			$from_text_find_chemist = str_replace("/", " || ",$from_text_find_chemist);
 			$parts = explode(" || ", $from_text_find_chemist);
-			foreach($parts as $from_text_find_chemist_new) {
-				
-				if(!empty($whatsapp_chemist)  && !empty($from_text_find_chemist_new)){
-					//agar body m chemist id nahi aa rahi ha to next say find karta ha yha
-					if($whatsapp_chemist!=$from_text_find_chemist_new){
-						$whatsapp_chemist = "";
-						echo "xx1";
-					}
-					if(empty($whatsapp_chemist)){
-						//agar pura naam milay to he next prcess karta ha
-						if (strpos($whatsapp_body, $from_text_find_chemist_new) !== false) {
-							echo $whatsapp_chemist = $from_text_find_chemist_new;
-							echo "xx2";
-						} 
-					}
-				}
-
-				if(empty($whatsapp_chemist)){
-					$row1 = $this->BankModel->select_query("SELECT body FROM `tbl_whatsapp_message` WHERE from_number='$from_number' AND FROM_UNIXTIME(timestamp) BETWEEN DATE_SUB('$timestamp', INTERVAL 7 MINUTE) AND DATE_ADD('$timestamp', INTERVAL 7 MINUTE) and body='$from_text_find_chemist_new' LIMIT 0, 25");
-					$row1 = $row1->row();
-					if(!empty($row1)){
-						$whatsapp_chemist = trim($row1->body);
-						echo "xx3";
-					}
-				}
-
-				if(empty($whatsapp_chemist)){
-					$row1 = $this->BankModel->select_query("SELECT body FROM `tbl_whatsapp_message` WHERE from_number='$from_number' AND FROM_UNIXTIME(timestamp) BETWEEN DATE_SUB('$timestamp', INTERVAL 7 MINUTE) AND DATE_ADD('$timestamp', INTERVAL 7 MINUTE) and REPLACE(TRIM(body), ' ', '')='$from_text_find_chemist_new' LIMIT 0, 25");
-					$row1 = $row1->row();
-					if(!empty($row1)){
-						$whatsapp_chemist = trim($row1->body);
-						$whatsapp_chemist = str_replace(" ","",$whatsapp_chemist);
-						echo "xx4";
-					}
-				}
-				
-				if(empty($whatsapp_chemist)){
-					$row1 = $this->BankModel->select_query("SELECT body FROM `tbl_whatsapp_message` WHERE from_number='$from_number' AND FROM_UNIXTIME(timestamp) BETWEEN DATE_SUB('$timestamp', INTERVAL 7 MINUTE) AND DATE_ADD('$timestamp', INTERVAL 7 MINUTE) and body!='' LIMIT 0, 25");
-					$row1 = $row1->row();
-					if(!empty($row1)){
-						$text = trim($row1->body);
-						if(!empty($text) && !empty($from_text_find_chemist_new)){
+			if (in_array($whatsapp_chemist, $parts)){
+				echo "milgaya array me say he";
+			}else{
+				foreach($parts as $from_text_find_chemist_new) {
+					
+					if(!empty($whatsapp_chemist)  && !empty($from_text_find_chemist_new)){
+						//agar body m chemist id nahi aa rahi ha to next say find karta ha yha
+						if($whatsapp_chemist!=$from_text_find_chemist_new){
+							$whatsapp_chemist = "";
+							echo "xx1";
+						}
+						if(empty($whatsapp_chemist)){
 							//agar pura naam milay to he next prcess karta ha
-							if (strpos($text, $from_text_find_chemist_new) !== false) {
-								$whatsapp_chemist = $from_text_find_chemist_new;
-								echo "xx5";
+							if (strpos($whatsapp_body, $from_text_find_chemist_new) !== false) {
+								echo $whatsapp_chemist = $from_text_find_chemist_new;
+								echo "xx2";
 							} 
 						}
 					}
-				}
 
-				if(empty($whatsapp_chemist)){
-					$row1 = $this->BankModel->select_query("SELECT (SELECT body FROM tbl_whatsapp_message WHERE from_number = wm.from_number AND REPLACE(TRIM(body), ' ', '') = '$from_text_find_chemist_new' AND FROM_UNIXTIME(timestamp) BETWEEN DATE_SUB(FROM_UNIXTIME(wm.timestamp), INTERVAL 7 MINUTE) AND DATE_ADD(FROM_UNIXTIME(wm.timestamp), INTERVAL 7 MINUTE) LIMIT 1) AS text FROM tbl_whatsapp_message AS wm WHERE wm.id = $whatsapp_id");
-					$row1 = $row1->row();
-					if(!empty($row1)){
-						$text = trim($row1->text);
-						if(!empty($text) && !empty($from_text_find_chemist_new)){
-							//agar pura naam milay to he next prcess karta ha
-							if (strpos($text, $from_text_find_chemist_new) !== false) {
-								$whatsapp_chemist = $from_text_find_chemist_new;
-								echo "xx6";
-							} 
+					if(empty($whatsapp_chemist)){
+						$row1 = $this->BankModel->select_query("SELECT body FROM `tbl_whatsapp_message` WHERE from_number='$from_number' AND FROM_UNIXTIME(timestamp) BETWEEN DATE_SUB('$timestamp', INTERVAL 7 MINUTE) AND DATE_ADD('$timestamp', INTERVAL 7 MINUTE) and body='$from_text_find_chemist_new' LIMIT 0, 25");
+						$row1 = $row1->row();
+						if(!empty($row1)){
+							$whatsapp_chemist = trim($row1->body);
+							echo "xx3";
+						}
+					}
+
+					if(empty($whatsapp_chemist)){
+						$row1 = $this->BankModel->select_query("SELECT body FROM `tbl_whatsapp_message` WHERE from_number='$from_number' AND FROM_UNIXTIME(timestamp) BETWEEN DATE_SUB('$timestamp', INTERVAL 7 MINUTE) AND DATE_ADD('$timestamp', INTERVAL 7 MINUTE) and REPLACE(TRIM(body), ' ', '')='$from_text_find_chemist_new' LIMIT 0, 25");
+						$row1 = $row1->row();
+						if(!empty($row1)){
+							$whatsapp_chemist = trim($row1->body);
+							$whatsapp_chemist = str_replace(" ","",$whatsapp_chemist);
+							echo "xx4";
+						}
+					}
+					
+					if(empty($whatsapp_chemist)){
+						$row1 = $this->BankModel->select_query("SELECT body FROM `tbl_whatsapp_message` WHERE from_number='$from_number' AND FROM_UNIXTIME(timestamp) BETWEEN DATE_SUB('$timestamp', INTERVAL 7 MINUTE) AND DATE_ADD('$timestamp', INTERVAL 7 MINUTE) and body!='' LIMIT 0, 25");
+						$row1 = $row1->row();
+						if(!empty($row1)){
+							$text = trim($row1->body);
+							if(!empty($text) && !empty($from_text_find_chemist_new)){
+								//agar pura naam milay to he next prcess karta ha
+								if (strpos($text, $from_text_find_chemist_new) !== false) {
+									$whatsapp_chemist = $from_text_find_chemist_new;
+									echo "xx5";
+								} 
+							}
+						}
+					}
+
+					if(empty($whatsapp_chemist)){
+						$row1 = $this->BankModel->select_query("SELECT (SELECT body FROM tbl_whatsapp_message WHERE from_number = wm.from_number AND REPLACE(TRIM(body), ' ', '') = '$from_text_find_chemist_new' AND FROM_UNIXTIME(timestamp) BETWEEN DATE_SUB(FROM_UNIXTIME(wm.timestamp), INTERVAL 7 MINUTE) AND DATE_ADD(FROM_UNIXTIME(wm.timestamp), INTERVAL 7 MINUTE) LIMIT 1) AS text FROM tbl_whatsapp_message AS wm WHERE wm.id = $whatsapp_id");
+						$row1 = $row1->row();
+						if(!empty($row1)){
+							$text = trim($row1->text);
+							if(!empty($text) && !empty($from_text_find_chemist_new)){
+								//agar pura naam milay to he next prcess karta ha
+								if (strpos($text, $from_text_find_chemist_new) !== false) {
+									$whatsapp_chemist = $from_text_find_chemist_new;
+									echo "xx6";
+								} 
+							}
 						}
 					}
 				}
