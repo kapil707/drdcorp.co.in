@@ -436,7 +436,7 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 										} ?>
 									</div>
 									<div class="td_div">
-										<b onclick="get_whats_message('<?= ($row_id); ?>','<?= ($row_whatsapp_id); ?>','<?= $row_upi_no; ?>')" data-toggle="modal" data-target="#myModal">Find WhatsApp : </b>
+										<b onclick="get_whatsapp_message('<?= ($row_id); ?>','<?= ($row_whatsapp_id); ?>','<?= $row_upi_no; ?>')" data-toggle="modal" data-target="#myModal">Find WhatsApp : </b>
 										<?= $row_whatsapp_chemist; ?>
 										<?php
 										if((strtolower($row_whatsapp_chemist)==strtolower($row_chemist_id)) && $row_whatsapp_chemist!="N/a"){
@@ -497,7 +497,7 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 
 								<?php if($row_whatsapp_text!="") { ?>
 								<div class="col-sm-12">
-									<b onclick="get_whats_message('<?= ($row_id); ?>','<?= ($row_whatsapp_id); ?>','<?= $row_upi_no; ?>')" data-toggle="modal" data-target="#myModal">
+									<b onclick="get_whatsapp_message('<?= ($row_id); ?>','<?= ($row_whatsapp_id); ?>','<?= $row_upi_no; ?>')" data-toggle="modal" data-target="#myModal">
 									<span class='<?php if((strtolower($row_whatsapp_chemist)==strtolower($row_chemist_id)) && $row_whatsapp_chemist!="N/a"){ echo "text_find_match"; } if(strtolower($row_whatsapp_chemist)!=strtolower($row_chemist_id)) { echo "text_find_match_not blink_me_white"; }?>'>WhatsApp-Text :</span></b>
 									Number : <?= ($row_whatsapp_number); ?>,
 									Date / Time : <?= date('d-M-y \a\t H:i:s',$row_whatsapp_timestamp) ?><br><b>Message :</b> <?= ($row_whatsapp_text); ?>
@@ -608,19 +608,19 @@ function row_refresh(id){
 	});
 }
 var row_id;
-function get_whats_message(row_id1,row_whatsapp_id,row_upi_no){
+function get_whatsapp_message(row_id1,row_whatsapp_id,row_upi_no){
 	row_id = row_id1;
 	$(".modal-title").html("Upi No : "+row_upi_no);
 	$.ajax({
 		type : "POST",
 		data : {row_whatsapp_id:row_whatsapp_id},
-		url  : "<?= base_url()?>admin/<?= $Page_name?>/get_whats_message",
+		url  : "<?= base_url()?>admin/<?= $Page_name?>/get_whatsapp_message",
 		cache: true,
 		error: function(){
 			toastr.error('Error');
 		},
 		success: function(data){
-			var table = $(".get_whats_message");
+			var table = $(".get_whatsapp_message");
 			table.find("tr:gt(0)").remove();
 			$.each(data.items, function(i,item){
 				if (item)
@@ -650,7 +650,7 @@ function get_whats_message(row_id1,row_whatsapp_id,row_upi_no){
         <h4 class="modal-title"></h4>
       </div>
       <div class="modal-body">
-        <table class="table table-striped table-bordered table-hover get_whats_message">
+        <table class="table table-striped table-bordered table-hover get_whatsapp_message">
 			<tr>
 				<td>From</td>
 				<td>Body</td>
