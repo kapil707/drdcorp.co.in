@@ -356,7 +356,7 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 										<?= ($row_from_text); ?>
 
 										<?php if($row_process_status!=0){ ?>
-										<?php if(empty($textbox_final_chemist) && $row_chemist_id == "N/a"){ ?>
+										<?php if(empty($textbox_final_chemist) && empty($row_from_text_find_chemist)){ ?>
 											<br>
 											<b class="text_find_match blink_me_white edit_from_text_chemist_id_<?= ($row_id); ?>" onclick="edit_from_text_chemist_id('<?= ($row_id); ?>')">Set Chemist <i class="fa fa-pencil" aria-hidden="true"></i></b>
 
@@ -464,7 +464,7 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 										} ?>
 									</div>
 									<div class="td_div1">
-										<?php if(empty($textbox_final_chemist) && $row_chemist_id == "N/a"){
+										<?php if(empty($textbox_final_chemist) && empty($row_from_text_find_chemist)){
 											?>
 											<?php if($row_process_status!=0){ ?>
 											<b style="float: left; margin-right:5px;" class="text_find_match_not blink_me_white">Please Set form Chemist </b>
