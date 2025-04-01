@@ -407,7 +407,7 @@ class BankWhatsAppModel extends CI_Model
 
 	public function whatsapp_insert_in_processing(){
 
-		$result = $this->BankModel->select_query("SELECT p.id, wm.id AS whatsapp_id, wm.body AS body, wm.vision_text, wm.timestamp, wm.from_number, p.from_text_find_chemist FROM tbl_bank_processing AS p JOIN tbl_whatsapp_message wm ON p.upi_no = wm.upi_no AND wm.date BETWEEN DATE_SUB(p.date, INTERVAL 1 DAY) AND DATE_ADD(p.date, INTERVAL 1 DAY) WHERE p.whatsapp_id = '' ORDER BY RAND() LIMIT 25");
+		$result = $this->BankModel->select_query("SELECT p.id, wm.id AS whatsapp_id, wm.body AS body, wm.vision_text, wm.timestamp, wm.from_number, p.from_text_find_chemist FROM tbl_bank_processing AS p JOIN tbl_whatsapp_message wm ON p.upi_no = wm.upi_no AND wm.date BETWEEN DATE_SUB(p.date, INTERVAL 1 DAY) AND DATE_ADD(p.date, INTERVAL 1 DAY) WHERE p.whatsapp_id = 37130 ORDER BY RAND() LIMIT 25");
 		$result = $result->result();
 		foreach($result as $row) {
 
@@ -422,6 +422,7 @@ class BankWhatsAppModel extends CI_Model
 			$from_text_find_chemist = str_replace("/", " || ",$from_text_find_chemist);
 			$parts = explode(" || ", $from_text_find_chemist);
 			foreach($parts as $from_text_find_chemist_new) {
+				
 				if(!empty($whatsapp_chemist)  && !empty($from_text_find_chemist_new)){
 					//agar body m chemist id nahi aa rahi ha to next say find karta ha yha
 					if($whatsapp_chemist!=$from_text_find_chemist_new){
