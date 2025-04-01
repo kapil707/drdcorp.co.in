@@ -309,7 +309,7 @@ class Manage_bank_processing extends CI_Controller {
 	}
 
 	public function get_whatsapp_message(){
-		$row_whatsapp_id = $_POST["row_whatsapp_id"];
+		echo $row_whatsapp_id = $_POST["row_whatsapp_id"];
 		if(!empty($row_whatsapp_id)){
 			$row1 = $this->BankModel->select_query("SELECT from_number,timestamp FROM `tbl_whatsapp_message` WHERE id='$row_whatsapp_id'");
 			$row1 = $row1->row();
