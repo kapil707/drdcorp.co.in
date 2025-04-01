@@ -178,7 +178,14 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 					$tr_style = "";
 					/********************************************** */
 					$row_id = $entry->id;
-					$row_process_status = $entry->process_status;					
+					$row_process_status = $entry->process_status;
+					$row_process_status_value = "Just Added";
+					if($row_process_status==1){
+						$row_process_status_value = "Find From Chemist Done";
+					}
+					if($row_process_status==2){
+						//$row_process_status_value = "Find From Chemist Done";
+					}			
 					/****************************************************** */
 					$row_date = "<b>Date : </b>".date("d-M-Y",strtotime($entry->date));
 					/****************************************************** */
@@ -205,10 +212,10 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 					$row_from_text_find_chemist = $entry->from_text_find_chemist;
 					$row_final_chemist 	= $entry->final_chemist;
 					/********************************************** */
-					$row_from_text_find_match_v = preg_quote($row_from_text_find_match, '/');
-					$row_from_text_find_match_v = preg_replace('/(' . $row_from_text_find_match_v . ')/i', '<span class="text_find_match">$1</span>', $row_from_text_find);
+					$row_from_text_find_match_value = preg_quote($row_from_text_find_match, '/');
+					$row_from_text_find_match_value = preg_replace('/(' . $row_from_text_find_match_value . ')/i', '<span class="text_find_match">$1</span>', $row_from_text_find);
 					if(empty($row_from_text)){
-						$row_from_text_find_match_v = "N/a";
+						$row_from_text_find_match_value = "N/a";
 					}
 					/********************************************** */
 					$row_chemist_id = $row_from_text_find_chemist;
@@ -364,7 +371,7 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 									<div class="td_div">
 										<b>Find  : </b> 
 										<?php if(!empty($row_from_text_find_match)) { 
-											echo ($row_from_text_find_match_v);
+											echo ($row_from_text_find_match_value);
 										} else {
 											echo "N/a";
 										}?>
@@ -384,7 +391,7 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 										}?>
 									</div>
 									<div class="td_div1">
-										<?= $row_process_status; ?>
+										<?= $row_process_status_value; ?>
 									</div>
 								</div>
 
