@@ -255,6 +255,11 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 						$row_find_by = substr($row_find_by, 0, -1);
 					}
 					/********************************************** */
+					//recommended say find_chemist ko set karta ha yha
+					if(!empty($row_recommended)){
+						$row_from_text_find_chemist_value = $row_recommended;
+					}
+					/********************************************** */
 					//jab user sirf invoice say or find chemist say milata ha to final textbox me value add hoti ha
 					if((strtolower($row_from_text_find_chemist)==strtolower($row_invoice_chemist)) && empty($row_whatsapp_chemist)){
 						$row_final_chemist_textbox = $row_from_text_find_chemist;
@@ -325,7 +330,6 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 								<?php
 								if(!empty($row_recommended)){
 								echo "<div class='col-sm-12'><b class='blink_me'>Find Chemist ($row_from_text_find_chemist) : Recommended set by invoice or whatsapp : ".$row_recommended."</b></div>";	
-								$row_from_text_find_chemist = $row_recommended;
 								}?>
 								<div class="col-sm-10">
 									<?php if(!empty($entry->sms_text)) { ?>
@@ -416,9 +420,9 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 									<div class="td_div">
 										<b>Find Chemist : </b>
 										<?php 
-										if(!empty($row_from_text_find_chemist))
+										if(!empty($row_from_text_find_chemist_value))
 										{
-											echo $row_from_text_find_chemist;
+											echo $row_from_text_find_chemist_value;
 										} else {
 											echo "N/a";
 										}
