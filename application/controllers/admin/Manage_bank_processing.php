@@ -314,7 +314,9 @@ class Manage_bank_processing extends CI_Controller {
 			$row1 = $this->BankModel->select_query("SELECT from_number,timestamp FROM `tbl_whatsapp_message` WHERE id='$row_whatsapp_id'");
 			$row1 = $row1->row();
 			$from_number = $row1->from_number;
-			echo $timestamp = date('Y-m-d H:i:s', $row1->timestamp);
+			$timestamp = date('Y-m-d H:i:s', $row1->timestamp);
+
+			echo "SELECT from_number,body,ist_timestamp,REPLACE(vision_text, '\n', ' ') AS vision_text,screenshot_image FROM `tbl_whatsapp_message` WHERE from_number='$from_number' AND FROM_UNIXTIME(timestamp) BETWEEN DATE_SUB('$timestamp', INTERVAL 7 MINUTE) AND DATE_ADD('$timestamp', INTERVAL 7 MINUTE) LIMIT 0, 25";
 
 			$result = $this->BankModel->select_query("SELECT from_number,body,ist_timestamp,REPLACE(vision_text, '\n', ' ') AS vision_text,screenshot_image FROM `tbl_whatsapp_message` WHERE from_number='$from_number' AND FROM_UNIXTIME(timestamp) BETWEEN DATE_SUB('$timestamp', INTERVAL 7 MINUTE) AND DATE_ADD('$timestamp', INTERVAL 7 MINUTE) LIMIT 0, 25");
 			$result = $result->result();
