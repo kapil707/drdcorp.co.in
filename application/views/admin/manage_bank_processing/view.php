@@ -176,10 +176,9 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 				$i= 1;
 				foreach ($result as $entry) {
 					$tr_style = "";
-					$chemist_fafa[] = "";
 					/********************************************** */
 					$row_id = $entry->id;
-					$process_status= $entry->process_status;					
+					$row_process_status= $entry->process_status;					
 					/****************************************************** */
 					$row_date = "<b>Date : </b>".date("d-M-Y",strtotime($entry->date));
 					/****************************************************** */
@@ -371,7 +370,7 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 										<?= $row_find_by; ?>
 									</div>
 									<div class="td_div1">
-										<?= $row_status; ?>
+										<?= $row_process_status; ?>
 									</div>
 								</div>
 
