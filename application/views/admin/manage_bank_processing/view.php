@@ -448,9 +448,11 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 										} else { ?>
 											<b style="float: left; margin-right:5px;">Final Chemist : </b>
 
-											<span class="span_final_chemist_<?= ($row_id); ?>" <?php if(empty($entry->final_chemist)) { ?>style="display:none" <?php } ?>><?php echo $entry->final_chemist ?></span>
+											<span class="span_final_chemist_<?= ($row_id); ?>" <?php if(empty($row_final_chemist)) { ?>style="display:none" <?php } ?>>
+												<?php echo $row_final_chemist ?>
+											</span>
 											
-											<span class="text_find_match_edit edit_final_chemist_<?= ($row_id); ?>" onclick="edit_final_chemist('<?= ($row_id); ?>')" <?php if(empty($entry->final_chemist)) { ?>style="display:none" <?php } ?>>
+											<span class="text_find_match_edit edit_final_chemist_<?= ($row_id); ?>" onclick="edit_final_chemist('<?= ($row_id); ?>')" <?php if(empty($row_final_chemist)) { ?>style="display:none" <?php } ?>>
 												Edit <i class="fa fa-pencil" aria-hidden="true"></i>
 											</span>
 
@@ -459,9 +461,9 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 												$textbox_final_chemist = $row_chemist_id;
 											}?>
 
-											<input type="text" value="<?php echo $textbox_final_chemist ?>" class="form-control text_final_chemist_id_<?= ($row_id); ?> pg_text_box" style="<?php if(!empty($entry->final_chemist)) { ?>display:none;<?php } ?>float: left !important;" placeholder="Chemist Id">
+											<input type="text" value="<?php echo $textbox_final_chemist ?>" class="form-control text_final_chemist_id_<?= ($row_id); ?> pg_text_box" style="<?php if(!empty($row_final_chemist)) { ?>display:none;<?php } ?>float: left !important;" placeholder="Chemist Id">
 											
-											<span class="text_find_match add_final_chemist_<?= ($row_id); ?>" onclick="add_final_chemist('<?= ($row_id); ?>')" style="<?php if(!empty($entry->final_chemist)) { ?>display:none;<?php } ?>float: left;">
+											<span class="text_find_match add_final_chemist_<?= ($row_id); ?>" onclick="add_final_chemist('<?= ($row_id); ?>')" style="<?php if(!empty($row_final_chemist)) { ?>display:none;<?php } ?>float: left;">
 												Set
 												<i class="fa fa-check" aria-hidden="true"></i>
 											</span>
