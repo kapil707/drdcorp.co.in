@@ -417,7 +417,12 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 									<div class="td_div1">
 										<?php if(empty($textbox_final_chemist) && $row_chemist_id == "N/a"){
 											?>
+											<?php if($row_process_status!=0){ ?>
 											<b style="float: left; margin-right:5px;" class="text_find_match_not blink_me_white">Please Set form Chemist </b>
+											<?php } ?>
+											<?php if($row_process_status==0){ ?>
+											<b style="float: left; margin-right:5px;" class="text_find_match_not blink_me_white">Loading Please Wait....</b>
+											<?php } ?>
 											<?php
 										} else { ?>
 											<b style="float: left; margin-right:5px;">Final Chemist : </b>
