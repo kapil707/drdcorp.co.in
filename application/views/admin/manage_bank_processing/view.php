@@ -255,14 +255,12 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 						$row_find_by = substr($row_find_by, 0, -1);
 					}
 					/********************************************** */
-					$row_whatsapp_chemist1 = 
-					$row_whatsapp_chemist1 = str_replace(' ', '', $row_whatsapp_chemist);
-					$row_whatsapp_chemist1 = str_replace('-', '', $row_whatsapp_chemist1);
-					if((strtolower($row_chemist_id)==strtolower($row_invoice_chemist)) && (strtolower($row_chemist_id)==strtolower($row_whatsapp_chemist1)) && (!empty($row_chemist_id) && !empty($row_invoice_chemist) && !empty($row_whatsapp_chemist1))){
-						$tr_style = "background-color: #1ab394;";
-						$row_final_chemist_textbox = $row_chemist_id;
+					if(empty($row_final_chemist_textbox)){
+						if((strtolower($row_from_text_find_chemist)==strtolower($row_invoice_chemist)) && (strtolower($row_from_text_find_chemist)==strtolower($row_whatsapp_chemist))){
+							$tr_style = "background-color: #1ab394;";
+							$row_final_chemist_textbox = $row_from_text_find_chemist;
+						}
 					}
-
 					if(empty($row_from_text_find_chemist)){
 						$tr_style = "background-color: #ff9494;";
 					}
