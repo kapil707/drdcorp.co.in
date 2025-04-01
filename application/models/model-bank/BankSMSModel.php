@@ -74,7 +74,6 @@ class BankSMSModel extends CI_Model
 			
 			if(empty($row_new->id) && $from_text!="Remitter" && $from_text != "Received from information not found"){
 				$dt = array(
-					'status'=>1,
 					'amount'=>$amount,
 					'date'=>$getdate,
 					'time'=>$gettime,

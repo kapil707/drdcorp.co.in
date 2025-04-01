@@ -268,7 +268,6 @@ class BankStatmentModel extends CI_Model
 				$row_new = $row_new->row();				
 				if(empty($row_new->id)){
 					$dt = array(
-						'status'=>2,
 						'amount'=>$amount,
 						'date'=>$date,
 						'from_text'=>$from_text,
@@ -292,7 +291,6 @@ class BankStatmentModel extends CI_Model
 					// 	$status = $row_new->status;
 					// }
 					$dt = array(
-						'status'=>2,
 						'from_text'=>$from_text,
 						'from_statment'=>1,
 						'statment_id'=>$statment_id,

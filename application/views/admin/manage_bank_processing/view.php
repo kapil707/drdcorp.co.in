@@ -179,24 +179,7 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 					$chemist_fafa[] = "";
 					/********************************************** */
 					$row_id = $entry->id;
-					/****************************************************** */
-					$status = "Add just now";
-					if($entry->status==1){
-						$status = "Add From SMS";
-					}
-					if($entry->status==2){
-						$status = "Add From Statment";
-					}
-					if($entry->status==4){
-						$status = "Done by Admin";
-					}
-					if($entry->status==7){
-						$status = "Invoice Find Done";
-					}
-					if($entry->status==8){
-						$status = "Ready For Download";
-					}
-					$row_status = "<b>Status : </b>".$status;
+					$process_status= $entry->process_status;					
 					/****************************************************** */
 					$row_date = "<b>Date : </b>".date("d-M-Y",strtotime($entry->date));
 					/****************************************************** */
