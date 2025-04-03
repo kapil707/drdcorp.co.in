@@ -281,15 +281,6 @@ class BankStatmentModel extends CI_Model
 					$this->BankModel->insert_fun("tbl_bank_processing", $dt);
 				}else{
 					$where = array('upi_no'=>$upi_no);
-					$status = 2;
-					/*$type = $row_new->type;
-					if($type=="SMS")
-					{
-						$type = "SMS/Statment";
-					}*/
-					// if(strtolower($row_new->received_from)==strtolower($from_text)){
-					// 	$status = $row_new->status;
-					// }
 					$dt = array(
 						'from_text'=>$from_text,
 						'from_statment'=>1,
