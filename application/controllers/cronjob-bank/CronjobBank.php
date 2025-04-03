@@ -155,7 +155,7 @@ class CronjobBank extends CI_Controller
 
 		preg_match("/FROM\s+(.+?)\s+REF/", $text, $matches);
 		if (!empty($matches) && empty($received_from)){
-			echo $received_from = trim($matches[1]);
+			echo $received_from = trim($matches[0]);
 			//$from_value = "<b>find2: ".$received_from."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
 			$statment_type = 2;
 			echo "<br>2</br>";
