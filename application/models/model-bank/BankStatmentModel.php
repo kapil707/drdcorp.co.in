@@ -257,7 +257,7 @@ class BankStatmentModel extends CI_Model
 			}
 
 			echo $from_text."<br>";
-			//die();
+			die();
 
 			$amount = str_replace([",", ".00"], "", $amount);
 			$amount = trim($amount);
