@@ -41,7 +41,7 @@ class CronjobBank extends CI_Controller
 
 	public function testing(){
 		
-		$row_from_text = "9911644379@PTYES";
+		/*$row_from_text = "9911644379@PTYES";
 		$row_from_text_find_match = "9911644379";
 
 		$row_from_text_find_match = preg_quote($row_from_text_find_match, '/');
@@ -62,15 +62,15 @@ class CronjobBank extends CI_Controller
 			$find_chemist_id.= ucfirst($myrow)." || ";
 		}
 		$find_chemist_id = substr($find_chemist_id, 0, -4);
-		echo $find_chemist_id;
-		/*$text = "+91-9899762072 507920298106 FROM MEHAK MEDICOS AND DEPARTMENTAL STORE 9300966180 CITI0000 9052 TRANS FER TO DR KARB0000547";
-		preg_match("/FROM\s+(.+?)\s+CITI/", $text, $matches);
+		echo $find_chemist_id; */
+		$text = "NEFT IN UTR CITIN25543558586 FROM MAXIMUM HELP PHA RMACY HDFCH00 152194269TXN REF NO 0001MAXIMUM HELP PHARM";
+		preg_match("/FROM\s+(.+?)\s+REF/", $text, $matches);
 		if (!empty($matches) && empty($received_from)){
 			echo $received_from = trim($matches[1]);
 			//$from_value = "<b>find2: ".$received_from."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
 			$statment_type = 2;
 			echo "<br>2</br>";
-		}*/
+		}
 	}
 
 	public function bank_main(){
