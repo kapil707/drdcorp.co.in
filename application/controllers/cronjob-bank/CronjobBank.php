@@ -115,8 +115,8 @@ class CronjobBank extends CI_Controller
 		$text = preg_replace("/AXOMB263\s*9/", '', $text);
 		$text = preg_replace("/AXOMB2639\s*/", '', $text);
 		/**********************************************/
-		$text = preg_replace('/\s+\d+TXN\s+REF NO/', ' REF NO', $text);
-		$text = preg_replace('/\s+\d+\s+REF NO/', ' REF NO', $text);
+		//$text = preg_replace('/\s+\d+TXN\s+REF NO/', ' REF NO', $text);
+		//$text = preg_replace('/\s+\d+\s+REF NO/', ' REF NO', $text);
 		$text = preg_replace('/AX.*?REF NO/', ' REF NO', $text);
 		$text = preg_replace('/N00.*?REF NO/', ' REF NO', $text);
 		$text = preg_replace('/PUNBY.*?REF NO/', ' REF NO', $text);
@@ -152,13 +152,14 @@ class CronjobBank extends CI_Controller
 
 		$text = preg_replace('/SB2.*?-UPI/', ' UPI', $text);
 		echo "<br>".$text;
+		/*****/
 
 		preg_match("/FROM\s+(.+?)\s+REF/", $text, $matches);
 		if (!empty($matches) && empty($received_from)){
-			echo $received_from = trim($matches[0]);
+			echo $received_from = trim($matches[1]);
 			//$from_value = "<b>find2: ".$received_from."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
-			$statment_type = 2;
-			echo "<br>2</br>";
+			$statment_type = 1;
+			echo "<br>1</br>";
 		}
 	}
 
