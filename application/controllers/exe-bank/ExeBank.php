@@ -100,7 +100,7 @@ class ExeBank extends CI_Controller
 		echo "get_whatsapp_or_insert_drdcorp";
 
 		//Created a GET API
-		$url = "https://drdweb.co.in/api-bank/Api01/get_whatsapp_api";
+		$url = "https://drdweb.co.in/api-bank/Api01/get_bank_whatsapp_api";
 
 		$parmiter = '';
 		$curl = curl_init();
