@@ -116,7 +116,7 @@ class CronjobBank extends CI_Controller
 		$text = preg_replace("/AXOMB2639\s*/", '', $text);
 		/**********************************************
 		$text = preg_replace('/\s+\d+TXN\s+REF NO/', ' REF NO', $text);
-		$text = preg_replace('/\s+\d+\s+REF NO/', ' REF NO', $text);
+		$text = preg_replace('/\s+\d+\s+REF NO/', ' REF NO', $text);*/
 		$text = preg_replace('/AX.*?REF NO/', ' REF NO', $text);
 		$text = preg_replace('/N00.*?REF NO/', ' REF NO', $text);
 		$text = preg_replace('/PUNBY.*?REF NO/', ' REF NO', $text);
@@ -136,7 +136,7 @@ class CronjobBank extends CI_Controller
 		$text = preg_replace('/SBIN.*?REF NO/', ' REF NO', $text);
 		$text = preg_replace('/BKIDN.*?REF NO/', ' REF NO', $text);
 		$text = preg_replace('/BINH.*?REF NO/', ' REF NO', $text);
-		$text = preg_replace('/C\s*BINH.*?REF NO/', ' REF NO', $text); */
+		$text = preg_replace('/C\s*BINH.*?REF NO/', ' REF NO', $text); 
 
 		$text = preg_replace('/INDBH.*?REF NO/', ' REF NO', $text);
 		$text = preg_replace('/I\sNDBH.*?REF NO/', ' REF NO', $text);
