@@ -65,7 +65,7 @@ class CronjobBank extends CI_Controller
 		echo $find_chemist_id; */
 		$text = "NEFT IN UTR CITIN25543558586 FROM MAXIMUM HELP PHA RMACY HDFCH00 152194269TXN REF NO 0001MAXIMUM HELP PHARM";
 
-		//$text = str_replace(array("\r", "\n"), ' ', $text);
+		$text = str_replace(array("\r", "\n"), ' ', $text);
 		$from_text = "";
 
 		/**********************************************/
@@ -114,7 +114,7 @@ class CronjobBank extends CI_Controller
 		$text = preg_replace("/AXOMB26\s*39/", '', $text);
 		$text = preg_replace("/AXOMB263\s*9/", '', $text);
 		$text = preg_replace("/AXOMB2639\s*/", '', $text);
-		/**********************************************/
+		/**********************************************
 		$text = preg_replace('/\s+\d+TXN\s+REF NO/', ' REF NO', $text);
 		$text = preg_replace('/\s+\d+\s+REF NO/', ' REF NO', $text);
 		$text = preg_replace('/AX.*?REF NO/', ' REF NO', $text);
