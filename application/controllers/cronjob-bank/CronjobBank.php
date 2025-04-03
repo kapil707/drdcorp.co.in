@@ -153,6 +153,7 @@ class CronjobBank extends CI_Controller
 		$text = preg_replace('/SB2.*?-UPI/', ' UPI', $text);
 		echo "<br>".$text;
 		/*****/
+		echo "<br>";
 
 		preg_match("/FROM\s+(.+?)\s+REF/", $text, $matches);
 		if (!empty($matches) && empty($received_from)){
