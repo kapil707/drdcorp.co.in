@@ -1,12 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Manage_bank_sms extends CI_Controller {
-	var $Page_title = "Manage Bank Sms";
-	var $Page_name  = "manage_bank_sms";
-	var $Page_view  = "manage_bank_sms";
-	var $Page_menu  = "manage_bank_sms";
-	var $page_controllers = "manage_bank_sms";
-	var $Page_tbl   = "";
+	public $Page_title = "Manage Bank Sms";
+	public $Page_name  = "manage_bank_sms";
+	public $Page_view  = "manage_bank_sms";
+	public $Page_menu  = "manage_bank_sms";
+	public $page_controllers = "manage_bank_sms";
+	public $Page_tbl   = "";
 	public function __construct()
     {
         parent::__construct();

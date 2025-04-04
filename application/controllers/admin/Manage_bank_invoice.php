@@ -1,12 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Manage_bank_invoice extends CI_Controller {
-	var $Page_title = "Manage Bank Invoice";
-	var $Page_name  = "manage_bank_invoice";
-	var $Page_view  = "manage_bank_invoice";
-	var $Page_menu  = "manage_bank_invoice";
-	var $page_controllers = "manage_bank_invoice";
-	var $Page_tbl   = "tbl_invoice";	
+	public $Page_title = "Manage Bank Invoice";
+	public $Page_name  = "manage_bank_invoice";
+	public $Page_view  = "manage_bank_invoice";
+	public $Page_menu  = "manage_bank_invoice";
+	public $page_controllers = "manage_bank_invoice";
+	public $Page_tbl   = "tbl_invoice";	
 	public function __construct()
     {
         // Call the Model constructor

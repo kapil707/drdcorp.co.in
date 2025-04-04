@@ -6,13 +6,14 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Writer\Xls;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+
 class Manage_bank_statment extends CI_Controller {
-	var $Page_title = "Manage Bank Statment";
-	var $Page_name  = "manage_bank_statment";
-	var $Page_view  = "manage_bank_statment";
-	var $Page_menu  = "manage_bank_statment";
-	var $page_controllers = "manage_bank_statment";
-	var $Page_tbl   = "tbl_statment";
+	public $Page_title = "Manage Bank Statment";
+	public $Page_name  = "manage_bank_statment";
+	public $Page_view  = "manage_bank_statment";
+	public $Page_menu  = "manage_bank_statment";
+	public $page_controllers = "manage_bank_statment";
+	public $Page_tbl   = "tbl_statment";
 	public function __construct()
     {
         parent::__construct();

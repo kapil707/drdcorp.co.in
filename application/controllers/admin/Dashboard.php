@@ -1,12 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Dashboard extends CI_Controller {
-	var $Page_title = "Dashboard";
-	var $Page_name  = "dashboard";
-	var $Page_view  = "dashboard";
-	var $Page_menu  = "dashboard";
-	var $Page_tbl   = "";
-	var $page_controllers = "dashboard";
+	public $Page_title = "Dashboard";
+	public $Page_name  = "dashboard";
+	public $Page_view  = "dashboard";
+	public $Page_menu  = "dashboard";
+	public $Page_tbl   = "";
+	public $page_controllers = "dashboard";
 	public function __construct()
     {
         // Call the Model constructor

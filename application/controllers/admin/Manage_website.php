@@ -1,12 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Manage_website extends CI_Controller {
-	var $Page_title = "Manage Website";
-	var $Page_name  = "manage_website";
-	var $Page_view  = "manage_website";
-	var $Page_menu  = "manage_website";
-	var $page_controllers = "manage_website";
-	var $Page_tbl   = "tbl_website";
+	public $Page_title = "Manage Website";
+	public $Page_name  = "manage_website";
+	public $Page_view  = "manage_website";
+	public $Page_menu  = "manage_website";
+	public $page_controllers = "manage_website";
+	public $Page_tbl   = "tbl_website";
 	public function index()
 	{
 		/******************session***********************/

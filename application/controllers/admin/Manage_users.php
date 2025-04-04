@@ -1,12 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Manage_users extends CI_Controller {
-	var $Page_title = "Manage Users";
-	var $Page_name  = "manage_users";
-	var $Page_view  = "manage_users";
-	var $Page_menu  = "manage_users";
-	var $page_controllers = "manage_users";
-	var $Page_tbl   = "tbl_user";
+	public $Page_title = "Manage Users";
+	public $Page_name  = "manage_users";
+	public $Page_view  = "manage_users";
+	public $Page_menu  = "manage_users";
+	public $page_controllers = "manage_users";
+	public $Page_tbl   = "tbl_user";
 	public function index()
 	{
 		$page_controllers = $this->page_controllers;
