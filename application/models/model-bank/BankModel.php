@@ -294,12 +294,21 @@ class BankModel extends CI_Model
 		];
 		$sheet->getStyle('A11:P11')->applyFromArray($borderStyle);
 		
-		$query = $this->BankModel->select_query("SELECT s.*,p.final_chemist as chemist_id,p.final_invoice as done_invoice,p.final_find_by as done_find_by from tbl_statment as s left JOIN tbl_bank_processing as p on p.upi_no=s.customer_reference where s.date BETWEEN '$start_date' AND '$end_date'");
+		$query = $this->BankModel->select_query("SELECT s.*,p.final_chemist as chemist_id,p.invoice_text as invoice_number from tbl_statment as s left JOIN tbl_bank_processing as p on p.upi_no=s.customer_reference where s.date BETWEEN '$start_date' AND '$end_date'");
 		$result = $query->result();
 		$rowCount = 12;
 		$fileok=0;
 		foreach($result as $row)
-		{			
+		{	
+			$gstvNo = "";
+			$invoice = $row->invoice_number; 
+			$parts = explode("||", $invoice);
+			foreach($parts as $invoice) {
+				preg_match('/GstvNo:([\w-]+)/', $invoice, $matches);
+				$gstvNo.= $matches[1].',';
+			}
+			$gstvNo = substr($gstvNo, 0, -2);
+
 			$sheet->SetCellValue('A'.$rowCount,$row->account_no);
 			$sheet->SetCellValue('B'.$rowCount,$row->branch_no);
 			$sheet->SetCellValue('C'.$rowCount,$row->statment_date);
@@ -315,8 +324,8 @@ class BankModel extends CI_Model
 			$sheet->SetCellValue('L'.$rowCount,$row->transaction_description);
 			$sheet->SetCellValue('M'.$rowCount,$row->iban_number);
 			$sheet->SetCellValue('N'.$rowCount,$row->chemist_id);
-			$sheet->SetCellValue('O'.$rowCount,$row->done_invoice);
-			$sheet->SetCellValue('P'.$rowCount,$row->done_find_by);
+			$sheet->SetCellValue('O'.$rowCount,$row->gstvNo);
+			//$sheet->SetCellValue('P'.$rowCount,$row->done_find_by);
 			
 			$sheet->getStyle('A'.$rowCount.':P'.$rowCount)->applyFromArray($borderStyle);
 			$rowCount++;
