@@ -75,7 +75,6 @@
 							<th>Transaction Description</th>
 							<th>Chemist</th>
 							<th>Invoice</th>
-							<th>Find By</th>
 							<th></th>
 						</tr>
 					</thead>
