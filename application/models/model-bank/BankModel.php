@@ -188,7 +188,16 @@ class BankModel extends CI_Model
 		$rowCount = 12;
 		$fileok=0;
 		foreach($result as $row)
-		{			
+		{
+			$gstvNo = "";
+			$invoice = $row->invoice_number; 
+			$parts = explode("||", $invoice);
+			foreach($parts as $invoice) {
+				preg_match('/GstvNo:([\w-]+)/', $invoice, $matches);
+				$gstvNo.= $matches[1].',';
+			}
+			$gstvNo = substr($gstvNo, 0, -2);
+
 			$sheet->SetCellValue('A'.$rowCount,$row->account_no);
 			$sheet->SetCellValue('B'.$rowCount,$row->branch_no);
 			$sheet->SetCellValue('C'.$rowCount,$row->statment_date);
@@ -204,7 +213,7 @@ class BankModel extends CI_Model
 			$sheet->SetCellValue('L'.$rowCount,$row->transaction_description);
 			$sheet->SetCellValue('M'.$rowCount,$row->iban_number);
 			$sheet->SetCellValue('N'.$rowCount,$row->chemist_id);
-			$sheet->SetCellValue('O'.$rowCount,$row->invoice_number);
+			$sheet->SetCellValue('O'.$rowCount,$gstvNo);
 			//$sheet->SetCellValue('P'.$rowCount,$row->done_find_by);
 			
 			$sheet->getStyle('A'.$rowCount.':P'.$rowCount)->applyFromArray($borderStyle);
