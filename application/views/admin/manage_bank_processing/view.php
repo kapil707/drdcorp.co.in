@@ -164,8 +164,7 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 		Total Statment : <?php echo $total_statment; ?> ||
 		Total Whatsapp Message : <?php echo $total_whatsapp; ?> ||
 		Total Whatsapp Chemist : <?php echo $total_whatsapp_chemist; ?> ||
-		Total Whatsapp Invoice : <?php echo $total_invoice; ?> ||
-		Total Whatsapp Invoice : <?php echo $total_invoice; ?> ||
+		Total Invoice : <?php echo $total_invoice; ?>
 	</div>
 	<div class="col-xs-12">
 		<div class="table-responsive">
