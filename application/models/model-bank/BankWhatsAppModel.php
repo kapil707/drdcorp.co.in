@@ -429,7 +429,7 @@ class BankWhatsAppModel extends CI_Model
 					
 					if(!empty($whatsapp_body)  && !empty($from_text_find_chemist_new)){
 						//agar body m chemist id nahi aa rahi ha to next say find karta ha yha
-						if($whatsapp_body!=$from_text_find_chemist_new){
+						if(strtolower($whatsapp_body)!=strtolower($from_text_find_chemist_new)){
 							$whatsapp_chemist = "";
 							echo "xx1";
 						}
