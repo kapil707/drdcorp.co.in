@@ -142,7 +142,7 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 		$date_range = $_GET["date-range"];
 	}
 	?>
-	<div class="col-xs-12" style="margin-top:10px;margin-bottom:10px;">
+	<div class="col-xs-12">
 		<b>Others</b> Total SMS : <?php echo $other_total_sms; ?> ||
 		Total Statment : <?php echo $other_total_statment; ?> ||
 		Total Whatsapp : <?php echo $other_total_whatsapp; ?> ||
