@@ -96,35 +96,7 @@ class BankModel extends CI_Model
 	}
 
 	public function statment_excel_file($download_type,$start_date,$end_date)
-	{	
-
-		// 📂 नया Spreadsheet बनाएँ
-$spreadsheet = new Spreadsheet();
-$sheet = $spreadsheet->getActiveSheet();
-
-// 📂 डेटा डालें (Example)
-$sheet->setCellValue('A1', 'Name');
-$sheet->setCellValue('B1', 'Age');
-$sheet->setCellValue('A2', 'Rahul');
-$sheet->setCellValue('B2', '25');
-$sheet->setCellValue('A3', 'Amit');
-$sheet->setCellValue('B3', '30');
-
-// 📂 Writer तैयार करें
-$writer = IOFactory::createWriter($spreadsheet, 'Xls');
-
-// 📂 Header सेट करें ताकि फाइल डाउनलोड हो
-header('Content-Type: application/vnd.ms-excel');
-header('Content-Disposition: attachment;filename="download.xls"');
-header('Cache-Control: max-age=0');
-
-// 📂 फ़ाइल को ब्राउज़र में आउटपुट करें
-$writer->save('php://output');
-exit;
-
-		die();
-		error_reporting(0);
-		
+	{			
 		/*$this->load->library('excel');
 		$objPHPExcel = new PHPExcel();
 		$objPHPExcel->setActiveSheetIndex(0);
@@ -143,47 +115,45 @@ exit;
 		$sheet->setCellValue('A8',"Cheques: ");
 		$sheet->setCellValue('A9',"Statement Date Range:");
 
-		$sheet->getActiveSheet()->mergeCells('B1:E1'); 
+		$sheet->mergeCells('B1:E1'); 
 
-		$sheet->setActiveSheetIndex(0)
-		->setCellValue('A11','Account Number')
-		->setCellValue('B11','Branch Number')
-		->setCellValue('C11','Statement Date')
-		->setCellValue('D11','Closing Ledger Balance')
-		->setCellValue('E11','Calculated Balances')
-		->setCellValue('F11','Amount')
-		->setCellValue('G11','Entry Date')
-		->setCellValue('H11','Value Date')
-		->setCellValue('I11','Bank Reference')
-		->setCellValue('J11','Customer Reference')
-		->setCellValue('K11','Narrative')
-		->setCellValue('L11','Transaction Description')
-		->setCellValue('M11','IBAN Number')
-		->setCellValue('N11','Chemist Id')
-		->setCellValue('O11','Invoice')
-		->setCellValue('P11','Find By');
+		$sheet->setCellValue('A11','Account Number');
+		$sheet->setCellValue('B11','Branch Number');
+		$sheet->setCellValue('C11','Statement Date');
+		$sheet->setCellValue('D11','Closing Ledger Balance');
+		$sheet->setCellValue('E11','Calculated Balances');
+		$sheet->setCellValue('F11','Amount');
+		$sheet->setCellValue('G11','Entry Date');
+		$sheet->setCellValue('H11','Value Date');
+		$sheet->setCellValue('I11','Bank Reference');
+		$sheet->setCellValue('J11','Customer Reference');
+		$sheet->setCellValue('K11','Narrative');
+		$sheet->setCellValue('L11','Transaction Description');
+		$sheet->setCellValue('M11','IBAN Number');
+		$sheet->setCellValue('N11','Chemist Id');
+		$sheet->setCellValue('O11','Invoice');
+		$sheet->setCellValue('P11','Find By');
 		
-		$sheet->getActiveSheet()->getColumnDimension('A')->setWidth(20);
-		$sheet->getActiveSheet()->getColumnDimension('B')->setWidth(20);
-		$sheet->getActiveSheet()->getColumnDimension('C')->setWidth(20);
-		$sheet->getActiveSheet()->getColumnDimension('D')->setWidth(20);
-		$sheet->getActiveSheet()->getColumnDimension('E')->setWidth(20);
-		$sheet->getActiveSheet()->getColumnDimension('F')->setWidth(20);
-		$sheet->getActiveSheet()->getColumnDimension('G')->setWidth(20);
-		$sheet->getActiveSheet()->getColumnDimension('H')->setWidth(20);
-		$sheet->getActiveSheet()->getColumnDimension('I')->setWidth(20);
-		$sheet->getActiveSheet()->getColumnDimension('J')->setWidth(20);
-		$sheet->getActiveSheet()->getColumnDimension('K')->setWidth(20);
-		$sheet->getActiveSheet()->getColumnDimension('L')->setWidth(20);
-		$sheet->getActiveSheet()->getColumnDimension('M')->setWidth(20);
-		$sheet->getActiveSheet()->getColumnDimension('N')->setWidth(20);
-		$sheet->getActiveSheet()->getColumnDimension('O')->setWidth(20);
-		$sheet->getActiveSheet()->getColumnDimension('P')->setWidth(20);
+		$sheet->getColumnDimension('A')->setWidth(20);
+		$sheet->getColumnDimension('B')->setWidth(20);
+		$sheet->getColumnDimension('C')->setWidth(20);
+		$sheet->getColumnDimension('D')->setWidth(20);
+		$sheet->getColumnDimension('E')->setWidth(20);
+		$sheet->getColumnDimension('F')->setWidth(20);
+		$sheet->getColumnDimension('G')->setWidth(20);
+		$sheet->getColumnDimension('H')->setWidth(20);
+		$sheet->getColumnDimension('I')->setWidth(20);
+		$sheet->getColumnDimension('J')->setWidth(20);
+		$sheet->getColumnDimension('K')->setWidth(20);
+		$sheet->getColumnDimension('L')->setWidth(20);
+		$sheet->getColumnDimension('M')->setWidth(20);
+		$sheet->getColumnDimension('N')->setWidth(20);
+		$sheet->getColumnDimension('O')->setWidth(20);
+		$sheet->getColumnDimension('P')->setWidth(20);
 		
-		$sheet->getActiveSheet()->getStyle('A1:P1')->applyFromArray(array('font' => array('size' =>10,'bold' => TRUE,'name'  => 'Arial','color' => ['rgb' => '800000'],)));
+		$sheet->getStyle('A1:P1')->applyFromArray(array('font' => array('size' =>10,'bold' => TRUE,'name'  => 'Arial','color' => ['rgb' => '800000'],)));
 		
-		$sheet->getActiveSheet()
-        ->getStyle('A1:P1')
+		$sheet->getStyle('A1:P1')
         ->getFill()
         ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
         ->getStartColor()
@@ -196,7 +166,7 @@ exit;
 			)
 		  )
 		);
-		$sheet->getActiveSheet()->getStyle('A11:P11')->applyFromArray($BStyle);
+		$sheet->getStyle('A11:P11')->applyFromArray($BStyle);
 		
 		$query = $this->BankModel->select_query("SELECT s.*,p.final_chemist as chemist_id,p.final_invoice as done_invoice,p.final_find_by as done_find_by from tbl_statment as s left JOIN tbl_bank_processing as p on p.upi_no=s.customer_reference where s.date BETWEEN '$start_date' AND '$end_date'");
 		$result = $query->result();
@@ -204,25 +174,25 @@ exit;
 		$fileok=0;
 		foreach($result as $row)
 		{			
-			$sheet->getActiveSheet()->SetCellValue('A'.$rowCount,$row->account_no);
-			$sheet->getActiveSheet()->SetCellValue('B'.$rowCount,$row->branch_no);
-			$sheet->getActiveSheet()->SetCellValue('C'.$rowCount,$row->statment_date);
-			$sheet->getActiveSheet()->SetCellValue('D'.$rowCount,$row->closing_ledger_balance);
-			$sheet->getActiveSheet()->SetCellValue('E'.$rowCount,$row->calculated_balances);
-			//$sheet->getActiveSheet()->SetCellValue('F'.$rowCount,(int)$row->amount);
-			$sheet->getActiveSheet()->SetCellValue('F'.$rowCount,$row->amount);
-			$sheet->getActiveSheet()->SetCellValue('G'.$rowCount,$row->enter_date);
-			$sheet->getActiveSheet()->SetCellValue('H'.$rowCount,$row->date);
-			$sheet->getActiveSheet()->SetCellValue('I'.$rowCount,$row->bank_reference);
-			$sheet->getActiveSheet()->SetCellValue('J'.$rowCount,$row->customer_reference);
-			$sheet->getActiveSheet()->SetCellValue('K'.$rowCount,$row->narrative);
-			$sheet->getActiveSheet()->SetCellValue('L'.$rowCount,$row->transaction_description);
-			$sheet->getActiveSheet()->SetCellValue('M'.$rowCount,$row->iban_number);
-			$sheet->getActiveSheet()->SetCellValue('N'.$rowCount,$row->chemist_id);
-			$sheet->getActiveSheet()->SetCellValue('O'.$rowCount,$row->done_invoice);
-			$sheet->getActiveSheet()->SetCellValue('P'.$rowCount,$row->done_find_by);
+			$sheet->SetCellValue('A'.$rowCount,$row->account_no);
+			$sheet->SetCellValue('B'.$rowCount,$row->branch_no);
+			$sheet->SetCellValue('C'.$rowCount,$row->statment_date);
+			$sheet->SetCellValue('D'.$rowCount,$row->closing_ledger_balance);
+			$sheet->SetCellValue('E'.$rowCount,$row->calculated_balances);
+			//$sheet->SetCellValue('F'.$rowCount,(int)$row->amount);
+			$sheet->SetCellValue('F'.$rowCount,$row->amount);
+			$sheet->SetCellValue('G'.$rowCount,$row->enter_date);
+			$sheet->SetCellValue('H'.$rowCount,$row->date);
+			$sheet->SetCellValue('I'.$rowCount,$row->bank_reference);
+			$sheet->SetCellValue('J'.$rowCount,$row->customer_reference);
+			$sheet->SetCellValue('K'.$rowCount,$row->narrative);
+			$sheet->SetCellValue('L'.$rowCount,$row->transaction_description);
+			$sheet->SetCellValue('M'.$rowCount,$row->iban_number);
+			$sheet->SetCellValue('N'.$rowCount,$row->chemist_id);
+			$sheet->SetCellValue('O'.$rowCount,$row->done_invoice);
+			$sheet->SetCellValue('P'.$rowCount,$row->done_find_by);
 			
-			$sheet->getActiveSheet()->getStyle('A'.$rowCount.':P'.$rowCount)->applyFromArray($BStyle);
+			$sheet->getStyle('A'.$rowCount.':P'.$rowCount)->applyFromArray($BStyle);
 			$rowCount++;
 		}
 		
@@ -241,6 +211,7 @@ exit;
 
 			// 📂 फ़ाइल को ब्राउज़र में आउटपुट करें
 			$writer->save('php://output');
+			exit;
 		}
 		
 		if($download_type=="cronjob_download")
