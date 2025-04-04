@@ -503,7 +503,7 @@ class BankWhatsAppModel extends CI_Model
 				$whatsapp_recommended = $whatsapp_body;
 			}
 
-			$whatsapp_chemist = str_replace(["\n", "\r", " "], "", $whatsapp_chemist);
+			//$whatsapp_chemist = str_replace(["\n", "\r", " "], "", $whatsapp_chemist);
 
 			$where = array(
 				'id' => $id,
