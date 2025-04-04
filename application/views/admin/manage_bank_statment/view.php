@@ -75,6 +75,7 @@
 							<th>Transaction Description</th>
 							<th>Chemist</th>
 							<th>Invoice</th>
+							<th>Find By</th>
 							<th></th>
 						</tr>
 					</thead>
@@ -128,7 +129,7 @@
 								$parts = explode(" || ", $invoice);
 								foreach($parts as $invoice) {
 									preg_match('/GstvNo:([\w-]+)/', $invoice, $matches);
-									$gstvNo.= $matches[1] ?? ''.",";
+									$gstvNo.= $matches[1] ?? '';
 								}
 								echo $gstvNo;
 								?>
