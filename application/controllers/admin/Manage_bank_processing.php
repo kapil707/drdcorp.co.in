@@ -72,7 +72,7 @@ class Manage_bank_processing extends CI_Controller {
 			if($type=="find_chemist"){
 				$where = " and from_text_find_chemist!='' ";
 			}
-			if($type=="not find_chemist"){
+			if($type=="not_find_chemist"){
 				$where = " and from_text_find_chemist='' ";
 			}
 		}
