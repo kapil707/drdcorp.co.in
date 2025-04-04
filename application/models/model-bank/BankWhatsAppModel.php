@@ -415,7 +415,7 @@ class BankWhatsAppModel extends CI_Model
 			$whatsapp_id = trim($row->whatsapp_id);
 			$whatsapp_body = trim($row->body);
 			$whatsapp_body = str_replace(["\n", "\r", " "], "", $whatsapp_body);
-			$whatsapp_chemist = $whatsapp_body;
+			$whatsapp_chemist = trim($row->body);
 			$from_number = $row->from_number;
 			$from_text_find_chemist = $row->from_text_find_chemist;
 			$timestamp = date('Y-m-d H:i:s', $row->timestamp);
