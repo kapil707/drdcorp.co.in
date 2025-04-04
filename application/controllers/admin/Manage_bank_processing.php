@@ -82,7 +82,7 @@ class Manage_bank_processing extends CI_Controller {
 			}
 
 			if($check_type=="find_invoice"){
-				$where = " and invoice_id='' ";
+				$where = " and invoice_id!='' ";
 			}
 		}
 		
