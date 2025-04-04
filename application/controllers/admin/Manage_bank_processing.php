@@ -100,6 +100,10 @@ class Manage_bank_processing extends CI_Controller {
 			if($check_type=="not_find_invoice"){
 				$where = " and invoice_id='' ";
 			}
+
+			if($check_type=="find_all"){
+				$where = " and from_text_find_chemist!='' and whatsapp_id!='' and invoice_id!='' ";
+			}
 		}
 		
 		//$query = $this->BankModel->select_query("SELECT * FROM `tbl_bank_processing` where date BETWEEN '$start_date' AND '$end_date' order by statment_id asc");
