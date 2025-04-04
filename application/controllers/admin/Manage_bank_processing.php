@@ -77,6 +77,10 @@ class Manage_bank_processing extends CI_Controller {
 				$where = " and from_statment='1' ";
 			}
 
+			if($check_type=="find_all"){
+				$where = " and from_text_find_chemist!='' and whatsapp_id!='' and invoice_id!='' ";
+			}
+
 			if($check_type=="find_chemist"){
 				$where = " and from_text_find_chemist!='' ";
 			}
@@ -99,10 +103,6 @@ class Manage_bank_processing extends CI_Controller {
 
 			if($check_type=="not_find_invoice"){
 				$where = " and invoice_id='' ";
-			}
-
-			if($check_type=="find_all"){
-				$where = " and from_text_find_chemist!='' and whatsapp_id!='' and invoice_id!='' ";
 			}
 		}
 		
