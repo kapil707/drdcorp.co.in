@@ -20,7 +20,6 @@ class Manage_bank_processing extends CI_Controller {
 	
 	public function view()
 	{
-		error_reporting(-1);
 		/******************session***********************/
 		$user_id = $this->session->userdata("user_id");
 		$user_type = $this->session->userdata("user_type");
