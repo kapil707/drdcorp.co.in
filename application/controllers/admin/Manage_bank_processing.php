@@ -71,7 +71,8 @@ class Manage_bank_processing extends CI_Controller {
 		tbl_whatsapp_message.timestamp as whatsapp_timestamp,tbl_whatsapp_message.set_chemist as whatsapp_set_chemist,tbl_bank_processing.* FROM `tbl_bank_processing` left JOIN tbl_whatsapp_message ON tbl_whatsapp_message.id = tbl_bank_processing.whatsapp_id WHERE tbl_bank_processing.date BETWEEN '$start_date' AND '$end_date' order by tbl_bank_processing.statment_id asc");
 		$data["result"] = $query->result();
 
-		$myrow = $this->BankModel->select_row("SELECT count(tbl_bank_processing.id) as total_processing FROM `tbl_bank_processing` left JOIN tbl_whatsapp_message ON tbl_whatsapp_message.id = tbl_bank_processing.whatsapp_id WHERE tbl_bank_processing.date BETWEEN '$start_date' AND '$end_date' order by tbl_bank_processing.statment_id asc");
+		$query = $this->BankModel->select_query("SELECT count(tbl_bank_processing.id) as total_processing FROM `tbl_bank_processing` left JOIN tbl_whatsapp_message ON tbl_whatsapp_message.id = tbl_bank_processing.whatsapp_id WHERE tbl_bank_processing.date BETWEEN '$start_date' AND '$end_date' order by tbl_bank_processing.statment_id asc");
+		$myrow = $query->row();
 		$data["total_processing"] = $myrow->total_processing;
 
 		$this->load->view("admin/header_footer/header",$data);
