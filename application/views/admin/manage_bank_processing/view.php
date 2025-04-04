@@ -158,8 +158,7 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 		Find Chemist : <?php echo $total_find_chemist; ?> ||
 		Find Not Chemist : <?php echo $total_not_find_chemist; ?>
 	</div>
-	<br>
-	<form method="get" class="mb-5" style="margin-bottom:10px;">
+	<form method="get" class="mb-5" style="margin-top:10px;margin-bottom:10px;">
 		<div class="col-md-3">
 			<label for="date-range">Select Date Range:</label>
 		</div>
