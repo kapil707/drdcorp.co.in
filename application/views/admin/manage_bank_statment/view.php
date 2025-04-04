@@ -123,7 +123,7 @@
 								<?php echo $row->chemist_id; ?>
 							</td>
 							<td>
-								<?php echo $row->done_invoice; ?>
+								<?php echo $row->invoice_number; ?>
 							</td>
 							<td>
 								<?php echo $row->done_find_by; ?>
