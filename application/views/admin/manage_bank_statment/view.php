@@ -125,7 +125,7 @@
 							<td>
 								<?php 
 								$gstvNo = "";
-								echo $invoice = $row->invoice_number; 
+								$invoice = $row->invoice_number; 
 								$parts = explode("||", $invoice);
 								foreach($parts as $invoice) {
 									preg_match('/GstvNo:([\w-]+)/', $invoice, $matches);
