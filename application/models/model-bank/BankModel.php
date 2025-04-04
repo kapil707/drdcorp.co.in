@@ -1,5 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+
+require 'vendor/autoload.php';
+
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+
 class BankModel extends CI_Model  
 {
 	function select_query($query)
@@ -93,24 +99,27 @@ class BankModel extends CI_Model
 	{	
 		error_reporting(0);
 		
-		$this->load->library('excel');
+		/*$this->load->library('excel');
 		$objPHPExcel = new PHPExcel();
 		$objPHPExcel->setActiveSheetIndex(0);
 		
-		ob_clean();
+		ob_clean();*/
 
-		$objPHPExcel->setActiveSheetIndex(0)
-		->setCellValue('B1','Account Statement Inquiry')
-		->setCellValue('A3','Search Criteria:')
-		->setCellValue('A5',"Account:'Equals'")
-		->setCellValue('A6',"Branch:'Equals'")
-		->setCellValue('A7',"Customer:'Equals'")
-		->setCellValue('A8',"Cheques: ")
-		->setCellValue('A9',"Statement Date Range:");
+		// 📂 नया Spreadsheet बनाएँ
+		$spreadsheet = new Spreadsheet();
+		$sheet = $spreadsheet->getActiveSheet();
 
-		$objPHPExcel->getActiveSheet()->mergeCells('B1:E1'); 
+		$sheet->setCellValue('B1','Account Statement Inquiry');
+		$sheet->setCellValue('A3','Search Criteria:');
+		$sheet->setCellValue('A5',"Account:'Equals'");
+		$sheet->setCellValue('A6',"Branch:'Equals'");
+		$sheet->setCellValue('A7',"Customer:'Equals'");
+		$sheet->setCellValue('A8',"Cheques: ");
+		$sheet->setCellValue('A9',"Statement Date Range:");
 
-		$objPHPExcel->setActiveSheetIndex(0)
+		$sheet->getActiveSheet()->mergeCells('B1:E1'); 
+
+		$sheet->setActiveSheetIndex(0)
 		->setCellValue('A11','Account Number')
 		->setCellValue('B11','Branch Number')
 		->setCellValue('C11','Statement Date')
@@ -128,26 +137,26 @@ class BankModel extends CI_Model
 		->setCellValue('O11','Invoice')
 		->setCellValue('P11','Find By');
 		
-		$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(20);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(20);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(20);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(20);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(20);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(20);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(20);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('H')->setWidth(20);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('I')->setWidth(20);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('J')->setWidth(20);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('K')->setWidth(20);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('L')->setWidth(20);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('M')->setWidth(20);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('N')->setWidth(20);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('O')->setWidth(20);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('P')->setWidth(20);
+		$sheet->getActiveSheet()->getColumnDimension('A')->setWidth(20);
+		$sheet->getActiveSheet()->getColumnDimension('B')->setWidth(20);
+		$sheet->getActiveSheet()->getColumnDimension('C')->setWidth(20);
+		$sheet->getActiveSheet()->getColumnDimension('D')->setWidth(20);
+		$sheet->getActiveSheet()->getColumnDimension('E')->setWidth(20);
+		$sheet->getActiveSheet()->getColumnDimension('F')->setWidth(20);
+		$sheet->getActiveSheet()->getColumnDimension('G')->setWidth(20);
+		$sheet->getActiveSheet()->getColumnDimension('H')->setWidth(20);
+		$sheet->getActiveSheet()->getColumnDimension('I')->setWidth(20);
+		$sheet->getActiveSheet()->getColumnDimension('J')->setWidth(20);
+		$sheet->getActiveSheet()->getColumnDimension('K')->setWidth(20);
+		$sheet->getActiveSheet()->getColumnDimension('L')->setWidth(20);
+		$sheet->getActiveSheet()->getColumnDimension('M')->setWidth(20);
+		$sheet->getActiveSheet()->getColumnDimension('N')->setWidth(20);
+		$sheet->getActiveSheet()->getColumnDimension('O')->setWidth(20);
+		$sheet->getActiveSheet()->getColumnDimension('P')->setWidth(20);
 		
-		$objPHPExcel->getActiveSheet()->getStyle('A1:P1')->applyFromArray(array('font' => array('size' =>10,'bold' => TRUE,'name'  => 'Arial','color' => ['rgb' => '800000'],)));
+		$sheet->getActiveSheet()->getStyle('A1:P1')->applyFromArray(array('font' => array('size' =>10,'bold' => TRUE,'name'  => 'Arial','color' => ['rgb' => '800000'],)));
 		
-		$objPHPExcel->getActiveSheet()
+		$sheet->getActiveSheet()
         ->getStyle('A1:P1')
         ->getFill()
         ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
@@ -161,7 +170,7 @@ class BankModel extends CI_Model
 			)
 		  )
 		);
-		$objPHPExcel->getActiveSheet()->getStyle('A11:P11')->applyFromArray($BStyle);
+		$sheet->getActiveSheet()->getStyle('A11:P11')->applyFromArray($BStyle);
 		
 		$query = $this->BankModel->select_query("SELECT s.*,p.final_chemist as chemist_id,p.final_invoice as done_invoice,p.final_find_by as done_find_by from tbl_statment as s left JOIN tbl_bank_processing as p on p.upi_no=s.customer_reference where s.date BETWEEN '$start_date' AND '$end_date'");
 		$result = $query->result();
@@ -169,25 +178,25 @@ class BankModel extends CI_Model
 		$fileok=0;
 		foreach($result as $row)
 		{			
-			$objPHPExcel->getActiveSheet()->SetCellValue('A'.$rowCount,$row->account_no);
-			$objPHPExcel->getActiveSheet()->SetCellValue('B'.$rowCount,$row->branch_no);
-			$objPHPExcel->getActiveSheet()->SetCellValue('C'.$rowCount,$row->statment_date);
-			$objPHPExcel->getActiveSheet()->SetCellValue('D'.$rowCount,$row->closing_ledger_balance);
-			$objPHPExcel->getActiveSheet()->SetCellValue('E'.$rowCount,$row->calculated_balances);
-			//$objPHPExcel->getActiveSheet()->SetCellValue('F'.$rowCount,(int)$row->amount);
-			$objPHPExcel->getActiveSheet()->SetCellValue('F'.$rowCount,$row->amount);
-			$objPHPExcel->getActiveSheet()->SetCellValue('G'.$rowCount,$row->enter_date);
-			$objPHPExcel->getActiveSheet()->SetCellValue('H'.$rowCount,$row->date);
-			$objPHPExcel->getActiveSheet()->SetCellValue('I'.$rowCount,$row->bank_reference);
-			$objPHPExcel->getActiveSheet()->SetCellValue('J'.$rowCount,$row->customer_reference);
-			$objPHPExcel->getActiveSheet()->SetCellValue('K'.$rowCount,$row->narrative);
-			$objPHPExcel->getActiveSheet()->SetCellValue('L'.$rowCount,$row->transaction_description);
-			$objPHPExcel->getActiveSheet()->SetCellValue('M'.$rowCount,$row->iban_number);
-			$objPHPExcel->getActiveSheet()->SetCellValue('N'.$rowCount,$row->chemist_id);
-			$objPHPExcel->getActiveSheet()->SetCellValue('O'.$rowCount,$row->done_invoice);
-			$objPHPExcel->getActiveSheet()->SetCellValue('P'.$rowCount,$row->done_find_by);
+			$sheet->getActiveSheet()->SetCellValue('A'.$rowCount,$row->account_no);
+			$sheet->getActiveSheet()->SetCellValue('B'.$rowCount,$row->branch_no);
+			$sheet->getActiveSheet()->SetCellValue('C'.$rowCount,$row->statment_date);
+			$sheet->getActiveSheet()->SetCellValue('D'.$rowCount,$row->closing_ledger_balance);
+			$sheet->getActiveSheet()->SetCellValue('E'.$rowCount,$row->calculated_balances);
+			//$sheet->getActiveSheet()->SetCellValue('F'.$rowCount,(int)$row->amount);
+			$sheet->getActiveSheet()->SetCellValue('F'.$rowCount,$row->amount);
+			$sheet->getActiveSheet()->SetCellValue('G'.$rowCount,$row->enter_date);
+			$sheet->getActiveSheet()->SetCellValue('H'.$rowCount,$row->date);
+			$sheet->getActiveSheet()->SetCellValue('I'.$rowCount,$row->bank_reference);
+			$sheet->getActiveSheet()->SetCellValue('J'.$rowCount,$row->customer_reference);
+			$sheet->getActiveSheet()->SetCellValue('K'.$rowCount,$row->narrative);
+			$sheet->getActiveSheet()->SetCellValue('L'.$rowCount,$row->transaction_description);
+			$sheet->getActiveSheet()->SetCellValue('M'.$rowCount,$row->iban_number);
+			$sheet->getActiveSheet()->SetCellValue('N'.$rowCount,$row->chemist_id);
+			$sheet->getActiveSheet()->SetCellValue('O'.$rowCount,$row->done_invoice);
+			$sheet->getActiveSheet()->SetCellValue('P'.$rowCount,$row->done_find_by);
 			
-			$objPHPExcel->getActiveSheet()->getStyle('A'.$rowCount.':P'.$rowCount)->applyFromArray($BStyle);
+			$sheet->getActiveSheet()->getStyle('A'.$rowCount.':P'.$rowCount)->applyFromArray($BStyle);
 			$rowCount++;
 		}
 		
@@ -196,16 +205,16 @@ class BankModel extends CI_Model
 		{
 			$file_name = $name."-".$start_date."-to-".$end_date.".xls";
 			
-			//$objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
-			$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel,'Excel5');
-			/*$objWriter->save('uploads_sales/kapilkifile.xls');*/
-			
-			header('Content-type: application/vnd.ms-excel');
-			header('Content-Disposition: attachment; filename='.$file_name);
+						// 📂 Writer तैयार करें
+			$writer = IOFactory::createWriter($spreadsheet, 'Xls');
+
+			// 📂 Header सेट करें ताकि फाइल डाउनलोड हो
+			header('Content-Type: application/vnd.ms-excel');
+			header('Content-Disposition: attachment;filename="$file_name"');
 			header('Cache-Control: max-age=0');
-			ob_start();
-			$objWriter->save('php://output');
-			$data = ob_get_contents();
+
+			// 📂 फ़ाइल को ब्राउज़र में आउटपुट करें
+			$writer->save('php://output');
 		}
 		
 		if($download_type=="cronjob_download")
