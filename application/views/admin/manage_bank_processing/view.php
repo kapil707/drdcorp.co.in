@@ -179,6 +179,11 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 					Find Statment
 				</option>
 
+				<option value="find_all" 
+					<?php if($check_type=="find_all") { ?> selected <?php } ?>>
+					Find All
+				</option>
+
 				<option value="find_chemist" 
 					<?php if($check_type=="find_chemist") { ?> selected <?php } ?>>
 					Find Chemist
