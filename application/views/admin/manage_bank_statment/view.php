@@ -123,7 +123,16 @@
 								<?php echo $row->chemist_id; ?>
 							</td>
 							<td>
-								<?php echo $row->invoice_number; ?>
+								<?php 
+								$gstvNo = "";
+								$invoice = $row->invoice_number; 
+								$parts = explode(" || ", $invoice);
+								foreach($parts as $invoice) {
+									preg_match('/GstvNo:([\w-]+)/', $invoice, $matches);
+									$gstvNo.= $matches[1] ?? '';
+								}
+								echo $gstvNo;
+								?>
 							</td>
 							<td>
 								<?php if($row->done_status==1 && $row->checkbox_done_status==0 && $row->download_easysol==0){ ?>
