@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Manage_bank_user_chemist extends CI_Controller {
-	var $Page_title = "Manage Chemist";
+	var $Page_title = "Manage Bank User Chemist";
 	var $Page_name  = "manage_bank_user_chemist";
 	var $Page_view  = "manage_bank_user_chemist";
 	var $Page_menu  = "manage_bank_user_chemist";
