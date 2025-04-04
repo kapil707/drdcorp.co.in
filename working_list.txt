@@ -22,5 +22,4 @@ UPDATE tbl_whatsapp_message set status=0 where date='2025-04-01';
 UPDATE tbl_whatsapp_message set set_chemist='',upi_no='',amount='0.0' where date='2025-04-01';
 delete from tbl_bank_chemist where recommended='1';
 
-
 //541103535394
