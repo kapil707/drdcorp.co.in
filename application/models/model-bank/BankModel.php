@@ -206,7 +206,7 @@ class BankModel extends CI_Model
 
 			// 📂 Header सेट करें ताकि फाइल डाउनलोड हो
 			header('Content-Type: application/vnd.ms-excel');
-			header('Content-Disposition: attachment;filename="$file_name"');
+			header('Content-Disposition: attachment;filename="'.$file_name.'"');
 			header('Cache-Control: max-age=0');
 
 			// 📂 फ़ाइल को ब्राउज़र में आउटपुट करें
