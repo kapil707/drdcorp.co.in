@@ -155,7 +155,19 @@ class BankModel extends CI_Model
 		
 		// 📂 Header Background Color सेट करें (A1 से P1)
 		$sheet->getStyle('A1:P1')->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setARGB('CCFFFF');
-		/*
+
+		// 📂 Borders सेट करें (A11 से P11)
+		$borderStyle = [
+					'borders' => [
+					'allBorders' => [
+					'borderStyle' => Border::BORDER_THIN
+				]
+			]
+		];
+		$sheet->getStyle('A11:P11')->applyFromArray($borderStyle);
+
+		/*$sheet->getStyle('A1:P1')->applyFromArray(array('font' => array('size' =>10,'bold' => TRUE,'name'  => 'Arial','color' => ['rgb' => '800000'],)));
+		
 		$sheet->getStyle('A1:P1')
         ->getFill()
         ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
