@@ -81,8 +81,16 @@ class Manage_bank_processing extends CI_Controller {
 				$where = " and whatsapp_id!='' ";
 			}
 
+			if($check_type=="not_find_whatsapp"){
+				$where = " and whatsapp_id='' ";
+			}
+
 			if($check_type=="find_invoice"){
 				$where = " and invoice_id!='' ";
+			}
+
+			if($check_type=="not_find_invoice"){
+				$where = " and invoice_id='' ";
 			}
 		}
 		

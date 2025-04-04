@@ -183,9 +183,19 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 					Find Whatsapp
 				</option>
 
+				<option value="not_find_whatsapp" 
+					<?php if($check_type=="not_find_whatsapp") { ?> selected <?php } ?>>
+					Not Find Whatsapp
+				</option>
+
 				<option value="find_invoice" 
 					<?php if($check_type=="find_invoice") { ?> selected <?php } ?>>
 					Find Invoice
+				</option>
+
+				<option value="not_find_invoice" 
+					<?php if($check_type=="not_find_invoice") { ?> selected <?php } ?>>
+					Not Find Invoice
 				</option>
 			</select>
 		</div>
