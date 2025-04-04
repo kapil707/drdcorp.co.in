@@ -30,16 +30,7 @@
                     <div class="navbar-header">
                         <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
                         <div class="col-lg-6">
-                        	<h3 class="pull-right" style="margin-top:20px;">
-                                Last Login Time : <?php
-                                /*$last_login_time = $this->session->userdata('last_login_time');
-                                if($last_login_time!=""){
-                                $display_time_H = date("H",$last_login_time);
-                                $display_time_i = date("i",$last_login_time);
-                                echo $time= date("d-M-Y",$last_login_time)." at ".$this->Scheme_Model->time_conveter($display_time_H,$display_time_i);
-							                  }*/
-                                ?>
-                            </h3>
+                        	
                         </div>
                         </div>
                         <ul class="nav navbar-top-links navbar-right">
