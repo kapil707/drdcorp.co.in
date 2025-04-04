@@ -1,11 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Manage_bank_invoice extends CI_Controller {
-	var $Page_title = "Manage Bank Invoice";
-	var $Page_name  = "manage_bank_invoice";
-	var $Page_view  = "manage_bank_invoice";
-	var $Page_menu  = "manage_bank_invoice";
-	var $page_controllers = "manage_bank_invoice";
+class Manage_invoice extends CI_Controller {
+	var $Page_title = "Manage Invoice";
+	var $Page_name  = "manage_invoice";
+	var $Page_view  = "manage_invoice";
+	var $Page_menu  = "manage_invoice";
+	var $page_controllers = "manage_invoice";
 	var $Page_tbl   = "tbl_invoice";	
 	public function __construct()
     {
@@ -63,7 +63,7 @@ class Manage_bank_invoice extends CI_Controller {
 			$items = "";
 			if(!empty($from_date) && !empty($to_date)){
 
-				$result = $this->BankModel->select_query("SELECT * FROM $Page_tbl WHERE date BETWEEN '$from_date' AND '$to_date' ORDER BY id DESC");
+				$result = $this->BankModel->select_query("SELECT $Page_tbl.*, tbl_chemist.name FROM $Page_tbl LEFT JOIN tbl_chemist ON $Page_tbl.chemist_id = tbl_chemist.altercode WHERE $Page_tbl.date BETWEEN '$from_date' AND '$to_date' ORDER BY $Page_tbl.id DESC");
 				$result = $result->result();
 
 				foreach($result as $row){
@@ -80,7 +80,7 @@ class Manage_bank_invoice extends CI_Controller {
 					$amt = $row->amt;
 					$taxamt = $row->taxamt;
 					$chemist_id = $row->chemist_id;
-					$user = $chemist_id;
+					$user = $row->name."(".$row->chemist_id.")";
 					//$datetime = date("d-M-y",strtotime($row->date)) . " @ " .$row->time;
 					$datetime = date("d-M-y",strtotime($row->date)) . " @ ".$row->mtime;
 
