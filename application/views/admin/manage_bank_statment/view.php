@@ -126,9 +126,6 @@
 								<?php echo $row->invoice_number; ?>
 							</td>
 							<td>
-								<?php echo $row->done_find_by; ?>
-							</td>
-							<td>
 								<?php if($row->done_status==1 && $row->checkbox_done_status==0 && $row->download_easysol==0){ ?>
 								<label><input type="checkbox" name="checkbox[]" value="<?php echo $row->customer_reference; ?>">Checkbox</label>
 								<?php } ?>
