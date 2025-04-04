@@ -422,18 +422,18 @@ class BankWhatsAppModel extends CI_Model
 
 			$from_text_find_chemist = str_replace("/", " || ",$from_text_find_chemist);
 			$parts = explode(" || ", $from_text_find_chemist);
-			if (in_array($whatsapp_chemist, $parts)){
+			if (in_array($whatsapp_body, $parts)){
 				echo "milgaya array me say he";
 			}else{
 				foreach($parts as $from_text_find_chemist_new) {
 					
-					if(!empty($whatsapp_chemist)  && !empty($from_text_find_chemist_new)){
+					if(!empty($whatsapp_body)  && !empty($from_text_find_chemist_new)){
 						//agar body m chemist id nahi aa rahi ha to next say find karta ha yha
-						if($whatsapp_chemist!=$from_text_find_chemist_new){
+						if($whatsapp_body!=$from_text_find_chemist_new){
 							$whatsapp_chemist = "";
 							echo "xx1";
 						}
-						if(empty($whatsapp_chemist)){
+						if(empty($whatsapp_body)){
 							//agar pura naam milay to he next prcess karta ha
 							if (strpos($whatsapp_body, $from_text_find_chemist_new) !== false) {
 								echo $whatsapp_chemist = $from_text_find_chemist_new;
