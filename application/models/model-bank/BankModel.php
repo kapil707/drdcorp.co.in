@@ -151,7 +151,7 @@ class BankModel extends CI_Model
 		$sheet->getColumnDimension('O')->setWidth(20);
 		$sheet->getColumnDimension('P')->setWidth(20);
 		
-		//$sheet->getStyle('A1:P1')->applyFromArray(array('font' => array('size' =>10,'bold' => TRUE,'name'  => 'Arial','color' => ['rgb' => '800000'],)));
+		$sheet->getStyle('A1:P1')->applyFromArray(array('font' => array('size' =>10,'bold' => TRUE,'name'  => 'Arial','color' => ['rgb' => '800000'],)));
 		
 		/*$sheet->getStyle('A1:P1')
         ->getFill()
