@@ -134,7 +134,7 @@ class BankModel extends CI_Model
 		$sheet->setCellValue('O11','Invoice');
 		$sheet->setCellValue('P11','Find By');
 		
-		$sheet->getColumnDimension('A')->setWidth(20);
+		/*$sheet->getColumnDimension('A')->setWidth(20);
 		$sheet->getColumnDimension('B')->setWidth(20);
 		$sheet->getColumnDimension('C')->setWidth(20);
 		$sheet->getColumnDimension('D')->setWidth(20);
@@ -149,11 +149,11 @@ class BankModel extends CI_Model
 		$sheet->getColumnDimension('M')->setWidth(20);
 		$sheet->getColumnDimension('N')->setWidth(20);
 		$sheet->getColumnDimension('O')->setWidth(20);
-		$sheet->getColumnDimension('P')->setWidth(20);
+		$sheet->getColumnDimension('P')->setWidth(20);*/
 		
-		$sheet->getStyle('A1:P1')->applyFromArray(array('font' => array('size' =>10,'bold' => TRUE,'name'  => 'Arial','color' => ['rgb' => '800000'],)));
+		//$sheet->getStyle('A1:P1')->applyFromArray(array('font' => array('size' =>10,'bold' => TRUE,'name'  => 'Arial','color' => ['rgb' => '800000'],)));
 		
-		$sheet->getStyle('A1:P1')
+		/*$sheet->getStyle('A1:P1')
         ->getFill()
         ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
         ->getStartColor()
@@ -165,8 +165,8 @@ class BankModel extends CI_Model
 			  'style' => PHPExcel_Style_Border::BORDER_THIN
 			)
 		  )
-		);
-		$sheet->getStyle('A11:P11')->applyFromArray($BStyle);
+		);*/
+		//$sheet->getStyle('A11:P11')->applyFromArray($BStyle);
 		
 		$query = $this->BankModel->select_query("SELECT s.*,p.final_chemist as chemist_id,p.final_invoice as done_invoice,p.final_find_by as done_find_by from tbl_statment as s left JOIN tbl_bank_processing as p on p.upi_no=s.customer_reference where s.date BETWEEN '$start_date' AND '$end_date'");
 		$result = $query->result();
@@ -192,7 +192,7 @@ class BankModel extends CI_Model
 			$sheet->SetCellValue('O'.$rowCount,$row->done_invoice);
 			$sheet->SetCellValue('P'.$rowCount,$row->done_find_by);
 			
-			$sheet->getStyle('A'.$rowCount.':P'.$rowCount)->applyFromArray($BStyle);
+			//$sheet->getStyle('A'.$rowCount.':P'.$rowCount)->applyFromArray($BStyle);
 			$rowCount++;
 		}
 		
