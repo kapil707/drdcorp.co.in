@@ -167,6 +167,11 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 			<input type="text" id="date-range" class="form-control" name="date-range" value="<?php echo $date_range ?>">
 		</div>
 		<div class="col-md-3">
+			<select name="type">
+				<option value="">Select type</option>
+				<option value="find_chemist">Find Chemist</option>
+				<option value="not_find_chemist">Not Find Chemist</option>
+			</select>
 		</div>
 		<div class="col-md-3">
 			<button type="submit" class="btn btn-info submit_button" name="Submit">
