@@ -71,7 +71,7 @@ class Manage_bank_processing extends CI_Controller {
 		tbl_whatsapp_message.timestamp as whatsapp_timestamp,tbl_whatsapp_message.set_chemist as whatsapp_set_chemist,tbl_bank_processing.* FROM `tbl_bank_processing` left JOIN tbl_whatsapp_message ON tbl_whatsapp_message.id = tbl_bank_processing.whatsapp_id WHERE tbl_bank_processing.date BETWEEN '$start_date' AND '$end_date' order by tbl_bank_processing.statment_id asc");
 		$data["result"] = $query->result();
 
-		$query = $this->BankModel->select_query("SELECT COUNT(tbl_bank_processing.id) AS total_processing, COUNT(tbl_whatsapp_message.vision_text) AS total_whatsapp, SUM(CASE WHEN tbl_bank_processing.from_sms IS NOT NULL AND tbl_bank_processing.from_sms != '' THEN 1 ELSE 0 END) AS total_sms, SUM(CASE WHEN tbl_bank_processing.from_statment IS NOT NULL AND tbl_bank_processing.from_statment != '' THEN 1 ELSE 0 END) AS total_statment, SUM(CASE WHEN tbl_bank_processing.whatsapp_chemist IS NOT NULL AND tbl_bank_processing.whatsapp_chemist != '' THEN 1 ELSE 0 END) AS total_whatsapp_chemist, SUM(CASE WHEN tbl_bank_processing.invoice_id IS NOT NULL AND tbl_bank_processing.invoice_id != '' THEN 1 ELSE 0 END) AS total_invoice FROM tbl_bank_processing LEFT JOIN tbl_whatsapp_message ON tbl_whatsapp_message.id = tbl_bank_processing.whatsapp_id WHERE tbl_bank_processing.date BETWEEN '$start_date' AND '$end_date' ORDER BY tbl_bank_processing.statment_id ASC");
+		$query = $this->BankModel->select_query("SELECT COUNT(tbl_bank_processing.id) AS total_processing, COUNT(tbl_whatsapp_message.vision_text) AS total_whatsapp, SUM(CASE WHEN tbl_bank_processing.from_sms IS NOT NULL AND tbl_bank_processing.from_sms != '' THEN 1 ELSE 0 END) AS total_sms, SUM(CASE WHEN tbl_bank_processing.from_statment IS NOT NULL AND tbl_bank_processing.from_statment != '' THEN 1 ELSE 0 END) AS total_statment, SUM(CASE WHEN tbl_bank_processing.whatsapp_chemist IS NOT NULL AND tbl_bank_processing.whatsapp_chemist != '' THEN 1 ELSE 0 END) AS total_whatsapp_chemist, SUM(CASE WHEN tbl_bank_processing.invoice_id IS NOT NULL AND tbl_bank_processing.invoice_id != '' THEN 1 ELSE 0 END) AS total_invoice, SUM(CASE WHEN tbl_bank_processing.from_text_find_chemist IS NOT NULL AND tbl_bank_processing.from_text_find_chemist != '' THEN 1 ELSE 0 END) AS total_find_chemist, SUM(CASE WHEN tbl_bank_processing.from_text_find_chemist IS NOT NULL AND tbl_bank_processing.from_text_find_chemist = '' THEN 1 ELSE 0 END) AS total_not_find_chemist FROM tbl_bank_processing LEFT JOIN tbl_whatsapp_message ON tbl_whatsapp_message.id = tbl_bank_processing.whatsapp_id WHERE tbl_bank_processing.date BETWEEN '$start_date' AND '$end_date' ORDER BY tbl_bank_processing.statment_id ASC");
 		$myrow = $query->row();
 		$data["total_processing"] = $myrow->total_processing;
 		$data["total_sms"] = $myrow->total_sms;
@@ -80,6 +80,8 @@ class Manage_bank_processing extends CI_Controller {
 		$data["total_whatsapp"] = $myrow->total_whatsapp;
 		$data["total_whatsapp_chemist"] = $myrow->total_whatsapp_chemist;
 		$data["total_invoice"] = $myrow->total_invoice;
+		$data["total_find_chemist"] = $myrow->total_find_chemist;
+		$data["total_not_find_chemist"] = $myrow->total_not_find_chemist;
 
 		$query = $this->BankModel->select_query("SELECT COUNT(id) AS total FROM tbl_sms WHERE date BETWEEN '$start_date' AND '$end_date' ORDER BY id ASC");
 		$myrow = $query->row();

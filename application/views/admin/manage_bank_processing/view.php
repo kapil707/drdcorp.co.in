@@ -154,7 +154,9 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 		Find Statment : <?php echo $total_statment; ?> ||
 		Find Whatsapp Message : <?php echo $total_whatsapp; ?> ||
 		Find Whatsapp Chemist : <?php echo $total_whatsapp_chemist; ?> ||
-		Find Invoice : <?php echo $total_invoice; ?>
+		Find Invoice : <?php echo $total_invoice; ?> ||
+		Find Chemist : <?php echo $total_find_chemist; ?> ||
+		Find Not Chemist : <?php echo $total_not_find_chemist; ?>
 	</div>
 	<br>
 	<form method="get" class="mb-5" style="margin-bottom:10px;">
