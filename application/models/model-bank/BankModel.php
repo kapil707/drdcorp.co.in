@@ -97,6 +97,32 @@ class BankModel extends CI_Model
 
 	public function statment_excel_file($download_type,$start_date,$end_date)
 	{	
+
+		// 📂 नया Spreadsheet बनाएँ
+$spreadsheet = new Spreadsheet();
+$sheet = $spreadsheet->getActiveSheet();
+
+// 📂 डेटा डालें (Example)
+$sheet->setCellValue('A1', 'Name');
+$sheet->setCellValue('B1', 'Age');
+$sheet->setCellValue('A2', 'Rahul');
+$sheet->setCellValue('B2', '25');
+$sheet->setCellValue('A3', 'Amit');
+$sheet->setCellValue('B3', '30');
+
+// 📂 Writer तैयार करें
+$writer = IOFactory::createWriter($spreadsheet, 'Xls');
+
+// 📂 Header सेट करें ताकि फाइल डाउनलोड हो
+header('Content-Type: application/vnd.ms-excel');
+header('Content-Disposition: attachment;filename="download.xls"');
+header('Cache-Control: max-age=0');
+
+// 📂 फ़ाइल को ब्राउज़र में आउटपुट करें
+$writer->save('php://output');
+exit;
+
+		die();
 		error_reporting(0);
 		
 		/*$this->load->library('excel');
