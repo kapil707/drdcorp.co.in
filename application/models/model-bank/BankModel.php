@@ -168,7 +168,7 @@ class BankModel extends CI_Model
 		);*/
 		//$sheet->getStyle('A11:P11')->applyFromArray($BStyle);
 		
-		$query = $this->BankModel->select_query("SELECT s.*,p.final_chemist as chemist_id,p.final_invoice as done_invoice from tbl_statment as s left JOIN tbl_bank_processing as p on p.upi_no=s.customer_reference where s.date BETWEEN '$start_date' AND '$end_date'");
+		$query = $this->BankModel->select_query("SELECT s.*,p.final_chemist as chemist_id,p.invoice_text as invoice_number from tbl_statment as s left JOIN tbl_bank_processing as p on p.upi_no=s.customer_reference where s.date BETWEEN '$start_date' AND '$end_date'");
 		$result = $query->result();
 		$rowCount = 12;
 		$fileok=0;
@@ -189,7 +189,7 @@ class BankModel extends CI_Model
 			$sheet->SetCellValue('L'.$rowCount,$row->transaction_description);
 			$sheet->SetCellValue('M'.$rowCount,$row->iban_number);
 			$sheet->SetCellValue('N'.$rowCount,$row->chemist_id);
-			$sheet->SetCellValue('O'.$rowCount,$row->done_invoice);
+			$sheet->SetCellValue('O'.$rowCount,$row->invoice_number);
 			//$sheet->SetCellValue('P'.$rowCount,$row->done_find_by);
 			
 			//$sheet->getStyle('A'.$rowCount.':P'.$rowCount)->applyFromArray($BStyle);
