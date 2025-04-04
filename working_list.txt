@@ -23,4 +23,4 @@ UPDATE tbl_whatsapp_message set set_chemist='',upi_no='',amount='0.0' where date
 delete from tbl_bank_chemist where recommended='1';
 
 
-//508998497642
+//541103535394
