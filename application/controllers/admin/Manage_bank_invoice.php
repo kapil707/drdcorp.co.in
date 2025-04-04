@@ -1,11 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Manage_invoice extends CI_Controller {
-	var $Page_title = "Manage Invoice";
-	var $Page_name  = "manage_invoice";
-	var $Page_view  = "manage_invoice";
-	var $Page_menu  = "manage_invoice";
-	var $page_controllers = "manage_invoice";
+class Manage_bank_invoice extends CI_Controller {
+	var $Page_title = "Manage Bank Invoice";
+	var $Page_name  = "manage_bank_invoice";
+	var $Page_view  = "manage_bank_invoice";
+	var $Page_menu  = "manage_bank_invoice";
+	var $page_controllers = "manage_bank_invoice";
 	var $Page_tbl   = "tbl_invoice";	
 	public function __construct()
     {
