@@ -156,6 +156,7 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 		Find Whatsapp Chemist : <?php echo $total_whatsapp_chemist; ?> ||
 		Find Invoice : <?php echo $total_invoice; ?>
 	</div>
+	<br>
 	<form method="get" class="mb-5" style="margin-bottom:10px;">
 		<div class="col-md-3">
 			<label for="date-range">Select Date Range:</label>
