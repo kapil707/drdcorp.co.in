@@ -225,24 +225,7 @@ class BankModel extends CI_Model
 		
 		if($download_type=="cronjob_download")
 		{
-			if($fileok==1)
-			{
-				$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel,'Excel5');
-				$file_name = "test_folder/".$name.".xls";
-				$objWriter->save($file_name);
-				
-				$file_name2 = "test_folder/xx".$name.".xls";
-				$objWriter->save($file_name2);
-				
-				$x[0] = $file_name;
-				$x[1] = $invoice_message_body;
- 				return $x;
-			}
-			else
-			{
-				$file_name = "";
-				return $file_name;
-			}
+			
 		}
 	}
 
