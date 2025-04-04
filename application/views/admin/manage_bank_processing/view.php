@@ -177,6 +177,16 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 					<?php if($check_type=="not_find_chemist") { ?> selected <?php } ?>>
 					Not Find Chemist
 				</option>
+
+				<option value="find_whatsapp" 
+					<?php if($check_type=="find_whatsapp") { ?> selected <?php } ?>>
+					Find Whatsapp
+				</option>
+
+				<option value="find_invoice" 
+					<?php if($check_type=="find_invoice") { ?> selected <?php } ?>>
+					Find Invoice
+				</option>
 			</select>
 		</div>
 		<div class="col-md-3">
