@@ -207,7 +207,7 @@ class BankModel extends CI_Model
 			$sheet->SetCellValue('O'.$rowCount,$row->invoice_number);
 			//$sheet->SetCellValue('P'.$rowCount,$row->done_find_by);
 			
-			//$sheet->getStyle('A'.$rowCount.':P'.$rowCount)->applyFromArray($BStyle);
+			$sheet->getStyle('A'.$rowCount.':P'.$rowCount)->applyFromArray($BStyle);
 			$rowCount++;
 		}
 		
