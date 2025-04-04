@@ -70,9 +70,18 @@ class Manage_bank_processing extends CI_Controller {
 		$where = "";
 		if(isset($_GET["check_type"])){
 			$data["check_type"] = $check_type = $_GET["check_type"];
+			if($check_type=="find_sms"){
+				$where = " and from_sms='1' ";
+			}
+
+			if($check_type=="find_statment"){
+				$where = " and from_statment='1' ";
+			}
+
 			if($check_type=="find_chemist"){
 				$where = " and from_text_find_chemist!='' ";
 			}
+
 			if($check_type=="not_find_chemist"){
 				$where = " and from_text_find_chemist='' ";
 			}

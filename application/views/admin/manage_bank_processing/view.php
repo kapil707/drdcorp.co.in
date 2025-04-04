@@ -166,12 +166,24 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 			<input type="text" id="date-range" class="form-control" name="date-range" value="<?php echo $date_range ?>">
 		</div>
 		<div class="col-md-3">
-			<select name="check_type" class="form-control" multiple>
+			<select name="check_type" class="form-control">
 				<option value="">Select All</option>
+
+				<option value="find_sms" 
+					<?php if($check_type=="find_sms") { ?> selected <?php } ?>>
+					Find SMS
+				</option>
+
+				<option value="find_statment" 
+					<?php if($check_type=="find_statment") { ?> selected <?php } ?>>
+					Find Statment
+				</option>
+
 				<option value="find_chemist" 
 					<?php if($check_type=="find_chemist") { ?> selected <?php } ?>>
 					Find Chemist
 				</option>
+				
 				<option value="not_find_chemist" 
 					<?php if($check_type=="not_find_chemist") { ?> selected <?php } ?>>
 					Not Find Chemist
