@@ -160,8 +160,8 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 	</form>
 	<div class="col-xs-12">
 		<b>Others</b> Total SMS : <?php echo $other_total_sms; ?> ||
-		Total Statment : <?php echo $other_total_statment; ?>
-		Total Whatsapp : <?php echo $other_total_whatsapp; ?>
+		Total Statment : <?php echo $other_total_statment; ?> ||
+		Total Whatsapp : <?php echo $other_total_whatsapp; ?> ||
 		Total Invoice : <?php echo $other_total_invoice; ?>
 	</div>
 	<div class="col-xs-12">
