@@ -142,13 +142,13 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 		$date_range = $_GET["date-range"];
 	}
 	?>
-	<div class="col-xs-12">
+	<div class="col-xs-12" style="margin-top:10px;margin-bottom:10px;">
 		<b>Others</b> Total SMS : <?php echo $other_total_sms; ?> ||
 		Total Statment : <?php echo $other_total_statment; ?> ||
 		Total Whatsapp : <?php echo $other_total_whatsapp; ?> ||
 		Total Invoice : <?php echo $other_total_invoice; ?>
 	</div>
-	<div class="col-xs-12">
+	<div class="col-xs-12" style="margin-top:10px;margin-bottom:10px;">
 		<b>Processing</b> Entries : <?php echo $total_processing; ?> ||
 		Find SMS : <?php echo $total_sms; ?> ||
 		Find Statment : <?php echo $total_statment; ?> ||
@@ -158,7 +158,7 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 		Find Chemist : <?php echo $total_find_chemist; ?> ||
 		Find Not Chemist : <?php echo $total_not_find_chemist; ?>
 	</div>
-	<form method="get" class="mb-5" style="margin-top:10px;margin-bottom:10px;">
+	<form method="get" class="mb-5">
 		<div class="col-md-3">
 			<label for="date-range">Select Date Range:</label>
 		</div>
