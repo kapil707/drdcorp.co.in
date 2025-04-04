@@ -142,6 +142,20 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 		$date_range = $_GET["date-range"];
 	}
 	?>
+	<div class="col-xs-12">
+		<b>Others</b> Total SMS : <?php echo $other_total_sms; ?> ||
+		Total Statment : <?php echo $other_total_statment; ?> ||
+		Total Whatsapp : <?php echo $other_total_whatsapp; ?> ||
+		Total Invoice : <?php echo $other_total_invoice; ?>
+	</div>
+	<div class="col-xs-12">
+		<b>Processing</b> Total Entries : <?php echo $total_processing; ?> ||
+		Total SMS : <?php echo $total_sms; ?> ||
+		Total Statment : <?php echo $total_statment; ?> ||
+		Total Whatsapp Message : <?php echo $total_whatsapp; ?> ||
+		Total Whatsapp Chemist : <?php echo $total_whatsapp_chemist; ?> ||
+		Total Invoice : <?php echo $total_invoice; ?>
+	</div>
 	<form method="get" class="mb-5" style="margin-bottom:10px;">
 		<div class="col-md-3">
 			<label for="date-range">Select Date Range:</label>
@@ -158,20 +172,6 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 			</button>
 		</div>
 	</form>
-	<div class="col-xs-12">
-		<b>Others</b> Total SMS : <?php echo $other_total_sms; ?> ||
-		Total Statment : <?php echo $other_total_statment; ?> ||
-		Total Whatsapp : <?php echo $other_total_whatsapp; ?> ||
-		Total Invoice : <?php echo $other_total_invoice; ?>
-	</div>
-	<div class="col-xs-12">
-		<b>Processing</b> Total Entries : <?php echo $total_processing; ?> ||
-		Total SMS : <?php echo $total_sms; ?> ||
-		Total Statment : <?php echo $total_statment; ?> ||
-		Total Whatsapp Message : <?php echo $total_whatsapp; ?> ||
-		Total Whatsapp Chemist : <?php echo $total_whatsapp_chemist; ?> ||
-		Total Invoice : <?php echo $total_invoice; ?>
-	</div>
 	<div class="col-xs-12">
 		<div class="table-responsive">
             <table class="table table-striped table-bordered table-hover dataTables-example21">
