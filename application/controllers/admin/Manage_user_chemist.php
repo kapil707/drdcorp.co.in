@@ -45,67 +45,57 @@ class Manage_user_chemist extends CI_Controller {
 		$data['url_path'] = base_url()."uploads/$page_controllers/photo/";
 		$upload_path = "./uploads/$page_controllers/photo/";	
 		
-		$result = $this->BankModel->select_query("SELECT tbl_chemist.code,tbl_chemist.altercode,tbl_chemist.name,tbl_chemist.mobile,tbl_chemist.email,tbl_chemist.address,tbl_chemist.address1,tbl_chemist.address2,tbl_chemist.address3,tbl_chemist_other.website_limit,tbl_chemist_other.android_limit,tbl_chemist_other.status,tbl_chemist.id as id,tbl_chemist_other.id as id2 from tbl_chemist left join tbl_chemist_other on tbl_chemist.code = tbl_chemist_other.code where tbl_chemist.slcd='CL' order by tbl_chemist.id desc");
-		$result = $result->result();
-		
-  		$data["result"] = $result;
 		$this->load->view("admin/header_footer/header",$data);
 		$this->load->view("admin/$Page_view/view",$data);
 		$this->load->view("admin/header_footer/footer",$data);
 		$this->load->view("admin/$Page_view/footer2",$data);
 	}
 
-	public function find_chemist()
-	{	
-		$i  = 0;
-		$jsonArray = array();
+	public function view_api() {
+		
+		$i = 1;
+		$Page_tbl = $this->Page_tbl;
 		if(!empty($_REQUEST)){
-			
-			$chemist_name = $this->input->post('chemist_name');
-			if(strtolower($chemist_name)=="all"){
-				$sr_no = $i++;
-				$id = "0";
-				$chemist_id = "all";
-				$chemist_name = "All Users";	
+			$from_date 	= $_REQUEST["from_date"];
+			$to_date	= $_REQUEST['to_date'];
 
-				$dt = array(
-					'sr_no' => $sr_no,
-					'id' => $id,
-					'chemist_id' => $chemist_id,
-					'chemist_name'=>$chemist_name,
-				);
-				$jsonArray[] = $dt;
-				
-				$sr_no = $i++;
-				$id = "1";
-				$chemist_id = "all login";
-				$chemist_name = "All Login Users";	
+			$jsonArray = array();
 
-				$dt = array(
-					'sr_no' => $sr_no,
-					'id' => $id,
-					'chemist_id' => $chemist_id,
-					'chemist_name'=>$chemist_name,
-				);
-				$jsonArray[] = $dt;
+			$items = "";
+			if(!empty($from_date) && !empty($to_date)){
+
+				$result = $this->BankModel->select_query("SELECT * FROM $Page_tbl ORDER BY id DESC");
+				$result = $result->result();
+
+				foreach($result as $row){
+
+					$sr_no = $i++;
+					$id = $row->id;
+					$chemist_id = $row->altercode;
+					$name = $row->name;
+					$telephone = $row->telephone;
+					$telephone1 = $row->telephone1;
+					$mobile = $row->mobile;
+					$email = $row->email;
+
+					$time = time();
+					$datetime = date("d-M-y @ h:i a",strtotime($time));
+
+					$dt = array(
+						'sr_no' => $sr_no,
+						'id' => $id,
+						'chemist_id' => $chemist_id,
+						'name'=>$name,
+						'telephone'=>$telephone,
+						'telephone1'=>$telephone1,
+						'mobile'=>$mobile,
+						'email'=>$email,
+						'datetime'=>$datetime,
+					);
+					$jsonArray[] = $dt;
+				}
 			}
-			$result =  $this->db->query ("select * from tbl_chemist where name Like '$chemist_name%' or name Like '%$chemist_name' or altercode='$chemist_name' and slcd='CL' limit 50")->result();
-			foreach($result as $row){
 
-				$sr_no = $i++;
-				$id = $row->id;
-				$chemist_id = $row->altercode;
-				$chemist_name = $row->name;	
-
-				$dt = array(
-					'sr_no' => $sr_no,
-					'id' => $id,
-					'chemist_id' => $chemist_id,
-					'chemist_name'=>$chemist_name,
-				);
-				$jsonArray[] = $dt;
-			}
-			
 			$items = $jsonArray;
 			$response = array(
 				'success' => "1",
@@ -119,7 +109,7 @@ class Manage_user_chemist extends CI_Controller {
 			);
 		}
 
-		// Send JSON response
+        // Send JSON response
         header('Content-Type: application/json');
         echo json_encode($response);
 	}

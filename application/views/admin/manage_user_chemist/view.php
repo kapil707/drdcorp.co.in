@@ -1,2 +1,30 @@
-<div class="row">    <div class="col-xs-12" style="margin-bottom:5px;">    	<?php /*<a href="add">            <button type="submit" class="btn btn-info">                Add            </button>        </a> */ ?>   	</div>	<div class="col-xs-12">        <div class="table-responsive">			<table class="table table-striped table-bordered table-hover" id="example-table">                <thead>                    <tr>                    	<th>							Sno.						</th>						<th>							Code						</th>						<th>							Name						</th>						<th>                        	Email 						</th>						<th>                         	Mobile 						</th>						<th>                        	Address                        </th>						<th>							Website / Android Limit						</th>						<th>                        	Status                        </th>						<th>                        	Edit                        </th>						<th>                        	Logout                        </th>                    </tr>                </thead>                <tbody>                </tbody>			</table>		</div>    </div></div>
-<script>function logout_fun(altercode){	$.ajax({		type       : "POST",		data       :  {altercode:altercode},		url        : "<?php echo base_url(); ?>admin/<?= $Page_name ?>/user_logout",		cache	   : false,		success    : function(data){			if(data!="")			{				swal("Error");			}			$.each(data.items, function(i,item){				if (item){					swal("Logout Successfully");				}			});			}	});}</script>
+<div class="row">
+    <!-- <div class="col-xs-12" style="margin-bottom:5px;">
+		<a href="add">
+            <button type="submit" class="btn btn-info">
+                Add
+            </button>
+        </a>
+   	</div> -->
+	<div class="col-xs-12">
+		<!-- <div class="row">
+			<div class="col-md-3">
+				<label for="date-range">Select Date Range:</label>
+				<input type="text" id="date-range" class="form-control">
+				<br>
+			</div>
+		</div> -->
+		<div class="row">
+			<div class="col-sm-12  pt-1 pb-5">
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered table-hover" id="example-table">
+						<thead>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
