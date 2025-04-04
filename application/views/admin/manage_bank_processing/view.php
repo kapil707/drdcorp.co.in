@@ -159,6 +159,9 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 		</div>
 	</form>
 	<div class="col-xs-12">
+		<?php echo $total_processing; ?>
+	</div>
+	<div class="col-xs-12">
 		<div class="table-responsive">
             <table class="table table-striped table-bordered table-hover dataTables-example21">
                 <thead>

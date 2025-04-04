@@ -17,142 +17,6 @@ class Manage_bank_processing extends CI_Controller {
 		$page_controllers = $this->page_controllers;
 		redirect("admin/$page_controllers/view");
 	}
-	public function add()
-	{
-		error_reporting(0);
-		/******************session***********************/
-		$user_id = $this->session->userdata("user_id");
-		$user_type = $this->session->userdata("user_type");
-		/******************session***********************/		
-
-		$Page_title = $this->Page_title;
-		$Page_name 	= $this->Page_name;
-		$Page_view 	= $this->Page_view;
-		$Page_menu 	= $this->Page_menu;
-		$Page_tbl 	= $this->Page_tbl;
-		$page_controllers 	= $this->page_controllers;	
-		
-		$this->Admin_Model->permissions_check_or_set($Page_title,$Page_name,$user_type);		
-
-		$data['title1'] = $Page_title." || Edit";
-		$data['title2'] = "Edit";
-		$data['Page_name'] = $Page_name;
-		$data['Page_menu'] = $Page_menu;
-		$this->breadcrumbs->push("Edit","admin/");
-		$this->breadcrumbs->push("$Page_title","admin/$page_controllers/");
-		$this->breadcrumbs->push("Edit","admin/$page_controllers/edit");		
-
-		$tbl = $Page_tbl;	
-
-		$data['url_path'] = base_url()."uploads/$page_controllers/photo/";
-		$data['upload_path'] = "./uploads/$page_controllers/myfile/";
-		$upload_thumbs_path = "./uploads/$page_controllers/photo/thumbs/";		
-		$system_ip = $this->input->ip_address();
-
-		$data["filename"] = "";
-		extract($_POST);
-		if (isset($Submit)) {
-			$message_db = "";
-			$time = time();
-			$date = date("Y-m-d", $time);
-
-			if (!empty($_FILES["myfile"]["name"])) {
-				$upload_image = "./uploads/$page_controllers/myfile/";
-
-				ini_set('upload_max_filesize', '10M');
-				ini_set('post_max_size', '10M');
-				ini_set('max_input_time', 300);
-				ini_set('max_execution_time', 300);
-		
-				$config['upload_path'] = $upload_image;  // Define the directory where you want to store the uploaded files.
-				$config['allowed_types'] = '*';  // You may want to restrict allowed file types.
-				$config['max_size'] = 0;  // Set to 0 to allow any size.
-
-				$new_name = time().$_FILES["myfile"]['name'];
-				$config['file_name'] = $new_name;
-		
-				$this->load->library('upload', $config);
-		
-				if (!$this->upload->do_upload('myfile')) {
-					$error = array('error' => $this->upload->display_errors());
-					//$this->load->view('upload_form', $error);
-					print_r($error);
-				} else {
-					$data1 = $this->upload->data();
-					$image = ($data1['file_name']);
-					//$this->load->view('upload_success', $data);
-				}
-			}
-			$filename = $image;
-
-			$account_no 			= "A";
-			$branch_no 				= "B";
-			$statment_date 			= "C";
-			$closing_ledger_balance = "D";
-			$calculated_balances 	= "E";
-			$amount 				= "F";
-			$enter_date 			= "G";
-			$value_date 			= "H";
-			$bank_reference 		= "I";
-			$customer_reference 	= "J";
-			$narrative 				= "K";
-			$transaction_description= "L";
-			$iban_number			= "M";
-
-			$start_row 				= "13";
-
-			$upload_path = "uploads/manage_bank_processing/myfile/";
-			$excelFile = $upload_path.$filename;
-			$i=1;
-			if(file_exists($excelFile))
-			{
-				$this->load->library('excel');
-				$objPHPExcel = PHPExcel_IOFactory::load($excelFile);
-				foreach ($objPHPExcel->getWorksheetIterator() as $worksheet)
-				{
-					$highestRow = $worksheet->getHighestRow();
-					for ($row=$start_row; $row<=$highestRow; $row++)
-					{
-						$account_no1 = $worksheet->getCell($account_no.$row)->getValue();
-						$branch_no1 = $worksheet->getCell($branch_no.$row)->getValue();
-						$statment_date1 = $worksheet->getCell($statment_date.$row)->getValue();
-						$closing_ledger_balance1 = $worksheet->getCell($closing_ledger_balance.$row)->getValue();
-						$calculated_balances1 = $worksheet->getCell($calculated_balances.$row)->getValue();
-						$amount1 = $worksheet->getCell($amount.$row)->getValue();
-						$enter_date1 = $worksheet->getCell($enter_date.$row)->getValue();
-						$value_date1 = $worksheet->getCell($value_date.$row)->getValue();
-						$bank_reference1 = $worksheet->getCell($bank_reference.$row)->getValue();
-						$customer_reference1 = $worksheet->getCell($customer_reference.$row)->getValue();
-						$narrative1 = $worksheet->getCell($narrative.$row)->getValue();
-						$transaction_description1 = $worksheet->getCell($transaction_description.$row)->getValue();
-						$iban_number1 = $worksheet->getCell($iban_number.$row)->getValue();
-
-						$dt = array(
-							'account_no'=>$account_no1,
-							'branch_no'=>$branch_no1,
-							'statment_date'=>$statment_date1,
-							'closing_ledger_balance'=>$closing_ledger_balance1,
-							'calculated_balances'=>$calculated_balances1,
-							'amount'=>$amount1,
-							'enter_date'=>$enter_date1,
-							'value_date'=>$value_date1,
-							'bank_reference'=>$bank_reference1,
-							'customer_reference'=>$customer_reference1,
-							'narrative'=>$narrative1,
-							'transaction_description'=>$transaction_description1,
-							'iban_number'=>$iban_number1,
-						);
-						$this->BankModel->insert_fun("tbl_statment", $dt);
-					}
-				}
-			}
-			redirect(base_url()."admin/$page_controllers/view");
-		}
-
-		$this->load->view("admin/header_footer/header",$data);
-		$this->load->view("admin/$Page_view/add",$data);
-		$this->load->view("admin/header_footer/footer",$data);
-	}
 	
 	public function view()
 	{
@@ -206,6 +70,9 @@ class Manage_bank_processing extends CI_Controller {
 		$query = $this->BankModel->select_query("SELECT tbl_whatsapp_message.vision_text as whatsapp_text,tbl_whatsapp_message.from_number as whatsapp_number,
 		tbl_whatsapp_message.timestamp as whatsapp_timestamp,tbl_whatsapp_message.set_chemist as whatsapp_set_chemist,tbl_bank_processing.* FROM `tbl_bank_processing` left JOIN tbl_whatsapp_message ON tbl_whatsapp_message.id = tbl_bank_processing.whatsapp_id WHERE tbl_bank_processing.date BETWEEN '$start_date' AND '$end_date' order by tbl_bank_processing.statment_id asc");
 		$data["result"] = $query->result();
+
+		$myrow = $this->BankModel->select_row("SELECT count(tbl_bank_processing.id) as total_processing FROM `tbl_bank_processing` left JOIN tbl_whatsapp_message ON tbl_whatsapp_message.id = tbl_bank_processing.whatsapp_id WHERE tbl_bank_processing.date BETWEEN '$start_date' AND '$end_date' order by tbl_bank_processing.statment_id asc");
+		$data["total_processing"] = $myrow->total_processing;
 
 		$this->load->view("admin/header_footer/header",$data);
 		$this->load->view("admin/$Page_view/view",$data);
