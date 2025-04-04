@@ -159,10 +159,13 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 		</div>
 	</form>
 	<div class="col-xs-12">
-		<?php echo $total_processing; ?> ||
-		<?php echo $total_whatsapp; ?> ||
-		<?php echo $total_whatsapp_chemist; ?> ||
-		<?php echo $total_invoice; ?> ||
+		Total Entries : <?php echo $total_processing; ?> ||
+		Total SMS : <?php echo $total_sms; ?> ||
+		Total Statment : <?php echo $total_statment; ?> ||
+		Total Whatsapp Message : <?php echo $total_whatsapp; ?> ||
+		Total Whatsapp Chemist : <?php echo $total_whatsapp_chemist; ?> ||
+		Total Whatsapp Invoice : <?php echo $total_invoice; ?> ||
+		Total Whatsapp Invoice : <?php echo $total_invoice; ?> ||
 	</div>
 	<div class="col-xs-12">
 		<div class="table-responsive">
