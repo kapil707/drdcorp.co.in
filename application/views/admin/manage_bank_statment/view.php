@@ -129,7 +129,7 @@
 								$parts = explode("||", $invoice);
 								foreach($parts as $invoice) {
 									preg_match('/GstvNo:([\w-]+)/', $invoice, $matches);
-									$gstvNo.= $matches[1] ?? '';
+									$gstvNo.= $matches[1] ?? ''.',';
 								}
 								echo $gstvNo;
 								?>
