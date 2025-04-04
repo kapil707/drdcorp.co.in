@@ -66,13 +66,14 @@ class Manage_bank_processing extends CI_Controller {
 		$start_date = $start_date->format('Y-m-d');
 		$end_date 	= $end_date->format('Y-m-d');
 
+		$data["check_type"] = "";
 		$where = "";
-		if(isset($_GET["type"])){
-			$type = $_GET["type"];
-			if($type=="find_chemist"){
+		if(isset($_GET["check_type"])){
+			$data["check_type"] = $check_type = $_GET["check_type"];
+			if($check_type=="find_chemist"){
 				$where = " and from_text_find_chemist!='' ";
 			}
-			if($type=="not_find_chemist"){
+			if($check_type=="not_find_chemist"){
 				$where = " and from_text_find_chemist='' ";
 			}
 		}

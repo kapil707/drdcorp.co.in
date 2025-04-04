@@ -169,8 +169,14 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 		<div class="col-md-3">
 			<select name="type" class="form-control">
 				<option value="">Select type</option>
-				<option value="find_chemist">Find Chemist</option>
-				<option value="not_find_chemist">Not Find Chemist</option>
+				<option value="find_chemist" 
+					<?php if($check_type=="find_chemist") { ?> checked <?php } ?>>
+					Find Chemist
+				</option>
+				<option value="not_find_chemist" 
+					<?php if($check_type=="not_find_chemist") { ?> checked <?php } ?>>
+					Not Find Chemist
+				</option>
 			</select>
 		</div>
 		<div class="col-md-3">
