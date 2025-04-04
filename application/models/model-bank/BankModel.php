@@ -3,10 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 require 'vendor/autoload.php';
 
+use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xls;
-use PhpOffice\PhpSpreadsheet\Style\Fill;
-use PhpOffice\PhpSpreadsheet\Style\Border;
 
 class BankModel extends CI_Model  
 {
@@ -155,16 +153,20 @@ class BankModel extends CI_Model
 		
 		/*$sheet->getStyle('A1:P1')->applyFromArray(array('font' => array('size' =>10,'bold' => TRUE,'name'  => 'Arial','color' => ['rgb' => '800000'],)));
 		
-		$sheet->getStyle('A1:P1')->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setARGB('CCFFFF');
+		$sheet->getStyle('A1:P1')
+        ->getFill()
+        ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
+        ->getStartColor()
+        ->setRGB('ccffff');
 		
-		$borderStyle = [
-			'borders' => [
-				'allBorders' => [
-					'borderStyle' => Border::BORDER_THIN
-				]
-			]
-		];
-		$sheet->getStyle('A11:P11')->applyFromArray($borderStyle);*/
+		$BStyle = array(
+		  'borders' => array(
+			'allborders' => array(
+			  'style' => PHPExcel_Style_Border::BORDER_THIN
+			)
+		  )
+		);
+		$sheet->getStyle('A11:P11')->applyFromArray($BStyle);*/
 		
 		$query = $this->BankModel->select_query("SELECT s.*,p.final_chemist as chemist_id,p.invoice_text as invoice_number from tbl_statment as s left JOIN tbl_bank_processing as p on p.upi_no=s.customer_reference where s.date BETWEEN '$start_date' AND '$end_date'");
 		$result = $query->result();
@@ -190,7 +192,7 @@ class BankModel extends CI_Model
 			$sheet->SetCellValue('O'.$rowCount,$row->invoice_number);
 			//$sheet->SetCellValue('P'.$rowCount,$row->done_find_by);
 			
-			//$sheet->getStyle('A'.$rowCount.':P'.$rowCount)->applyFromArray($borderStyle);
+			//$sheet->getStyle('A'.$rowCount.':P'.$rowCount)->applyFromArray($BStyle);
 			$rowCount++;
 		}
 		
