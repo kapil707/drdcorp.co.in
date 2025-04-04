@@ -67,7 +67,7 @@ class Manage_bank_processing extends CI_Controller {
 		$end_date 	= $end_date->format('Y-m-d');
 
 		$where = "";
-		if(!emtpy($_GET["type"])){
+		if(isset($_GET["type"])){
 			$type = $_GET["type"];
 			if($type=="find_chemist"){
 				$where = " and from_text_find_chemist!='' ";
