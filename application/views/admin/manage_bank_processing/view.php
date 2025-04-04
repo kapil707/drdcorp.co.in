@@ -149,12 +149,12 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 		Total Invoice : <?php echo $other_total_invoice; ?>
 	</div>
 	<div class="col-xs-12">
-		<b>Processing</b> Total Entries : <?php echo $total_processing; ?> ||
-		Total SMS : <?php echo $total_sms; ?> ||
-		Total Statment : <?php echo $total_statment; ?> ||
-		Total Whatsapp Message : <?php echo $total_whatsapp; ?> ||
-		Total Whatsapp Chemist : <?php echo $total_whatsapp_chemist; ?> ||
-		Total Invoice : <?php echo $total_invoice; ?>
+		<b>Processing</b> Entries : <?php echo $total_processing; ?> ||
+		Find SMS : <?php echo $total_sms; ?> ||
+		Find Statment : <?php echo $total_statment; ?> ||
+		Find Whatsapp Message : <?php echo $total_whatsapp; ?> ||
+		Find Whatsapp Chemist : <?php echo $total_whatsapp_chemist; ?> ||
+		Find Invoice : <?php echo $total_invoice; ?>
 	</div>
 	<form method="get" class="mb-5" style="margin-bottom:10px;">
 		<div class="col-md-3">
