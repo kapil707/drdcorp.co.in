@@ -1,11 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Manage_user_chemist extends CI_Controller {
-	var $Page_title = "Manage chemist";
-	var $Page_name  = "manage_user_chemist";
-	var $Page_view  = "manage_user_chemist";
-	var $Page_menu  = "manage_user_chemist";
-	var $page_controllers = "manage_user_chemist";
+class Manage_bank_user_chemist extends CI_Controller {
+	var $Page_title = "Manage Chemist";
+	var $Page_name  = "manage_bank_user_chemist";
+	var $Page_view  = "manage_bank_user_chemist";
+	var $Page_menu  = "manage_bank_user_chemist";
+	var $page_controllers = "manage_bank_user_chemist";
 	var $Page_tbl   = "tbl_chemist";
 	public function __construct()
     {
