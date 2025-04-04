@@ -81,13 +81,21 @@ class Manage_bank_processing extends CI_Controller {
 		$data["total_whatsapp_chemist"] = $myrow->total_whatsapp_chemist;
 		$data["total_invoice"] = $myrow->total_invoice;
 
-		$query = $this->BankModel->select_query("SELECT COUNT(id) AS total_sms FROM tbl_sms WHERE date BETWEEN '$start_date' AND '$end_date' ORDER BY id ASC");
+		$query = $this->BankModel->select_query("SELECT COUNT(id) AS total FROM tbl_sms WHERE date BETWEEN '$start_date' AND '$end_date' ORDER BY id ASC");
 		$myrow = $query->row();
-		$data["other_total_sms"] = $myrow->total_sms;
+		$data["other_total_sms"] = $myrow->total;
 
-		$query = $this->BankModel->select_query("SELECT COUNT(id) AS total_statment FROM tbl_statment WHERE date BETWEEN '$start_date' AND '$end_date' ORDER BY id ASC");
+		$query = $this->BankModel->select_query("SELECT COUNT(id) AS total FROM tbl_statment WHERE date BETWEEN '$start_date' AND '$end_date' ORDER BY id ASC");
 		$myrow = $query->row();
-		$data["other_total_statment"] = $myrow->total_statment;
+		$data["other_total_statment"] = $myrow->total;
+
+		$query = $this->BankModel->select_query("SELECT COUNT(id) AS total FROM tbl_whatsapp_message WHERE date BETWEEN '$start_date' AND '$end_date' ORDER BY id ASC");
+		$myrow = $query->row();
+		$data["other_total_whatsapp"] = $myrow->total;
+
+		$query = $this->BankModel->select_query("SELECT COUNT(id) AS total FROM tbl_invoice WHERE date BETWEEN '$start_date' AND '$end_date' ORDER BY id ASC");
+		$myrow = $query->row();
+		$data["other_total_invoice"] = $myrow->total;
 
 		$this->load->view("admin/header_footer/header",$data);
 		$this->load->view("admin/$Page_view/view",$data);
