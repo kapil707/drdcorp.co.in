@@ -357,43 +357,27 @@ class BankModel extends CI_Model
 
 	public function statment_excel_file2($download_type,$start_date,$end_date)
 	{	
-		error_reporting(0);
-		
-		$this->load->library('excel');
-		$objPHPExcel = new PHPExcel();
-		$objPHPExcel->setActiveSheetIndex(0);
-		
-		ob_clean();
+		// 📂 नया Spreadsheet बनाएँ
+		$spreadsheet = new Spreadsheet();
+		$sheet = $spreadsheet->getActiveSheet();
 
-		/*$objPHPExcel->setActiveSheetIndex(0)
-		->setCellValue('B1','Account Statement Inquiry')
-		->setCellValue('A3','Search Criteria:')
-		->setCellValue('A5',"Account:'Equals'")
-		->setCellValue('A6',"Branch:'Equals'")
-		->setCellValue('A7',"Customer:'Equals'")
-		->setCellValue('A8',"Cheques: ")
-		->setCellValue('A9',"Statement Date Range:");
-
-		$sheet->mergeCells('B1:E1');*/ 
-
-		$objPHPExcel->setActiveSheetIndex(0)
-		->setCellValue('A1','Value Date')
-		->setCellValue('B1','Account Number')
-		->setCellValue('C1','Account Name')
-		->setCellValue('D1','Beneficiary / Remitter')
-		->setCellValue('E1','Currency')
-		->setCellValue('F1','Amount')
-		->setCellValue('G1','Customer Reference')
-		->setCellValue('H1','Branch Name')
-		->setCellValue('I1','Statment Date')
-		->setCellValue('J1','Type')
-		->setCellValue('K1','Entry Date')
-		->setCellValue('L1','Description')
-		->setCellValue('M1','Bank Reference')
-		->setCellValue('N1','Narrative')
-		->setCellValue('O1','Chemist Id')
-		->setCellValue('P1','Invoice')
-		->setCellValue('Q1','Find By');
+		$sheet->setCellValue('A1','Value Date');
+		$sheet->etCellValue('B1','Account Number');
+		$sheet->setCellValue('C1','Account Name');
+		$sheet->setCellValue('D1','Beneficiary / Remitter');
+		$sheet->setCellValue('E1','Currency');
+		$sheet->setCellValue('F1','Amount');
+		$sheet->setCellValue('G1','Customer Reference');
+		$sheet->setCellValue('H1','Branch Name');
+		$sheet->setCellValue('I1','Statment Date');
+		$sheet->setCellValue('J1','Type');
+		$sheet->setCellValue('K1','Entry Date');
+		$sheet->setCellValue('L1','Description');
+		$sheet->setCellValue('M1','Bank Reference');
+		$sheet->setCellValue('N1','Narrative');
+		$sheet->setCellValue('O1','Chemist Id');
+		$sheet->setCellValue('P1','Invoice');
+		$sheet->setCellValue('Q1','Find By');
 		
 		$sheet->getColumnDimension('A')->setWidth(20);
 		$sheet->getColumnDimension('B')->setWidth(20);
@@ -415,28 +399,34 @@ class BankModel extends CI_Model
 		
 		$sheet->getStyle('A1:Q1')->applyFromArray(array('font' => array('size' =>10,'bold' => TRUE,'name'  => 'Arial','color' => ['rgb' => '800000'],)));
 		
-		$objPHPExcel->getActiveSheet()
-        ->getStyle('A1:Q1')
-        ->getFill()
-        ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
-        ->getStartColor()
-        ->setRGB('ccffff');
-		
-		$BStyle = array(
-		  'borders' => array(
-			'allborders' => array(
-			  'style' => PHPExcel_Style_Border::BORDER_THIN
-			)
-		  )
-		);
-		$sheet->getStyle('A11:Q11')->applyFromArray($BStyle);
+		// 📂 Header Background Color सेट करें (A1 से P1)
+		$sheet->getStyle('A1:Q1')->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setARGB('CCFFFF');
 
-		$query = $this->BankModel->select_query("SELECT s.*,p.final_chemist as chemist_id,p.final_invoice as done_invoice,p.final_find_by as done_find_by from tbl_statment as s left JOIN tbl_bank_processing as p on p.upi_no=s.customer_reference where s.date BETWEEN '$start_date' AND '$end_date'");
+		// 📂 Borders सेट करें (A11 से P11)
+		$borderStyle = [
+					'borders' => [
+					'allBorders' => [
+					'borderStyle' => Border::BORDER_THIN
+				]
+			]
+		];
+		$sheet->getStyle('A11:Q11')->applyFromArray($borderStyle);
+
+		$query = $this->BankModel->select_query("SELECT s.*,p.final_chemist as chemist_id,p.invoice_text as invoice_number from tbl_statment as s left JOIN tbl_bank_processing as p on p.upi_no=s.customer_reference where s.date BETWEEN '$start_date' AND '$end_date'");
 		$result = $query->result();
 		$rowCount = 2;
 		$fileok=0;
 		foreach($result as $row)
 		{	
+			$gstvNo = "";
+			$invoice = $row->invoice_number; 
+			$parts = explode("||", $invoice);
+			foreach($parts as $invoice) {
+				preg_match('/GstvNo:([\w-]+)/', $invoice, $matches);
+				$gstvNo.= $matches[1].',';
+			}
+			$gstvNo = substr($gstvNo, 0, -2);
+
 			$value_date1 = DateTime::createFromFormat('Y-m-d', $row->date)->format('d/m/Y');
 			$sheet->SetCellValue('A'.$rowCount,$value_date1);
 			$sheet->SetCellValue('B'.$rowCount,$row->account_no);
@@ -453,10 +443,10 @@ class BankModel extends CI_Model
 			$sheet->SetCellValue('M'.$rowCount,$row->bank_reference);
 			$sheet->SetCellValue('N'.$rowCount,$row->narrative);
 			$sheet->SetCellValue('O'.$rowCount,$row->chemist_id);
-			$sheet->SetCellValue('P'.$rowCount,$row->done_invoice);
-			$sheet->SetCellValue('Q'.$rowCount,$row->done_find_by);
+			$sheet->SetCellValue('P'.$rowCount,$gstvNo);
+			//$sheet->SetCellValue('Q'.$rowCount,$row->done_find_by);
 
-			$sheet->getStyle('A'.$rowCount.':Q'.$rowCount)->applyFromArray($BStyle);
+			$sheet->getStyle('A'.$rowCount.':Q'.$rowCount)->applyFromArray($borderStyle);
 			$rowCount++;
 		}
 		
@@ -465,80 +455,48 @@ class BankModel extends CI_Model
 		{
 			$file_name = $name."-".$start_date."-to-".$end_date.".xls";
 			
-			//$objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
-			$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel,'Excel5');
-			/*$objWriter->save('uploads_sales/kapilkifile.xls');*/
-			
-			header('Content-type: application/vnd.ms-excel');
-			header('Content-Disposition: attachment; filename='.$file_name);
+			// 📂 Writer तैयार करें
+			$writer = IOFactory::createWriter($spreadsheet, 'Xls');
+
+			// 📂 Header सेट करें ताकि फाइल डाउनलोड हो
+			header('Content-Type: application/vnd.ms-excel');
+			header('Content-Disposition: attachment;filename="'.$file_name.'"');
 			header('Cache-Control: max-age=0');
-			ob_start();
-			$objWriter->save('php://output');
-			$data = ob_get_contents();
+
+			// 📂 फ़ाइल को ब्राउज़र में आउटपुट करें
+			$writer->save('php://output');
+			exit;
 		}
 		
 		if($download_type=="cronjob_download")
 		{
-			if($fileok==1)
-			{
-				$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel,'Excel5');
-				$file_name = "test_folder/".$name.".xls";
-				$objWriter->save($file_name);
-				
-				$file_name2 = "test_folder/xx".$name.".xls";
-				$objWriter->save($file_name2);
-				
-				$x[0] = $file_name;
-				$x[1] = $invoice_message_body;
- 				return $x;
-			}
-			else
-			{
-				$file_name = "";
-				return $file_name;
-			}
+			
 		}
 	}
 	
 	public function statment_excel_file3($download_type,$start_date,$end_date)
 	{	
-		error_reporting(0);
-		
-		$this->load->library('excel');
-		$objPHPExcel = new PHPExcel();
-		$objPHPExcel->setActiveSheetIndex(0);
-		
-		ob_clean();
+		// 📂 नया Spreadsheet बनाएँ
+		$spreadsheet = new Spreadsheet();
+		$sheet = $spreadsheet->getActiveSheet();
 
-		/*$objPHPExcel->setActiveSheetIndex(0)
-		->setCellValue('B1','Account Statement Inquiry')
-		->setCellValue('A3','Search Criteria:')
-		->setCellValue('A5',"Account:'Equals'")
-		->setCellValue('A6',"Branch:'Equals'")
-		->setCellValue('A7',"Customer:'Equals'")
-		->setCellValue('A8',"Cheques: ")
-		->setCellValue('A9',"Statement Date Range:");
-
-		$sheet->mergeCells('B1:E1');*/ 
-
-		$objPHPExcel->setActiveSheetIndex(0)
-		->setCellValue('A1','Value Date')
-		->setCellValue('B1','Statment Date')
-		->setCellValue('C1','Currency')
-		->setCellValue('D1','Amount')
-		->setCellValue('E1','Beneficiary / Remitter')
-		->setCellValue('F1','Customer Reference')
-		->setCellValue('G1','Type')
-		->setCellValue('H1','Branch Number')
-		->setCellValue('I1','Branch Name')
-		->setCellValue('J1','Entry Date')
-		->setCellValue('K1','Bank Reference')
-		->setCellValue('L1','Description')
-		->setCellValue('M1','Narrative')
-		->setCellValue('N1','Payment Details')
-		->setCellValue('O1','Chemist Id')
-		->setCellValue('P1','Invoice')
-		->setCellValue('Q1','Find By');
+		$sheet->setCellValue('A1','Value Date');
+		$sheet->setCellValue('B1','Statment Date');
+		$sheet->setCellValue('C1','Currency');
+		$sheet->setCellValue('D1','Amount');
+		$sheet->setCellValue('E1','Beneficiary / Remitter');
+		$sheet->setCellValue('F1','Customer Reference');
+		$sheet->setCellValue('G1','Type');
+		$sheet->setCellValue('H1','Branch Number');
+		$sheet->setCellValue('I1','Branch Name');
+		$sheet->setCellValue('J1','Entry Date');
+		$sheet->setCellValue('K1','Bank Reference');
+		$sheet->setCellValue('L1','Description');
+		$sheet->setCellValue('M1','Narrative');
+		$sheet->setCellValue('N1','Payment Details');
+		$sheet->setCellValue('O1','Chemist Id');
+		$sheet->setCellValue('P1','Invoice');
+		$sheet->setCellValue('Q1','Find By');
 		
 		$sheet->getColumnDimension('A')->setWidth(20);
 		$sheet->getColumnDimension('B')->setWidth(20);
@@ -560,28 +518,34 @@ class BankModel extends CI_Model
 		
 		$sheet->getStyle('A1:Q1')->applyFromArray(array('font' => array('size' =>10,'bold' => TRUE,'name'  => 'Arial','color' => ['rgb' => '800000'],)));
 		
-		$objPHPExcel->getActiveSheet()
-        ->getStyle('A1:Q1')
-        ->getFill()
-        ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
-        ->getStartColor()
-        ->setRGB('ccffff');
-		
-		$BStyle = array(
-		  'borders' => array(
-			'allborders' => array(
-			  'style' => PHPExcel_Style_Border::BORDER_THIN
-			)
-		  )
-		);
-		$sheet->getStyle('A11:Q11')->applyFromArray($BStyle);
+		// 📂 Header Background Color सेट करें (A1 से P1)
+		$sheet->getStyle('A1:Q1')->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setARGB('CCFFFF');
 
-		$query = $this->BankModel->select_query("SELECT s.*,p.final_chemist as chemist_id,p.final_invoice as done_invoice,p.final_find_by as done_find_by from tbl_statment as s left JOIN tbl_bank_processing as p on p.upi_no=s.customer_reference where s.date BETWEEN '$start_date' AND '$end_date'");
+		// 📂 Borders सेट करें (A11 से P11)
+		$borderStyle = [
+					'borders' => [
+					'allBorders' => [
+					'borderStyle' => Border::BORDER_THIN
+				]
+			]
+		];
+		$sheet->getStyle('A11:Q11')->applyFromArray($borderStyle);
+
+		$query = $this->BankModel->select_query("SELECT s.*,p.final_chemist as chemist_id,p.invoice_text as invoice_number from tbl_statment as s left JOIN tbl_bank_processing as p on p.upi_no=s.customer_reference where s.date BETWEEN '$start_date' AND '$end_date'");
 		$result = $query->result();
 		$rowCount = 2;
 		$fileok=0;
 		foreach($result as $row)
 		{	
+			$gstvNo = "";
+			$invoice = $row->invoice_number; 
+			$parts = explode("||", $invoice);
+			foreach($parts as $invoice) {
+				preg_match('/GstvNo:([\w-]+)/', $invoice, $matches);
+				$gstvNo.= $matches[1].',';
+			}
+			$gstvNo = substr($gstvNo, 0, -2);
+
 			$date = date('m/d/Y', strtotime($row->date));
 			$sheet->SetCellValue('A'.$rowCount,$date);
 			$sheet->SetCellValue('B'.$rowCount,$row->statment_date);
@@ -598,10 +562,10 @@ class BankModel extends CI_Model
 			$sheet->SetCellValue('M'.$rowCount,$row->narrative);
 			$sheet->SetCellValue('N'.$rowCount,$row->payment_details);
 			$sheet->SetCellValue('O'.$rowCount,$row->chemist_id);
-			$sheet->SetCellValue('P'.$rowCount,$row->done_invoice);
-			$sheet->SetCellValue('Q'.$rowCount,$row->done_find_by);
+			$sheet->SetCellValue('P'.$rowCount,$gstvNo);
+			//$sheet->SetCellValue('Q'.$rowCount,$row->done_find_by);
 
-			$sheet->getStyle('A'.$rowCount.':Q'.$rowCount)->applyFromArray($BStyle);
+			$sheet->getStyle('A'.$rowCount.':Q'.$rowCount)->applyFromArray($borderStyle);
 			$rowCount++;
 		}
 		
@@ -610,38 +574,22 @@ class BankModel extends CI_Model
 		{
 			$file_name = $name."-".$start_date."-to-".$end_date.".xls";
 			
-			//$objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
-			$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel,'Excel5');
-			/*$objWriter->save('uploads_sales/kapilkifile.xls');*/
-			
-			header('Content-type: application/vnd.ms-excel');
-			header('Content-Disposition: attachment; filename='.$file_name);
+			// 📂 Writer तैयार करें
+			$writer = IOFactory::createWriter($spreadsheet, 'Xls');
+
+			// 📂 Header सेट करें ताकि फाइल डाउनलोड हो
+			header('Content-Type: application/vnd.ms-excel');
+			header('Content-Disposition: attachment;filename="'.$file_name.'"');
 			header('Cache-Control: max-age=0');
-			ob_start();
-			$objWriter->save('php://output');
-			$data = ob_get_contents();
+
+			// 📂 फ़ाइल को ब्राउज़र में आउटपुट करें
+			$writer->save('php://output');
+			exit;
 		}
 		
 		if($download_type=="cronjob_download")
 		{
-			if($fileok==1)
-			{
-				$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel,'Excel5');
-				$file_name = "test_folder/".$name.".xls";
-				$objWriter->save($file_name);
-				
-				$file_name2 = "test_folder/xx".$name.".xls";
-				$objWriter->save($file_name2);
-				
-				$x[0] = $file_name;
-				$x[1] = $invoice_message_body;
- 				return $x;
-			}
-			else
-			{
-				$file_name = "";
-				return $file_name;
-			}
+			
 		}
 	}
 }	
