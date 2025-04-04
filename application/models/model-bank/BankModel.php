@@ -153,6 +153,8 @@ class BankModel extends CI_Model
 		$sheet->getColumnDimension('O')->setWidth(20);
 		$sheet->getColumnDimension('P')->setWidth(20);
 		
+		$sheet->getStyle('A1:P1')->applyFromArray(array('font' => array('size' =>10,'bold' => TRUE,'name'  => 'Arial','color' => ['rgb' => '800000'],)));
+
 		// 📂 Header Background Color सेट करें (A1 से P1)
 		$sheet->getStyle('A1:P1')->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setARGB('CCFFFF');
 
@@ -165,23 +167,6 @@ class BankModel extends CI_Model
 			]
 		];
 		$sheet->getStyle('A11:P11')->applyFromArray($borderStyle);
-
-		/*$sheet->getStyle('A1:P1')->applyFromArray(array('font' => array('size' =>10,'bold' => TRUE,'name'  => 'Arial','color' => ['rgb' => '800000'],)));
-		
-		$sheet->getStyle('A1:P1')
-        ->getFill()
-        ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
-        ->getStartColor()
-        ->setRGB('ccffff');
-		
-		$BStyle = array(
-		  'borders' => array(
-			'allborders' => array(
-			  'style' => PHPExcel_Style_Border::BORDER_THIN
-			)
-		  )
-		);
-		$sheet->getStyle('A11:P11')->applyFromArray($BStyle);*/
 		
 		$query = $this->BankModel->select_query("SELECT s.*,p.final_chemist as chemist_id,p.invoice_text as invoice_number from tbl_statment as s left JOIN tbl_bank_processing as p on p.upi_no=s.customer_reference where s.date BETWEEN '$start_date' AND '$end_date'");
 		$result = $query->result();
