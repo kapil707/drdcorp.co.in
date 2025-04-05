@@ -22,8 +22,8 @@ class BankStatmentModel extends CI_Model
 			$text = $statment_text = trim($row->narrative);
 			echo $text;
 			echo "<br>";
-			$text = str_replace(["\n", "\r",],"", $text);
-			$text = preg_replace('/\s*\n/', '', $text);
+			$text = str_replace(["\n", "\r",]," ", $text);
+			$text = preg_replace('/\s*\n/', ' ', $text);
 			//$text = str_replace($upi_no, ' ', $text);
 			$text = str_replace(' TXN REF NO', ' TXN REF NO', $text);
 			$text = str_replace('T XN REF NO', ' TXN REF NO', $text);
@@ -35,7 +35,11 @@ class BankStatmentModel extends CI_Model
 			for ($i = 1; $i < $length; $i++) {
 				echo $withSpace = substr($upi_no, 0, $i) . ' ' . substr($upi_no, $i);
 				$text = str_replace($withSpace, ' ', $text);
-				echo "<br>";
+			}
+			$length = strlen($upi_no);
+			for ($i = 1; $i < $length; $i++) {
+				echo $withSpace = substr($upi_no, 0, $i) . '  ' . substr($upi_no, $i);
+				$text = str_replace($withSpace, ' ', $text);
 			}
 			echo $text;
 			echo "<br>";
