@@ -277,7 +277,7 @@ class BankStatmentModel extends CI_Model
 				echo "<br>14</br>";
 			}
 
-			preg_match("/FROM\s+(.*)/", $text, $matches);
+			preg_match("/FROM\s+(.*?)\s+930/", $text, $matches);
 			if (!empty($matches) && empty($from_text)){
 				$from_text = trim($matches[1]);
 				//$from_text = str_replace("'", "", $from_text);
@@ -286,6 +286,17 @@ class BankStatmentModel extends CI_Model
 				//$from_value = "<b>find6: ".$from_text."</b>"; // Output: 97926121865@PAYTM SAMEER S O KALLU NA
 				$statment_type = 15;
 				echo "<br>15</br>";
+			}
+
+			preg_match("/FROM\s+(.*)/", $text, $matches);
+			if (!empty($matches) && empty($from_text)){
+				$from_text = trim($matches[1]);
+				//$from_text = str_replace("'", "", $from_text);
+				//$from_text = str_replace(" ", "", $from_text);
+				//$from_text = str_replace("\n", "", $from_text);
+				//$from_value = "<b>find6: ".$from_text."</b>"; // Output: 97926121865@PAYTM SAMEER S O KALLU NA
+				$statment_type = 16;
+				echo "<br>16</br>";
 			}
 
 			echo $from_text."<br>";
