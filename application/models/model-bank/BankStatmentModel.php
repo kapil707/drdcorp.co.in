@@ -131,24 +131,8 @@ class BankStatmentModel extends CI_Model
 			$text = preg_replace('/HDFC\s*H.*?REF NO/', ' REF NO', $text);
 
 			$text = preg_replace('/SB2.*?-UPI/', ' UPI', $text);*/
-			
-			preg_match('/FROM\s+(.*?)\s+[A-Z]{5}\d{11}/', $text, $matches);
-			if (!empty($matches) && empty($from_text)){
-				$from_text = trim($matches[1]);
-				//$from_value = "<b>find2: ".$from_text."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
-				$statment_type = 0;
-				echo "<br>0</br>";
-			}
 
-			preg_match('/FROM\s+(.*?)\s+[A-Z]{5}+\s*\d{11}/', $text, $matches);
-			if (!empty($matches) && empty($from_text)){
-				$from_text = trim($matches[1]);
-				//$from_value = "<b>find2: ".$from_text."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
-				$statment_type = 00;
-				echo "<br>00</br>";
-			}
-
-			preg_match('/FROM\s+(.*?)\s+[A-Z0-9]+\s*TXN REF NO/i', $text, $matches);
+			preg_match("/FROM\s+(.+?)\s+TXN REF NO/", $text, $matches);
 			if (!empty($matches) && empty($from_text)){
 				$from_text = trim($matches[1]);
 				//$from_value = "<b>find2: ".$from_text."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
