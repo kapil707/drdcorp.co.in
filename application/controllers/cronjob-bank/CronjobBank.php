@@ -41,7 +41,7 @@ class CronjobBank extends CI_Controller
 
 	public function testing(){
 		
-		/*$text = " FROM ONE 97 COMMUNICAT IONS LIMITED SETTLEMENT ACCOUNT 9300966180 CITI000 0 7217 API TXN YESB0000001";
+		$text = "NEFT IN UTR CITIN25544306370 FROM OKHLA MEDICOS K BKH2509196819 5TXN REF NO PAYMENT";
 
 		echo $text;
 		echo "<br>";
@@ -55,7 +55,7 @@ class CronjobBank extends CI_Controller
 		}
 		echo $text;
 		echo "<br>";
-		die();*/
+		die();
 
 		/*$row_from_text = "9911644379@PTYES";
 		$row_from_text_find_match = "9911644379";
