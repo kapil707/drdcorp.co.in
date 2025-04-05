@@ -19,7 +19,7 @@ class BankStatmentModel extends CI_Model
 			$amount = $row->amount;
 			$date = $row->date;
 			echo $text = $statment_text = $row->narrative;
-			$text = str_replace(array("\r", "\n"), ' ', $text);
+			$text = str_replace(array("\r", "\n"), '', $text);
 			$upi_no = $orderid = $row->customer_reference;
 			$from_text = "";
 
@@ -96,6 +96,7 @@ class BankStatmentModel extends CI_Model
 
 			$text = preg_replace('/AXOIC.*?REF NO/', ' REF NO', $text);
 			$text = preg_replace('/AXOI\s*C.*?REF NO/', ' REF NO', $text);
+
 			$text = preg_replace('/AXOIC.*?REF NO/', ' REF NO', $text);
 			$text = preg_replace('/AXOIC.*?REF NO/', ' REF NO', $text);
 
