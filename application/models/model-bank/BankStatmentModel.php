@@ -24,7 +24,7 @@ class BankStatmentModel extends CI_Model
 			$upi_no = $orderid = $row->customer_reference;
 			$from_text = "";
 
-			/**********************************************/
+			/**********************************************
 			$text = preg_replace("/KKBKH\d+/", "", $text);
 			$text = preg_replace("/KK\s*BKH\d+/", "", $text);
 			$text = preg_replace("/KKB\s*KH\d+/", "", $text);
@@ -58,7 +58,6 @@ class BankStatmentModel extends CI_Model
 			$text = preg_replace("/N2632432758\s*889/", '', $text);
 			$text = preg_replace("/N26324327588\s*89/", '', $text);
 			$text = preg_replace("/N263243275888\s*9/", '', $text);
-			$text = preg_replace("/N2632432758889\s*/", '', $text);
 
 			$text = preg_replace("/AXOMB2639/", '', $text);
 			$text = preg_replace("/A\s*XOMB2639/", '', $text);
@@ -69,8 +68,7 @@ class BankStatmentModel extends CI_Model
 			$text = preg_replace("/AXOMB2\s*639/", '', $text);
 			$text = preg_replace("/AXOMB26\s*39/", '', $text);
 			$text = preg_replace("/AXOMB263\s*9/", '', $text);
-			$text = preg_replace("/AXOMB2639\s*/", '', $text);
-			/**********************************************/
+			
 			$text = preg_replace('/\s+\d+TXN\s+REF NO/', ' REF NO', $text);
 			$text = preg_replace('/\s+\d+\s+REF NO/', ' REF NO', $text);
 			//$text = preg_replace('/AX.*?REF NO/', ' REF NO', $text);
@@ -113,7 +111,8 @@ class BankStatmentModel extends CI_Model
 			$text = preg_replace('/HDF\s*CH.*?REF NO/', ' REF NO', $text);
 			$text = preg_replace('/HDFC\s*H.*?REF NO/', ' REF NO', $text);
 
-			$text = preg_replace('/SB2.*?-UPI/', ' UPI', $text);
+			$text = preg_replace('/SB2.*?-UPI/', ' UPI', $text);*/
+			
 			echo "<br>".$text;
 
 			preg_match("/FROM\s+(.+?)\s+REF/", $text, $matches);
