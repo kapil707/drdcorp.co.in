@@ -28,6 +28,10 @@ class BankStatmentModel extends CI_Model
 			//$text = str_replace('TX N REF NO', 'TXN REF NO', $text);
 			$from_text = "";
 
+			$text = preg_replace_callback('/([A-Z]{4,6})\s+(\d{5,})/', function($m) {
+				return $m[1] . $m[2];
+			}, $text);
+
 			// Step 2: Extract name between FROM and UPI
 			if (preg_match('/FROM\s+(.*?)\s+[A-Z]{4,6}\d{5,}/', $text, $matches)) {
 				$name = trim(preg_replace('/\s+/', ' ', $matches[1])); // Cleanup multiple spaces
