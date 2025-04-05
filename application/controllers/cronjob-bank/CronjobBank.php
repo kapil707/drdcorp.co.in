@@ -42,19 +42,43 @@ class CronjobBank extends CI_Controller
 	public function testing(){
 		
 		$text = "NEFT IN UTR CITIN25544306370 FROM OKHLA MEDICOS K BKH2509196819 5TXN REF NO PAYMENT";
+		$upi_no = "KKBKH25091968195";
 
-		echo $text;
-		echo "<br>";
-
-		$upi_no = "BKIDP25090272092";
+		echo "full text: $text <br>";
+		$text = str_replace(["\n", "\r",]," ", $text);
+		$text = preg_replace('/\s*\n/', ' ', $text);
+		$text = str_replace($upi_no, ' ', $text);
+		$text = str_replace(' TXN REF NO', ' TXN REF NO', $text);
+		$text = str_replace('T XN REF NO', ' TXN REF NO', $text);
+		$text = str_replace('TX N REF NO', ' TXN REF NO', $text);
+		// yha check karta ha upi no or oss ko remove karta ha string me say
 		$length = strlen($upi_no);
-
 		for ($i = 1; $i < $length; $i++) {
 			$withSpace = substr($upi_no, 0, $i) . ' ' . substr($upi_no, $i);
 			$text = str_replace($withSpace, ' ', $text);
 		}
-		echo $text;
-		echo "<br>";
+		$length = strlen($upi_no);
+		for ($i = 1; $i < $length; $i++) {
+			$withSpace = substr($upi_no, 0, $i) . '  ' . substr($upi_no, $i);
+			$text = str_replace($withSpace, ' ', $text);
+		}
+		/******************************* */
+		//KK BKH2509190011 5TXN
+		$upi_no1 = substr($upi_no, 0, -1);
+		echo "upi: $upi_no1 <br>";
+		$length = strlen($upi_no1);
+		for ($i = 1; $i < $length; $i++) {
+			$withSpace = substr($upi_no1, 0, $i) . ' ' . substr($upi_no1, $i);
+			$text = str_replace($withSpace, ' ', $text);
+		}
+		$length = strlen($upi_no1);
+		for ($i = 1; $i < $length; $i++) {
+			$withSpace = substr($upi_no1, 0, $i) . '  ' . substr($upi_nupi_no1o, $i);
+			$text = str_replace($withSpace, ' ', $text);
+		}
+		$upi_no1 = substr($upi_no1,-1);
+		$text = str_replace($upi_no1."TXN", 'TXN', $text);
+		echo "text: $text <br>";
 		die();
 
 		/*$row_from_text = "9911644379@PTYES";
