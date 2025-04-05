@@ -42,14 +42,13 @@ class CronjobBank extends CI_Controller
 	public function testing(){
 		
 		$text = "NEFT IN UTR CITIN25544458326 FROM G K MEDICOS BKID P25090272092 TXN REF NO";
-		$upi_no = "BKIDP25090272092";
 
-		for($i=16;$i>0;$i--){
-			echo $i;
-			echo "<br>";
-			echo $upi_no1 = substr($upi_no,$i);
-			echo "<br>";
-			echo $text = str_replace($upi_no1, ' ', $text);
+		$upi_no = "BKIDP25090272092";
+		//$text = str_replace($upi_no, ' ', $text);
+		echo $text;
+
+		for($i=0;$i<16;$i++){
+			echo substr($upi_no,$i,16);
 			echo "<br>";
 		}
 		die();
