@@ -45,6 +45,7 @@ class CronjobBank extends CI_Controller
 		$upi_no = "KKBKH25091968195";
 
 		echo "full text: $text <br>";
+		echo "upi: $upi_no <br>";
 		$text = str_replace(["\n", "\r",]," ", $text);
 		$text = preg_replace('/\s*\n/', ' ', $text);
 		$text = str_replace($upi_no, ' ', $text);
@@ -65,7 +66,7 @@ class CronjobBank extends CI_Controller
 		/******************************* */
 		//KK BKH2509190011 5TXN
 		$upi_no1 = substr($upi_no, 0, -1);
-		echo "upi: $upi_no1 <br>";
+		echo "upi1: $upi_no1 <br>";
 		$length = strlen($upi_no1);
 		for ($i = 1; $i < $length; $i++) {
 			$withSpace = substr($upi_no1, 0, $i) . ' ' . substr($upi_no1, $i);
@@ -76,8 +77,9 @@ class CronjobBank extends CI_Controller
 			$withSpace = substr($upi_no1, 0, $i) . '  ' . substr($upi_nupi_no1o, $i);
 			$text = str_replace($withSpace, ' ', $text);
 		}
-		$upi_no1 = substr($upi_no1,-1);
-		$text = str_replace($upi_no1."TXN", 'TXN', $text);
+		$upi_no2 = substr($upi_no,-1);
+		echo "upi2: $upi_no2 <br>";
+		$text = str_replace($upi_no2."TXN", 'TXN', $text);
 		echo "text: $text <br>";
 		die();
 
