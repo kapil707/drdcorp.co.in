@@ -135,7 +135,7 @@ class BankStatmentModel extends CI_Model
 				echo "<br>01</br>";
 			}
 
-			/*preg_match("/FROM\s+(.+?)\s+REF/", $text, $matches);
+			preg_match("/FROM\s+(.+?)\s+930/", $text, $matches);
 			if (!empty($matches) && empty($from_text)){
 				$from_text = trim($matches[1]);
 				//$from_value = "<b>find2: ".$from_text."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
@@ -143,7 +143,7 @@ class BankStatmentModel extends CI_Model
 				echo "<br>1</br>";
 			}
 
-			preg_match("/FROM\s+(.+?)\s+CITI/", $text, $matches);
+			/*preg_match("/FROM\s+(.+?)\s+CITI/", $text, $matches);
 			if (!empty($matches) && empty($from_text)){
 				$from_text = trim($matches[1]);
 				//$from_value = "<b>find2: ".$from_text."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
