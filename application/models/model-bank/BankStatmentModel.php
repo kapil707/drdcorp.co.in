@@ -136,19 +136,11 @@ class BankStatmentModel extends CI_Model
 			if (!empty($matches) && empty($from_text)){
 				$from_text = trim($matches[1]);
 				//$from_value = "<b>find2: ".$from_text."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
-				$statment_type = 01;
-				echo "<br>01</br>";
+				$statment_type = 00;
+				echo "<br>00</br>";
 			}
 
-			preg_match("/FROM\s+(.+?)\s+930/", $text, $matches);
-			if (!empty($matches) && empty($from_text)){
-				$from_text = trim($matches[1]);
-				//$from_value = "<b>find2: ".$from_text."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
-				$statment_type = 02;
-				echo "<br>02</br>";
-			}
-
-			/*preg_match("/FROM\s+(.+?)\s+REF/", $text, $matches);
+			preg_match("/FROM\s+(.+?)\s+REF/", $text, $matches);
 			if (!empty($matches) && empty($from_text)){
 				$from_text = trim($matches[1]);
 				//$from_value = "<b>find2: ".$from_text."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
@@ -294,7 +286,7 @@ class BankStatmentModel extends CI_Model
 				//$from_value = "<b>find6: ".$from_text."</b>"; // Output: 97926121865@PAYTM SAMEER S O KALLU NA
 				$statment_type = 15;
 				echo "<br>15</br>";
-			}*/
+			}
 
 			echo $from_text."<br>";
 			//die();
