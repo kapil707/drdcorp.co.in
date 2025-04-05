@@ -55,7 +55,7 @@ class BankStatmentModel extends CI_Model
 			}
 			$upi_no1 = substr($upi_no1,-1);
 			$text = str_replace($upi_no1.'TXN', 'TXN', $text);
-			echo "text: $upi_no1 <br>";
+			echo "text: $text <br>";
 			/**********************************************
 			$text = preg_replace("/KKBKH\d+/", "", $text);
 			$text = preg_replace("/KK\s*BKH\d+/", "", $text);
