@@ -79,19 +79,25 @@ class BankStatmentModel extends CI_Model
 			$text = preg_replace('/INDBN.*?REF NO/', ' REF NO', $text);
 			$text = preg_replace('/INDBH.*?REF NO/', ' REF NO', $text);
 			$text = preg_replace('/IDFBH.*?REF NO/', ' REF NO', $text); 
-			$text = preg_replace('/ID FBH.*?REF NO/', ' REF NO', $text); 
+			$text = preg_replace('/ID\s*FBH.*?REF NO/', ' REF NO', $text); 
 			$text = preg_replace('/ICIN.*?REF NO/', ' REF NO', $text);
 			$text = preg_replace('/YES.*?REF NO/', ' REF NO', $text);
 			$text = preg_replace('/POD.*?REF NO/', ' REF NO', $text);
 			$text = preg_replace('/TXN.*?REF NO/', ' REF NO', $text);
 			$text = preg_replace('/FOR.*?REF NO/', ' REF NO', $text);
 			$text = preg_replace('/CNRBH.*?REF NO/', ' REF NO', $text);
-			$text = preg_replace('/N 06.*?REF NO/', ' REF NO', $text);
+			$text = preg_replace('/N\s*06.*?REF NO/', ' REF NO', $text);
 			$text = preg_replace('/N06.*?REF NO/', ' REF NO', $text);
 			$text = preg_replace('/SBIN.*?REF NO/', ' REF NO', $text);
 			$text = preg_replace('/BKIDN.*?REF NO/', ' REF NO', $text);
 			$text = preg_replace('/BINH.*?REF NO/', ' REF NO', $text);
 			$text = preg_replace('/C\s*BINH.*?REF NO/', ' REF NO', $text);
+
+
+			$text = preg_replace('/AXOIC.*?REF NO/', ' REF NO', $text);
+			$text = preg_replace('/AXOI\s*C.*?REF NO/', ' REF NO', $text);
+			$text = preg_replace('/AXOIC.*?REF NO/', ' REF NO', $text);
+			$text = preg_replace('/AXOIC.*?REF NO/', ' REF NO', $text);
 
 			$text = preg_replace('/INDBH.*?REF NO/', ' REF NO', $text);
 			$text = preg_replace('/I\sNDBH.*?REF NO/', ' REF NO', $text);
@@ -100,10 +106,10 @@ class BankStatmentModel extends CI_Model
 			$text = preg_replace('/INDB\sH.*?REF NO/', ' REF NO', $text);
 
 			$text = preg_replace('/HDFCH.*?REF NO/', ' REF NO', $text);
-			$text = preg_replace('/H DFCH.*?REF NO/', ' REF NO', $text);
-			$text = preg_replace('/HD FCH.*?REF NO/', ' REF NO', $text);
-			$text = preg_replace('/HDF CH.*?REF NO/', ' REF NO', $text);
-			$text = preg_replace('/HDFC H.*?REF NO/', ' REF NO', $text);
+			$text = preg_replace('/H\s*DFCH.*?REF NO/', ' REF NO', $text);
+			$text = preg_replace('/HD\s*FCH.*?REF NO/', ' REF NO', $text);
+			$text = preg_replace('/HDF\s*CH.*?REF NO/', ' REF NO', $text);
+			$text = preg_replace('/HDFC\s*H.*?REF NO/', ' REF NO', $text);
 
 			$text = preg_replace('/SB2.*?-UPI/', ' UPI', $text);
 			echo "<br>".$text;
