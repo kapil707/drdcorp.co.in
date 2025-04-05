@@ -120,7 +120,7 @@ class BankStatmentModel extends CI_Model
 			
 			echo "<br>".$text;
 
-			preg_match('/FROM\s*((?:\d\s*){11})TXN REF NO/i', $text, $matches);
+			preg_match('/FROM\s+(.*?)\s+[A-Z]{5}\d{11}/', $text, $matches);
 			if (!empty($matches) && empty($from_text)){
 				$from_text = trim($matches[1]);
 				//$from_value = "<b>find2: ".$from_text."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
