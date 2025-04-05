@@ -123,7 +123,7 @@ class BankStatmentModel extends CI_Model
 
 			$text = preg_replace('/SB2.*?-UPI/', ' UPI', $text);*/
 			
-			echo "<br>".$text;
+			echo "<br>Text : ".$text;
 			
 			preg_match('/FROM\s+(.*?)\s+[A-Z]{5}\d{11}/', $text, $matches);
 			if (!empty($matches) && empty($from_text)){
