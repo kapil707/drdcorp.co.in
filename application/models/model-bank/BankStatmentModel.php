@@ -28,6 +28,11 @@ class BankStatmentModel extends CI_Model
 			$text = str_replace('TX N REF NO', 'TXN REF NO', $text);
 			$from_text = "";
 
+			// Step 1: Join 5+ alphabets + space + 11+ digits into one string
+			$text = preg_replace_callback('/([A-Z]{4,6})\s+(\d{5,}[A-Z0-9]*)/', function($m) {
+				return $m[1] . $m[2];
+			}, $text);
+
 			/**********************************************
 			$text = preg_replace("/KKBKH\d+/", "", $text);
 			$text = preg_replace("/KK\s*BKH\d+/", "", $text);
