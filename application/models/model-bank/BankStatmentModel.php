@@ -19,7 +19,7 @@ class BankStatmentModel extends CI_Model
 			$amount = $row->amount;
 			$date = $row->date;
 			$text = $statment_text = $row->narrative;
-			$text = str_replace(["\n", "\r",],"", $text);
+			//$text = str_replace(["\n", "\r",],"", $text);
 			echo $text = preg_replace('/\s*\n/', '', $text);
 			die();
 			echo $text = str_replace(' TXN', 'TXN', $text);
