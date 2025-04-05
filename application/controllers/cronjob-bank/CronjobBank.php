@@ -48,7 +48,7 @@ class CronjobBank extends CI_Controller
 		echo $text;
 
 		for($i=0;$i<16;$i++){
-			echo substr($upi_no,16,$i);
+			echo substr($upi_no,0,$i);
 			echo "<br>";
 		}
 		die();
