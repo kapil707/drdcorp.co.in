@@ -33,9 +33,8 @@ class BankStatmentModel extends CI_Model
 			// yha check karta ha upi no or oss ko remove karta ha string me say
 			$length = strlen($upi_no);
 			for ($i = 1; $i < $length; $i++) {
-				$withSpace = substr($upi_no, 0, $i) . ' ' . substr($upi_no, $i);
+				echo $withSpace = substr($upi_no, 0, $i) . ' ' . substr($upi_no, $i);
 				$text = str_replace($withSpace, ' ', $text);
-				echo $text;
 				echo "<br>";
 			}
 			echo $text;
