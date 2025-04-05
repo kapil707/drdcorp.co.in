@@ -210,7 +210,7 @@ class BankStatmentModel extends CI_Model
 				echo "<br>9</br>";
 			}
 
-			//preg_match("/FROM\s+(\w+)\d+@\s*(\w+)/", $text, $matches);
+			/*//preg_match("/FROM\s+(\w+)\d+@\s*(\w+)/", $text, $matches);
 			preg_match("/FROM\s+([\d]+)@\s*([\w]+)/", $text, $matches);
 			if (!empty($matches) && empty($from_text)){
 				$from_text = trim($matches[1])."@".trim($matches[2]);
@@ -231,7 +231,7 @@ class BankStatmentModel extends CI_Model
 				//$from_value = "<b>find4: ".$from_text."</b>"; // Output: 97926121865@PAYTM SAMEER S O KALLU NA
 				$statment_type = 11;
 				echo "<br>11</br>";
-			}
+			}*/
 
 			preg_match("/FROM\s+([^\@]+)@\s*(\w+)/", $text, $matches);
 			if (!empty($matches) && empty($from_text)){
@@ -243,7 +243,7 @@ class BankStatmentModel extends CI_Model
 				$statment_type = 12;
 				echo "<br>12</br>";
 			}
-
+			/*
 			preg_match("/FROM\s+(.*?)\s+PUNBQ/", $text, $matches);
 			if (!empty($matches) && empty($from_text)){
 				$from_text = trim($matches[1]);
@@ -297,7 +297,7 @@ class BankStatmentModel extends CI_Model
 				//$from_value = "<b>find6: ".$from_text."</b>"; // Output: 97926121865@PAYTM SAMEER S O KALLU NA
 				$statment_type = 17;
 				echo "<br>17</br>";
-			}
+			}*/
 
 			echo $from_text."<br>";
 			//die();
