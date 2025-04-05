@@ -15,7 +15,7 @@ class BankStatmentModel extends CI_Model
 		$result = $result->result();
 		foreach($result as $row){
 		
-			echo "ID." .$row->id."<br>";			
+			echo "<br>ID. $row->id <br>";			
 			$upi_no = $orderid = $row->customer_reference;
 			$amount = $row->amount;
 			$date = $row->date;
