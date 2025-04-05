@@ -28,6 +28,11 @@ class BankStatmentModel extends CI_Model
 			$text = str_replace('TX N REF NO', 'TXN REF NO', $text);
 			$from_text = "";
 
+			// Step 1: Fix UPI number (5 letters + 11 digits with space)
+			$text = preg_replace_callback('/([A-Z]{5}\d{5})\s+(\d{6})/', function($m) {
+				return $m[1] . $m[2];
+			}, $text);
+
 			/**********************************************
 			$text = preg_replace("/KKBKH\d+/", "", $text);
 			$text = preg_replace("/KK\s*BKH\d+/", "", $text);
