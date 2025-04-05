@@ -22,7 +22,7 @@ class BankStatmentModel extends CI_Model
 			$text = $statment_text = $row->narrative;
 			echo "full text: $text <br>";
 			echo "upi0: $upi_no <br>";
-			//$text = str_replace(["\n", "\r",]," ", $text);
+			$text = str_replace(["\n", "\r",]," ", $text);
 			//$text = preg_replace('/\s*\n/', ' ', $text);
 			$text = str_replace($upi_no, ' ', $text);
 			$text = str_replace(' TXN REF NO', ' TXN REF NO', $text);
@@ -38,7 +38,7 @@ class BankStatmentModel extends CI_Model
 			}
 			$length = strlen($upi_no);
 			for ($i = 1; $i < $length; $i++) {
-				$withSpace = substr($upi_no, 0, $i) . '/\s*\n/' . substr($upi_no, $i);
+				$withSpace = substr($upi_no, 0, $i) . '  ' . substr($upi_no, $i);
 				$text = str_replace($withSpace, ' ', $text);
 			}
 			/******************************* */
@@ -52,7 +52,7 @@ class BankStatmentModel extends CI_Model
 			}
 			$length = strlen($upi_no1);
 			for ($i = 1; $i < $length; $i++) {
-				$withSpace = substr($upi_no1, 0, $i) . '/\s*\n/' . substr($upi_nupi_no1o, $i);
+				$withSpace = substr($upi_no1, 0, $i) . '  ' . substr($upi_nupi_no1o, $i);
 				$text = str_replace($withSpace, ' ', $text);
 			}
 			$upi_no2 = substr($upi_no,-1);
