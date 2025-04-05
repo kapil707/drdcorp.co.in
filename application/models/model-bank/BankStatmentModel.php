@@ -15,16 +15,17 @@ class BankStatmentModel extends CI_Model
 		$result = $result->result();
 		foreach($result as $row){
 		
-			echo $row->id."----<br>";
+			echo $row->id."----<br>";			
+			$upi_no = $orderid = $row->customer_reference;
 			$amount = $row->amount;
 			$date = $row->date;
 			$text = $statment_text = $row->narrative;
 			//$text = str_replace(["\n", "\r",],"", $text);
-			//$text = preg_replace('/\s*\n/', '', $text);
+			$text = preg_replace('/\s*\n/', '', $text);
+			$text = str_replace($upi_no, ' ', $text);
 			$text = str_replace(' TXN REF NO', 'TXN REF NO', $text);
 			$text = str_replace('T XN REF NO', 'TXN REF NO', $text);
 			$text = str_replace('TX N REF NO', 'TXN REF NO', $text);
-			$upi_no = $orderid = $row->customer_reference;
 			$from_text = "";
 
 			/**********************************************
@@ -139,11 +140,19 @@ class BankStatmentModel extends CI_Model
 			if (!empty($matches) && empty($from_text)){
 				$from_text = trim($matches[1]);
 				//$from_value = "<b>find2: ".$from_text."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
+				$statment_type = 02;
+				echo "<br>02</br>";
+			}
+
+			/*preg_match("/FROM\s+(.+?)\s+REF/", $text, $matches);
+			if (!empty($matches) && empty($from_text)){
+				$from_text = trim($matches[1]);
+				//$from_value = "<b>find2: ".$from_text."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
 				$statment_type = 1;
 				echo "<br>1</br>";
 			}
 
-			/*preg_match("/FROM\s+(.+?)\s+CITI/", $text, $matches);
+			preg_match("/FROM\s+(.+?)\s+CITI/", $text, $matches);
 			if (!empty($matches) && empty($from_text)){
 				$from_text = trim($matches[1]);
 				//$from_value = "<b>find2: ".$from_text."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
