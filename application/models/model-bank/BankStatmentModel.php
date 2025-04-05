@@ -15,7 +15,7 @@ class BankStatmentModel extends CI_Model
 		$result = $result->result();
 		foreach($result as $row){
 		
-			echo $row->id."----<br>";			
+			echo "ID." .$row->id."<br>";			
 			$upi_no = $orderid = $row->customer_reference;
 			$amount = $row->amount;
 			$date = $row->date;
@@ -55,7 +55,7 @@ class BankStatmentModel extends CI_Model
 				$text = str_replace($withSpace, ' ', $text);
 			}
 			$upi_no1 = substr($upi_no1,-1);
-			echo $text = str_replace($upi_no1.'TXN', 'TXN', $text);
+			$text = str_replace($upi_no1.'TXN', 'TXN', $text);
 			echo "<br>";
 			/**********************************************
 			$text = preg_replace("/KKBKH\d+/", "", $text);
