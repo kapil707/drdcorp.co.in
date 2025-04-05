@@ -38,7 +38,7 @@ class BankStatmentModel extends CI_Model
 			}
 			$length = strlen($upi_no);
 			for ($i = 1; $i < $length; $i++) {
-				$withSpace = substr($upi_no, 0, $i) . '  ' . substr($upi_no, $i);
+				$withSpace = substr($upi_no, 0, $i) . '/\s*\n/' . substr($upi_no, $i);
 				$text = str_replace($withSpace, ' ', $text);
 			}
 			/******************************* */
