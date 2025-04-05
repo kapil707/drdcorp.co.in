@@ -32,7 +32,7 @@ class BankStatmentModel extends CI_Model
 			$text = preg_replace("/KK\s*BKH\d+/", "", $text);
 			$text = preg_replace("/KKB\s*KH\d+/", "", $text);
 			$text = preg_replace("/KKBK\s*H\d+/", "", $text);
-			$text = preg_replace("/KKBKH\s*\d+/", "", $text);
+			$text = preg_replace("/KKBKH\s*\d+/", "", $text); */
 
 			$text = preg_replace("/9300966180/", '', $text);
 			$text = preg_replace("/\s*9300966180/", '', $text);
@@ -46,6 +46,7 @@ class BankStatmentModel extends CI_Model
 			$text = preg_replace("/93009661\s*80/", '', $text);
 			$text = preg_replace("/930096618\s*0/", '', $text);
 
+			/*
 			$text = preg_replace("/N\s*0/", '', $text);
 			$text = preg_replace("/N2632432758889/", '', $text);
 			$text = preg_replace("/N\s*2632432758889/", '', $text);
