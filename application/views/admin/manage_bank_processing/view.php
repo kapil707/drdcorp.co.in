@@ -390,6 +390,7 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 
 									<?php if(!empty($entry->statment_text)) { ?>
 										<b>Statment :</b> <?= $entry->statment_text; ?>
+										--(From Find By <?php echo $entry->statment_type ?>)
 									<?php } ?>
 								</div>
 
