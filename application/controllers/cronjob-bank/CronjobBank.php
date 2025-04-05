@@ -44,14 +44,17 @@ class CronjobBank extends CI_Controller
 		$text = "NEFT IN UTR CITIN25544458326 FROM G K MEDICOS BKID P25090272092 TXN REF NO";
 
 		echo $text;
+		echo "<br>";
 
 		$upi_no = "BKIDP25090272092";
 		$length = strlen($upi_no);
 
 		for ($i = 1; $i < $length; $i++) {
 			$withSpace = substr($upi_no, 0, $i) . ' ' . substr($upi_no, $i);
-			echo $withSpace . "<br>";
+			$text = str_replace($withSpace, ' ', $text);
 		}
+		echo $text;
+		echo "<br>";
 		die();
 
 		/*$row_from_text = "9911644379@PTYES";
