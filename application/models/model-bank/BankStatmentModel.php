@@ -52,7 +52,7 @@ class BankStatmentModel extends CI_Model
 			}
 			$length = strlen($upi_no1);
 			for ($i = 1; $i < $length; $i++) {
-				$withSpace = substr($upi_no1, 0, $i) . '  ' . substr($upi_nupi_no1o, $i);
+				$withSpace = substr($upi_no1, 0, $i) . '/\s*\n/' . substr($upi_nupi_no1o, $i);
 				$text = str_replace($withSpace, ' ', $text);
 			}
 			$upi_no2 = substr($upi_no,-1);
