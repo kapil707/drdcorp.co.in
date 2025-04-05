@@ -31,7 +31,7 @@ class BankStatmentModel extends CI_Model
 			// Step 2: Extract name between FROM and UPI
 			if (preg_match('/FROM\s+(.*?)\s+[A-Z]{4,6}\d{5,}/', $text, $matches)) {
 				$name = trim(preg_replace('/\s+/', ' ', $matches[1])); // Cleanup multiple spaces
-				$from_text = trim($name);
+				$from_text = $name . PHP_EOL;
 			}
 
 			/**********************************************
