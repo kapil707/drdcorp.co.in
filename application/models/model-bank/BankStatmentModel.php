@@ -28,10 +28,12 @@ class BankStatmentModel extends CI_Model
 			$text = str_replace('TX N REF NO', ' TXN REF NO', $text);
 			$from_text = "";
 
-			// Step 1: Join 5+ alphabets + space + 11+ digits into one string
-			$text = preg_replace_callback('/([A-Z]{4,6})\s+(\d{5,}[A-Z0-9]*)/', function($m) {
-				return $m[1] . $m[2];
-			}, $text);
+			// yha check karta ha upi no or oss ko remove karta ha string me say
+			$length = strlen($upi_no);
+			for ($i = 1; $i < $length; $i++) {
+				$withSpace = substr($upi_no, 0, $i) . ' ' . substr($upi_no, $i);
+				$text = str_replace($withSpace, ' ', $text);
+			}
 
 			/**********************************************
 			$text = preg_replace("/KKBKH\d+/", "", $text);
