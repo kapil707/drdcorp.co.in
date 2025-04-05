@@ -19,7 +19,8 @@ class BankStatmentModel extends CI_Model
 			$amount = $row->amount;
 			$date = $row->date;
 			$text = $statment_text = $row->narrative;
-			echo $text = str_replace(["\n", "\r",],"", $text);
+			$text = str_replace(["\n", "\r",],"", $text);
+			echo $text = preg_replace('/\s+/', '', $text);
 			die();
 			echo $text = str_replace(' TXN', 'TXN', $text);
 			$upi_no = $orderid = $row->customer_reference;
