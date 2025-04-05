@@ -25,7 +25,7 @@ class BankStatmentModel extends CI_Model
 			$upi_no = $orderid = $row->customer_reference;
 			$from_text = "";
 
-			/**********************************************
+			/**********************************************/
 			$text = preg_replace("/KKBKH\d+/", "", $text);
 			$text = preg_replace("/KK\s*BKH\d+/", "", $text);
 			$text = preg_replace("/KKB\s*KH\d+/", "", $text);
@@ -112,7 +112,7 @@ class BankStatmentModel extends CI_Model
 			$text = preg_replace('/HDF\s*CH.*?REF NO/', ' REF NO', $text);
 			$text = preg_replace('/HDFC\s*H.*?REF NO/', ' REF NO', $text);
 
-			$text = preg_replace('/SB2.*?-UPI/', ' UPI', $text);*/
+			$text = preg_replace('/SB2.*?-UPI/', ' UPI', $text);
 			
 			echo "<br>".$text;
 
