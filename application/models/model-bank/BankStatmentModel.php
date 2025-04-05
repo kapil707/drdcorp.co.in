@@ -40,7 +40,7 @@ class BankStatmentModel extends CI_Model
 			}
 			echo $text;
 			echo "<br>";
-
+			die();
 			/**********************************************
 			$text = preg_replace("/KKBKH\d+/", "", $text);
 			$text = preg_replace("/KK\s*BKH\d+/", "", $text);
