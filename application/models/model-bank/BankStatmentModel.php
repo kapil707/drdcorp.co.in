@@ -97,8 +97,8 @@ class BankStatmentModel extends CI_Model
 			$text = preg_replace('/AXOIC.*?REF NO/', ' REF NO', $text);
 			$text = preg_replace('/AXOI\s*C.*?REF NO/', ' REF NO', $text);
 
-			$text = preg_replace('/AXOIC.*?REF NO/', ' REF NO', $text);
-			$text = preg_replace('/AXOIC.*?REF NO/', ' REF NO', $text);
+			$text = preg_replace('/BKIDP.*?REF NO/', ' REF NO', $text);
+			$text = preg_replace('/BKID\s*P.*?REF NO/', ' REF NO', $text);
 
 			$text = preg_replace('/INDBH.*?REF NO/', ' REF NO', $text);
 			$text = preg_replace('/I\sNDBH.*?REF NO/', ' REF NO', $text);
