@@ -128,6 +128,14 @@ class BankStatmentModel extends CI_Model
 				echo "<br>0</br>";
 			}
 
+			preg_match('/FROM\s+(.*?)\s+[A-Z]{5}+\s*\d{11}/', $text, $matches);
+			if (!empty($matches) && empty($from_text)){
+				$from_text = trim($matches[1]);
+				//$from_value = "<b>find2: ".$from_text."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
+				$statment_type = 00;
+				echo "<br>00</br>";
+			}
+
 			preg_match('/FROM\s+(.*?)\s+[A-Z0-9]+\s*TXN REF NO/i', $text, $matches);
 			if (!empty($matches) && empty($from_text)){
 				$from_text = trim($matches[1]);
