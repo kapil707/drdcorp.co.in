@@ -152,7 +152,7 @@ class BankStatmentModel extends CI_Model
 				$from_text = trim($matches[1]);
 				//$from_value = "<b>find2: ".$from_text."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
 				$statment_type = 1;
-				echo "<br>1</br>";
+				echo "statment type:1</br>";
 			}
 
 			preg_match("/FROM\s+(.+?)\s+REF/", $text, $matches);
@@ -160,7 +160,7 @@ class BankStatmentModel extends CI_Model
 				$from_text = trim($matches[1]);
 				//$from_value = "<b>find2: ".$from_text."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
 				$statment_type = 2;
-				echo "<br>2</br>";
+				echo "statment type:2</br>";
 			}
 
 			preg_match("/FROM\s+(.+?)\s+CITI/", $text, $matches);
@@ -168,7 +168,7 @@ class BankStatmentModel extends CI_Model
 				$from_text = trim($matches[1]);
 				//$from_value = "<b>find2: ".$from_text."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
 				$statment_type = 3;
-				echo "<br>3</br>";
+				echo "statment type:3</br>";
 			}
 			
 			preg_match("/FROM\s+(.+?)\s*+PAYMENT/", $text, $matches);
@@ -176,7 +176,7 @@ class BankStatmentModel extends CI_Model
 				$from_text = trim($matches[1]);
 				//$from_value = "<b>find2: ".$from_text."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
 				$statment_type = 4;
-				echo "<br>4</br>";
+				echo "statment type:4</br>";
 			}
 
 			preg_match("/FROM\s+(.+?)\s+SENT/", $text, $matches);
@@ -184,7 +184,7 @@ class BankStatmentModel extends CI_Model
 				$from_text = trim($matches[1]);
 				//$from_value = "<b>find2: ".$from_text."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
 				$statment_type = 5;
-				echo "<br>5</br>";
+				echo "statment type:5</br>";
 			}
 
 			preg_match("/FROM\s+(.+?)\s+UPI/", $text, $matches);
@@ -192,7 +192,7 @@ class BankStatmentModel extends CI_Model
 				$from_text = trim($matches[1]);
 				//$from_value = "<b>find2: ".$from_text."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
 				$statment_type = 6;
-				echo "<br>6</br>";
+				echo "statment type:6</br>";
 			}
 
 			preg_match("/FROM\s+(.+?)\s+PAY/", $text, $matches);
@@ -200,7 +200,7 @@ class BankStatmentModel extends CI_Model
 				$from_text = trim($matches[1]);
 				//$from_value = "<b>find2: ".$from_text."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
 				$statment_type = 7;
-				echo "<br>7</br>";
+				echo "statment type:7</br>";
 			}
 			
 			preg_match("/FROM\s+(\d+)@\s+(\w+)/", $text, $matches);
@@ -211,7 +211,7 @@ class BankStatmentModel extends CI_Model
 				$from_text = str_replace("\n", "", $from_text);
 				//$from_value = "<b>find: ".$from_text."</b>"; // Output: 97926121865@PAYTM SAMEER S O KALLU NA
 				$statment_type = 8;
-				echo "<br>8</br>";
+				echo "statment type:8</br>";
 			}
 			
 			preg_match("/FROM\s+(\d+)\s+@\s*(\w+)/", $text, $matches);
@@ -222,7 +222,7 @@ class BankStatmentModel extends CI_Model
 				$from_text = str_replace("\n", "", $from_text);
 				//$from_value = "<b>find2: ".$from_text."</b>"; // Output: 97926121865@PAYTM SAMEER S O KALLU NA
 				$statment_type = 9;
-				echo "<br>9</br>";
+				echo "statment type:9</br>";
 			}
 
 			/*//preg_match("/FROM\s+(\w+)\d+@\s*(\w+)/", $text, $matches);
@@ -245,7 +245,7 @@ class BankStatmentModel extends CI_Model
 				$from_text = str_replace("\n", "", $from_text);
 				//$from_value = "<b>find4: ".$from_text."</b>"; // Output: 97926121865@PAYTM SAMEER S O KALLU NA
 				$statment_type = 11;
-				echo "<br>11</br>";
+				echo "statment type:11</br>";
 			}*/
 
 			preg_match("/FROM\s+([^\@]+)@\s*(\w+)/", $text, $matches);
@@ -256,7 +256,7 @@ class BankStatmentModel extends CI_Model
 				$from_text = str_replace("\n", "", $from_text);
 				//$from_value = "<b>find5: ".$from_text."</b>"; // Output: 97926121865@PAYTM SAMEER S O KALLU NA
 				$statment_type = 12;
-				echo "<br>12</br>";
+				echo "statment type:12</br>";
 			}
 			/*
 			preg_match("/FROM\s+(.*?)\s+PUNBQ/", $text, $matches);
@@ -267,7 +267,7 @@ class BankStatmentModel extends CI_Model
 				//$from_text = str_replace("\n", "", $from_text);
 				//$from_value = "<b>find6: ".$from_text."</b>"; // Output: 97926121865@PAYTM SAMEER S O KALLU NA
 				$statment_type = 13;
-				echo "<br>13</br>";
+				echo "statment type:13</br>";
 			}
 
 			preg_match("/FROM\s+([\w\s]+)\s+[A-Z0-9]+\s+REF NO/", $text, $matches);
@@ -278,7 +278,7 @@ class BankStatmentModel extends CI_Model
 				//$from_text = str_replace("\n", "", $from_text);
 				//$from_value = "<b>find6: ".$from_text."</b>"; // Output: 97926121865@PAYTM SAMEER S O KALLU NA
 				$statment_type = 14;
-				echo "<br>14</br>";
+				echo "statment type:14</br>";
 			}
 
 			preg_match("/FROM\s+(.*?)\s+CITI0000/", $text, $matches);
@@ -289,7 +289,7 @@ class BankStatmentModel extends CI_Model
 				//$from_text = str_replace("\n", "", $from_text);
 				//$from_value = "<b>find6: ".$from_text."</b>"; // Output: 97926121865@PAYTM SAMEER S O KALLU NA
 				$statment_type = 15;
-				echo "<br>15</br>";
+				echo "statment type:15</br>";
 			}*/
 
 			preg_match("/FROM\s+(.*?)\s+9300\d+/", $text, $matches);
@@ -300,7 +300,7 @@ class BankStatmentModel extends CI_Model
 				//$from_text = str_replace("\n", "", $from_text);
 				//$from_value = "<b>find6: ".$from_text."</b>"; // Output: 97926121865@PAYTM SAMEER S O KALLU NA
 				$statment_type = 16;
-				echo "<br>16</br>";
+				echo "statment type:16</br>";
 			}
 
 			/*
@@ -312,10 +312,10 @@ class BankStatmentModel extends CI_Model
 				//$from_text = str_replace("\n", "", $from_text);
 				//$from_value = "<b>find6: ".$from_text."</b>"; // Output: 97926121865@PAYTM SAMEER S O KALLU NA
 				$statment_type = 17;
-				echo "<br>17</br>";
+				echo "statment type:17</br>";
 			}*/
 
-			echo $from_text."<br>";
+			echo "find: $from_text <br>";
 			//die();
 
 			$amount = str_replace([",", ".00"], "", $amount);
