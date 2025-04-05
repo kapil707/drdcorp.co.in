@@ -23,9 +23,9 @@ class BankStatmentModel extends CI_Model
 			//$text = str_replace(["\n", "\r",],"", $text);
 			//$text = preg_replace('/\s*\n/', '', $text);
 			//$text = str_replace($upi_no, ' ', $text);
-			$text = str_replace(' TXN REF NO', 'TXN REF NO', $text);
-			$text = str_replace('T XN REF NO', 'TXN REF NO', $text);
-			$text = str_replace('TX N REF NO', 'TXN REF NO', $text);
+			$text = str_replace(' TXN REF NO', ' TXN REF NO', $text);
+			$text = str_replace('T XN REF NO', ' TXN REF NO', $text);
+			$text = str_replace('TX N REF NO', ' TXN REF NO', $text);
 			$from_text = "";
 
 			// Step 1: Join 5+ alphabets + space + 11+ digits into one string
