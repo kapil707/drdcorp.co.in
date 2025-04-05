@@ -23,20 +23,10 @@ class BankStatmentModel extends CI_Model
 			//$text = str_replace(["\n", "\r",],"", $text);
 			//$text = preg_replace('/\s*\n/', '', $text);
 			//$text = str_replace($upi_no, ' ', $text);
-			//$text = str_replace(' TXN REF NO', 'TXN REF NO', $text);
-			//$text = str_replace('T XN REF NO', 'TXN REF NO', $text);
-			//$text = str_replace('TX N REF NO', 'TXN REF NO', $text);
+			$text = str_replace(' TXN REF NO', 'TXN REF NO', $text);
+			$text = str_replace('T XN REF NO', 'TXN REF NO', $text);
+			$text = str_replace('TX N REF NO', 'TXN REF NO', $text);
 			$from_text = "";
-
-			$text = preg_replace_callback('/([A-Z]{4,6})\s+(\d{5,})/', function($m) {
-				return $m[1] . $m[2];
-			}, $text);
-
-			// Step 2: Extract name between FROM and UPI
-			if (preg_match('/FROM\s+(.*?)\s+[A-Z]{4,6}\d{5,}/', $text, $matches)) {
-				$name = trim(preg_replace('/\s+/', ' ', $matches[1])); // Cleanup multiple spaces
-				$from_text = $name;
-			}
 
 			/**********************************************
 			$text = preg_replace("/KKBKH\d+/", "", $text);
@@ -129,7 +119,7 @@ class BankStatmentModel extends CI_Model
 			$text = preg_replace('/SB2.*?-UPI/', ' UPI', $text);*/
 			
 			echo "<br>".$text;
-			/*
+			
 			preg_match('/FROM\s+(.*?)\s+[A-Z]{5}\d{11}/', $text, $matches);
 			if (!empty($matches) && empty($from_text)){
 				$from_text = trim($matches[1]);
