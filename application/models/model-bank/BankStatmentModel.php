@@ -20,7 +20,7 @@ class BankStatmentModel extends CI_Model
 			$date = $row->date;
 			$text = $statment_text = $row->narrative;
 			//$text = str_replace(["\n", "\r",],"", $text);
-			$text = preg_replace('/\s*\n/', '', $text);
+			//$text = preg_replace('/\s*\n/', '', $text);
 			$text = str_replace(' TXN REF NO', 'TXN REF NO', $text);
 			$text = str_replace('T XN REF NO', 'TXN REF NO', $text);
 			$text = str_replace('TX N REF NO', 'TXN REF NO', $text);
@@ -32,7 +32,7 @@ class BankStatmentModel extends CI_Model
 			$text = preg_replace("/KK\s*BKH\d+/", "", $text);
 			$text = preg_replace("/KKB\s*KH\d+/", "", $text);
 			$text = preg_replace("/KKBK\s*H\d+/", "", $text);
-			$text = preg_replace("/KKBKH\s*\d+/", "", $text); */
+			$text = preg_replace("/KKBKH\s*\d+/", "", $text); 
 
 			$text = preg_replace("/9300966180/", '', $text);
 			$text = preg_replace("/\s*9300966180/", '', $text);
