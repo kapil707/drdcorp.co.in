@@ -46,10 +46,10 @@ class CronjobBank extends CI_Controller
 		echo $text;
 
 		$upi_no = "BKIDP25090272092";
-		$length = strlen($upi);
+		$length = strlen($upi_no);
 
 		for ($i = 1; $i < $length; $i++) {
-			$withSpace = substr($upi, 0, $i) . ' ' . substr($upi, $i);
+			$withSpace = substr($upi_no, 0, $i) . ' ' . substr($upi_no, $i);
 			echo $withSpace . "<br>";
 		}
 		die();
