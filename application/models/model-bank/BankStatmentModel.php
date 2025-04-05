@@ -22,7 +22,7 @@ class BankStatmentModel extends CI_Model
 			$text = $statment_text = $row->narrative;
 			echo "full text: $text <br>";
 			echo "upi0: $upi_no <br>";
-			$text = str_replace(["\n", "\r",]," ", $text);
+			//$text = str_replace(["\n", "\r",]," ", $text);
 			//$text = preg_replace('/\s*\n/', ' ', $text);
 			$text = str_replace($upi_no, ' ', $text);
 			$text = str_replace(' TXN REF NO', ' TXN REF NO', $text);
