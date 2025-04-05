@@ -39,6 +39,19 @@ class BankStatmentModel extends CI_Model
 				$withSpace = substr($upi_no, 0, $i) . '  ' . substr($upi_no, $i);
 				$text = str_replace($withSpace, ' ', $text);
 			}
+			/******************************* */
+			//KK BKH2509190011 5TXN
+			$upi_no1 = substr($upi_no1, 0, -2);
+			$length = strlen($upi_no1);
+			for ($i = 1; $i < $length; $i++) {
+				$withSpace = substr($upi_no1, 0, $i) . ' ' . substr($upi_no1, $i);
+				$text = str_replace($withSpace, ' ', $text);
+			}
+			$length = strlen($upi_no1);
+			for ($i = 1; $i < $length; $i++) {
+				$withSpace = substr($upi_no1, 0, $i) . '  ' . substr($upi_nupi_no1o, $i);
+				$text = str_replace($withSpace, ' ', $text);
+			}
 			
 			/**********************************************
 			$text = preg_replace("/KKBKH\d+/", "", $text);
