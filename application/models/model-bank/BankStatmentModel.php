@@ -21,7 +21,9 @@ class BankStatmentModel extends CI_Model
 			$text = $statment_text = $row->narrative;
 			//$text = str_replace(["\n", "\r",],"", $text);
 			$text = preg_replace('/\s*\n/', '', $text);
-			echo $text = str_replace(' TXN', 'TXN', $text);
+			$text = str_replace(' TXN REF NO', 'TXN REF NO', $text);
+			$text = str_replace('T XN REF NO', 'TXN REF NO', $text);
+			$text = str_replace('TX N REF NO', 'TXN REF NO', $text);
 			$upi_no = $orderid = $row->customer_reference;
 			$from_text = "";
 
