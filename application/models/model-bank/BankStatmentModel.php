@@ -42,6 +42,8 @@ class BankStatmentModel extends CI_Model
 			/******************************* */
 			//KK BKH2509190011 5TXN
 			$upi_no1 = substr($upi_no, 0, -1);
+			echo "upi: ".$upi_no1;
+			echo "<br>";
 			$length = strlen($upi_no1);
 			for ($i = 1; $i < $length; $i++) {
 				$withSpace = substr($upi_no1, 0, $i) . ' ' . substr($upi_no1, $i);
