@@ -34,6 +34,8 @@ class BankStatmentModel extends CI_Model
 				$withSpace = substr($upi_no, 0, $i) . ' ' . substr($upi_no, $i);
 				$text = str_replace($withSpace, ' ', $text);
 			}
+			echo $text;
+			echo "<br>";
 
 			/**********************************************
 			$text = preg_replace("/KKBKH\d+/", "", $text);
