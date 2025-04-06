@@ -10,7 +10,7 @@ class BankProcessingModel extends CI_Model
 
 	public function get_processing(){
 		
-		$result = $this->BankModel->select_query("select * from tbl_bank_processing where process_status='0' limit 50");
+		$result = $this->BankModel->select_query("select * from tbl_bank_processing where process_status='0' limit 75");
 		$result = $result->result();
 		foreach($result as $row){
 
