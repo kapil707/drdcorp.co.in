@@ -76,7 +76,7 @@ class BankStatmentModel extends CI_Model
 			$text = str_replace($upi_no2."TXN", 'TXN', $text);
 			echo "text: $text <br>";
 			/******************************* */
-			// yha last 12 ko delete karta ha 
+			// yha last 1 ko delete karta ha 
 			$upi_no2 = substr($upi_no,-1);
 			echo "upi2: $upi_no2 <br>";
 			$text = str_replace($upi_no2."TXN", 'TXN', $text);
