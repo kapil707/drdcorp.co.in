@@ -60,7 +60,7 @@ class BankStatmentModel extends CI_Model
 			$text = str_replace($upi_no2."TXN", 'TXN', $text);
 			echo "text: $text <br>";
 			/******************************* */
-			//KK BKH2509190011 5TXN
+			//N 0922507454800 21TXN
 			$upi_no1 = substr($upi_no, 0, -2);
 			echo "upi1: $upi_no1 <br>";
 			$length = strlen($upi_no1);
