@@ -81,6 +81,24 @@ class CronjobBank extends CI_Controller
 		echo "upi2: $upi_no2 <br>";
 		$text = str_replace($upi_no2."TXN", 'TXN', $text);
 		echo "text: $text <br>";
+		/******************************* */
+		//N 0922507454800 21TXN
+		$upi_no1 = substr($upi_no, 0, -2);
+		echo "upi1: $upi_no1 <br>";
+		$length = strlen($upi_no1);
+		for ($i = 1; $i < $length; $i++) {
+			$withSpace = substr($upi_no1, 0, $i) . ' ' . substr($upi_no1, $i);
+			$text = str_replace($withSpace, ' ', $text);
+		}
+		$length = strlen($upi_no1);
+		for ($i = 1; $i < $length; $i++) {
+			$withSpace = substr($upi_no1, 0, $i) . '  ' . substr($upi_nupi_no1o, $i);
+			$text = str_replace($withSpace, ' ', $text);
+		}
+		$upi_no2 = substr($upi_no,-2);
+		echo "upi2: $upi_no2 <br>";
+		$text = str_replace($upi_no2."TXN", 'TXN', $text);
+		echo "text: $text <br>";
 		die();
 
 		/*$row_from_text = "9911644379@PTYES";
