@@ -13,7 +13,7 @@ class BankSMSModel extends CI_Model
 		//echo " get_sms";
 		$date = date('Y-m-d');
 
-		$result = $this->BankModel->select_query("select * from tbl_sms where status='0' limit 25");
+		$result = $this->BankModel->select_query("select * from tbl_sms where status='0' limit 100");
 		$result = $result->result();
 		foreach($result as $row){
 			echo $sms_text = $message_body = $row->message_body;
