@@ -77,10 +77,6 @@ class CronjobBank extends CI_Controller
 			$withSpace = substr($upi_no1, 0, $i) . '  ' . substr($upi_nupi_no1o, $i);
 			$text = str_replace($withSpace, ' ', $text);
 		}
-		$upi_no2 = substr($upi_no,-1);
-		echo "upi2: $upi_no2 <br>";
-		$text = str_replace($upi_no2."TXN", 'TXN', $text);
-		echo "text: $text <br>";
 		/******************************* */
 		//N 0922507454800 21TXN
 		$upi_no1 = substr($upi_no, 0, -2);
@@ -96,6 +92,11 @@ class CronjobBank extends CI_Controller
 			$text = str_replace($withSpace, ' ', $text);
 		}
 		$upi_no2 = substr($upi_no,-2);
+		echo "upi2: $upi_no2 <br>";
+		$text = str_replace($upi_no2."TXN", 'TXN', $text);
+		echo "text: $text <br>";
+
+		$upi_no2 = substr($upi_no,-1);
 		echo "upi2: $upi_no2 <br>";
 		$text = str_replace($upi_no2."TXN", 'TXN', $text);
 		echo "text: $text <br>";
