@@ -1,13 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class ExeBankWhatsApp extends CI_Controller
+class ExeBankSMS extends CI_Controller
 {
 	public function __construct(){
 		parent::__construct();
 		//Load model
 		$this->load->model("model-bank/BankModel");
 	}
-	
+
 	public function download() {
 		$jsonArray = array();
 		$items = "";
