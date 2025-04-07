@@ -52,8 +52,9 @@ class Api01 extends CI_Controller {
 			);
 		}else{
 			$response = array(
-				'success' => "0",
-				'message' => '502 error',
+				'success' => "1",
+				'message' => 'Data load successfully',
+				'items' => [],
 			);
 		}
 		
