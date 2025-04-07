@@ -52,43 +52,12 @@ $route['default_controller'] = 'main';
 $route['login'] = 'user/login';
 $route['logout'] = 'user/logout';
 
-
-$route['chemist/android/Api_mobile30/insert_temp_order/(:any)'] = 'android/Api_mobile30/insert_temp_order/$1';
-$route['chemist/android/Api_mobile30/get_online_cart/(:any)'] = 'android/Api_mobile30/get_online_cart/$1';
-$route['chemist/android/Api_mobile30/get_online_cart2/(:any)'] = 'android/Api_mobile30/get_online_cart2/$1';
-$route['chemist/android/Api_mobile30/delete_temp_order/(:any)'] = 'android/Api_mobile30/delete_temp_order/$1';
-$route['chemist/android/Api_mobile30/deleteall_temp_order/(:any)'] = 'android/Api_mobile30/deleteall_temp_order/$1';
-$route['chemist/android/Api_mobile30/save_order_to_server/(:any)'] = 'android/Api_mobile30/save_order_to_server/$1';
-
-
-$route['invoice/(:any)/(:any)'] = 'invoice/index/$1/$2';
-$route['invoice_download/(:any)/(:any)'] = 'invoice/invoice_download/$1/$2';
-$route['all_invoice'] = 'User/local_server_all_invoice';
-$route['pickedby'] = 'User/local_server_pickedby';
-$route['deliverby'] = 'User/local_server_deliverby';
-
-$route['category/(:any)'] = 'Category/index/$1';
-$route['category/medicine_item_wise/(:any)']= 'Category/medicine_item_wise/$1';
-$route['category/featured_brand/(:any)/(:any)']= 'Category/featured_brand/$1/$2';
-
 // setting route for admin
 $route['admin']='admin/admin';
 $route['admin/logout']='admin/admin/logout';
-//$route['admin'] = 'admin/auth';
-$route['index'] = 'index/auth';
-$route['autocomplete'] = 'index/auth/searchauto';
-$route['autocomplete-another'] = 'index/auth/searchanother';
-$route['get-data'] = 'index/auth/getting_value';
-$route['calculate-data'] = 'index/auth/calculate_data';
-$route['admin/dashboard2'] = 'admin/dashboard/index2';
-$route['adminlte'] = 'admin/auth';
-$route['adminlte/(:any)'] = 'admin/adminlte/$1';
-$route['myinv/(:any)/(:any)/(:any)'] = 'api3/myinv/$1/$2/$3';
 
 
 $route['check_sms'] = 'sms/index';
-$route['top_sales_medicines'] = 'top_sales_medicines/index';
 
-
-$route['404_override'] = '';
+$route['404_override'] = 'errors/custom_404';
 $route['translate_uri_dashes'] = FALSE;
