@@ -27,7 +27,7 @@ class ExeBankWhatsApp extends CI_Controller
 
 			$code_array = array();
 			foreach ($data as $record) {
-				$code_array[] = $record['message_id'];
+				$code_array[] = $record['_id'];
 				
 				$message_id = $record['message_id'];
 				$body = $record['body'];
