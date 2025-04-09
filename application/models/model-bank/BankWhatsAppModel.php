@@ -481,9 +481,10 @@ class BankWhatsAppModel extends CI_Model
 						$row1 = $row1->row();
 						if(!empty($row1)){
 							$text = trim($row1->text);
+							$text1 = str_replace('-',"", $text);
 							if(!empty($text) && !empty($from_text_find_chemist_new)){
 								//agar pura naam milay to he next prcess karta ha
-								if (strpos($text, $from_text_find_chemist_new) !== false) {
+								if (strpos($text1, $from_text_find_chemist_new) !== false) {
 									$whatsapp_chemist = $from_text_find_chemist_new;
 									echo "xx6";
 								} 
