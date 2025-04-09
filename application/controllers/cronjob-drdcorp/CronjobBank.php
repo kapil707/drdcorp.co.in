@@ -41,17 +41,18 @@ class CronjobBank extends CI_Controller
 
 	public function testing(){
 		
-		$text = "NEFT IN UTR CITIN25544554061 FROM KAPTON MEDICOS N 0922507454800 21TXN REF NO";
-		$upi_no = "N092250745480021";
+		$text = "NEFT IN UTR CITIN25547158484 FROM VIKRAM MEDICOS A 
+UBLH09821432415TXN REF NO Money Transfer";
+		$upi_no = "AUBLH09821432415";
 
 		echo "full text: $text <br>";
 		echo "upi0: $upi_no <br>";
-		$text = str_replace(["\n", "\r",]," ", $text);
 		$text = preg_replace('/\s*\n/', ' ', $text);
 		$text = str_replace($upi_no, ' ', $text);
 		$text = str_replace(' TXN REF NO', ' TXN REF NO', $text);
 		$text = str_replace('T XN REF NO', ' TXN REF NO', $text);
 		$text = str_replace('TX N REF NO', ' TXN REF NO', $text);
+		$from_text = "";
 		// yha check karta ha upi no or oss ko remove karta ha string me say
 		$length = strlen($upi_no);
 		for ($i = 1; $i < $length; $i++) {
@@ -91,11 +92,14 @@ class CronjobBank extends CI_Controller
 			$withSpace = substr($upi_no1, 0, $i) . '  ' . substr($upi_nupi_no1o, $i);
 			$text = str_replace($withSpace, ' ', $text);
 		}
+		/******************************* */
+		// yha last 2 ko delete karta ha 
 		$upi_no2 = substr($upi_no,-2);
 		echo "upi2: $upi_no2 <br>";
 		$text = str_replace($upi_no2."TXN", 'TXN', $text);
 		echo "text: $text <br>";
-
+		/******************************* */
+		// yha last 1 ko delete karta ha 
 		$upi_no2 = substr($upi_no,-1);
 		echo "upi2: $upi_no2 <br>";
 		$text = str_replace($upi_no2."TXN", 'TXN', $text);
