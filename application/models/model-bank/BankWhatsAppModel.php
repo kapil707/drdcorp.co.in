@@ -497,7 +497,6 @@ class BankWhatsAppModel extends CI_Model
 						$row1 = $row1->row();
 						if(!empty($row1)){
 							//445300982188
-							$whatsapp_body = $row1->text; 
 							$text = trim($row1->text);
 							$text1 = str_replace(["\n", "\r","-"," ",],"", $text);
 							if(!empty($text) && !empty($from_text_find_chemist_new)){
