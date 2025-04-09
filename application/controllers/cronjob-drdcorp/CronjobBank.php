@@ -41,8 +41,7 @@ class CronjobBank extends CI_Controller
 
 	public function testing(){
 		
-		$text = "NEFT IN UTR CITIN25547158484 FROM VIKRAM MEDICOS A 
-UBLH09821432415TXN REF NO Money Transfer";
+		$text = "NEFT IN UTR CITIN25547158484 FROM VIKRAM MEDICOS A   UBLH09821432415TXN REF NO Money Transfer";
 		$upi_no = "AUBLH09821432415";
 
 		echo "full text: $text <br>";
