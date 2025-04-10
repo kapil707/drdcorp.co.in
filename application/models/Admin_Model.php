@@ -30,8 +30,7 @@ class Admin_Model extends CI_Model
 					);
 					$this->Scheme_Model->insert_fun("tbl_login_time",$dt);
 
-					echo $user_type = $row->user_type;
-					die();
+					$user_type = $row->user_type;					
 					$user_type_title = $row->user_type_title;		
 					$this->load->library('session');
 
