@@ -4,25 +4,44 @@ class Admin_Model extends CI_Model
 {  
 	public function admin_login($username,$password)
 	{
-		$query = $this->db->query("select * from tbl_user where (email='$username' or username='$username') ");
+		$query = $this->db->query("select tbl_user.*,tbl_user_type.user_type_title from tbl_user left join tbl_user_type on tbl_user.user_type=tbl_user_type.id where (email='$username' or username='$username') ");
 		$row = $query->row();
 		if($row->email == $username or $row->username==$username)
 		{
-			//$row = $sql->row_array();
-			$user_password = $row->password;			
+			$user_id = $row->id;
+			$user_password = $row->password;
+			$system_ip = $this->input->ip_address();		
 			if($user_password ==$password)
 			{
 				if($row->status == "1")
 				{
 					$id = $row->id;
-					$last_login_time = $row->login_time;
-					if(empty($last_login_time)){
-						$last_login_time = time();
-					}
-					$login_time = time();
-					$this->db->query("update tbl_user set last_login_time='$last_login_time',login_time='$login_time' where id='$id'");
-					$user_type = $row->user_type;										$this->load->library('session');
-					$session_arr = array('user_id'=>$row->id,'name'=>$row->name,'user_email'=>$row->email,'username'=>$row->username,'user_type'=>$user_type,'user_password'=>$user_password,'last_login_time'=>$last_login_time,'image'=>$row->image);
+					
+					$timestamp = time();
+					$date = date("Y-m-d",$timestamp);
+					$time = date("H:i",$timestamp);
+
+					$dt = array(
+						'user_id'=>$user_id,
+						'date'=>$date,
+						'time'=>$time,
+						'timestamp'=>$timestamp,
+						'system_ip'=>$system_ip,
+					);
+					$this->Scheme_Model->insert_fun("tbl_login_time",$dt);
+
+					$user_type = $row->user_type;
+					$user_type_title = $row->user_type_title;		
+					$this->load->library('session');
+
+					$session_arr = array(
+						'user_id'=>$row->id,
+						'name'=>$row->name,
+						'user_email'=>$row->email,
+						'username'=>$row->username,
+						'user_type'=>$user_type,
+						'user_type_title'=>$user_type_title,
+						'user_password'=>$user_password,'last_login_time'=>$last_login_time,'image'=>$row->image);
 					$this->session->set_userdata($session_arr);
 					if($session_arr)
 					{
@@ -95,10 +114,11 @@ class Admin_Model extends CI_Model
 		/***********************************************/
 		$user_id = $this->session->userdata("user_id");
 		/***********************************************/
-		$time  = time();
-		$date = date("Y-m-d",$time);
-		$message = base64_encode($message);
-		$dt = array('user_id'=>$user_id,'message'=>$message,'date'=>$date,'time'=>$time,);
+		$timestamp = time();
+		$date = date("Y-m-d",$timestamp);
+		$time = date("H:i",$timestamp);
+		
+		$dt = array('user_id'=>$user_id,'message'=>$message,'date'=>$date,'time'=>$time,'timestamp'=>$timestamp,);
 		$this->Scheme_Model->insert_fun("tbl_activity_log",$dt);
 	}
 

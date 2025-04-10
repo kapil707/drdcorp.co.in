@@ -78,12 +78,13 @@ class Scheme_Model extends CI_Model
 	}
 	public function get_website_data($page_type)
 	{
-		$query = $this->db->query("select * from tbl_website where page_type='$page_type'")->row();
-		if($query->mydata=="")
+		$data = "";
+		$query = $this->db->query("select data from tbl_website where page_type='$page_type'")->row();
+		if(!empty($query->data))
 		{
-			$query->mydata = base64_encode("");
+			$data = $query->data;
 		}
-		return base64_decode($query->mydata);
+		return $data;
 	}
 
 	function select_fun_limit($tbl,$where,$get_limit='',$order_by='')
