@@ -480,9 +480,9 @@ class BankWhatsAppModel extends CI_Model
 						$row1 = $this->BankModel->select_query("SELECT (SELECT body FROM tbl_whatsapp_message WHERE from_number = wm.from_number AND REPLACE(REPLACE(REPLACE(REPLACE(TRIM(body), ' ', ''), '\\n', ''), '\\r', ''), '-', '') = '$from_text_find_chemist_new' AND FROM_UNIXTIME(timestamp) BETWEEN DATE_SUB(FROM_UNIXTIME(wm.timestamp), INTERVAL 7 MINUTE) AND DATE_ADD(FROM_UNIXTIME(wm.timestamp), INTERVAL 7 MINUTE) LIMIT 1) AS text FROM tbl_whatsapp_message AS wm WHERE wm.id = $whatsapp_id");
 						$row1 = $row1->row();
 						if(!empty($row1)){
-							$text = trim($row1->text);
+							echo $text = trim($row1->text);
 							$text1 = str_replace(["\n", "\r","-"," ",],"", $text);
-							if(!empty($text) && !empty($from_text_find_chemist_new)){
+							if(!empty($text1) && !empty($from_text_find_chemist_new)){
 								//agar pura naam milay to he next prcess karta ha
 								if (strpos($text1, $from_text_find_chemist_new) !== false) {
 									$whatsapp_chemist = $from_text_find_chemist_new;
@@ -499,7 +499,7 @@ class BankWhatsAppModel extends CI_Model
 							//445300982188
 							$text = trim($row1->text);
 							$text1 = str_replace(["\n", "\r","-"," ",],"", $text);
-							if(!empty($text) && !empty($from_text_find_chemist_new)){
+							if(!empty($text1) && !empty($from_text_find_chemist_new)){
 								//agar pura naam milay to he next prcess karta ha
 								if (strpos($text1, $from_text_find_chemist_new) !== false) {
 									$whatsapp_chemist = $from_text_find_chemist_new;
