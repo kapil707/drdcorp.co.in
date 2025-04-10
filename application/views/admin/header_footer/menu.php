@@ -15,7 +15,8 @@
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                     <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold"><?= $this->session->userdata("name"); ?></strong>
                      </span> <span class="text-muted text-xs block"><?php $user_type1 = $this->session->userdata("user_type"); ?>
-                     <?php echo str_replace("_"," ",$user_type1); ?><b class="caret"></b></span> </span> </a>
+					 <?php $user_type_title = $this->session->userdata("user_type_title"); ?>
+                     <?php echo $user_type_title; ?><b class="caret"></b></span> </span> </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
                         <li><a href="<?= base_url()?>admin/dashboard/edit_profile">Edit Profile</a></li>
                         <?php /* <li><a href="contacts.html">Contacts</a></li>
@@ -99,7 +100,7 @@
 				</ul>
 			</li>
 			<?php } 
-			$menu = $this->db->query("select DISTINCT tbl_permission_settings.page_type,sorting_order from tbl_permission_settings,tbl_permission_page where tbl_permission_settings.page_type=tbl_permission_page.page_type and user_type='$user_type' and (tbl_permission_settings.page_type='manage_bank_statment' or tbl_permission_settings.page_type='manage_bank_invoice' or tbl_permission_settings.page_type='manage_bank_user_chemist' or tbl_permission_settings.page_type='manage_bank_chemist' or tbl_permission_settings.page_type='manage_bank_whatsapp' or tbl_permission_settings.page_type='manage_bank_sms' or tbl_permission_settings.page_type='manage_bank_processing') GROUP BY tbl_permission_settings.page_type,sorting_order order by sorting_order asc")->result();
+			$menu = $this->db->query("select DISTINCT tbl_permission_settings.page_type,sorting_order from tbl_permission_settings,tbl_permission_page where tbl_permission_settings.page_type=tbl_permission_page.page_type and user_type='$user_type' and (tbl_permission_settings.page_type='manage_bank_statment' or tbl_permission_settings.page_type='manage_bank_chemist' or tbl_permission_settings.page_type='manage_bank_whatsapp' or tbl_permission_settings.page_type='manage_bank_sms' or tbl_permission_settings.page_type='manage_bank_processing') GROUP BY tbl_permission_settings.page_type,sorting_order order by sorting_order asc")->result();
 			if(!empty($menu)){
 			?>
 			<li <?php foreach($menu as $mymenu){ if($Page_menu==$mymenu->page_type) { ?> class="active" <?php } }?>>
@@ -285,38 +286,78 @@
 					<?php if($mymenu->page_type=="manage_website") { ?>
 					<li><a href="<?= base_url()?>admin/manage_website/add/title">Title</a>
 					</li>
+					<li><a href="<?= base_url()?>admin/manage_website/add/title2">Title2</a>
 					</li>
 					<li><a href="<?= base_url()?>admin/manage_website/add/logo">Logo</a>
 					</li>
 					<li><a href="<?= base_url()?>admin/manage_website/add/icon">Icon</a>
 					</li>
+					<li><a href="<?= base_url()?>admin/manage_website/add/defaultpassword">Default Password</a>
+					</li>
+					<li><a href="<?= base_url()?>admin/manage_website/add/mapapikey">Map Api Key</a>
+					</li>
+					<li><a href="<?= base_url()?>admin/manage_website/add/whatsapp_deviceid">Whatsapp Deviceid</a>
+					</li>
+					<li><a href="<?= base_url()?>admin/manage_website/add/whatsapp_key">Whatsapp Key</a>
+					</li>
+					<li><a href="<?= base_url()?>admin/manage_website/add/whatsapp_group1">Whatsapp Group1</a>
+					</li>
+					<li><a href="<?= base_url()?>admin/manage_website/add/whatsapp_group2">Whatsapp Group2</a>
+					</li>
+					<li><a href="<?= base_url()?>admin/manage_website/add/whatsapp_group3">Whatsapp Group3</a>
+					</li>
+					<li><a href="<?= base_url()?>admin/manage_website/add/under_construction">Under Construction</a>
+					</li>
+					<li><a href="<?= base_url()?>admin/manage_website/add/under_construction_message">Under Construction Message</a>
+					</li>
+					<li><a href="<?= base_url()?>admin/manage_website/add/medicine_icon">Medicine icon</a>
+					</li>
+					<li><a href="<?= base_url()?>admin/manage_website/add/corporate_url">Corporate Url</a>
+					</li>
+					<li><a href="<?= base_url()?>admin/manage_website/add/corporate_url_local">Corporate Url Local</a>
+					</li>
+					<li><a href="<?= base_url()?>admin/manage_website/add/default_title_text">Default Title Text</a>
+					</li>
+					<li><a href="<?= base_url()?>admin/manage_website/add/email_footer_text">Email Footer Text</a>
+					</li>
+					<li><a href="<?= base_url()?>admin/manage_website/add/whatsapp_footer_text">WhatsApp Footer Text</a>
+					</li>
+					<li><a href="<?= base_url()?>admin/manage_website/add/login_details_text">Login Details Text</a>
+					</li>
+					<li><a href="<?= base_url()?>admin/manage_website/add/default_place_order_text">Default Place Order Text</a>
+					</li>
+					<li><a href="<?= base_url()?>admin/manage_website/add/place_order_message">Place Order Message</a>
+					</li>
+					<li><a href="<?= base_url()?>admin/manage_website/add/terms_of_services">Terms of services</a>
+					</li>
+					<li><a href="<?= base_url()?>admin/manage_website/add/privacy_policy">Privacy policy</a>
+					</li>
+					<?php }
+					if($mymenu->page_type=="manage_email") { ?>
+					<li><a href="<?= base_url()?>admin/manage_email/view">Email Setting</a>
+					</li>
 					<?php } }?>
 				</ul>
 			</li>
 			<?php } 
-			$menu = $this->db->query("select DISTINCT tbl_permission_settings.page_type,sorting_order from tbl_permission_settings,tbl_permission_page where tbl_permission_settings.page_type=tbl_permission_page.page_type and user_type='$user_type' and (tbl_permission_settings.page_type='profile_management' or tbl_permission_settings.page_type='manage_users' or tbl_permission_settings.page_type='manage_user_type') GROUP BY tbl_permission_settings.page_type,sorting_order order by sorting_order asc")->result();
+			$menu = $this->db->query("select DISTINCT tbl_permission_settings.page_type,sorting_order from tbl_permission_settings,tbl_permission_page where tbl_permission_settings.page_type=tbl_permission_page.page_type and user_type='$user_type' and (tbl_permission_settings.page_type='profile_management' or tbl_permission_settings.page_type='manage_users' or tbl_permission_settings.page_type='manage_users_type') GROUP BY tbl_permission_settings.page_type,sorting_order order by sorting_order asc")->result();
 			if(!empty($menu)){ ?>
-			<li <?php if($Page_menu=="profile_management" || $Page_menu=="manage_users" || $Page_menu=="manage_user_type") { ?> class="active" <?php } ?>>
+			<li <?php if($Page_menu=="profile_management" || $Page_menu=="manage_users" || $Page_menu=="manage_users_type") { ?> class="active" <?php } ?>>
 				<a href="#">
 					<span class="nav-label">
 						<i class="fa fa-th-large"></i>
 						Manage Othres
 					</span><span class="fa arrow"></span>
 				</a>
-				<ul class="nav nav-second-level collapse">	
-				<?php 
-				foreach($menu as $mymenu){
-					if($mymenu->page_type=="profile_management") { ?>			
-					<li><a href="<?= base_url()?>admin/profile_management/permission_settings">Profile Management</a>
-					</li>
-					<?php }
-					if($mymenu->page_type=="manage_users") { ?>
-					<li><a href="<?= base_url()?>admin/manage_users/view">Users</a></li>
-					<?php }
-					if($mymenu->page_type=="manage_user_type") { ?>
-					<li><a href="<?= base_url()?>admin/manage_user_type/view">User Type</a>
-					</li>
-					<?php } } ?>
+				<ul class="nav nav-second-level collapse">
+					<?php
+					foreach($menu as $mymenu){
+						$row = $this->db->query("select page_title from  tbl_permission_page where page_type='$mymenu->page_type'")->row();
+						?>
+						<li>
+							<a href="<?= base_url()?>admin/<?php echo $mymenu->page_type ?>/view" <?php if($Page_menu==$mymenu->page_type) { ?> class="active" <?php }  ?>><?php echo $row->page_title;?></a>
+						</li>
+					<?php } ?>
 					<li><a href="<?= base_url()?>admin/logout">Logout</a>
 					</li>
 				</ul>
