@@ -1,12 +1,15 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Manage_website extends CI_Controller {
-	public $Page_title = "Manage Website";
-	public $Page_name  = "manage_website";
-	public $Page_view  = "manage_website";
-	public $Page_menu  = "manage_website";
-	public $page_controllers = "manage_website";
-	public $Page_tbl   = "tbl_website";
+	var $Page_title = "Manage Website";
+	var $Page_name  = "manage_website";
+	var $Page_view  = "manage_website";
+	var $Page_menu  = "manage_website";
+	var $page_controllers = "manage_website";
+	var $Page_tbl   = "tbl_website";
+	
+	var $Image_Width   = "500";
+	var $Image_Height  = "120";
 	public function index()
 	{
 		/******************session***********************/
@@ -22,10 +25,11 @@ class Manage_website extends CI_Controller {
 		$page_controllers 	= $this->page_controllers;
 		
 		$this->Admin_Model->permissions_check_or_set($Page_title,$Page_name,$user_type);
+		
+		redirect(base_url()."admin/dashboard");
 	}
 	public function add($page_type="")
 	{
-		error_reporting(0);
 		/******************session***********************/
 		$user_id = $this->session->userdata("user_id");
 		$user_type = $this->session->userdata("user_type");
@@ -52,8 +56,12 @@ class Manage_website extends CI_Controller {
 		
 		$tbl = $Page_tbl;
 		
-		$data['url_path'] = base_url()."uploads/$page_controllers/photo/";
-		$upload_path = "./uploads/$page_controllers/photo/";
+		$data['url_path'] 	= base_url()."uploads/$page_controllers/photo/main/";
+		$data['url_resize'] = base_url()."uploads/$page_controllers/photo/resize/";
+		$upload_path 		= "./uploads/$page_controllers/photo/main/";
+		$upload_resize 		= "./uploads/$page_controllers/photo/resize/";
+		$data["Image_Width"]  = $this->Image_Width;
+		$data["Image_Height"] = $this->Image_Height;
 		
 		$data["type"] = "text";
 		if($page_type=="title")
@@ -67,7 +75,7 @@ class Manage_website extends CI_Controller {
 			$data["type"] = "image";
 			$data["titlepg"] = "Website Logo";
 			$data["placeholderpg"] = "Website Logo";
-			$data["pagetextpg"] = "height : 50px & width : 150px";
+			$data["pagetextpg"] = "width : $this->Image_Width Px<br>Height : $this->Image_Height Px";
 		}
 		if($page_type=="icon")
 		{
@@ -76,169 +84,7 @@ class Manage_website extends CI_Controller {
 			$data["placeholderpg"] = "Website Icon";
 			$data["pagetextpg"] = "";
 		}
-		if($page_type=="topphone")
-		{
-			$data["titlepg"] = "Website Top Phone";
-			$data["placeholderpg"] = "Website Top Phone";
-			$data["pagetextpg"] = "";
-		}
-		if($page_type=="topemail")
-		{
-			$data["titlepg"] = "Website Top Email";
-			$data["placeholderpg"] = "Website Top Email";
-			$data["pagetextpg"] = "";
-		}
 		
-		if($page_type=="footeraboutus")
-		{
-			$data["titlepg"] = "Website Footer About Us";
-			$data["placeholderpg"] = "Website Footer About Us";
-			$data["pagetextpg"] = "";
-		}
-		
-		
-		if($page_type=="footeraddress")
-		{
-			$data["titlepg"] = "Website Footer Address";
-			$data["placeholderpg"] = "Website Footer Address";
-			$data["pagetextpg"] = "";
-		}
-		
-		if($page_type=="footeremail")
-		{
-			$data["titlepg"] = "Website Footer Email";
-			$data["placeholderpg"] = "Website Footer Email";
-			$data["pagetextpg"] = "";
-		}
-		
-		if($page_type=="footerphone")
-		{
-			$data["titlepg"] = "Website Footer Phone";
-			$data["placeholderpg"] = "Website Footer Phone";
-			$data["pagetextpg"] = "";
-		}
-		
-		if($page_type=="footerstayintouch")
-		{
-			$data["titlepg"] = "Website Footer Stay In Touch";
-			$data["placeholderpg"] = "Website Footer Stay In Touch";
-			$data["pagetextpg"] = "";
-		}
-		
-		if($page_type=="facebook")
-		{
-			$data["titlepg"] = "Website Facebook Link";
-			$data["placeholderpg"] = "Website Facebook Link";;
-			$data["pagetextpg"] = "";
-		}
-		
-		if($page_type=="twitter")
-		{
-			$data["titlepg"] = "Website Twitter Link";
-			$data["placeholderpg"] = "Website Twitter Link";;
-			$data["pagetextpg"] = "";
-		}
-		
-		if($page_type=="googleplus")
-		{
-			$data["titlepg"] = "Website Google + Link";
-			$data["placeholderpg"] = "Website Google + Link";;
-			$data["pagetextpg"] = "";
-		}
-		
-		if($page_type=="instagram")
-		{
-			$data["titlepg"] = "Website Instagram Link";
-			$data["placeholderpg"] = "Website Instagram Link";;
-			$data["pagetextpg"] = "";
-		}
-		
-		if($page_type=="watermarkimage")
-		{
-			$data["type"] = "image";
-			$data["titlepg"] = "Water Mark Image";
-			$data["placeholderpg"] = "Water Mark Image";
-			$data["pagetextpg"] = "";
-		}
-		
-		if($page_type=="footerimage")
-		{
-			$data["type"] = "image";
-			$data["titlepg"] = "Website Footer Image";
-			$data["placeholderpg"] = "Website Footer Image";
-			$data["pagetextpg"] = "height : 50px & width : 150px";
-		}
-		
-		if($page_type=="skype")
-		{
-			$data["titlepg"] = "Website skype";
-			$data["placeholderpg"] = "Website skype";
-			$data["pagetextpg"] = "";
-		}
-		
-		if($page_type=="footercopyright")
-		{
-			$data["titlepg"] = "Website Footer Copy Right";
-			$data["placeholderpg"] = "Website Footer Copy Right";
-			$data["pagetextpg"] = "";
-		}
-		
-		if($page_type=="meta_title")
-		{
-			$data["titlepg"] = "Website Meta Title";
-			$data["placeholderpg"] = "Website Meta Title";
-			$data["pagetextpg"] = "";
-		}
-		
-		if($page_type=="meta_keywords")
-		{
-			$data["titlepg"] = "Website Meta Keywords";
-			$data["placeholderpg"] = "Website Meta Keywords";
-			$data["pagetextpg"] = "";
-		}
-		
-		if($page_type=="meta_discription")
-		{
-			$data["titlepg"] = "Website Meta Discription";
-			$data["placeholderpg"] = "Website Meta Discription";
-			$data["pagetextpg"] = "";
-		}
-
-
-		if($page_type=="default_title_text")
-		{
-			$data["titlepg"] = "Default Title Title";
-			$data["placeholderpg"] = "Default Title Title";
-			$data["pagetextpg"] = "";
-		}
-
-		if($page_type=="email_footer_text")
-		{
-			$data["titlepg"] = "Email footer Title";
-			$data["placeholderpg"] = "Email footer Title";
-			$data["pagetextpg"] = "";
-		}
-
-		if($page_type=="whatsapp_footer_text")
-		{
-			$data["titlepg"] = "WhatsApp footer Title";
-			$data["placeholderpg"] = "WhatsApp footer Title";
-			$data["pagetextpg"] = "";
-		}
-
-		if($page_type=="default_place_order_text")
-		{
-			$data["titlepg"] = "Default Place Order Text";
-			$data["placeholderpg"] = "Default Place Order Text";
-			$data["pagetextpg"] = "";
-		}
-
-		if($page_type=="place_order_message")
-		{
-			$data["titlepg"] = "Place Order Message";
-			$data["placeholderpg"] = "Place Order Message";
-			$data["pagetextpg"] = "";
-		}
 		extract($_POST);
 		if(isset($Submit))
 		{
@@ -247,29 +93,36 @@ class Manage_website extends CI_Controller {
 			{
 				if (!empty($_FILES["image"]["name"]))
 				{
-					$x = $_FILES["image"]['name'];
-					$y = $_FILES["image"]['tmp_name'];
-					$mydata = $this->Scheme_Model->photo_up("photo",$x,$y,$upload_path);	
+					$this->Image_Model->uploadTo = $upload_path;
+					$photo = $this->Image_Model->upload($_FILES['image']);
+					$photo = str_replace($upload_path,"",$photo);
+					
+					$this->Image_Model->newPath = $upload_resize;
+					$this->Image_Model->newWidth  = $this->Image_Width;
+					$this->Image_Model->newHeight = $this->Image_Height;
+					$this->Image_Model->resize();
+				
+					$mydata = $photo;
 				}
 				else
 				{
 					$mydata = $old_mydata;
 				}
 			}
-			$mydata = base64_encode($mydata);
-			
-			$time = time();
-			$date = date("Y-m-d",$time);
+
+			$timestamp = time();
+			$date = date("Y-m-d",$timestamp);
+			$time = date("H:i",$timestamp);
 			
 			$result = "";
-			$dt = array('mydata'=>$mydata,'page_type'=>$page_type,'update_date'=>$date,'update_time'=>$time,);
+			$dt = array('data'=>$mydata,'page_type'=>$page_type,'date'=>$date,'time'=>$time,'datetime'=>$timestamp,);
 			
 			$change_text = "";
 			if($old_mydata!=$mydata)
 			{
 				if($data["type"]=="text")
 				{
-					$change_text = $data["titlepg"]." - ($old_mydata to ".base64_decode($mydata).")";
+					$change_text = $data["titlepg"]." - ($old_mydata to ".$mydata.")";
 				}
 				if($data["type"]=="image")
 				{
@@ -277,7 +130,7 @@ class Manage_website extends CI_Controller {
 					$url_path = "./uploads/$page_controllers/photo/";					
 					$query = $this->db->query("select * from $tbl where page_type='$page_type'");
 					$row11 = $query->row();
-					$filename = $url_path.base64_decode($row11->mydata);
+					$filename = $url_path.($row11->data);
 					unlink($filename);
 				}
 			}
@@ -319,11 +172,11 @@ class Manage_website extends CI_Controller {
 			}
 		}
 		$data["mydata"] = "";
-		$query = $this->db->query("select * from $tbl where page_type='$page_type'");
+		$query = $this->db->query("select data from $tbl where page_type='$page_type'");
 		$row = $query->row();
-		if(!empty($row->id))
+		if(!empty($row->data))
 		{
-			$data["mydata"] = base64_decode($row->mydata);
+			$data["mydata"] = $row->data;
 		}
 		
 		$this->load->view("admin/header_footer/header",$data);

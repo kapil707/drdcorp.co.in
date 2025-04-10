@@ -14,14 +14,14 @@
                         </option>
                         <?php
 						$user_type = $this->session->flashdata('user_type1');
-                        $query = $this->db->query("select * from tbl_user_type");
-                        $result1 = $query->result();
+						$user_id = $this->session->userdata("user_id");
+						$result1 = $this->db->query("select * from tbl_user_type where user_id='$user_id' and status=1")->result();
                         foreach($result1 as $row1)
                         {
                             ?>
-                            <option value="<?= $row1->user_type; ?>"
-                            <?php if($row1->user_type==$user_type){ echo "selected"; } ?>>
-                                <?= $row1->user_title; ?>               	
+                            <option value="<?= $row1->id; ?>"
+                            <?php if($row1->id==$user_type){ echo "selected"; } ?>>
+                                <?= $row1->user_type_title; ?>               	
                             </option>
                             <?php
                         }
@@ -49,7 +49,9 @@
 						$query = $this->db->query("select * from tbl_permission_settings where user_type='$user_type' and page_type='$page_type'");
 						$row2 = $query->row();
 						?>
-						<option value="<?= $row1->page_type; ?>" <?php if($row2->page_type==$row1->page_type) { echo "selected"; }?>>
+						<option value="<?= $row1->page_type; ?>" <?php 
+						if(!empty($row2)){
+						if($row2->page_type==$row1->page_type) { echo "selected"; } }?>>
 							<?= $row1->page_title; ?>
 						</option>
 						<?php

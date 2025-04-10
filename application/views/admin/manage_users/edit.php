@@ -1,6 +1,11 @@
 <div class="row">
 	<div class="col-xs-12">
-		<button type="button" class="btn btn-w-m btn-info" onclick="goBack();"><< Back</button>
+		<!-- <button type="button" class="btn btn-w-m btn-info" onclick="goBack();"><< Back</button> -->
+        <a href="<?php echo base_url(); ?>admin/<?php echo $Page_name ?>">
+            <button type="submit" class="btn btn-info">
+                << Back
+            </button>
+        </a>
 	</div>
     <div class="col-xs-12">
         <!-- PAGE CONTENT BEGINS -->
@@ -57,12 +62,13 @@
 							</option>
 							<?php
 							$user_type = $row->user_type;
-							$result1 = $this->db->query("select * from tbl_user_type where id!='1'")->result();
+                            $user_id = $this->session->userdata("user_id");
+							$result1 = $this->db->query("select * from tbl_user_type where user_id='$user_id' and status=1")->result();
 							foreach($result1 as $row1)
 							{
 								?>
-								<option value="<?= $row1->user_type; ?>" <?php if($user_type == $row1->user_type) { ?> selected="selected" <?php } ?>>
-								<?= $row1->user_title; ?>
+								<option value="<?= $row1->id; ?>" <?php if($user_type == $row1->id) { ?> selected="selected" <?php } ?>>
+								<?= $row1->user_type_title; ?>
 								</option>
 								<?php
 							}

@@ -1,12 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Manage_users extends CI_Controller {
-	var $Page_title = "Manage Users";
-	var $Page_name  = "manage_users";
-	var $Page_view  = "manage_users";
-	var $Page_menu  = "manage_users";
-	var $page_controllers = "manage_users";
-	var $Page_tbl   = "tbl_user";
+class Manage_users_type extends CI_Controller {
+	var $Page_title = "Manage Users Type";
+	var $Page_name  = "manage_users_type";
+	var $Page_view  = "manage_users_type";
+	var $Page_menu  = "manage_users_type";
+	var $page_controllers = "manage_users_type";
+	var $Page_tbl   = "tbl_user_type";
 	public function index()
 	{
 		$page_controllers = $this->page_controllers;
@@ -18,13 +18,16 @@ class Manage_users extends CI_Controller {
 		$user_id = $this->session->userdata("user_id");
 		$user_type = $this->session->userdata("user_type");
 		/******************session***********************/
+		
 		$Page_title = $this->Page_title;
 		$Page_name 	= $this->Page_name;
 		$Page_view 	= $this->Page_view;
 		$Page_menu 	= $this->Page_menu;
 		$Page_tbl 	= $this->Page_tbl;
 		$page_controllers 	= $this->page_controllers;
+		
 		$this->Admin_Model->permissions_check_or_set($Page_title,$Page_name,$user_type);
+		
 		$data['title1'] = $Page_title." || Add";
 		$data['title2'] = "Add";
 		$data['Page_name'] = $Page_name;
@@ -32,62 +35,49 @@ class Manage_users extends CI_Controller {
 		$this->breadcrumbs->push("Admin","admin/");
 		$this->breadcrumbs->push("$Page_title","admin/$page_controllers/");
 		$this->breadcrumbs->push("Add","admin/$page_controllers/add");
+		
 		$tbl = $Page_tbl;
+		
 		$data['url_path'] = base_url()."uploads/$page_controllers/photo/";
 		$upload_path = "./uploads/$page_controllers/photo/";
-		$system_ip = $this->input->ip_address();
-		$user_type = $status = "";
+		$upload_thumbs_path = "./uploads/$page_controllers/photo/thumbs/";
+		
 		extract($_POST);
 		if(isset($Submit))
 		{
 			$message_db = "";
 			$result = "";
+			/*$this->form_validation->set_rules('user_type_title','User Type Title',"required|is_unique[$tbl.user_type_title]",
+			array(
+			"is_unique"=>"<p class='font-bold  alert alert-danger m-b-sm'>This User Type already exists.</p>"
+			));
+			if ($this->form_validation->run() == FALSE)
+			{
+				$message = "Check Validation.";
+				$this->session->set_flashdata("message_type","warning");
+			}
+			else{*/
+				$timestamp = time();
+				$date = date("Y-m-d",$timestamp);
+				$time = date("H:i",$timestamp);
+				
+				$user_type = str_replace(" ","_",$user_type_title);
 
-			$timestamp = time();
-			$date = date("Y-m-d",$timestamp);
-			$time = date("H:i",$timestamp);
-			if (!empty($_FILES["image"]["name"]))
-			{
-				$name1 = "photo";
-				$x = $_FILES["image"]['name'];
-				$y = $_FILES["image"]['tmp_name'];
-				$image = "";//$this->Scheme_Model->photo_up($name1,$x,$y,$upload_path);
-			}		
-			else
-			{
-				$image = "";
-			}
-			
-			$password = md5($password);
-			$password = sha1($password);
-			$password = md5($password);
-			
-			$dt = array(
-				'user_id'=>$user_id,
-				'name'=>$name,
-				'email'=>$email,
-				'user_type'=>$user_type,
-				'password'=>$password,
-				'image'=>$image,
-				'status'=>$status,
-				'date'=>$date,
-				'time'=>$time,
-				'timestamp'=>$timestamp,
-				'system_ip'=>$system_ip,
-				);
-			$result = $this->Scheme_Model->insert_fun($tbl,$dt);
-			if($result)
-			{
-				$message_db = "($name) -  Add Successfully.";
-				$message = "Add Successfully.";
-				$this->session->set_flashdata("message_type","success");
-			}
-			else
-			{
-				$message_db = "($property_title) - Not Add.";
-				$message = "Not Add.";
-				$this->session->set_flashdata("message_type","error");
-			}
+				$dt = array('user_type_title'=>$user_type_title,'user_type'=>$user_type,'user_id'=>$user_id,'date'=>$date,'time'=>$time,'timestamp'=>$timestamp,'status'=>1);
+				$result = $this->Scheme_Model->insert_fun($tbl,$dt);
+				if($result)
+				{
+					$message_db = "($user_title) Add Successfully.";
+					$message = "Add Successfully.";
+					$this->session->set_flashdata("message_type","success");
+				}
+				else
+				{
+					$message_db = "$user_title Not Add.";
+					$message = "Not Add.";
+					$this->session->set_flashdata("message_type","error");
+				}
+			//}
 			if(!empty($message_db))
 			{
 				$message = $Page_title." - ".$message;
@@ -101,6 +91,7 @@ class Manage_users extends CI_Controller {
 				}
 			}
 		}
+		
 		$this->load->view("admin/header_footer/header",$data);
 		$this->load->view("admin/$Page_view/add",$data);
 		$this->load->view("admin/header_footer/footer",$data);
@@ -111,13 +102,16 @@ class Manage_users extends CI_Controller {
 		$user_id = $this->session->userdata("user_id");
 		$user_type = $this->session->userdata("user_type");
 		/******************session***********************/
+		
 		$Page_title = $this->Page_title;
 		$Page_name 	= $this->Page_name;
 		$Page_view 	= $this->Page_view;
 		$Page_menu 	= $this->Page_menu;
 		$Page_tbl 	= $this->Page_tbl;
 		$page_controllers 	= $this->page_controllers;
+		
 		$this->Admin_Model->permissions_check_or_set($Page_title,$Page_name,$user_type);
+		
 		$data['title1'] = $Page_title." || View";
 		$data['title2'] = "View";
 		$data['Page_name'] = $Page_name;
@@ -125,29 +119,31 @@ class Manage_users extends CI_Controller {
 		$this->breadcrumbs->push("Admin","admin/");
 		$this->breadcrumbs->push("$Page_title","admin/$page_controllers/");
 		$this->breadcrumbs->push("View","admin/$page_controllers/view");
+		
 		$tbl = $Page_tbl;
-		$data['url_path'] = base_url()."uploads/$page_controllers/photo/";
-		$upload_path = "./uploads/$page_controllers/photo/";
-
+		
 		$this->load->view("admin/header_footer/header",$data);
 		$this->load->view("admin/$Page_view/view",$data);
 		$this->load->view("admin/header_footer/footer",$data);
 		$this->load->view("admin/$Page_view/footer2",$data);
 	}
-
+	
 	public function edit($id)
 	{
 		/******************session***********************/
 		$user_id = $this->session->userdata("user_id");
 		$user_type = $this->session->userdata("user_type");
 		/******************session***********************/
+		
 		$Page_title = $this->Page_title;
 		$Page_name 	= $this->Page_name;
 		$Page_view 	= $this->Page_view;
 		$Page_menu 	= $this->Page_menu;
 		$Page_tbl 	= $this->Page_tbl;
 		$page_controllers 	= $this->page_controllers;
+		
 		$this->Admin_Model->permissions_check_or_set($Page_title,$Page_name,$user_type);
+		
 		$data['title1'] = $Page_title." || Edit";
 		$data['title2'] = "Edit";
 		$data['Page_name'] = $Page_name;
@@ -155,82 +151,59 @@ class Manage_users extends CI_Controller {
 		$this->breadcrumbs->push("Edit","admin/");
 		$this->breadcrumbs->push("$Page_title","admin/$page_controllers/");
 		$this->breadcrumbs->push("Edit","admin/$page_controllers/edit");
+		
 		$tbl = $Page_tbl;
+		
 		$data['url_path'] = base_url()."uploads/$page_controllers/photo/";
 		$upload_path = "./uploads/$page_controllers/photo/";
 		$upload_thumbs_path = "./uploads/$page_controllers/photo/thumbs/";
-		$system_ip = $this->input->ip_address();
+		
 		extract($_POST);
 		if(isset($Submit))
 		{
-			$message_db = "";			
+			$message_db = "";
 			$result = "";
+			/*if($old_user_type_title!=$user_type_title)
+			{
+				$this->form_validation->set_rules('user_type_title','User Type Title',"required|is_unique[$tbl.user_type_title]",
+				array(
+					"is_unique"=>"<p class='font-bold  alert alert-danger m-b-sm'>This User Type already exists.</p>"
+				));
+			}
+			else
+			{
+				$this->form_validation->set_rules('user_type_title','User Type',"required");
+			}*/
 
-			$timestamp = time();
-			$date = date("Y-m-d",$timestamp);
-			$time = date("H:i",$timestamp);
-
-			$where = array('id'=>$id);
-			if (!empty($_FILES["image"]["name"]))
+			/*if ($this->form_validation->run() == FALSE)
 			{
-				$img = "image";			
-				$url_path = "./uploads/$page_controllers/photo/";
-				$query = $this->db->query("select * from $tbl where id='$id'");
-				$row11 = $query->row();
-				$filename = $url_path."p".$row11->$img;
-				unlink($filename);
+				$message = "Check Validation.";
+				$this->session->set_flashdata("message_type","warning");
+			}
+			else
+			{*/	
+				$timestamp = time();
+				$date = date("Y-m-d",$timestamp);
+				$time = date("H:i",$timestamp);
+					
+				$user_type = str_replace(" ","_",$user_type_title);
 				
-				$this->Image_Model->uploadTo = $upload_path;
-				$image = $this->Image_Model->upload($_FILES['image']);
-				$image = str_replace($upload_path,"",$image);
-				
-				$this->Image_Model->newPath = $upload_resize;
-				$this->Image_Model->newWidth = 1024;
-				$this->Image_Model->newHeight = 250;
-				$this->Image_Model->resize();
-			}		
-			else
-			{
-				$image = $old_image;
-			}
-			if($password!="")
-			{
-				$password = md5($password);
-				$password = sha1($password);
-				$password = md5($password);
-			}
-			else
-			{
-				$password = $old_password;
-			}
-			
-			$dt = array(
-				'user_id'=>$user_id,
-				'name'=>$name,
-				'email'=>$email,
-				'user_type'=>$user_type,
-				'password'=>$password,
-				'image'=>$image,
-				'status'=>$status,
-				'date'=>$date,
-				'time'=>$time,
-				'timestamp'=>$timestamp,
-				'system_ip'=>$system_ip,
-				);
-			$result = $this->Scheme_Model->edit_fun($tbl,$dt,$where);
-			$change_text = $title." - ($change_text)";
-			if($result)
-			{
-				$message_db = "$change_text - Edit Successfully.";
-				$message = "Edit Successfully.";
-				$this->session->set_flashdata("message_type","success");
-			}
-			else
-			{
-				$message_db = "$change_text - Not Add.";
-				$message = "Not Add.";
-				$this->session->set_flashdata("message_type","error");
-			}
+				$dt = array('user_type_title'=>$user_type_title,'user_type'=>$user_type,'user_id'=>$user_id,'date'=>$date,'time'=>$time,'timestamp'=>$timestamp,'status'=>1);
+				$where = array('id'=>$id);
+				$result = $this->Scheme_Model->edit_fun($tbl,$dt,$where);
+				if($result)
+				{
+					$message_db = "($old_user_title to $user_title) - Edit Successfully.";
+					$message = "Edit Successfully.";
+					$this->session->set_flashdata("message_type","success");
+				}
+				else
+				{
+					$message_db = "$old_user_title to $user_title - Not Add.";
+					$message = "Not Add.";
+					$this->session->set_flashdata("message_type","error");
+				}
+			//}
 			if(!empty($message_db))
 			{
 				$message = $Page_title." - ".$message;
@@ -253,22 +226,25 @@ class Manage_users extends CI_Controller {
 		$this->load->view("admin/$Page_view/edit",$data);
 		$this->load->view("admin/header_footer/footer",$data);
 	}
+	
 	public function delete_rec()
 	{
 		$id = $_POST["id"];
 		$Page_title = $this->Page_title;
 		$Page_tbl = $this->Page_tbl;
+		
 		$query = $this->db->query("select * from $Page_tbl where id='$id'");
 		$row1 = $query->row();
-		$name = ucfirst($row1->name);
+		$name = ucfirst($row1->user_title);
+		
 		$result = $this->db->query("delete from $Page_tbl where id='$id'");
 		if($result)
 		{
-			$message = "$name Delete Successfully.";
+			$message = "$name - Delete Successfully.";
 		}
 		else
 		{
-			$message = "$name Not Delete.";
+			$message = "$name - Not Delete.";
 		}
 		$message = $Page_title." - ".$message;
 		$this->Admin_Model->Add_Activity_log($message);
@@ -284,15 +260,16 @@ class Manage_users extends CI_Controller {
 
 		$user_id = $this->session->userdata("user_id");
 
-		$query  = $this->db->query("select $Page_tbl.*,tbl_user_type.user_type_title as user_type_title from $Page_tbl left join tbl_user_type on tbl_user_type.id=$Page_tbl.user_type where $Page_tbl.user_id='$user_id'");
+		$query  = $this->db->query("select * from $Page_tbl where user_id='$user_id'");
   		$result = $query->result();
 		foreach($result as $row) {
 
 			$sr_no = $i++;
 			$id = $row->id;
 			
-			$user_name = $row->name;
 			$user_type_title = $row->user_type_title;
+			$user_type 	= $row->user_type;
+			$isdefault 	= $row->isdefault;
 			
 			$timestamp = $row->timestamp;
 			if(empty($timestamp)){
@@ -303,8 +280,9 @@ class Manage_users extends CI_Controller {
 			$dt = array(
 				'sr_no' => $sr_no,
 				'id' => $id,
-				'user_name' => $user_name,
 				'user_type_title' => $user_type_title,
+				'user_type' => $user_type,
+				'isdefault' => $isdefault,
 				'timestamp' => $timestamp,
 			);
 			$jsonArray[] = $dt;
