@@ -11,7 +11,7 @@ class BankStatmentModel extends CI_Model
 	public function get_statment(){
 
 		//echo " get_statment";
-		$result = $this->BankModel->select_query("select * from tbl_statment where status='0' limit 100");
+		$result = $this->BankModel->select_query("select * from tbl_statment where status='0' limit 250");
 		$result = $result->result();
 		foreach($result as $row){
 		
