@@ -414,7 +414,7 @@ class BankWhatsAppModel extends CI_Model
 			$id = $row->id;
 			$whatsapp_id = trim($row->whatsapp_id);
 			$whatsapp_body = trim($row->body);
-			$whatsapp_body = str_replace(["\n", "\r", " "], "", $whatsapp_body);
+			$whatsapp_body1 = str_replace(["\n", "\r", " "], "", $whatsapp_body);
 			$whatsapp_chemist = trim($row->body);
 			$from_number = $row->from_number;
 			$from_text_find_chemist = $row->from_text_find_chemist;
@@ -422,20 +422,20 @@ class BankWhatsAppModel extends CI_Model
 
 			$from_text_find_chemist = str_replace("/", " || ",$from_text_find_chemist);
 			$parts = explode(" || ", $from_text_find_chemist);
-			if (in_array($whatsapp_body, $parts)){
+			if (in_array($whatsapp_body1, $parts)){
 				echo "milgaya array me say he";
 			}else{
 				foreach($parts as $from_text_find_chemist_new) {
 					
-					if(!empty($whatsapp_body)  && !empty($from_text_find_chemist_new)){
+					if(!empty($whatsapp_body1)  && !empty($from_text_find_chemist_new)){
 						//agar body m chemist id nahi aa rahi ha to next say find karta ha yha
-						if(strtolower($whatsapp_body)!=strtolower($from_text_find_chemist_new)){
+						if(strtolower($whatsapp_body1)!=strtolower($from_text_find_chemist_new)){
 							$whatsapp_chemist = "";
 							echo "xx1";
 						}
-						if(empty($whatsapp_body)){
+						if(empty($whatsapp_body1)){
 							//agar pura naam milay to he next prcess karta ha
-							if (strpos($whatsapp_body, $from_text_find_chemist_new) !== false) {
+							if (strpos($whatsapp_body1, $from_text_find_chemist_new) !== false) {
 								echo $whatsapp_chemist = $from_text_find_chemist_new;
 								echo "xx2";
 							} 
@@ -520,8 +520,6 @@ class BankWhatsAppModel extends CI_Model
 				$whatsapp_chemist = "";
 				$whatsapp_recommended = $whatsapp_body;
 			}
-
-			//$whatsapp_chemist = str_replace(["\n", "\r", " "], "", $whatsapp_chemist);
 
 			$where = array(
 				'id' => $id,
