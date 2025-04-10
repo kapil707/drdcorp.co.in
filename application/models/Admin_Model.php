@@ -30,7 +30,8 @@ class Admin_Model extends CI_Model
 					);
 					$this->Scheme_Model->insert_fun("tbl_login_time",$dt);
 
-					$user_type = $row->user_type;
+					echo $user_type = $row->user_type;
+					die();
 					$user_type_title = $row->user_type_title;		
 					$this->load->library('session');
 
@@ -41,7 +42,8 @@ class Admin_Model extends CI_Model
 						'username'=>$row->username,
 						'user_type'=>$user_type,
 						'user_type_title'=>$user_type_title,
-						'user_password'=>$user_password,'last_login_time'=>$last_login_time,'image'=>$row->image);
+						'user_password'=>$user_password,'last_login_time'=>$last_login_time,
+						'image'=>$row->image);
 					$this->session->set_userdata($session_arr);
 					if($session_arr)
 					{
