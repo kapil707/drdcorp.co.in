@@ -115,7 +115,7 @@ class Manage_website extends CI_Controller {
 			$time = date("H:i",$timestamp);
 			
 			$result = "";
-			$dt = array('data'=>$mydata,'page_type'=>$page_type,'date'=>$date,'time'=>$time,'datetime'=>$timestamp,);
+			$dt = array('data'=>$mydata,'page_type'=>$page_type,'date'=>$date,'time'=>$time,'timestamp'=>$timestamp,);
 			
 			$change_text = "";
 			if($old_mydata!=$mydata)
