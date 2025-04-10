@@ -485,7 +485,7 @@ class BankWhatsAppModel extends CI_Model
 							if(!empty($text1) && !empty($from_text_find_chemist_new)){
 								//agar pura naam milay to he next prcess karta ha
 								echo $from_text_find_chemist_new;
-								if (strpos($text1, $from_text_find_chemist_new) !== false) {
+								if (strpos(strtolower($text1), strtolower($from_text_find_chemist_new)) !== false) {
 									$whatsapp_chemist = $from_text_find_chemist_new;
 									echo "xx6";
 								} 
@@ -502,7 +502,7 @@ class BankWhatsAppModel extends CI_Model
 							$text1 = str_replace(["\n", "\r","-"," ",],"", $text);
 							if(!empty($text1) && !empty($from_text_find_chemist_new)){
 								//agar pura naam milay to he next prcess karta ha
-								if (strpos($text1, $from_text_find_chemist_new) !== false) {
+								if (strpos(strtolower($text1), strtolower($from_text_find_chemist_new)) !== false) {
 									$whatsapp_chemist = $from_text_find_chemist_new;
 									echo "xx7";
 								} 
