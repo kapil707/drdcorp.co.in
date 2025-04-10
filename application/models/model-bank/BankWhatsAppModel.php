@@ -424,6 +424,7 @@ class BankWhatsAppModel extends CI_Model
 			$parts = explode(" || ", $from_text_find_chemist);
 			if (in_array($whatsapp_body1, $parts)){
 				echo "milgaya array me say he";
+				$whatsapp_chemist = str_replace(["\n", "\r","-"," ",],"", $whatsapp_chemist);
 			}else{
 				foreach($parts as $from_text_find_chemist_new) {
 					
@@ -484,7 +485,6 @@ class BankWhatsAppModel extends CI_Model
 							$text1 = str_replace(["\n", "\r","-"," ",],"", $text);
 							if(!empty($text1) && !empty($from_text_find_chemist_new)){
 								//agar pura naam milay to he next prcess karta ha
-								echo $from_text_find_chemist_new;
 								if (strpos(strtolower($text1), strtolower($from_text_find_chemist_new)) !== false) {
 									$whatsapp_chemist = $from_text_find_chemist_new;
 									echo "xx6";
