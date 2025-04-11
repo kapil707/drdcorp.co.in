@@ -5,8 +5,8 @@
     	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title><?= $this->Scheme_Model->get_website_data("title") ;?> | Login</title>
         
-        <link rel="shortcut icon" href="<?= base_url()?>/uploads/manage_website/<?= $this->Scheme_Model->get_website_data("icon") ;?>" type="image/x-icon">
-        <link rel="icon" href="<?= base_url()?>/uploads/manage_website/<?= $this->Scheme_Model->get_website_data("icon") ;?>" type="image/x-icon">
+        <link rel="shortcut icon" href="<?= base_url()?>/uploads/manage_website/photo/main/<?= $this->Scheme_Model->get_website_data("icon") ;?>" type="image/x-icon">
+        <link rel="icon" href="<?= base_url()?>/uploads/manage_website/photo/main/<?= $this->Scheme_Model->get_website_data("icon") ;?>" type="image/x-icon">
         
         <link href="<?= base_url()?>assets/css/bootstrap.min.css" rel="stylesheet">
         <link href="<?= base_url()?>assets/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -18,7 +18,7 @@
     <div class="middle-box text-center loginscreen animated fadeInDown">
         <div>
             <div>
-				<img alt="image" class="" src="<?= base_url()?>uploads/manage_website/photo/<?= $this->Scheme_Model->get_website_data("logo") ;?>" width="120" />
+				<img alt="image" class="" src="<?= base_url()?>uploads/manage_website/photo/main/<?= $this->Scheme_Model->get_website_data("logo") ;?>" width="120" />
                 <h4 class="logo-name1">VP-Admin Panel</h4>
             </div>
             <p>Website administration area public are prohibited!.
