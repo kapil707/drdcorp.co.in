@@ -41,7 +41,7 @@ class Admin_Model extends CI_Model
 						'username'=>$row->username,
 						'user_type'=>$user_type,
 						'user_type_title'=>$user_type_title,
-						'user_password'=>$user_password,'last_login_time'=>$last_login_time,
+						'user_password'=>$user_password,
 						'image'=>$row->image);
 					$this->session->set_userdata($session_arr);
 					if($session_arr)
