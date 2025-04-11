@@ -5,8 +5,8 @@
     	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title><?= $this->Scheme_Model->get_website_data("title") ;?> | 404 page not found</title>
         
-        <link rel="shortcut icon" href="<?= base_url()?>/uploads/manage_website/<?= $this->Scheme_Model->get_website_data("icon") ;?>" type="image/x-icon">
-        <link rel="icon" href="<?= base_url()?>/uploads/manage_website/<?= $this->Scheme_Model->get_website_data("icon") ;?>" type="image/x-icon">
+        <link rel="shortcut icon" href="<?= base_url()?>/uploads/manage_website/photo/main/<?= $this->Scheme_Model->get_website_data("icon") ;?>" type="image/x-icon">
+        <link rel="icon" href="<?= base_url()?>/uploads/manage_website/photo/main/<?= $this->Scheme_Model->get_website_data("icon") ;?>" type="image/x-icon">
         
 	</head>
 	<body class="">
@@ -16,7 +16,7 @@
 				  <div class="login-main-container">
 					  <div class="thankyou-wrapper">
 							<h1>
-							<img alt="image" class="" src="<?= base_url()?>uploads/manage_website/photo/<?= $this->Scheme_Model->get_website_data("logo") ;?>" width="120" /></h1>
+							<img alt="image" class="" src="<?= base_url()?>uploads/manage_website/photo/main/<?= $this->Scheme_Model->get_website_data("logo") ;?>" width="120" /></h1>
 							<h1>404 Page Not Found</h1>
 							<p>The page you requested could not be found.</p>
 							<a href="<?php echo base_url(); ?>">Back to home</a>
