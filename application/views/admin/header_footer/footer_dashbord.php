@@ -1,6 +1,6 @@
 				<div class="footer">
                      <div class="pull-right">
-						Powered by Vp-Admin || Kapil707 
+						Powered by Vp-Admin || Kapil Kumar Sharma 
 					</div>
 					<div>
 						All rights are reserved  &copy; <?php echo date("Y") ?>

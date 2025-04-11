@@ -5,7 +5,7 @@
                 </div>
                 <div class="footer">
                      <div class="pull-right">
-						Powered by Kapil Kumar Sharma&nbsp; &nbsp; &nbsp; &nbsp; 
+					 	Powered by Vp-Admin || Kapil Kumar Sharma  
 					</div>
 					<div>
 						All rights are reserved  &copy; <?php echo date("Y") ?>

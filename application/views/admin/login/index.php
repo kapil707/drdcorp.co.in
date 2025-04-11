@@ -46,7 +46,7 @@
     </div>
     <div class="row" style="background: none repeat scroll 0 0 white;border-top: 1px solid #e7eaec;bottom: 0;left: 0;padding: 10px 20px;position: fixed;right: 0;">
         <div class="pull-right">
-            Powered by Vp-Panel&nbsp; &nbsp; &nbsp; &nbsp; 
+            Powered by Vp-Admin || Kapil Kumar Sharma 
         </div>
         <div>
             All rights are reserved  &copy; <?php echo date("Y") ?>
