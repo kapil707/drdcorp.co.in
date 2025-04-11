@@ -146,7 +146,8 @@ class Dashboard extends CI_Controller {
 			$this->Admin_Model->Add_Activity_log($message);
 			if($result)
 			{
-				redirect(base_url()."admin/$page_controllers/edit_profile");
+				redirect(current_url());
+				//redirect(base_url()."admin/$page_controllers/edit_profile");
 			}
 		}		
 
