@@ -72,9 +72,10 @@ class Dashboard extends CI_Controller {
 		$this->breadcrumbs->push("Edit Profile","admin/$page_controllers/add");	
 
 		$tbl = $Page_tbl;
-		$data['url_path'] = base_url()."uploads/manage_users/photo/";
-		$upload_path = "./uploads/manage_users/photo/";
-		$upload_thumbs_path = "./uploads/manage_users/photo/thumbs/";		
+		$data['url_path'] 	= base_url()."uploads/$page_controllers/photo/main/";
+		$data['url_resize'] = base_url()."uploads/$page_controllers/photo/resize/";
+		$upload_path 		= "./uploads/$page_controllers/photo/main/";
+		$upload_resize 		= "./uploads/$page_controllers/photo/resize/";
 
 		extract($_POST);
 		if(isset($Submit))
@@ -108,10 +109,16 @@ class Dashboard extends CI_Controller {
 				$image = "";
 				if (!empty($_FILES["photo"]["name"]))
 				{
-					$name1 = "photo";
-					$x = $_FILES["photo"]['name'];
-					$y = $_FILES["photo"]['tmp_name'];
-					$image = $this->Scheme_Model->photo_up($name1,$x,$y,$upload_path,$upload_thumbs_path,"60");
+					$this->Image_Model->uploadTo = $upload_path;
+					$photo = $this->Image_Model->upload($_FILES['image']);
+					$photo = str_replace($upload_path,"",$photo);
+					
+					$this->Image_Model->newPath = $upload_resize;
+					$this->Image_Model->newWidth  = 120;
+					$this->Image_Model->newHeight = 120;
+					$this->Image_Model->resize();
+				
+					$image = $photo;
 				}
 				else
 				{
