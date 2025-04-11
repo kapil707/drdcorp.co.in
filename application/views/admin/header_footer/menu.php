@@ -5,7 +5,7 @@
                 <div class="dropdown profile-element"> <span>
                 	<?php 
 					if($this->session->userdata("user_type") !=""){ ?>
-                    <img alt="image" class="img-circle" src="<?= base_url()?>uploads/manage_users/photo/<?= $this->session->userdata("image") ?>" width="100" />
+                    <img alt="image" class="img-circle" src="<?= base_url()?>uploads/manage_users/photo/main/<?= $this->session->userdata("image") ?>" width="100" />
                     <?php } else { 
 					?>
                     <img alt="image" class="img-circle" src="<?= base_url()?>uploads/manage_profile/photo/unapproved.jpg" width="100" />
