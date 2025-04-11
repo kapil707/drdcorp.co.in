@@ -286,51 +286,9 @@
 					<?php if($mymenu->page_type=="manage_website") { ?>
 					<li><a href="<?= base_url()?>admin/manage_website/add/title">Title</a>
 					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/title2">Title2</a>
-					</li>
 					<li><a href="<?= base_url()?>admin/manage_website/add/logo">Logo</a>
 					</li>
 					<li><a href="<?= base_url()?>admin/manage_website/add/icon">Icon</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/defaultpassword">Default Password</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/mapapikey">Map Api Key</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/whatsapp_deviceid">Whatsapp Deviceid</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/whatsapp_key">Whatsapp Key</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/whatsapp_group1">Whatsapp Group1</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/whatsapp_group2">Whatsapp Group2</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/whatsapp_group3">Whatsapp Group3</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/under_construction">Under Construction</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/under_construction_message">Under Construction Message</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/medicine_icon">Medicine icon</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/corporate_url">Corporate Url</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/corporate_url_local">Corporate Url Local</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/default_title_text">Default Title Text</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/email_footer_text">Email Footer Text</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/whatsapp_footer_text">WhatsApp Footer Text</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/login_details_text">Login Details Text</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/default_place_order_text">Default Place Order Text</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/place_order_message">Place Order Message</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/terms_of_services">Terms of services</a>
-					</li>
-					<li><a href="<?= base_url()?>admin/manage_website/add/privacy_policy">Privacy policy</a>
 					</li>
 					<?php }
 					if($mymenu->page_type=="manage_email") { ?>
