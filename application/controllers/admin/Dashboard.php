@@ -72,10 +72,10 @@ class Dashboard extends CI_Controller {
 		$this->breadcrumbs->push("Edit Profile","admin/$page_controllers/add");	
 
 		$tbl = $Page_tbl;
-		$data['url_path'] 	= base_url()."uploads/$page_controllers/photo/main/";
-		$data['url_resize'] = base_url()."uploads/$page_controllers/photo/resize/";
-		$upload_path 		= "./uploads/$page_controllers/photo/main/";
-		$upload_resize 		= "./uploads/$page_controllers/photo/resize/";
+		$data['url_path'] 	= base_url()."uploads/manage_users/photo/main/";
+		$data['url_resize'] = base_url()."uploads/manage_users/photo/resize/";
+		$upload_path 		= "./uploads/manage_users/photo/main/";
+		$upload_resize 		= "./uploads/manage_users/photo/resize/";
 
 		extract($_POST);
 		if(isset($Submit))
