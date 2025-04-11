@@ -110,7 +110,7 @@ class Dashboard extends CI_Controller {
 				if (!empty($_FILES["photo"]["name"]))
 				{
 					$this->Image_Model->uploadTo = $upload_path;
-					$photo = $this->Image_Model->upload($_FILES['image']);
+					$photo = $this->Image_Model->upload($_FILES['photo']);
 					$photo = str_replace($upload_path,"",$photo);
 					
 					$this->Image_Model->newPath = $upload_resize;
