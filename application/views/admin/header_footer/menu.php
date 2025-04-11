@@ -290,10 +290,6 @@
 					</li>
 					<li><a href="<?= base_url()?>admin/manage_website/add/icon">Icon</a>
 					</li>
-					<?php }
-					if($mymenu->page_type=="manage_email") { ?>
-					<li><a href="<?= base_url()?>admin/manage_email/view">Email Setting</a>
-					</li>
 					<?php } }?>
 				</ul>
 			</li>
