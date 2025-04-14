@@ -543,6 +543,7 @@ class BankWhatsAppModel extends CI_Model
 		$working = 0;
 		if($working==0){
 			$result = $this->BankModel->select_query("SELECT * FROM `tbl_bank_processing` WHERE date='$date' and `from_text_find_chemist`='' limit 50");
+			echo "SELECT * FROM `tbl_bank_processing` WHERE date='$date' and `from_text_find_chemist`='' limit 50";
 			$result = $result->result();
 			foreach($result as $row) {
 				$working = 1;
