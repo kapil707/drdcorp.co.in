@@ -19,16 +19,11 @@ class CronjobBank extends CI_Controller
 		$this->BankWhatsAppModel->get_whatsapp_or_insert_rishav();
 	}
 
-	public function whatsapp_update_upi(){
-		echo "whatsapp_update_upi";
-		$this->BankWhatsAppModel->whatsapp_update_upi();
-	}
-
 	public function whatsapp_update_reply_message(){
 		echo "whatsapp_update_reply_message";
 		$this->BankWhatsAppModel->whatsapp_update_reply_message();
 	}
-	
+
 	public function recommended_to_find(){
 		echo "recommended_to_find";
 		$this->BankProcessingModel->recommended_to_find();
@@ -170,6 +165,9 @@ class CronjobBank extends CI_Controller
 							$this->BankWhatsAppModel->whatsapp_insert_in_processing();
 						}else{
 							$this->BankInvoiceModel->get_invoice_find_user();
+
+							echo "whatsapp_update_upi";
+							$this->BankWhatsAppModel->whatsapp_update_upi();
 						}
 					}
 				}
