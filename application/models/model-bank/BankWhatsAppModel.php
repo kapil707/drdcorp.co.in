@@ -540,8 +540,22 @@ class BankWhatsAppModel extends CI_Model
 	public function whatsapp_update_upi(){
 
 		$date = date("Y-m-d");
-
 		$working = 0;
+		if($working==0){
+			$result = $this->BankModel->select_query("SELECT * FROM `tbl_bank_processing` WHERE date='$date' and `from_text_find_chemist`='' limit 50");
+			$result = $result->result();
+			foreach($result as $row) {
+				$working = 1;
+
+				$result1 = $this->BankModel->select_query("SELECT body FROM `tbl_whatsapp_message` WHERE date='$date' limit 50");
+				$result1 = $result1->result();
+				foreach($result1 as $row1) {
+					echo $row1->body;
+					echo "<br>";
+				}
+			}
+		}
+
 		if($working==0){
 			// **UPI Ref. No:** 5070336 94491 = 50703369449111 (11)date h =>507033694491 agar iss ke pichay date add ho kar aa rahi ha to wo oss ko delete kar ke upi no sahi karta ha
 			//amount or vision or body text say karta ha search
