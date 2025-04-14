@@ -542,18 +542,32 @@ class BankWhatsAppModel extends CI_Model
 		$date = date("Y-m-d");
 		$working = 0;
 		if($working==0){
-			$result = $this->BankModel->select_query("SELECT * FROM `tbl_bank_processing` WHERE date='$date' and `from_text_find_chemist`='' limit 50");
-			echo "SELECT * FROM `tbl_bank_processing` WHERE date='$date' and `from_text_find_chemist`='' limit 50";
+			// yha sirf suggest karta ha user ko 
+			$result = $this->BankModel->select_query("SELECT id,amount FROM `tbl_bank_processing` WHERE date='$date' and `from_text_find_chemist`='' limit 50");
 			$result = $result->result();
 			foreach($result as $row) {
 				$working = 1;
 
+				$id 	= $row->id;
 				$amount = $row->amount;
-				$result1 = $this->BankModel->select_query("SELECT body FROM `tbl_whatsapp_message` WHERE date='$date' and amount='$amount' limit 50");
+
+				$result1 = $this->BankModel->select_query("SELECT body FROM `tbl_whatsapp_message` WHERE date='$date' and amount='$amount'");
 				$result1 = $result1->result();
 				foreach($result1 as $row1) {
-					echo $row1->body;
-					echo "<br>";
+
+					$whatsapp_recommended = $row1->body;
+
+					$where = array(
+						'id' => $id,
+					);
+					$dt = array(
+						'process_status'=>2,
+						'whatsapp_id'=>$whatsapp_id,
+						'whatsapp_recommended'=>$whatsapp_recommended,
+					);
+					echo "my01";
+					print_r($dt);
+					$this->BankModel->edit_fun("tbl_bank_processing", $dt,$where);
 				}
 			}
 		}
