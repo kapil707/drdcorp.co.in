@@ -548,7 +548,8 @@ class BankWhatsAppModel extends CI_Model
 			foreach($result as $row) {
 				$working = 1;
 
-				$result1 = $this->BankModel->select_query("SELECT body FROM `tbl_whatsapp_message` WHERE date='$date' limit 50");
+				$amount = $row->amount;
+				$result1 = $this->BankModel->select_query("SELECT body FROM `tbl_whatsapp_message` WHERE date='$date' and amount='$amount' limit 50");
 				$result1 = $result1->result();
 				foreach($result1 as $row1) {
 					echo $row1->body;
