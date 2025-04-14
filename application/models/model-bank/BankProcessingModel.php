@@ -194,6 +194,10 @@ class BankProcessingModel extends CI_Model
 	}
 
 	public function recommended_to_find(){
+
+		/**************************************** */
+		$this->BankProcessingModel->get_processing_recommended();
+		/**************************************** */
 		
 		$date = date("Y-m-d");
 		// jab invoice or whatsapp mil jaya but find chemist ek say jada hoya to yha automatick user ko add karta ha v153 || v155 = v155
