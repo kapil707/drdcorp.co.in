@@ -539,11 +539,13 @@ class BankWhatsAppModel extends CI_Model
 
 	public function whatsapp_update_upi(){
 
+		$date = date("Y-m-d");
+
 		$working = 0;
 		if($working==0){
 			// **UPI Ref. No:** 5070336 94491 = 50703369449111 (11)date h =>507033694491 agar iss ke pichay date add ho kar aa rahi ha to wo oss ko delete kar ke upi no sahi karta ha
 			//amount or vision or body text say karta ha search
-			$result = $this->BankModel->select_query("SELECT p.upi_no,wm.id as whatsapp_id, wm.vision_text FROM tbl_bank_processing AS p JOIN tbl_whatsapp_message wm ON p.amount = wm.amount and wm.date BETWEEN DATE_SUB(p.date, INTERVAL 1 DAY) AND DATE_ADD(p.date, INTERVAL 1 DAY) and (REPLACE(TRIM(wm.vision_text), ' ', '') LIKE CONCAT('%', TRIM(p.upi_no), '%') or REPLACE(TRIM(wm.vision_text), ' ', '') LIKE CONCAT('%', TRIM(p.orderid), '%')) and REPLACE(TRIM(wm.body), ' ', '') LIKE CONCAT('%', TRIM(p.from_text_find_chemist), '%') where p.whatsapp_id='' and wm.upi_no!='' limit 50");
+			$result = $this->BankModel->select_query("SELECT p.upi_no,wm.id as whatsapp_id, wm.vision_text FROM tbl_bank_processing AS p JOIN tbl_whatsapp_message wm ON p.amount = wm.amount and wm.date BETWEEN DATE_SUB(p.date, INTERVAL 1 DAY) AND DATE_ADD(p.date, INTERVAL 1 DAY) and (REPLACE(TRIM(wm.vision_text), ' ', '') LIKE CONCAT('%', TRIM(p.upi_no), '%') or REPLACE(TRIM(wm.vision_text), ' ', '') LIKE CONCAT('%', TRIM(p.orderid), '%')) and REPLACE(TRIM(wm.body), ' ', '') LIKE CONCAT('%', TRIM(p.from_text_find_chemist), '%') where p.whatsapp_id='' and wm.upi_no!='' and wm.date='$date' limit 50");
 			$result = $result->result();
 			foreach($result as $row) {
 				$working = 1;
@@ -568,7 +570,7 @@ class BankWhatsAppModel extends CI_Model
 		if($working==0){
 			// **UPI Ref. No:** 5070336 94491 = 50703369449111 (11)date h =>507033694491 agar iss ke pichay date add ho kar aa rahi ha to wo oss ko delete kar ke upi no sahi karta ha
 			//amount or vision text say karta ha search
-			$result = $this->BankModel->select_query("SELECT p.upi_no,wm.id as whatsapp_id, wm.vision_text FROM tbl_bank_processing AS p JOIN tbl_whatsapp_message wm ON p.amount = wm.amount and wm.date BETWEEN DATE_SUB(p.date, INTERVAL 1 DAY) AND DATE_ADD(p.date, INTERVAL 1 DAY) and (REPLACE(TRIM(wm.vision_text), ' ', '') LIKE CONCAT('%', TRIM(p.upi_no), '%') or REPLACE(TRIM(wm.vision_text), ' ', '') LIKE CONCAT('%', TRIM(p.orderid), '%')) where p.whatsapp_id='' and wm.upi_no!='' limit 50");
+			$result = $this->BankModel->select_query("SELECT p.upi_no,wm.id as whatsapp_id, wm.vision_text FROM tbl_bank_processing AS p JOIN tbl_whatsapp_message wm ON p.amount = wm.amount and wm.date BETWEEN DATE_SUB(p.date, INTERVAL 1 DAY) AND DATE_ADD(p.date, INTERVAL 1 DAY) and (REPLACE(TRIM(wm.vision_text), ' ', '') LIKE CONCAT('%', TRIM(p.upi_no), '%') or REPLACE(TRIM(wm.vision_text), ' ', '') LIKE CONCAT('%', TRIM(p.orderid), '%')) where p.whatsapp_id='' and wm.upi_no!='' and wm.date='$date' limit 50");
 			$result = $result->result();
 			foreach($result as $row) {
 				$working = 1;
@@ -593,7 +595,7 @@ class BankWhatsAppModel extends CI_Model
 		if($working==0){
 			//jab amount or vision text or body sab kuch sahi say match kary to
 			//amount or vision or body text me say upi no find karna
-			$result = $this->BankModel->select_query("SELECT p.upi_no,wm.id as whatsapp_id, wm.vision_text FROM tbl_bank_processing AS p JOIN tbl_whatsapp_message wm ON p.amount = wm.amount and wm.date BETWEEN DATE_SUB(p.date, INTERVAL 1 DAY) AND DATE_ADD(p.date, INTERVAL 1 DAY) and (REPLACE(TRIM(wm.vision_text), ' ', '') LIKE CONCAT('%', TRIM(p.upi_no), '%') or REPLACE(TRIM(wm.vision_text), ' ', '') LIKE CONCAT('%', TRIM(p.orderid), '%')) and REPLACE(TRIM(wm.body), ' ', '') LIKE CONCAT('%', TRIM(p.from_text_find_chemist), '%') where p.whatsapp_id='' and wm.upi_no='' limit 50");
+			$result = $this->BankModel->select_query("SELECT p.upi_no,wm.id as whatsapp_id, wm.vision_text FROM tbl_bank_processing AS p JOIN tbl_whatsapp_message wm ON p.amount = wm.amount and wm.date BETWEEN DATE_SUB(p.date, INTERVAL 1 DAY) AND DATE_ADD(p.date, INTERVAL 1 DAY) and (REPLACE(TRIM(wm.vision_text), ' ', '') LIKE CONCAT('%', TRIM(p.upi_no), '%') or REPLACE(TRIM(wm.vision_text), ' ', '') LIKE CONCAT('%', TRIM(p.orderid), '%')) and REPLACE(TRIM(wm.body), ' ', '') LIKE CONCAT('%', TRIM(p.from_text_find_chemist), '%') where p.whatsapp_id='' and wm.upi_no='' and wm.date='$date' limit 50");
 			$result = $result->result();
 			foreach($result as $row) {
 				$working = 1;
@@ -619,7 +621,7 @@ class BankWhatsAppModel extends CI_Model
 		if($working==0){
 			//other upi no xx 1234 amout say amount
 			//amount or vision or body text me say upi no find karna
-			$result = $this->BankModel->select_query("SELECT p.upi_no,wm.id AS whatsapp_id, wm.vision_text FROM tbl_bank_processing AS p JOIN tbl_whatsapp_message wm ON p.amount = wm.amount and wm.date BETWEEN DATE_SUB(p.date, INTERVAL 1 DAY) AND DATE_ADD(p.date, INTERVAL 1 DAY) AND (REPLACE(TRIM(wm.vision_text), ' ', '') LIKE CONCAT('%xx', RIGHT(TRIM(p.upi_no), 4), '%') or REPLACE(TRIM(wm.vision_text), ' ', '') LIKE CONCAT('%xx', RIGHT(TRIM(p.orderid), 4), '%')) and REPLACE(TRIM(wm.body), ' ', '') LIKE CONCAT('%', TRIM(p.from_text_find_chemist), '%') WHERE p.whatsapp_id = '' limit 50");
+			$result = $this->BankModel->select_query("SELECT p.upi_no,wm.id AS whatsapp_id, wm.vision_text FROM tbl_bank_processing AS p JOIN tbl_whatsapp_message wm ON p.amount = wm.amount and wm.date BETWEEN DATE_SUB(p.date, INTERVAL 1 DAY) AND DATE_ADD(p.date, INTERVAL 1 DAY) AND (REPLACE(TRIM(wm.vision_text), ' ', '') LIKE CONCAT('%xx', RIGHT(TRIM(p.upi_no), 4), '%') or REPLACE(TRIM(wm.vision_text), ' ', '') LIKE CONCAT('%xx', RIGHT(TRIM(p.orderid), 4), '%')) and REPLACE(TRIM(wm.body), ' ', '') LIKE CONCAT('%', TRIM(p.from_text_find_chemist), '%') WHERE p.whatsapp_id = '' and wm.date='$date' limit 50");
 			$result = $result->result();
 			foreach($result as $row) {
 				$working = 1;
@@ -645,7 +647,7 @@ class BankWhatsAppModel extends CI_Model
 		if($working==0){
 			//other upi no xx 1234 amout say amount
 			//amount or vision text me say upi no find karna
-			$result = $this->BankModel->select_query("SELECT p.upi_no, wm.id as whatsapp_id, wm.vision_text FROM tbl_bank_processing AS p JOIN tbl_whatsapp_message wm ON p.amount = wm.amount and wm.date BETWEEN DATE_SUB(p.date, INTERVAL 1 DAY) AND DATE_ADD(p.date, INTERVAL 1 DAY) AND (REPLACE(TRIM(wm.vision_text), ' ', '') LIKE CONCAT('%xx', RIGHT(TRIM(p.upi_no), 4), '%') or REPLACE(TRIM(wm.vision_text), ' ', '') LIKE CONCAT('%xx', RIGHT(TRIM(p.orderid), 4), '%')) and p.whatsapp_id='' limit 50");
+			$result = $this->BankModel->select_query("SELECT p.upi_no, wm.id as whatsapp_id, wm.vision_text FROM tbl_bank_processing AS p JOIN tbl_whatsapp_message wm ON p.amount = wm.amount and wm.date BETWEEN DATE_SUB(p.date, INTERVAL 1 DAY) AND DATE_ADD(p.date, INTERVAL 1 DAY) AND (REPLACE(TRIM(wm.vision_text), ' ', '') LIKE CONCAT('%xx', RIGHT(TRIM(p.upi_no), 4), '%') or REPLACE(TRIM(wm.vision_text), ' ', '') LIKE CONCAT('%xx', RIGHT(TRIM(p.orderid), 4), '%')) and p.whatsapp_id='' and wm.date='$date' limit 50");
 			$result = $result->result();
 			foreach($result as $row) {
 				$working = 1;
@@ -671,7 +673,7 @@ class BankWhatsAppModel extends CI_Model
 		if($working==0){
 			//jab chemist id or amont match kar jaya to upi id set hoti ha
 			//amount or body text me say upi no find karna
-			$result = $this->BankModel->select_query("SELECT p.upi_no,wm.id AS whatsapp_id, wm.vision_text FROM tbl_bank_processing AS p JOIN tbl_whatsapp_message wm ON p.amount = wm.amount and wm.date BETWEEN DATE_SUB(p.date, INTERVAL 1 DAY) AND DATE_ADD(p.date, INTERVAL 1 DAY) AND REPLACE(TRIM(wm.body), ' ', '') LIKE CONCAT('%', TRIM(p.from_text_find_chemist), '%') WHERE p.whatsapp_id = '' limit 50");
+			$result = $this->BankModel->select_query("SELECT p.upi_no,wm.id AS whatsapp_id, wm.vision_text FROM tbl_bank_processing AS p JOIN tbl_whatsapp_message wm ON p.amount = wm.amount and wm.date BETWEEN DATE_SUB(p.date, INTERVAL 1 DAY) AND DATE_ADD(p.date, INTERVAL 1 DAY) AND REPLACE(TRIM(wm.body), ' ', '') LIKE CONCAT('%', TRIM(p.from_text_find_chemist), '%') WHERE p.whatsapp_id = '' and wm.date='$date' limit 50");
 			$result = $result->result();
 			foreach($result as $row) {
 				$working = 1;
@@ -696,7 +698,7 @@ class BankWhatsAppModel extends CI_Model
 
 		if($working==0){
 			//amount or upi id say find karta ha "CARTMEDICSHEALTHCAREPRIVATELIMITED.9873069729.IBZ@ICICI"
-			$result = $this->BankModel->select_query("SELECT p.upi_no, wm.id as whatsapp_id, wm.vision_text FROM tbl_bank_processing AS p JOIN tbl_whatsapp_message wm ON p.amount = wm.amount and wm.date BETWEEN DATE_SUB(p.date, INTERVAL 1 DAY) AND DATE_ADD(p.date, INTERVAL 1 DAY) and REPLACE(TRIM(wm.vision_text), ' ', '') LIKE CONCAT('%', TRIM(p.from_text_find_match), '%') and p.whatsapp_id='' limit 50");
+			$result = $this->BankModel->select_query("SELECT p.upi_no, wm.id as whatsapp_id, wm.vision_text FROM tbl_bank_processing AS p JOIN tbl_whatsapp_message wm ON p.amount = wm.amount and wm.date BETWEEN DATE_SUB(p.date, INTERVAL 1 DAY) AND DATE_ADD(p.date, INTERVAL 1 DAY) and REPLACE(TRIM(wm.vision_text), ' ', '') LIKE CONCAT('%', TRIM(p.from_text_find_match), '%') and p.whatsapp_id='' and wm.date='$date' limit 50");
 			$result = $result->result();
 			foreach($result as $row) {
 				$working = 1;
@@ -721,7 +723,7 @@ class BankWhatsAppModel extends CI_Model
 		if($working==0){
 			//jab whatsapp ki photo me bhut saray trastion aya 
 			//https://api.wassi.chat/v1/chat/66faf180345d460e9984e4ac/files/67d056d71031ceec86dcd4fe/download?token=531fe5caf0e132bdb6000bf01ed66d8cfb75b53606cc8f6eed32509d99d74752f47f288db155557e
-			$result = $this->BankModel->select_query("SELECT p.upi_no,wm.id AS whatsapp_id, wm.vision_text FROM tbl_bank_processing AS p JOIN tbl_whatsapp_message wm ON wm.date BETWEEN DATE_SUB(p.date, INTERVAL 1 DAY) AND DATE_ADD(p.date, INTERVAL 1 DAY) and REPLACE(TRIM(wm.vision_text), ' ', '') LIKE CONCAT('%', TRIM(p.upi_no), '%') WHERE p.whatsapp_id = '' limit 50");
+			$result = $this->BankModel->select_query("SELECT p.upi_no,wm.id AS whatsapp_id, wm.vision_text FROM tbl_bank_processing AS p JOIN tbl_whatsapp_message wm ON wm.date BETWEEN DATE_SUB(p.date, INTERVAL 1 DAY) AND DATE_ADD(p.date, INTERVAL 1 DAY) and REPLACE(TRIM(wm.vision_text), ' ', '') LIKE CONCAT('%', TRIM(p.upi_no), '%') WHERE p.whatsapp_id = '' and wm.date='$date' limit 50");
 			$result = $result->result();
 			foreach($result as $row) {
 				$working = 1;
@@ -744,7 +746,7 @@ class BankWhatsAppModel extends CI_Model
 
 		if($working==0){
 			//jab amount or vision text me chemist id mil kaya to 
-			$result = $this->BankModel->select_query("SELECT p.upi_no,wm.amount, wm.id as whatsapp_id, wm.vision_text FROM tbl_bank_processing AS p JOIN tbl_whatsapp_message wm ON p.amount = wm.amount and wm.date BETWEEN DATE_SUB(p.date, INTERVAL 1 DAY) AND DATE_ADD(p.date, INTERVAL 1 DAY) and REPLACE(TRIM(wm.vision_text), ' ', '') LIKE CONCAT('%', TRIM(p.from_text_find_chemist), '%') and p.whatsapp_id='' and p.from_text_find_chemist!='' limit 50");
+			$result = $this->BankModel->select_query("SELECT p.upi_no,wm.amount, wm.id as whatsapp_id, wm.vision_text FROM tbl_bank_processing AS p JOIN tbl_whatsapp_message wm ON p.amount = wm.amount and wm.date BETWEEN DATE_SUB(p.date, INTERVAL 1 DAY) AND DATE_ADD(p.date, INTERVAL 1 DAY) and REPLACE(TRIM(wm.vision_text), ' ', '') LIKE CONCAT('%', TRIM(p.from_text_find_chemist), '%') and p.whatsapp_id='' and p.from_text_find_chemist!='' and wm.date='$date' limit 50");
 			$result = $result->result();
 			foreach($result as $row) {
 				$working = 1;
