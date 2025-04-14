@@ -195,8 +195,9 @@ class BankProcessingModel extends CI_Model
 
 	public function recommended_to_find(){
 		
+		$date = date("Y-m-d");
 		// jab invoice or whatsapp mil jaya but find chemist ek say jada hoya to yha automatick user ko add karta ha v153 || v155 = v155
-		$result = $this->BankModel->select_query("SELECT id,invoice_chemist FROM `tbl_bank_processing` WHERE `invoice_chemist`=`whatsapp_chemist` and invoice_chemist!='' and whatsapp_chemist!='' and invoice_chemist!=from_text_find_chemist");
+		$result = $this->BankModel->select_query("SELECT id,invoice_chemist FROM `tbl_bank_processing` WHERE `invoice_chemist`=`whatsapp_chemist` and invoice_chemist!='' and whatsapp_chemist!='' and invoice_chemist!=from_text_find_chemist and date='$date'");
 		$result = $result->result();
 		foreach($result as $row){
 			if(!empty($row->id)){
@@ -212,7 +213,7 @@ class BankProcessingModel extends CI_Model
 			}
 		}
 
-		$result = $this->BankModel->select_query("SELECT id,from_text,from_text_find_chemist,invoice_recommended FROM `tbl_bank_processing` WHERE `invoice_recommended`=`whatsapp_recommended` and invoice_recommended!='' and whatsapp_recommended!='' and recommended=''");
+		$result = $this->BankModel->select_query("SELECT id,from_text,from_text_find_chemist,invoice_recommended FROM `tbl_bank_processing` WHERE `invoice_recommended`=`whatsapp_recommended` and invoice_recommended!='' and whatsapp_recommended!='' and recommended='' and date='$date'");
 		$result = $result->result();
 		foreach($result as $row){
 			if(!empty($row->id)){

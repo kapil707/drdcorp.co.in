@@ -28,15 +28,15 @@ class CronjobBank extends CI_Controller
 		echo "whatsapp_update_reply_message";
 		$this->BankWhatsAppModel->whatsapp_update_reply_message();
 	}
-	
-	public function recommended_to_find(){
-		echo "recommended_to_find";
-		$this->BankProcessingModel->recommended_to_find();
-	}
 
 	public function get_processing_recommended(){
 		echo "get_processing_recommended";
 		$this->BankProcessingModel->get_processing_recommended();
+	}
+	
+	public function recommended_to_find(){
+		echo "recommended_to_find";
+		$this->BankProcessingModel->recommended_to_find();
 	}	
 
 	public function testing(){
