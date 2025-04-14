@@ -70,10 +70,8 @@ class BankInvoiceModel extends CI_Model
 	public function invoice_find($id,$chemist_id,$amount,$date){
 
 		$status = 0;
-		echo $date;
 		$start_date = date('Y-m-d', strtotime($date.' -5 day'));
 		$end_date = date('Y-m-d');
-		echo $start_date;die();
 
 		$parts = explode(" || ", $chemist_id);
 		foreach($parts as $chemist_id_new) {
@@ -106,10 +104,10 @@ class BankInvoiceModel extends CI_Model
 		return $status;
 	}
 
-	public function invoice_find_in_total($id,$chemist_id,$amount){
+	public function invoice_find_in_total($id,$chemist_id,$amount,$date){
 		
 		$status = 0;
-		$start_date = date('Y-m-d', strtotime('-10 day'));
+		$start_date = date('Y-m-d', strtotime($date.' -5 day'));
 		$end_date = date('Y-m-d');
 
 		$json_invoice_id = [];
@@ -193,11 +191,10 @@ class BankInvoiceModel extends CI_Model
 		return $status;
 	}
 
-	public function recommended_invoice_find($id,$chemist_id,$amount){
+	public function recommended_invoice_find($id,$chemist_id,$amount,$date){
 		
 		$status = 0;
-
-		$start_date = date('Y-m-d', strtotime('-10 day'));
+		$start_date = date('Y-m-d', strtotime($date.' -5 day'));
 		$end_date = date('Y-m-d');
 
 		$parts = explode(" || ", $chemist_id);
