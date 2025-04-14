@@ -546,7 +546,6 @@ class BankWhatsAppModel extends CI_Model
 			$result = $this->BankModel->select_query("SELECT id,amount FROM `tbl_bank_processing` WHERE date='$date' and `from_text_find_chemist`='' and recommended_status=0 limit 50");
 			$result = $result->result();
 			foreach($result as $row) {
-				$working = 1;
 
 				$id 	= $row->id;
 				$amount = $row->amount;
