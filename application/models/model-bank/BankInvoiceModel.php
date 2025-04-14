@@ -70,9 +70,10 @@ class BankInvoiceModel extends CI_Model
 	public function invoice_find($id,$chemist_id,$amount,$date){
 
 		$status = 0;
-		echo $date;die();
-		$start_date = date('Y-m-d', strtotime('-10 day'));
+		echo $date;
+		$start_date = date('Y-m-d', strtotime($date.' -5 day'));
 		$end_date = date('Y-m-d');
+		echo $start_date;die();
 
 		$parts = explode(" || ", $chemist_id);
 		foreach($parts as $chemist_id_new) {
