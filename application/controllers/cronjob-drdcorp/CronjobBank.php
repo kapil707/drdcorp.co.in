@@ -19,11 +19,6 @@ class CronjobBank extends CI_Controller
 		$this->BankWhatsAppModel->get_whatsapp_or_insert_rishav();
 	}
 
-	public function whatsapp_find_upi_amount(){
-		echo "whatsapp_find_upi_amount";
-		$this->BankWhatsAppModel->whatsapp_find_upi_amount();
-	}
-
 	public function whatsapp_update_upi(){
 		echo "whatsapp_update_upi";
 		$this->BankWhatsAppModel->whatsapp_update_upi();
@@ -147,29 +142,35 @@ class CronjobBank extends CI_Controller
 
 	public function bank_main(){
 		//$this->get_invoice();
-		$check_sms = $this->BankModel->select_row("tbl_sms", array('status' => 0));
-		if (!empty($check_sms)) {
-			echo "get_sms<br>";
-			$this->BankSMSModel->get_sms();
+		$whatsapp_find_upi_amount = $this->BankModel->select_row("tbl_whatsapp_message", array('status' => 0));
+		if (!empty($whatsapp_find_upi_amount)) {
+			echo "whatsapp_find_upi_amount<br>";
+			$this->BankWhatsAppModel->whatsapp_find_upi_amount();
 		}else{
-			$check_statment = $this->BankModel->select_row("tbl_statment", array('status' => 0));
-			if (!empty($check_statment)) {
-				echo "get_statment<br>";
-				$this->BankStatmentModel->get_statment();
+			$check_sms = $this->BankModel->select_row("tbl_sms", array('status' => 0));
+			if (!empty($check_sms)) {
+				echo "get_sms<br>";
+				$this->BankSMSModel->get_sms();
 			}else{
-				$check_processing = $this->BankModel->select_row("tbl_bank_processing", array('process_status'=>0));
-				if (!empty($check_processing)) {
-					echo "tbl_bank_processing<br>";
-					$this->BankProcessingModel->get_processing();
+				$check_statment = $this->BankModel->select_row("tbl_statment", array('status' => 0));
+				if (!empty($check_statment)) {
+					echo "get_statment<br>";
+					$this->BankStatmentModel->get_statment();
 				}else{
-					//yha whatsapp message ko insert karwata ha processing me
-					$result = $this->BankModel->select_query("SELECT p.id FROM tbl_bank_processing AS p JOIN tbl_whatsapp_message wm ON p.upi_no = wm.upi_no AND wm.date BETWEEN DATE_SUB(p.date, INTERVAL 1 DAY) AND DATE_ADD(p.date, INTERVAL 1 DAY) WHERE p.whatsapp_id = '' ORDER BY RAND() LIMIT 25");
-					$check_whatsapp_status2 = $result->row();
-					if (!empty($check_whatsapp_status2)) {
-						echo "whatsapp_insert_in_processing<br>";
-						$this->BankWhatsAppModel->whatsapp_insert_in_processing();
+					$check_processing = $this->BankModel->select_row("tbl_bank_processing", array('process_status'=>0));
+					if (!empty($check_processing)) {
+						echo "tbl_bank_processing<br>";
+						$this->BankProcessingModel->get_processing();
 					}else{
-						$this->BankInvoiceModel->get_invoice_find_user();
+						//yha whatsapp message ko insert karwata ha processing me
+						$result = $this->BankModel->select_query("SELECT p.id FROM tbl_bank_processing AS p JOIN tbl_whatsapp_message wm ON p.upi_no = wm.upi_no AND wm.date BETWEEN DATE_SUB(p.date, INTERVAL 1 DAY) AND DATE_ADD(p.date, INTERVAL 1 DAY) WHERE p.whatsapp_id = '' ORDER BY RAND() LIMIT 25");
+						$check_whatsapp_status2 = $result->row();
+						if (!empty($check_whatsapp_status2)) {
+							echo "whatsapp_insert_in_processing<br>";
+							$this->BankWhatsAppModel->whatsapp_insert_in_processing();
+						}else{
+							$this->BankInvoiceModel->get_invoice_find_user();
+						}
 					}
 				}
 			}
