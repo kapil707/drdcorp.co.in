@@ -437,6 +437,7 @@ class BankProcessingModel extends CI_Model
 	}
 
 	public function get_processing_recommended(){
+		$date = date("Y-m-d");
 		// yha sirf suggest karta ha user ko 
 		$result = $this->BankModel->select_query("SELECT id,amount,date FROM `tbl_bank_processing` WHERE date='$date' and `from_text_find_chemist`='' and from_text_find_chemist_status=0 limit 50");
 		$result = $result->result();
