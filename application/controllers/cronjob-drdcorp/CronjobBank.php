@@ -24,11 +24,6 @@ class CronjobBank extends CI_Controller
 		$this->BankWhatsAppModel->whatsapp_update_reply_message();
 	}
 
-	public function recommended_to_find(){
-		echo "recommended_to_find";
-		$this->BankProcessingModel->recommended_to_find();
-	}	
-
 	public function testing(){
 		
 		$text = "NEFT IN UTR CITIN25547158484 FROM VIKRAM MEDICOS A   UBLH09821432415TXN REF NO Money Transfer";
@@ -168,6 +163,9 @@ class CronjobBank extends CI_Controller
 
 							echo "whatsapp_update_upi";
 							$this->BankWhatsAppModel->whatsapp_update_upi();
+
+							echo "recommended_to_find";
+							$this->BankProcessingModel->recommended_to_find();
 						}
 					}
 				}
