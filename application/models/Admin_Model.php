@@ -64,7 +64,18 @@ class Admin_Model extends CI_Model
 			$return = "Wrong UserName And Password";
 		}
 		return $return;
-	}		function check_login()	{		$user_id = $this->session->userdata('user_id');		if(empty($user_id) && $user_id =='')		{			redirect(base_url().'admin');		}		if(!empty($user_id) && $user_id !='')		{			redirect(base_url().'admin/dashboard');		}	}
+	}
+	function check_login()	{
+		$user_id = $this->session->userdata('user_id');
+		if(empty($user_id) && $user_id =='')
+		{
+			redirect(base_url().'admin');
+		}
+		if(!empty($user_id) && $user_id !='')
+		{
+			redirect(base_url().'admin/dashboard');
+		}
+	}
 	function check_login1()
 	{
 		$user_id = $this->session->userdata('user_id');
