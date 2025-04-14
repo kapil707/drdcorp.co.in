@@ -65,6 +65,7 @@ class Admin_Model extends CI_Model
 		}
 		return $return;
 	}
+	
 	function check_login()	{
 		$user_id = $this->session->userdata('user_id');
 		if(empty($user_id) && $user_id =='')
