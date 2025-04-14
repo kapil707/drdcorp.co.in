@@ -213,7 +213,7 @@ class BankProcessingModel extends CI_Model
 			}
 		}
 
-		$result = $this->BankModel->select_query("SELECT id,from_text,from_text_find_chemist,invoice_recommended FROM `tbl_bank_processing` WHERE `invoice_recommended`=`whatsapp_recommended` and invoice_recommended!='' and whatsapp_recommended!='' and recommended='' and date='$date'");
+		$result = $this->BankModel->select_query("SELECT id,from_text,from_text_find_chemist,invoice_recommended FROM `tbl_bank_processing` WHERE `invoice_recommended`=`whatsapp_recommended` and invoice_recommended!='' and whatsapp_recommended!='' and recommended='' and date='$date' and recommended_status=1");
 		$result = $result->result();
 		foreach($result as $row){
 			if(!empty($row->id)){
