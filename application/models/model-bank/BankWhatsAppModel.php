@@ -543,7 +543,7 @@ class BankWhatsAppModel extends CI_Model
 		$working = 0;
 		if($working==0){
 			// yha sirf suggest karta ha user ko 
-			$result = $this->BankModel->select_query("SELECT id,amount FROM `tbl_bank_processing` WHERE date='$date' and `from_text_find_chemist`='' limit 50");
+			$result = $this->BankModel->select_query("SELECT id,amount FROM `tbl_bank_processing` WHERE date='$date' and `from_text_find_chemist`='' and recommended_status=0 limit 50");
 			$result = $result->result();
 			foreach($result as $row) {
 				$working = 1;
@@ -564,6 +564,7 @@ class BankWhatsAppModel extends CI_Model
 						'process_status'=>2,
 						'whatsapp_id'=>$whatsapp_id,
 						'whatsapp_recommended'=>$whatsapp_recommended,
+						'recommended_status'=>1,
 					);
 					echo "my01";
 					print_r($dt);
