@@ -34,6 +34,11 @@ class CronjobBank extends CI_Controller
 		$this->BankProcessingModel->recommended_to_find();
 	}
 
+	public function get_processing_recommended(){
+		echo "get_processing_recommended";
+		$this->BankProcessingModel->get_processing_recommended();
+	}	
+
 	public function testing(){
 		
 		$text = "NEFT IN UTR CITIN25547158484 FROM VIKRAM MEDICOS A   UBLH09821432415TXN REF NO Money Transfer";

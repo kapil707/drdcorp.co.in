@@ -537,41 +537,35 @@ class BankWhatsAppModel extends CI_Model
 		}
 	}
 
+	public function whatsapp_recommended($id,$amount){
+		$chemist_id = "";
+		$result1 = $this->BankModel->select_query("SELECT body FROM `tbl_whatsapp_message` WHERE date='$date' and amount='$amount'");
+		$result1 = $result1->result();
+		foreach($result1 as $row1) {
+
+			$whatsapp_recommended 	= trim($row1->body);
+			$chemist_id 			= $whatsapp_recommended;
+
+			$where = array(
+				'id' => $id,
+			);
+			$dt = array(
+				'process_status'=>2,
+				'whatsapp_id'=>$whatsapp_id,
+				'whatsapp_recommended'=>$whatsapp_recommended,
+				'from_text_find_chemist_status'=>1,
+			);
+			echo "my01";
+			print_r($dt);
+			$this->BankModel->edit_fun("tbl_bank_processing", $dt,$where);
+		}
+		return $chemist_id;
+	}
+
 	public function whatsapp_update_upi(){
 
 		$date = date("Y-m-d");
 		$working = 0;
-		if($working==0){
-			// yha sirf suggest karta ha user ko 
-			$result = $this->BankModel->select_query("SELECT id,amount FROM `tbl_bank_processing` WHERE date='$date' and `from_text_find_chemist`='' and from_text_find_chemist_status=0 limit 50");
-			$result = $result->result();
-			foreach($result as $row) {
-
-				$id 	= $row->id;
-				$amount = $row->amount;
-
-				$result1 = $this->BankModel->select_query("SELECT body FROM `tbl_whatsapp_message` WHERE date='$date' and amount='$amount'");
-				$result1 = $result1->result();
-				foreach($result1 as $row1) {
-
-					$whatsapp_recommended = $row1->body;
-
-					$where = array(
-						'id' => $id,
-					);
-					$dt = array(
-						'process_status'=>2,
-						'whatsapp_id'=>$whatsapp_id,
-						'whatsapp_recommended'=>$whatsapp_recommended,
-						'from_text_find_chemist_status'=>1,
-					);
-					echo "my01";
-					print_r($dt);
-					$this->BankModel->edit_fun("tbl_bank_processing", $dt,$where);
-				}
-			}
-		}
-
 		if($working==0){
 			// **UPI Ref. No:** 5070336 94491 = 50703369449111 (11)date h =>507033694491 agar iss ke pichay date add ho kar aa rahi ha to wo oss ko delete kar ke upi no sahi karta ha
 			//amount or vision or body text say karta ha search

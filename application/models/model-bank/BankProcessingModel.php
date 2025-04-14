@@ -6,6 +6,8 @@ class BankProcessingModel extends CI_Model
 
 		parent::__construct();
 		$this->load->model("model-bank/BankModel");
+		$this->load->model("model-bank/BankWhatsAppModel");
+		$this->load->model("model-bank/BankInvoiceModel");	
 	}
 
 	public function get_processing(){
@@ -432,5 +434,22 @@ class BankProcessingModel extends CI_Model
 		$return["process_value"] = $process_value;
 
 		return $return;
+	}
+
+	public function get_processing_recommended(){
+		// yha sirf suggest karta ha user ko 
+		$result = $this->BankModel->select_query("SELECT id,amount,date FROM `tbl_bank_processing` WHERE date='$date' and `from_text_find_chemist`='' and from_text_find_chemist_status=0 limit 50");
+		$result = $result->result();
+		foreach($result as $row) {
+
+			$id 	= $row->id;
+			$amount = $row->amount;
+			$date	= $row->date;
+
+			$chemist_id = $this->BankWhatsAppModel->whatsapp_recommended($id,$amount);
+			if(!empty($chemist_id)){
+				$this->BankInvoiceModel->recommended_invoice_find($id,$chemist_id,$amount,$date);
+			}
+		}
 	}
 }	
