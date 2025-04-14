@@ -537,7 +537,7 @@ class BankWhatsAppModel extends CI_Model
 		}
 	}
 
-	public function whatsapp_recommended($id,$amount){
+	public function whatsapp_recommended($id,$amount,$date){
 		$chemist_id = "";
 		$result1 = $this->BankModel->select_query("SELECT body FROM `tbl_whatsapp_message` WHERE date='$date' and amount='$amount'");
 		$result1 = $result1->result();

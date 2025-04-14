@@ -447,7 +447,7 @@ class BankProcessingModel extends CI_Model
 			$amount = $row->amount;
 			$date	= $row->date;
 
-			$chemist_id = $this->BankWhatsAppModel->whatsapp_recommended($id,$amount);
+			$chemist_id = $this->BankWhatsAppModel->whatsapp_recommended($id,$amount,$date);
 			if(!empty($chemist_id)){
 				$this->BankInvoiceModel->recommended_invoice_find($id,$chemist_id,$amount,$date);
 			}
