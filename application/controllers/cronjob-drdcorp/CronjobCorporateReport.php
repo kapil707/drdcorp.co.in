@@ -69,6 +69,16 @@ class CronjobCorporateReport extends CI_Controller
 
 	public function test_email2()
 	{
+		$to      = 'kapil707sharma@gmail.com';
+		$subject = 'the subject';
+		$message = 'hello';
+		$headers = 'From: report@drdcorp.co.in' . "\r\n" .
+			'Reply-To: report@drdcorp.co.in' . "\r\n" .
+			'X-Mailer: PHP/' . phpversion();
+
+		mail($to, $subject, $message, $headers);
+
+		/*
 		$email = $this->phpmailer_lib->load();
 		
 		$subject = "drd local test ok";
@@ -98,14 +108,14 @@ class CronjobCorporateReport extends CI_Controller
 		$email->SMTPSecure = 'ssl'; // Use SSL (as your SMTP port is 465)
 		$email->Port       = 465; // SMTP Port*/
 
-		if($email->send()){
+		/*if($email->send()){
 			echo 'Message has been sent';
 		}else{
 			echo 'Message could not be sent.';
 			echo 'Mailer Error: ' . $email->ErrorInfo;
 		}
 		echo "<pre>";
-		print_r($email);
+		print_r($email);*/
 	}
 
 	public function test_email3()
