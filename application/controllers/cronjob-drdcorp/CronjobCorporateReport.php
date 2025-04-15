@@ -72,7 +72,7 @@ class CronjobCorporateReport extends CI_Controller
 	{
 		$email = $this->phpmailer_lib->load();
 		
-		$subject = "drd local test ok";
+		$subject = "drd local test ok new 2025-04-15";
 		$message = $this->get_body();
 		
 		$addreplyto 		= "vipul@drdindia.com";
