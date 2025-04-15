@@ -57,7 +57,7 @@ class CorporateReport extends CI_Model
 		$this->db->select('*');
         $this->db->from('tbl_corporate_report');
         $this->db->where('email_status', 0);
-        $this->db->limit(10);
+        $this->db->limit(1);
 
         $query = $this->db->get();
         $result = $query->result();
