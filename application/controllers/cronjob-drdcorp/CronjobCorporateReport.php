@@ -93,11 +93,11 @@ class CronjobCorporateReport extends CI_Controller
 
 		$email->isSMTP();
 		$email->Host       = 'mail.drdcorp.co.in'; // SMTP Server
-		$email->SMTPAuth   = true; // Enable SMTP Authentication
+		$email->SMTPAuth   = false; // Enable SMTP Authentication
 		$email->Username   = 'report@drdcorp.co.in'; // SMTP Username
 		$email->Password   = 'Kapil1234!@#$'; // SMTP Password
-		$email->SMTPSecure = 'ssl'; // Use SSL (as your SMTP port is 465)
-		$email->Port       = 465; // SMTP Port
+		$email->SMTPSecure = false; // Use SSL (as your SMTP port is 465)
+		$email->Port       = 25; // SMTP Port
 
 		if($email->send()){
 			echo 'Message has been sent';
