@@ -162,8 +162,8 @@ class CorporateReport extends CI_Model
 		$dt = array('email_status'=>1,'message_status'=>$message_status,'subject'=>$subject,'message'=>$message);
 		$where = array('code'=>$code);
 		$this->UpdateRecoreds("tbl_corporate_report", $dt, $where);
-		echo "<pre>";
-		print_r($email);
+		//echo "<pre>";
+		//print_r($email);
 	}
 
     public function test_email($email,$subject,$message,$code)
