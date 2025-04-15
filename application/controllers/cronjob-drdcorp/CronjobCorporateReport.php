@@ -120,8 +120,6 @@ class CronjobCorporateReport extends CI_Controller
 		$addreplyto_name 	= "Vipul Gupta";
 		$server_email 		= "report@drdcorp.co.in";
 		$server_email_name 	= "DRD Corporate Report";
-		//$server_email 	= "send@drdindia.com";
-		$server_email_name 	= "DRD TEST";
 		$email1 			= "kapil707sharma@gmail.com";
 		
 		$email->AddReplyTo($addreplyto,$addreplyto_name);
