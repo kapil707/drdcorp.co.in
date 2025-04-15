@@ -2,9 +2,7 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require APPPATH . 'third_party/PHPMailer/src/Exception.php';
-require APPPATH . 'third_party/PHPMailer/src/PHPMailer.php';
-require APPPATH . 'third_party/PHPMailer/src/SMTP.php';
+require_once FCPATH . 'vendor/autoload.php';  // Composer autoload
 
 class Phpmailer_lib {
     public function load() {
