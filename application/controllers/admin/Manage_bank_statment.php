@@ -20,24 +20,18 @@ class Manage_bank_statment extends CI_Controller {
 		$this->load->model("model-bank/BankModel");
     }
 
-	public function export() {
-        $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+	public function export_excel() {
+        $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
 
-        $sheet->setCellValue('A1', 'Name');
-        $sheet->setCellValue('B1', 'Email');
-        $sheet->setCellValue('A2', 'Ali');
-        $sheet->setCellValue('B2', 'ali@example.com');
+        $sheet->setCellValue('A1', 'Test Excel');
+        $sheet->setCellValue('A2', 'Success!');
 
-        $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
-        $filename = 'users.xlsx';
-
-        // Download response
+        $writer = new Xlsx($spreadsheet);
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header("Content-Disposition: attachment; filename=\"$filename\"");
+        header('Content-Disposition: attachment; filename="statement.xlsx"');
         header('Cache-Control: max-age=0');
         $writer->save('php://output');
-        exit;
     }
 
 	public function index()
