@@ -7,6 +7,8 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Writer\Xls;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
+require_once FCPATH . 'vendor/autoload.php';
+
 class Manage_bank_statment extends CI_Controller {
 	public $Page_title = "Manage Bank Statment";
 	public $Page_name  = "manage_bank_statment";
