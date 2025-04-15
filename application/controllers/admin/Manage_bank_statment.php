@@ -7,8 +7,6 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Writer\Xls;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
-require_once FCPATH . 'vendor/autoload.php';
-
 class Manage_bank_statment extends CI_Controller {
 	public $Page_title = "Manage Bank Statment";
 	public $Page_name  = "manage_bank_statment";
@@ -21,6 +19,27 @@ class Manage_bank_statment extends CI_Controller {
         parent::__construct();
 		$this->load->model("model-bank/BankModel");
     }
+
+	public function export() {
+        $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $sheet->setCellValue('A1', 'Name');
+        $sheet->setCellValue('B1', 'Email');
+        $sheet->setCellValue('A2', 'Ali');
+        $sheet->setCellValue('B2', 'ali@example.com');
+
+        $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+        $filename = 'users.xlsx';
+
+        // Download response
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header("Content-Disposition: attachment; filename=\"$filename\"");
+        header('Cache-Control: max-age=0');
+        $writer->save('php://output');
+        exit;
+    }
+
 	public function index()
 	{
 		$page_controllers = $this->page_controllers;
