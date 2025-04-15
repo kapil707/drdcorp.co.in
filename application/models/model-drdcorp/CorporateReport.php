@@ -57,7 +57,7 @@ class CorporateReport extends CI_Model
 		$this->db->select('*');
         $this->db->from('tbl_corporate_report');
         $this->db->where('email_status', 0);
-        $this->db->limit(1);
+        $this->db->limit(5);
 
         $query = $this->db->get();
         $result = $query->result();
@@ -129,8 +129,8 @@ class CorporateReport extends CI_Model
 		$addreplyto_name 	= "Vipul Gupta";
 		$server_email 		= "report@drdcorp.co.in";
 		$server_email_name 	= "DRD Corporate Report";
-		$user_email 		= "kapil707sharma@gmail.com";
-		$email_bcc 			= "kapildrd@gmail.com";
+		//$user_email 		= "kapil707sharma@gmail.com";
+		$email_bcc 			= "application@drdindia.com";
 		
 		$email->AddReplyTo($addreplyto,$addreplyto_name);
 		$email->SetFrom($server_email,$server_email_name);
