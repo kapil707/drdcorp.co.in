@@ -416,6 +416,16 @@ class BankProcessingModel extends CI_Model
 		}
 
 		if(empty($process_value)){
+			$rr = $this->BankModel->select_query("SELECT * FROM `tbl_chemist` WHERE `name` like '%$received_from%' ");
+			$rr = $rr->result();
+			foreach($rr as $tt){
+				$jsonArray[] = $tt->altercode;
+				$process_value = $tt->name;
+				//$chemist_id = $tt->chemist_id;
+			}
+		}
+
+		if(empty($process_value)){
 			$rr = $this->BankModel->select_query("SELECT * FROM `tbl_chemist` WHERE `telephone1` like '%$received_from%' ");
 			$rr = $rr->result();
 			foreach($rr as $tt){
