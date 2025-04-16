@@ -649,7 +649,7 @@ function add_from_text_chemist_id(id){
 
 		$(".edit_from_text_chemist_id_"+id).html('Edit <i class="fa fa-pencil" aria-hidden="true"></i>');		
 
-		$(".from_text_find_match_id_"+id).html('from_text <?php echo $duble_tick ?>');
+		$(".from_text_find_match_id_"+id).html(from_text + '<?php echo $duble_tick ?>');
 
 		$.ajax({
 			type : "POST",
