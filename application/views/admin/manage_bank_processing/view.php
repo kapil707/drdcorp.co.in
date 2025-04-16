@@ -537,7 +537,7 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 									</div>
 									<div class="td_div1">
 										<?php 
-										$mycss_chemist_final = "";
+										$mycss_chemist_final = "display:none;";
 										if(empty($textbox_final_chemist) && empty($row_from_text_find_chemist)){
 											?>
 											<?php if($row_process_status!=0){ ?>
@@ -548,7 +548,7 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 											<?php } ?>
 											<?php
 										} else {
-											$mycss_chemist_final = "display:none;";
+											$mycss_chemist_final = "";
 										} ?>
 										<b style="float: left; margin-right:5px;<?php echo $mycss_chemist_final ?>">Final Chemist : </b>
 
