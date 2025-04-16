@@ -663,10 +663,10 @@ function add_from_text_chemist_id(id){
 
 		$(".tr_css_"+id).css("background-color", "#eeeeee");
 
-		$(".span_final_chemist_id_"+id).hide();	
+		/*$(".span_final_chemist_id_"+id).hide();	
 		$(".span_final_chemist_lbl_"+id).show();
 		$(".text_final_chemist_id_"+id).show();
-		$(".add_final_chemist_"+id).show();
+		$(".add_final_chemist_"+id).show();*/
 
 		$.ajax({
 			type : "POST",
