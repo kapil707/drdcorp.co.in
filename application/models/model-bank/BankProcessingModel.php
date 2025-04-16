@@ -160,7 +160,7 @@ class BankProcessingModel extends CI_Model
 				if (isset($matches[1])) {
 					$result = $this->find_by_acm_tbl($matches[1]);
 					$find_chemist_id = $result["find_chemist_id"];
-					$find_by = "Acm mobile";
+					$find_by = "Acm Name / Mobile";
 					$process_value = $result["process_value"];
 					$process_name = $result["process_name"];
 				}
