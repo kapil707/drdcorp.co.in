@@ -420,10 +420,11 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 										<b>From :</b>
 										<?= ($row_from_text); ?>
 
-										<?php if($row_process_status!=0){ ?>
-										<?php if(empty($textbox_final_chemist) && empty($row_from_text_find_chemist)){ ?>
+										<?php 
+										if($row_process_status!=0){
+											if(empty($textbox_final_chemist) && empty($row_from_text_find_chemist)){ ?>
 											<br>
-											<b class="text_find_match blink_me_white edit_from_text_chemist_id_<?= ($row_id); ?>" onclick="edit_from_text_chemist_id('<?= ($row_id); ?>')">Set Chemist <i class="fa fa-pencil" aria-hidden="true"></i></b>
+											<b class="text_find_match blink_me_white edit_from_text_chemist_id_<?= ($row_id); ?>" onclick="edit_from_text_chemist_id('<?= ($row_id); ?>')">Add Chemist <i class="fa fa-pencil" aria-hidden="true"></i></b>
 
 											<input type="hidden" value="<?php echo $row_from_text ?>" class="text_from_text_<?= ($row_id); ?>" placeholder='Set Chemist'>
 
@@ -642,6 +643,9 @@ function add_from_text_chemist_id(id){
 		alert("Etner any chemist id")
 	}else{
 		cancel_from_text_chemist_id(id);
+
+		$(".edit_from_text_chemist_id_"+id).html('Edit <i class="fa fa-pencil" aria-hidden="true"></i>');		
+
 		$.ajax({
 			type : "POST",
 			data : {chemist_id:chemist_id,from_text:from_text,},
