@@ -16,7 +16,7 @@ class BankProcessingModel extends CI_Model
 		$result = $result->result();
 		foreach($result as $row){
 
-			echo $from_text = $row->from_text;
+			$from_text = $row->from_text;
 			$from_text = str_replace("'", "", $from_text);
 
 			$find_by = "";
@@ -165,7 +165,7 @@ class BankProcessingModel extends CI_Model
 					$process_name = $result["process_name"];
 				}
 			}
-			echo $find_by;
+			echo $from_text." - ".$find_by."<br>";
 			if(!empty($find_chemist_id)){
 				$find_chemist_id = str_replace("/", " || ", $find_chemist_id);
 				$array = explode("||", $find_chemist_id);
