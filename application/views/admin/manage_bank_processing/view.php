@@ -474,6 +474,8 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 								<div class="col-sm-4 myborder2">
 									<div class="td_div">
 										<b>Find Chemist : </b>
+										
+										<span class="from_text_find_chemist_id_<?= ($row_id); ?>">
 										<?php 
 										if(!empty($row_from_text_find_chemist))
 										{
@@ -486,6 +488,7 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 											echo $duble_tick;
 										}
 										?>
+										</span>
 									</div>
 									<div class="td_div">
 										<b>Find Invoice : </b>
@@ -650,6 +653,8 @@ function add_from_text_chemist_id(id){
 		$(".edit_from_text_chemist_id_"+id).html('Edit <i class="fa fa-pencil" aria-hidden="true"></i>');		
 
 		$(".from_text_find_match_id_"+id).html(from_text + '<?php echo $duble_tick ?>');
+
+		$(".from_text_find_chemist_id_"+id).html(chemist_id);
 
 		$.ajax({
 			type : "POST",
