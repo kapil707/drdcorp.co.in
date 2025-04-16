@@ -179,6 +179,10 @@ class BankProcessingModel extends CI_Model
 				$find_chemist_id = substr($find_chemist_id, 0, -4);
 			}
 
+			if(empty($find_chemist_id)){
+				$process_name = "";
+			}
+
 			/************************************************* */
 			$id = $row->id;
 			$where = array('id'=>$id);
