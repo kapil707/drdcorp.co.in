@@ -155,12 +155,20 @@ class BankProcessingModel extends CI_Model
 			}
 
 			if(empty($find_chemist_id)){
+				$result = $this->find_by_acm_tbl($matches[1]);
+				$find_chemist_id = $result["find_chemist_id"];
+				$find_by = "Acm Name";
+				$process_value = $result["process_value"];
+				$process_name = $result["process_name"];
+			}
+
+			if(empty($find_chemist_id)){
 				$pattern = '/(\d{10})/';
 				preg_match($pattern, $from_text, $matches);
 				if (isset($matches[1])) {
 					$result = $this->find_by_acm_tbl($matches[1]);
 					$find_chemist_id = $result["find_chemist_id"];
-					$find_by = "Acm Name / Mobile";
+					$find_by = "Acm Mobile";
 					$process_value = $result["process_value"];
 					$process_name = $result["process_name"];
 				}
