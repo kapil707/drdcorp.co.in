@@ -537,8 +537,6 @@ class BankWhatsAppModel extends CI_Model
 				$whatsapp_recommended = $whatsapp_recommended_new;
 			}
 
-			echo "<br>";
-
 			$where = array(
 				'id' => $id,
 			);
@@ -548,9 +546,11 @@ class BankWhatsAppModel extends CI_Model
 				'whatsapp_chemist'=>$whatsapp_chemist,
 				'whatsapp_recommended'=>$whatsapp_recommended,
 			);
-			echo "my01";
+			echo "--";
 			print_r($dt);
 			$this->BankModel->edit_fun("tbl_bank_processing", $dt,$where);
+
+			echo "<br>";
 		}
 	}
 
