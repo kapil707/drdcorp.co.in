@@ -15,12 +15,12 @@ git branch -M backup-24-11-08
 git push -u origin backup-24-11-08
 
 /*******************/
-update tbl_sms set status=0 where date='2025-04-14';
-update tbl_statment set status=0 where date='2025-04-14';
-delete from tbl_bank_processing where date='2025-04-14';
-UPDATE tbl_whatsapp_message set status=0 where date='2025-04-14';
-UPDATE tbl_whatsapp_message set set_chemist='',upi_no='',amount='0.0' where date='2025-04-14';
-delete from tbl_bank_chemist where recommended='1' and date='2025-04-14';
+update tbl_sms set status=0 where date='2025-04-16';
+update tbl_statment set status=0 where date='2025-04-16';
+delete from tbl_bank_processing where date='2025-04-16';
+UPDATE tbl_whatsapp_message set status=0 where date='2025-04-16';
+UPDATE tbl_whatsapp_message set set_chemist='',upi_no='',amount='0.0' where date='2025-04-16';
+delete from tbl_bank_chemist where recommended='1' and date='2025-04-16';
 
 //541103535394
 
