@@ -162,7 +162,7 @@ class Manage_bank_processing extends CI_Controller {
 				);
 				$dt = array(
 					'final_chemist'=>$final_chemist,
-					'process_status'=>'4',
+					'final_status'=>'4',
 				);
 				$this->BankModel->edit_fun("tbl_bank_processing", $dt,$where);
 			}
