@@ -390,7 +390,7 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 
 									<?php if(!empty($entry->statment_text)) { ?>
 										<b>Statment :</b> <?= $entry->statment_text; ?>
-										--(From Find By <?php echo $entry->statment_type ?>)
+										-- (From Find By <?php echo $entry->statment_type ?>)
 									<?php } ?>
 								</div>
 
@@ -663,10 +663,13 @@ function add_from_text_chemist_id(id){
 
 		$(".tr_css_"+id).css("background-color", "#eeeeee");
 
+		
 		$(".span_final_chemist_id_"+id).hide();	
 		$(".span_final_chemist_lbl_"+id).show();
 		$(".text_final_chemist_id_"+id).show();
 		$(".add_final_chemist_"+id).show();
+
+		$(".text_final_chemist_id_"+id).val(chemist_id);
 
 		$.ajax({
 			type : "POST",
