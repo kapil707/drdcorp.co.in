@@ -525,7 +525,7 @@ class BankWhatsAppModel extends CI_Model
 			}
 
 			// jab kuch na milay to recommended ban jaya serach ho kar ke
-			if(empty(trim($whatsapp_chemist)) && empty(trim($from_text_find_chemist))){
+			if(empty(trim($whatsapp_chemist)) && empty(trim($whatsapp_recommended))){
 				$whatsapp_recommended_new = "";
 				echo "SELECT body FROM tbl_whatsapp_message WHERE from_number = '$from_number' AND FROM_UNIXTIME(timestamp) BETWEEN DATE_SUB(FROM_UNIXTIME($timestamp_main), INTERVAL 7 MINUTE) AND DATE_ADD(FROM_UNIXTIME($timestamp_main), INTERVAL 7 MINUTE) and body!='' LIMIT 25 OFFSET 0;";
 
