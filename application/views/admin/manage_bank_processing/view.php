@@ -656,6 +656,8 @@ function add_from_text_chemist_id(id){
 
 		$(".from_text_find_chemist_id_"+id).html(chemist_id);
 
+		$(".tr_css_"+id).css("background-color", "#eeeeee");
+
 		$.ajax({
 			type : "POST",
 			data : {chemist_id:chemist_id,from_text:from_text,},
