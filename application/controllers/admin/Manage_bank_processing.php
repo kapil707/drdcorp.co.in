@@ -195,7 +195,7 @@ class Manage_bank_processing extends CI_Controller {
 				'from_text'=>$from_text,
 			);
 			$dt = array(
-				'process_status'=>'0',
+				'process_status'=>'1',
 				'whatsapp_id'=>0,
 				'whatsapp_chemist'=>'',
 				'whatsapp_recommended'=>'',
