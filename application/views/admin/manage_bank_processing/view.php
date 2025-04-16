@@ -474,7 +474,7 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 								<div class="col-sm-4 myborder2">
 									<div class="td_div">
 										<b>Find Chemist : </b>
-										
+																		
 										<span class="from_text_find_chemist_id_<?= ($row_id); ?>">
 										<?php 
 										if(!empty($row_from_text_find_chemist))
@@ -536,21 +536,24 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 										} ?>
 									</div>
 									<div class="td_div1">
-										<?php 
-										$mycss_chemist_final = "display:none;";
-										if(empty($textbox_final_chemist) && empty($row_from_text_find_chemist)){
-											?>
-											<?php if($row_process_status!=0){ ?>
-											<b style="float: left; margin-right:5px;" class="text_find_match_not blink_me_white">Please Set form Chemist </b>
-											<?php } ?>
-											<?php if($row_process_status==0){ ?>
-											<b style="float: left; margin-right:5px;" class="text_find_match_not blink_me_white">Loading Please Wait....</b>
-											<?php } ?>
-											<?php
-										} else {
-											$mycss_chemist_final = "";
-										} ?>
-										<b style="float: left; margin-right:5px;<?php echo $mycss_chemist_final ?>">Final Chemist : </b>
+										<span class="span_final_chemist_id_<?= ($row_id); ?>">
+
+											<?php if(empty($textbox_final_chemist) && empty($row_from_text_find_chemist)){
+												?>
+												<?php if($row_process_status!=0){ ?>
+												<b style="float: left; margin-right:5px;" class="text_find_match_not blink_me_white">Please Set form Chemist </b>
+												<?php } ?>
+												<?php if($row_process_status==0){ ?>
+												<b style="float: left; margin-right:5px;" class="text_find_match_not blink_me_white">Loading Please Wait....</b>
+												<?php } ?>
+												<?php
+												$mycss_chemist_final = "display:none;";
+											} else {
+												$mycss_chemist_final = "";
+											} ?>
+										</span>
+
+										<b style="float: left; margin-right:5px;<?php echo $mycss_chemist_final ?>" class="span_final_chemist_lbl_<?= ($row_id); ?>">Final Chemist : </b>
 
 										<span class="span_final_chemist_<?= ($row_id); ?>" <?php if(empty($row_final_chemist)) { ?>style="display:none" <?php } ?>>
 											<?php echo $row_final_chemist ?>
@@ -659,6 +662,11 @@ function add_from_text_chemist_id(id){
 		$(".from_text_find_chemist_id_"+id).html(chemist_id);
 
 		$(".tr_css_"+id).css("background-color", "#eeeeee");
+
+		$(".span_final_chemist_id_"+id).hide();	
+		$(".span_final_chemist_lbl_"+id).show();
+		$(".text_final_chemist_id_"+id).show();
+		$(".add_final_chemist_"+id).show();
 
 		$.ajax({
 			type : "POST",
