@@ -66,6 +66,9 @@ class CorporateReport extends CI_Model
 			/************************************************/
 			$report_type 	= $row->report_type;
 			$email     		= $row->email;
+			if(empty($email)){
+				$email = "kapildrd@gmail.com";
+			}
             $code       	= $row->code;
             $compcode   	= $row->compcode;
             $division   	= $row->division;
