@@ -163,6 +163,14 @@ class BankProcessingModel extends CI_Model
 			}
 
 			if(empty($find_chemist_id)){
+				$result = $this->find_by_acm_tbl($from_text);
+				$find_chemist_id = $result["find_chemist_id"];
+				$find_by = "Acm Name without space";
+				$process_value = $result["process_value"];
+				$process_name = $result["process_name"];
+			}
+
+			if(empty($find_chemist_id)){
 				$pattern = '/(\d{10})/';
 				preg_match($pattern, $from_text, $matches);
 				if (isset($matches[1])) {
@@ -425,6 +433,17 @@ class BankProcessingModel extends CI_Model
 
 		if(empty($process_value)){
 			$rr = $this->BankModel->select_query("SELECT * FROM `tbl_chemist` WHERE `name` like '%$received_from%' ");
+			$rr = $rr->result();
+			foreach($rr as $tt){
+				$jsonArray[] = $tt->altercode;
+				$process_value = $tt->name;
+				//$chemist_id = $tt->chemist_id;
+			}
+		}
+
+		if(empty($process_value)){
+			$received_from1 = str_replace(" ","", $received_from);
+			$rr = $this->BankModel->select_query("SELECT * FROM `tbl_chemist` WHERE REPLACE(TRIM(name), ' ', '')='$received_from1' ");
 			$rr = $rr->result();
 			foreach($rr as $tt){
 				$jsonArray[] = $tt->altercode;
