@@ -443,7 +443,7 @@ class BankProcessingModel extends CI_Model
 
 		if(empty($process_value)){
 			$received_from1 = str_replace(" ","", $received_from);
-			$rr = $this->BankModel->select_query("SELECT * FROM `tbl_chemist` WHERE REPLACE(TRIM(name), ' ', '')='$received_from1' ");
+			$rr = $this->BankModel->select_query("SELECT * FROM `tbl_chemist` WHERE trimname='$received_from1' ");
 			$rr = $rr->result();
 			foreach($rr as $tt){
 				$jsonArray[] = $tt->altercode;
