@@ -176,12 +176,14 @@ class BankModel extends CI_Model
 		{
 			$gstvNo = "";
 			$invoice = $row->invoice_number; 
-			$parts = explode("||", $invoice);
-			foreach($parts as $invoice) {
-				preg_match('/GstvNo:([\w-]+)/', $invoice, $matches);
-				$gstvNo.= $matches[1].',';
+			if(!empty($invoice)){
+				$parts = explode("||", $invoice);
+				foreach($parts as $invoice) {
+					preg_match('/GstvNo:([\w-]+)/', $invoice, $matches);
+					$gstvNo.= $matches[1].',';
+				}
+				$gstvNo = substr($gstvNo, 0, -2);
 			}
-			$gstvNo = substr($gstvNo, 0, -2);
 
 			$sheet->SetCellValue('A'.$rowCount,$row->account_no);
 			$sheet->SetCellValue('B'.$rowCount,$row->branch_no);
