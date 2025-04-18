@@ -126,41 +126,46 @@ class CorporateReport extends CI_Model
 
 	public function SendEmail($user_email,$subject,$message,$code)
 	{
-		$email = $this->phpmailer_lib->load();
-		
-		$addreplyto 		= "vipul@drdindia.com";
-		$addreplyto_name 	= "Vipul Gupta";
-		$server_email 		= "report@drdcorp.co.in";
-		$server_email_name 	= "DRD Corporate Report";
-		//$user_email 		= "kapil707sharma@gmail.com";
-		$email_bcc 			= "application@drdindia.com";
-		
-		$email->AddReplyTo($addreplyto,$addreplyto_name);
-		$email->SetFrom($server_email,$server_email_name);
-		$email->AddAddress($user_email);
-		$email->addBcc($email_bcc);
-		
-		$email->Subject   	= $subject;
-		$email->Body 		= $message;
+		try{
+			$email = $this->phpmailer_lib->load();
+			
+			$addreplyto 		= "vipul@drdindia.com";
+			$addreplyto_name 	= "Vipul Gupta";
+			$server_email 		= "report@drdcorp.co.in";
+			$server_email_name 	= "DRD Corporate Report";
+			//$user_email 		= "kapil707sharma@gmail.com";
+			$email_bcc 			= "application@drdindia.com";
+			
+			$email->AddReplyTo($addreplyto,$addreplyto_name);
+			$email->SetFrom($server_email,$server_email_name);
+			$email->AddAddress($user_email);
+			$email->addBcc($email_bcc);
+			
+			$email->Subject   	= $subject;
+			$email->Body 		= $message;
 
-		$email->IsHTML(true);
+			$email->IsHTML(true);
 
-		// $email->isSMTP();
-		// $email->Host       = 'mail.drdcorp.co.in'; // SMTP Server
-		// $email->SMTPAuth   = true; // Enable SMTP Authentication
-		// $email->Username   = 'report@drdcorp.co.in'; // SMTP Username
-		// $email->Password   = 'Kapil1234!@#$'; // SMTP Password
-		// $email->SMTPSecure = 'ssl'; // Use SSL (as your SMTP port is 465)
-		// $email->Port       = 465; // SMTP Port
+			// $email->isSMTP();
+			// $email->Host       = 'mail.drdcorp.co.in'; // SMTP Server
+			// $email->SMTPAuth   = true; // Enable SMTP Authentication
+			// $email->Username   = 'report@drdcorp.co.in'; // SMTP Username
+			// $email->Password   = 'Kapil1234!@#$'; // SMTP Password
+			// $email->SMTPSecure = 'ssl'; // Use SSL (as your SMTP port is 465)
+			// $email->Port       = 465; // SMTP Port
 
-		if($email->send()){
-			$message_status = 'Message has been sent';
-			echo "<br>";
-		}else{
-			$message_status = 'Message could not be sent.';
-			echo 'Mailer Error: ' . $email->ErrorInfo;
-		}
-		echo $message_status;
+			if($email->send()){
+				$message_status = 'Message has been sent';
+				echo "<br>";
+			}else{
+				$message_status = 'Message could not be sent.';
+				echo 'Mailer Error: ' . $email->ErrorInfo;
+			}
+			echo $message_status;
+		} catch (Exception $e) {
+            // Catch error
+            echo 'Email could not be sent. Mailer Error: ' . $email->ErrorInfo;
+        }
 
 		$dt = array('email_status'=>1,'message_status'=>$message_status,'subject'=>$subject,'message'=>$message);
 		$where = array('code'=>$code);
