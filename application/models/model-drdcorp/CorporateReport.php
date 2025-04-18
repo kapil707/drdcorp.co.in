@@ -126,6 +126,7 @@ class CorporateReport extends CI_Model
 
 	public function SendEmail($user_email,$subject,$message,$code)
 	{
+		$message_status = "";
 		try{
 			$email = $this->phpmailer_lib->load();
 			
