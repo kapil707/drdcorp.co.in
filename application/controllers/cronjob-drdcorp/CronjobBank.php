@@ -26,17 +26,16 @@ class CronjobBank extends CI_Controller
 
 	public function testing(){
 		
-		$text = "NEFT IN UTR CITIN25547158484 FROM VIKRAM MEDICOS A   UBLH09821432415TXN REF NO Money Transfer";
+		$text = "'+91-9810350383 510818340185 FROM TERA HI TERA PHAR MACY U O DHAN GURU NANAK SEWA MISSION 9300966180 C ITI0000 7217 STOP CHECK PART '";
 		$upi_no = "AUBLH09821432415";
 
-		echo "full text: $text <br>";
-		echo "upi0: $upi_no <br>";
 		$text = preg_replace('/\s*\n/', ' ', $text);
 		$text = str_replace($upi_no, ' ', $text);
 		$text = str_replace(' TXN REF NO', ' TXN REF NO', $text);
 		$text = str_replace('T XN REF NO', ' TXN REF NO', $text);
 		$text = str_replace('TX N REF NO', ' TXN REF NO', $text);
 		$from_text = "";
+
 		// yha check karta ha upi no or oss ko remove karta ha string me say
 		$length = strlen($upi_no);
 		for ($i = 1; $i < $length; $i++) {
@@ -59,7 +58,7 @@ class CronjobBank extends CI_Controller
 		}
 		$length = strlen($upi_no1);
 		for ($i = 1; $i < $length; $i++) {
-			$withSpace = substr($upi_no1, 0, $i) . '  ' . substr($upi_nupi_no1o, $i);
+			$withSpace = substr($upi_no1, 0, $i) . '  ' . substr($upi_no1, $i);
 			$text = str_replace($withSpace, ' ', $text);
 		}
 		/******************************* */
@@ -73,7 +72,7 @@ class CronjobBank extends CI_Controller
 		}
 		$length = strlen($upi_no1);
 		for ($i = 1; $i < $length; $i++) {
-			$withSpace = substr($upi_no1, 0, $i) . '  ' . substr($upi_nupi_no1o, $i);
+			$withSpace = substr($upi_no1, 0, $i) . '  ' . substr($upi_no1, $i);
 			$text = str_replace($withSpace, ' ', $text);
 		}
 		/******************************* */
@@ -88,6 +87,195 @@ class CronjobBank extends CI_Controller
 		echo "upi2: $upi_no2 <br>";
 		$text = str_replace($upi_no2."TXN", 'TXN', $text);
 		echo "text: $text <br>";
+		/**********************************************
+		$text = preg_replace("/KKBKH\d+/", "", $text);
+		$text = preg_replace("/KK\s*BKH\d+/", "", $text);
+		$text = preg_replace("/KKB\s*KH\d+/", "", $text);
+		$text = preg_replace("/KKBK\s*H\d+/", "", $text);
+		$text = preg_replace("/KKBKH\s*\d+/", "", $text); 
+
+		/**********************************************/
+		$text = preg_replace("/9300966180/", '', $text);
+		$text = preg_replace("/\s*9300966180/", '', $text);
+		$text = preg_replace("/9\s*300966180/", '', $text);
+		$text = preg_replace("/93\s*00966180/", '', $text);
+		$text = preg_replace("/930\s*0966180/", '', $text);
+		$text = preg_replace("/9300\s*966180/", '', $text);
+		$text = preg_replace("/93009\s*66180/", '', $text);
+		$text = preg_replace("/930096\s*6180/", '', $text);
+		$text = preg_replace("/9300966\s*180/", '', $text);
+		$text = preg_replace("/93009661\s*80/", '', $text);
+		$text = preg_replace("/930096618\s*0/", '', $text);
+		
+		preg_match("/FROM\s+(.+?)\s+TXN REF NO/", $text, $matches);
+		if (!empty($matches) && empty($from_text)){
+			$from_text = trim($matches[1]);
+			//$from_value = "<b>find2: ".$from_text."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
+			$statment_type = 1;
+			echo "statment type:1</br>";
+		}
+
+		preg_match("/FROM\s+(.+?)\s+REF/", $text, $matches);
+		if (!empty($matches) && empty($from_text)){
+			$from_text = trim($matches[1]);
+			//$from_value = "<b>find2: ".$from_text."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
+			$statment_type = 2;
+			echo "statment type:2</br>";
+		}
+
+		preg_match("/FROM\s+(.+?)\s+CITI/", $text, $matches);
+		if (!empty($matches) && empty($from_text)){
+			$from_text = trim($matches[1]);
+			//$from_value = "<b>find2: ".$from_text."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
+			$statment_type = 3;
+			echo "statment type:3</br>";
+		}
+		
+		preg_match("/FROM\s+(.+?)\s*+PAYMENT/", $text, $matches);
+		if (!empty($matches) && empty($from_text)){
+			$from_text = trim($matches[1]);
+			//$from_value = "<b>find2: ".$from_text."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
+			$statment_type = 4;
+			echo "statment type:4</br>";
+		}
+
+		preg_match("/FROM\s+(.+?)\s+SENT/", $text, $matches);
+		if (!empty($matches) && empty($from_text)){
+			$from_text = trim($matches[1]);
+			//$from_value = "<b>find2: ".$from_text."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
+			$statment_type = 5;
+			echo "statment type:5</br>";
+		}
+
+		preg_match("/FROM\s+(.+?)\s+UPI/", $text, $matches);
+		if (!empty($matches) && empty($from_text)){
+			$from_text = trim($matches[1]);
+			//$from_value = "<b>find2: ".$from_text."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
+			$statment_type = 6;
+			echo "statment type:6</br>";
+		}
+
+		preg_match("/FROM\s+(.+?)\s+PAY/", $text, $matches);
+		if (!empty($matches) && empty($from_text)){
+			$from_text = trim($matches[1]);
+			//$from_value = "<b>find2: ".$from_text."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
+			$statment_type = 7;
+			echo "statment type:7</br>";
+		}
+		
+		preg_match("/FROM\s+(\d+)@\s+(\w+)/", $text, $matches);
+		if (!empty($matches) && empty($from_text)){
+			$from_text = trim($matches[1])."@".trim($matches[2]);
+			$from_text = str_replace("'", "", $from_text);
+			$from_text = str_replace(" ", "", $from_text);
+			$from_text = str_replace("\n", "", $from_text);
+			//$from_value = "<b>find: ".$from_text."</b>"; // Output: 97926121865@PAYTM SAMEER S O KALLU NA
+			$statment_type = 8;
+			echo "statment type:8</br>";
+		}
+		
+		preg_match("/FROM\s+(\d+)\s+@\s*(\w+)/", $text, $matches);
+		if (!empty($matches) && empty($from_text)){
+			$from_text = trim($matches[1])."@".trim($matches[2]);
+			$from_text = str_replace("'", "", $from_text);
+			$from_text = str_replace(" ", "", $from_text);
+			$from_text = str_replace("\n", "", $from_text);
+			//$from_value = "<b>find2: ".$from_text."</b>"; // Output: 97926121865@PAYTM SAMEER S O KALLU NA
+			$statment_type = 9;
+			echo "statment type:9</br>";
+		}
+
+		/*//preg_match("/FROM\s+(\w+)\d+@\s*(\w+)/", $text, $matches);
+		preg_match("/FROM\s+([\d]+)@\s*([\w]+)/", $text, $matches);
+		if (!empty($matches) && empty($from_text)){
+			$from_text = trim($matches[1])."@".trim($matches[2]);
+			$from_text = str_replace("'", "", $from_text);
+			$from_text = str_replace(" ", "", $from_text);
+			$from_text = str_replace("\n", "", $from_text);
+			//$from_value = "<b>find3: ".$from_text."</b>"; // Output: 97926121865@PAYTM SAMEER S O KALLU NA
+			$statment_type = 10;
+			echo "<br>10</br>";
+		}
+
+		preg_match("/FROM\s+([^\s@]+)\s+@\s*(\w+)/", $text, $matches);
+		if (!empty($matches) && empty($from_text)){
+			$from_text = trim($matches[1])."@".trim($matches[2]);
+			$from_text = str_replace("'", "", $from_text);
+			$from_text = str_replace(" ", "", $from_text);
+			$from_text = str_replace("\n", "", $from_text);
+			//$from_value = "<b>find4: ".$from_text."</b>"; // Output: 97926121865@PAYTM SAMEER S O KALLU NA
+			$statment_type = 11;
+			echo "statment type:11</br>";
+		}*/
+
+		preg_match("/FROM\s+([^\@]+)@\s*(\w+)/", $text, $matches);
+		if (!empty($matches) && empty($from_text)){
+			$from_text = trim($matches[1])."@".trim($matches[2]);
+			$from_text = str_replace("'", "", $from_text);
+			$from_text = str_replace(" ", "", $from_text);
+			$from_text = str_replace("\n", "", $from_text);
+			//$from_value = "<b>find5: ".$from_text."</b>"; // Output: 97926121865@PAYTM SAMEER S O KALLU NA
+			$statment_type = 12;
+			echo "statment type:12</br>";
+		}
+		/*
+		preg_match("/FROM\s+(.*?)\s+PUNBQ/", $text, $matches);
+		if (!empty($matches) && empty($from_text)){
+			$from_text = trim($matches[1]);
+			//$from_text = str_replace("'", "", $from_text);
+			//$from_text = str_replace(" ", "", $from_text);
+			//$from_text = str_replace("\n", "", $from_text);
+			//$from_value = "<b>find6: ".$from_text."</b>"; // Output: 97926121865@PAYTM SAMEER S O KALLU NA
+			$statment_type = 13;
+			echo "statment type:13</br>";
+		}
+
+		preg_match("/FROM\s+([\w\s]+)\s+[A-Z0-9]+\s+REF NO/", $text, $matches);
+		if (!empty($matches) && empty($from_text)){
+			$from_text = trim($matches[1]);
+			//$from_text = str_replace("'", "", $from_text);
+			//$from_text = str_replace(" ", "", $from_text);
+			//$from_text = str_replace("\n", "", $from_text);
+			//$from_value = "<b>find6: ".$from_text."</b>"; // Output: 97926121865@PAYTM SAMEER S O KALLU NA
+			$statment_type = 14;
+			echo "statment type:14</br>";
+		}
+
+		preg_match("/FROM\s+(.*?)\s+CITI0000/", $text, $matches);
+		if (!empty($matches) && empty($from_text)){
+			$from_text = trim($matches[1]);
+			//$from_text = str_replace("'", "", $from_text);
+			//$from_text = str_replace(" ", "", $from_text);
+			//$from_text = str_replace("\n", "", $from_text);
+			//$from_value = "<b>find6: ".$from_text."</b>"; // Output: 97926121865@PAYTM SAMEER S O KALLU NA
+			$statment_type = 15;
+			echo "statment type:15</br>";
+		}*/
+
+		preg_match("/FROM\s+(.*?)\s+9300\d+/", $text, $matches);
+		if (!empty($matches) && empty($from_text)){
+			$from_text = trim($matches[1]);
+			//$from_text = str_replace("'", "", $from_text);
+			//$from_text = str_replace(" ", "", $from_text);
+			//$from_text = str_replace("\n", "", $from_text);
+			//$from_value = "<b>find6: ".$from_text."</b>"; // Output: 97926121865@PAYTM SAMEER S O KALLU NA
+			$statment_type = 16;
+			echo "statment type:16</br>";
+		}
+
+		/*
+		preg_match("/FROM\s+(.*)/", $text, $matches);
+		if (!empty($matches) && empty($from_text)){
+			$from_text = trim($matches[1]);
+			//$from_text = str_replace("'", "", $from_text);
+			//$from_text = str_replace(" ", "", $from_text);
+			//$from_text = str_replace("\n", "", $from_text);
+			//$from_value = "<b>find6: ".$from_text."</b>"; // Output: 97926121865@PAYTM SAMEER S O KALLU NA
+			$statment_type = 17;
+			echo "statment type:17</br>";
+		}*/
+
+		echo "find: $from_text <br>";
 		die();
 
 		/*$row_from_text = "9911644379@PTYES";
