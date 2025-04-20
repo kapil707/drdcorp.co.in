@@ -195,6 +195,14 @@ class BankStatmentModel extends CI_Model
 				$statment_type = 3;
 				echo "statment type:3</br>";
 			}
+
+			preg_match("/FROM\s+(.+?)\s+C ITI/", $text, $matches);
+			if (!empty($matches) && empty($from_text)){
+				$from_text = trim($matches[1]);
+				//$from_value = "<b>find2: ".$from_text."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
+				$statment_type = 31;
+				echo "statment type:31</br>";
+			}
 			
 			preg_match("/FROM\s+(.+?)\s*+PAYMENT/", $text, $matches);
 			if (!empty($matches) && empty($from_text)){
