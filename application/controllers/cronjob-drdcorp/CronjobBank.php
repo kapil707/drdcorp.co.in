@@ -105,7 +105,7 @@ class CronjobBank extends CI_Controller
 		$text = preg_replace("/930096\s*6180/", '', $text);
 		$text = preg_replace("/9300966\s*180/", '', $text);
 		$text = preg_replace("/93009661\s*80/", '', $text);
-		echo $text = preg_replace("/930096618\s*0/", '', $text);
+		$text = preg_replace("/930096618\s*0/", '', $text);
 		
 		preg_match("/FROM\s+(.+?)\s+TXN REF NO/", $text, $matches);
 		if (!empty($matches) && empty($from_text)){
@@ -129,6 +129,14 @@ class CronjobBank extends CI_Controller
 			//$from_value = "<b>find2: ".$from_text."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
 			$statment_type = 3;
 			echo "statment type:3</br>";
+		}
+
+		preg_match("/FROM\s+(.+?)\s+C ITI/", $text, $matches);
+		if (!empty($matches) && empty($from_text)){
+			$from_text = trim($matches[1]);
+			//$from_value = "<b>find2: ".$from_text."</b>"; UPI CREDIT REFERENCE 956425755787 FROM APMAURYA6@I BL ARJUN PRASAD MAURYA PAYMENT FROM PHONEPE
+			$statment_type = 3;
+			echo "statment type:3.1</br>";
 		}
 		
 		preg_match("/FROM\s+(.+?)\s*+PAYMENT/", $text, $matches);
