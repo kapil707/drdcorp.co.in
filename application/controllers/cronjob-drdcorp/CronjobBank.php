@@ -105,7 +105,7 @@ class CronjobBank extends CI_Controller
 		$text = preg_replace("/930096\s*6180/", '', $text);
 		$text = preg_replace("/9300966\s*180/", '', $text);
 		$text = preg_replace("/93009661\s*80/", '', $text);
-		$text = preg_replace("/930096618\s*0/", '', $text);
+		echo $text = preg_replace("/930096618\s*0/", '', $text);
 		
 		preg_match("/FROM\s+(.+?)\s+TXN REF NO/", $text, $matches);
 		if (!empty($matches) && empty($from_text)){
