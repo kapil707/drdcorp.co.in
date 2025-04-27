@@ -211,54 +211,53 @@ class Manage_bank_statment extends CI_Controller {
 				$i=1;
 				if(file_exists($excelFile))
 				{
-					$this->load->library('excel');
-					$objPHPExcel = PHPExcel_IOFactory::load($excelFile);
-					foreach ($objPHPExcel->getWorksheetIterator() as $worksheet)
+					$spreadsheet = IOFactory::load($excelFile);
+					$worksheet = $spreadsheet->getActiveSheet();
+					
+					$highestRow = $worksheet->getHighestRow();
+					for ($row=$start_row; $row<=$highestRow; $row++)
 					{
-						$highestRow = $worksheet->getHighestRow();
-						for ($row=$start_row; $row<=$highestRow; $row++)
-						{
-							$date1 = $worksheet->getCell($date.$row)->getValue();//a
-							$account_no1 = $worksheet->getCell($account_no.$row)->getValue(); //b
-							$branch_no1 = $worksheet->getCell($branch_no.$row)->getValue(); //c
-							$beneficiary_remitter1 = $worksheet->getCell($beneficiary_remitter.$row)->getValue();//d
-							$currency1 = $worksheet->getCell($currency.$row)->getValue();//e
-							$amount1 = $worksheet->getCell($amount.$row)->getValue();//f
-							$customer_reference1 = $worksheet->getCell($customer_reference.$row)->getValue(); //g
-							$branch_name1 = $worksheet->getCell($branch_name.$row)->getValue(); //h
-							$statment_date1 = $worksheet->getCell($statment_date.$row)->getValue(); //i
-							$type1 = $worksheet->getCell($type.$row)->getValue();//j
-							$enter_date1 = $worksheet->getCell($enter_date.$row)->getValue();//k
-							$transaction_description1 = $worksheet->getCell($transaction_description.$row)->getValue();//l
-							$bank_reference1 = $worksheet->getCell($bank_reference.$row)->getValue();//m
-							$narrative1 = $worksheet->getCell($narrative.$row)->getValue(); //n
-							
-							//$date1 = DateTime::createFromFormat('d/m/Y', $date1)->format('Y-m-d');
-							$date1 = DateTime::createFromFormat('d M Y', $date1)->format('Y-m-d');
-							//$date1 = date('Y-m-d', strtotime($date1));
-							//die();
-							//change only for this
-							$amount1 = str_replace(',', '', $amount1);							
-							
-							$dt = array(
-								'date'=>$date1,
-								'account_no'=>$account_no1,
-								'branch_no'=>$branch_no1,
-								'beneficiary_remitter'=>$beneficiary_remitter1,
-								'currency'=>$currency1,
-								'amount'=>$amount1,
-								'customer_reference'=>$customer_reference1,
-								'branch_name'=>$branch_name1,
-								'statment_date'=>$statment_date1,
-								'type'=>$type1,
-								'enter_date'=>$enter_date1,
-								'transaction_description'=>$transaction_description1,
-								'bank_reference'=>$bank_reference1,
-								'narrative'=>$narrative1,
-								'formet'=>$formet,
-							);
-							$this->BankModel->insert_statment("tbl_statment", $dt);
-						}
+						$date1 = $worksheet->getCell($date.$row)->getValue();//a
+						$account_no1 = $worksheet->getCell($account_no.$row)->getValue(); //b
+						$branch_no1 = $worksheet->getCell($branch_no.$row)->getValue(); //c
+						$beneficiary_remitter1 = $worksheet->getCell($beneficiary_remitter.$row)->getValue();//d
+						$currency1 = $worksheet->getCell($currency.$row)->getValue();//e
+						$amount1 = $worksheet->getCell($amount.$row)->getValue();//f
+						$customer_reference1 = $worksheet->getCell($customer_reference.$row)->getValue(); //g
+						$branch_name1 = $worksheet->getCell($branch_name.$row)->getValue(); //h
+						$statment_date1 = $worksheet->getCell($statment_date.$row)->getValue(); //i
+						$type1 = $worksheet->getCell($type.$row)->getValue();//j
+						$enter_date1 = $worksheet->getCell($enter_date.$row)->getValue();//k
+						$transaction_description1 = $worksheet->getCell($transaction_description.$row)->getValue();//l
+						$bank_reference1 = $worksheet->getCell($bank_reference.$row)->getValue();//m
+						$narrative1 = $worksheet->getCell($narrative.$row)->getValue(); //n
+						
+						//$date1 = DateTime::createFromFormat('d/m/Y', $date1)->format('Y-m-d');
+						$date1 = DateTime::createFromFormat('d M Y', $date1)->format('Y-m-d');
+						//$date1 = date('Y-m-d', strtotime($date1));
+						//die();
+						//change only for this
+						$amount1 = str_replace(',', '', $amount1);							
+						
+						$dt = array(
+							'date'=>$date1,
+							'account_no'=>$account_no1,
+							'branch_no'=>$branch_no1,
+							'beneficiary_remitter'=>$beneficiary_remitter1,
+							'currency'=>$currency1,
+							'amount'=>$amount1,
+							'customer_reference'=>$customer_reference1,
+							'branch_name'=>$branch_name1,
+							'statment_date'=>$statment_date1,
+							'type'=>$type1,
+							'enter_date'=>$enter_date1,
+							'transaction_description'=>$transaction_description1,
+							'bank_reference'=>$bank_reference1,
+							'narrative'=>$narrative1,
+							'formet'=>$formet,
+						);
+						$this->BankModel->insert_statment("tbl_statment", $dt);
+						
 					}
 				}
 				redirect(base_url()."admin/$page_controllers/view2");
@@ -288,60 +287,58 @@ class Manage_bank_statment extends CI_Controller {
 				$i=1;
 				if(file_exists($excelFile))
 				{
-					$this->load->library('excel');
-					$objPHPExcel = PHPExcel_IOFactory::load($excelFile);
-					foreach ($objPHPExcel->getWorksheetIterator() as $worksheet)
+					$spreadsheet = IOFactory::load($excelFile);
+					$worksheet = $spreadsheet->getActiveSheet();
+					
+					$highestRow = $worksheet->getHighestRow();
+					for ($row=$start_row; $row<=$highestRow; $row++)
 					{
-						$highestRow = $worksheet->getHighestRow();
-						for ($row=$start_row; $row<=$highestRow; $row++)
-						{
-							$date1 = $worksheet->getCell($date.$row)->getValue();//a
-							$statment_date1 = $worksheet->getCell($statment_date.$row)->getValue(); //b
-							$currency1 = $worksheet->getCell($currency.$row)->getValue();//c
-							$amount1 = $worksheet->getCell($amount.$row)->getValue();//d
-							$beneficiary_remitter1 = $worksheet->getCell($beneficiary_remitter.$row)->getValue();//e
-							$customer_reference1 = $worksheet->getCell($customer_reference.$row)->getValue(); //f
-							$type1 = $worksheet->getCell($type.$row)->getValue();//g
-							$branch_no1 = $worksheet->getCell($branch_no.$row)->getValue(); //h
-							$branch_name1 = $worksheet->getCell($branch_name.$row)->getValue(); //i
-							$enter_date1 = $worksheet->getCell($enter_date.$row)->getValue();//j
-							$bank_reference1 = $worksheet->getCell($bank_reference.$row)->getValue();//k
-							$transaction_description1 = $worksheet->getCell($transaction_description.$row)->getValue();//l
-							$narrative1 = $worksheet->getCell($narrative.$row)->getValue(); //m
-							$payment_details1 = $worksheet->getCell($payment_details.$row)->getValue(); //n
+						$date1 = $worksheet->getCell($date.$row)->getValue();//a
+						$statment_date1 = $worksheet->getCell($statment_date.$row)->getValue(); //b
+						$currency1 = $worksheet->getCell($currency.$row)->getValue();//c
+						$amount1 = $worksheet->getCell($amount.$row)->getValue();//d
+						$beneficiary_remitter1 = $worksheet->getCell($beneficiary_remitter.$row)->getValue();//e
+						$customer_reference1 = $worksheet->getCell($customer_reference.$row)->getValue(); //f
+						$type1 = $worksheet->getCell($type.$row)->getValue();//g
+						$branch_no1 = $worksheet->getCell($branch_no.$row)->getValue(); //h
+						$branch_name1 = $worksheet->getCell($branch_name.$row)->getValue(); //i
+						$enter_date1 = $worksheet->getCell($enter_date.$row)->getValue();//j
+						$bank_reference1 = $worksheet->getCell($bank_reference.$row)->getValue();//k
+						$transaction_description1 = $worksheet->getCell($transaction_description.$row)->getValue();//l
+						$narrative1 = $worksheet->getCell($narrative.$row)->getValue(); //m
+						$payment_details1 = $worksheet->getCell($payment_details.$row)->getValue(); //n
 
-							//$date1 = DateTime::createFromFormat('d/m/Y', $date1)->format('Y-m-d');
-							$date1 = DateTime::createFromFormat('d M Y', $date1)->format('Y-m-d');
-							//$date1 = date('Y-m-d', strtotime($date1));
-							//die();
-							//change only for this
-							$amount1 = str_replace(',', '', $amount1);
+						//$date1 = DateTime::createFromFormat('d/m/Y', $date1)->format('Y-m-d');
+						$date1 = DateTime::createFromFormat('d M Y', $date1)->format('Y-m-d');
+						//$date1 = date('Y-m-d', strtotime($date1));
+						//die();
+						//change only for this
+						$amount1 = str_replace(',', '', $amount1);
 
-							$account_no1 = $closing_ledger_balance1 = $calculated_balances1 = $iban_number1 = $iban_number1 = "";
-							
-							$dt = array(
-								'account_no'=>$account_no1,
-								'branch_no'=>$branch_no1,
-								'statment_date'=>$statment_date1,
-								'closing_ledger_balance'=>$closing_ledger_balance1,
-								'calculated_balances'=>$calculated_balances1,
-								'amount'=>$amount1,
-								'enter_date'=>$enter_date1,
-								'date'=>$date1,
-								'bank_reference'=>$bank_reference1,
-								'customer_reference'=>$customer_reference1,
-								'narrative'=>$narrative1,
-								'transaction_description'=>$transaction_description1,
-								'iban_number'=>$iban_number1,
-								'currency'=>$currency1,
-								'beneficiary_remitter'=>$beneficiary_remitter1,
-								'type'=>$type1,
-								'branch_name'=>$branch_name1,
-								'payment_details'=>$payment_details1,
-								'formet'=>$formet,
-							);
-							$this->BankModel->insert_statment("tbl_statment", $dt);
-						}
+						$account_no1 = $closing_ledger_balance1 = $calculated_balances1 = $iban_number1 = $iban_number1 = "";
+						
+						$dt = array(
+							'account_no'=>$account_no1,
+							'branch_no'=>$branch_no1,
+							'statment_date'=>$statment_date1,
+							'closing_ledger_balance'=>$closing_ledger_balance1,
+							'calculated_balances'=>$calculated_balances1,
+							'amount'=>$amount1,
+							'enter_date'=>$enter_date1,
+							'date'=>$date1,
+							'bank_reference'=>$bank_reference1,
+							'customer_reference'=>$customer_reference1,
+							'narrative'=>$narrative1,
+							'transaction_description'=>$transaction_description1,
+							'iban_number'=>$iban_number1,
+							'currency'=>$currency1,
+							'beneficiary_remitter'=>$beneficiary_remitter1,
+							'type'=>$type1,
+							'branch_name'=>$branch_name1,
+							'payment_details'=>$payment_details1,
+							'formet'=>$formet,
+						);
+						$this->BankModel->insert_statment("tbl_statment", $dt);
 					}
 				}
 				redirect(base_url()."admin/$page_controllers/view3");
