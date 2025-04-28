@@ -98,9 +98,12 @@ class CorporateReport extends CI_Model
 		$file_name3 = "ChemistWiseReport.xlsx";
 		$file_name_path3 = "ChemistWiseReport-$file_name.xlsx";
 		$url1 = $url2 = $url3 = "";
+		$file_attachment1 = $file_attachment2 = $file_attachment3 = "";
 		if($file1==1){
 			$url = "https://www.drdcorp.co.in/corporate_report/".$folder_date."/".$file_name_path1;
 			$url1 = "<a href='".$url."'>".$file_name1."</a><br><br>";
+
+			$file_attachment1 = "corporate_report/".$folder_date."/".$file_name_path1;
 		}
 		if($file2==1){
 			$url = "https://www.drdcorp.co.in/corporate_report/".$folder_date."/".$file_name_path2;
@@ -121,10 +124,10 @@ class CorporateReport extends CI_Model
 		$message.= $url3;
 		$message.= "Please download the file as in the link above for your reference.<br>Thanks and regards<br><br>D.R. Distributors Pvt Ltd<br>Notice & Disclaimer - This email and any files transmitted with it contain Proprietary, privileged and confidential information and/or information protected by intellectual property rights and is only for the use of the intended recipient of this message. If you are not the intended recipient, please delete or destroy this and all copies of this message along with the attachments immediately. You are hereby notified and directed that (1) if you are not the named and intended addressee you shall not disseminate, distribute or copy this e-mail, and (2) any offer for product/service shall be subject to a final evaluation of relevant patent status. Company cannot guarantee that e-mail communications are secure or error-free, as information could be intercepted, corrupted, amended, lost, destroyed, arrive late or incomplete, or may contain viruses. Company does not accept responsibility for any loss or damage arising from the use of this email or attachments.";
 		
-		$this->SendEmail($email,$subject,$message,$code);
+		$this->SendEmail($email,$subject,$message,$code,$file_attachment1,$file_attachment2,$file_attachment3);
 	}
 
-	public function SendEmail($user_email,$subject,$message,$code)
+	public function SendEmail($user_email,$subject,$message,$code,$file_attachment1,$file_attachment2,$file_attachment3)
 	{
 		$message_status = "";
 		try{
@@ -146,6 +149,10 @@ class CorporateReport extends CI_Model
 			$email->Body 		= $message;
 
 			$email->IsHTML(true);
+
+			if(!empty($file_attachment1)){
+				$email->addAttachment(FCPATH.$file_attachment1);
+			}
 
 			// $email->isSMTP();
 			// $email->Host       = 'mail.drdcorp.co.in'; // SMTP Server

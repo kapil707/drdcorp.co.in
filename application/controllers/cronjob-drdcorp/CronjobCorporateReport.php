@@ -89,7 +89,7 @@ class CronjobCorporateReport extends CI_Controller
 		$email->Subject   	= $subject;
 		$email->Body 		= $message . time();
 
-		$email->addAttachment(FCPATH.'email_files/ChemistWiseReport-2025-04-28-366-daily-946-722-C11.xlsx');
+		//$email->addAttachment(FCPATH.'email_files/ChemistWiseReport-2025-04-28-366-daily-946-722-C11.xlsx');
 
 		$email->IsHTML(true);
 
