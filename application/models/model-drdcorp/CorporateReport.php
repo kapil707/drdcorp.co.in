@@ -173,6 +173,7 @@ class CorporateReport extends CI_Model
 		} catch (Exception $e) {
             // Catch error
             echo 'Email could not be sent. Mailer Error: ' . $email->ErrorInfo;
+			$message_status = 'Email could not be sent. Mailer Error: ';
         }
 
 		$dt = array('email_status'=>1,'message_status'=>$message_status,'subject'=>$subject,'message'=>$message);
