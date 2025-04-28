@@ -154,6 +154,14 @@ class CorporateReport extends CI_Model
 				$email->addAttachment(FCPATH.$file_attachment1);
 			}
 
+			if(!empty($file_attachment2)){
+				$email->addAttachment(FCPATH.$file_attachment2);
+			}
+
+			if(!empty($file_attachment3)){
+				$email->addAttachment(FCPATH.$file_attachment3);
+			}
+
 			// $email->isSMTP();
 			// $email->Host       = 'mail.drdcorp.co.in'; // SMTP Server
 			// $email->SMTPAuth   = true; // Enable SMTP Authentication
