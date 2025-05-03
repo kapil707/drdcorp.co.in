@@ -77,16 +77,17 @@ class CorporateReport extends CI_Model
 			$file1 			= $row->file1;
 			$file2 			= $row->file2;
 			$file3 			= $row->file3;
+			$file_attachment = $row->file_attachment;
 			$from_date 		= $row->from_date;
 			$to_date 		= $row->to_date;
 			$folder_date 	= $row->folder_date;
 			$file_name 		= $row->file_name;
             
-            $this->get_body($report_type,$email,$code,$compcode,$division,$name,$company_name,$file1,$file2,$file3,$from_date,$to_date,$folder_date,$file_name);
+            $this->get_body($report_type,$email,$code,$compcode,$division,$name,$company_name,$file1,$file2,$file3,$file_attachment,$from_date,$to_date,$folder_date,$file_name);
 		}
 	}
 
-    public function get_body($report_type,$email,$code,$compcode,$division,$name,$company_name,$file1,$file2,$file3,$from_date,$to_date,$folder_date,$file_name) {
+    public function get_body($report_type,$email,$code,$compcode,$division,$name,$company_name,$file1,$file2,$file3,$file_attachment,$from_date,$to_date,$folder_date,$file_name) {
 
 		$from_date = date("d-M-y", strtotime($from_date));
 		$to_date = date("d-M-y", strtotime($to_date));
@@ -118,16 +119,16 @@ class CorporateReport extends CI_Model
 		if($from_date==$to_date){
 			$subject = "Daily Report (".$from_date.") ".ucwords(strtolower($company_name))." (".$division.")";
 		}
-		/*$message = "Hello Sir/Madam ".ucwords(strtolower($name)).",<br><br>It is the sales data as you have sought<br>";
-		/*$message.= $url1;
+		$message = "Hello Sir/Madam ".ucwords(strtolower($name)).",<br><br>It is the sales data as you have sought<br>";
+		$message.= $url1;
 		$message.= $url2;
-		$message.= $url3;*/
+		$message.= $url3;
 		$message.= "Please download the file as in the link above for your reference.<br>Thanks and regards<br><br>D.R. Distributors Pvt Ltd<br>Notice & Disclaimer - This email and any files transmitted with it contain Proprietary, privileged and confidential information and/or information protected by intellectual property rights and is only for the use of the intended recipient of this message. If you are not the intended recipient, please delete or destroy this and all copies of this message along with the attachments immediately. You are hereby notified and directed that (1) if you are not the named and intended addressee you shall not disseminate, distribute or copy this e-mail, and (2) any offer for product/service shall be subject to a final evaluation of relevant patent status. Company cannot guarantee that e-mail communications are secure or error-free, as information could be intercepted, corrupted, amended, lost, destroyed, arrive late or incomplete, or may contain viruses. Company does not accept responsibility for any loss or damage arising from the use of this email or attachments.";
 		
-		$this->SendEmail($email,$subject,$message,$code,$file_attachment1,$file_attachment2,$file_attachment3);
+		$this->SendEmail($email,$subject,$message,$code,$file_attachment,$file_attachment1,$file_attachment2,$file_attachment3);
 	}
 
-	public function SendEmail($user_email,$subject,$message,$code,$file_attachment1,$file_attachment2,$file_attachment3)
+	public function SendEmail($user_email,$subject,$message,$code,$file_attachment,$file_attachment1,$file_attachment2,$file_attachment3)
 	{
 		$message_status = "";
 		try{
@@ -150,15 +151,15 @@ class CorporateReport extends CI_Model
 
 			$email->IsHTML(true);
 
-			if(!empty($file_attachment1)){
+			if($file_attachment == 1 && !empty($file_attachment1)){
 				$email->addAttachment(FCPATH.$file_attachment1);
 			}
 
-			if(!empty($file_attachment2)){
+			if($file_attachment == 1 && !empty($file_attachment2)){
 				$email->addAttachment(FCPATH.$file_attachment2);
 			}
 
-			if(!empty($file_attachment3)){
+			if($file_attachment == 1 && !empty($file_attachment3)){
 				$email->addAttachment(FCPATH.$file_attachment3);
 			}
 
