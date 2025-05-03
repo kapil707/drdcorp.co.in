@@ -39,6 +39,7 @@ class ExeCorporate extends CI_Controller
 				$file1 = $record['file1'];
 				$file2 = $record['file2'];
 				$file3 = $record['file3'];
+				$file_attachment = $record['file_attachment'];
 				$file_name = $record['file_name'];
 				$from_date = $record['from_date'];
 				$to_date = $record['to_date'];
@@ -57,7 +58,8 @@ class ExeCorporate extends CI_Controller
 					'file1' => $file1,
 					'file2' => $file2,
 					'file3' => $file3,
-					'file_name' => $file_name,
+					'file3' => $file3,
+					'file_attachment' => $file_attachment,
 					'from_date' => $from_date,
 					'to_date' => $to_date,
 					'folder_date' => $folder_date,
