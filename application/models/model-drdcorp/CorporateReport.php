@@ -54,9 +54,13 @@ class CorporateReport extends CI_Model
 
 	function sendReport() {
 
+		
+		$email_send_time = date("YmdHi");
+
 		$this->db->select('*');
         $this->db->from('tbl_corporate_report');
         $this->db->where('email_status', 0);
+		$this->db->where('email_send_time<=', $email_send_time);
         $this->db->limit(5);
 
         $query = $this->db->get();
