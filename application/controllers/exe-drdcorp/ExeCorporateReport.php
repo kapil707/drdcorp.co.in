@@ -62,6 +62,7 @@ class ExeCorporateReport extends CI_Controller
 					'file3' => $file3,
 					'file3' => $file3,
 					'file_attachment' => $file_attachment,
+					'file_name' => $file_name,
 					'from_date' => $from_date,
 					'to_date' => $to_date,
 					'folder_date' => $folder_date,
