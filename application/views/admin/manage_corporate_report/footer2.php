@@ -15,8 +15,13 @@ $(document).ready(function(){
 		order: [[0, 'asc']],
 		columns: [
 			{ data: 'sr_no', title: 'Id' },
-			{ data: 'string_value', title: 'Name' },
-			{ data: 'chemist_id', title: 'ChemistID' },
+			{ data: 'name', title: 'Name' },
+			{ data: 'email', title: 'Email' },
+			{ data: 'from_date', title: 'From Date' },
+			{ data: 'to_date', title: 'To Date' },
+			{ data: 'email_status', title: 'Status' },
+			{ data: 'subject', title: 'Subject' },
+			{ data: 'message', title: 'Message' },
 			/*{
 				data: 'image',
 				title: 'Image',
