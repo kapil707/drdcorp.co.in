@@ -163,11 +163,11 @@ class Manage_corporate_report extends CI_Controller {
 			$subject = $row->subject;
 			$message = $row->message;
 			
-			$time = $row->insert_time;
+			/*$time = $row->insert_time;
 			if(empty($time)){
 				$time = time();
 			}
-			$datetime = date("d-M-y @ H:i:s", $time);
+			$datetime = date("d-M-y @ H:i:s", $time);*/
 
 			$dt = array(
 				'sr_no' => $sr_no,
