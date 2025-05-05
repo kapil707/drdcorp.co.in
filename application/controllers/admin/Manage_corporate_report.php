@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Manage_corporate_report extends CI_Controller {
-	public $Page_title = "Manage Bank Chemist";
+	public $Page_title = "Manage Corporate Report";
 	public $Page_name  = "manage_corporate_report";
 	public $Page_view  = "manage_corporate_report";
 	public $Page_menu  = "manage_corporate_report";
