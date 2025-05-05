@@ -148,7 +148,7 @@ class Manage_corporate_report extends CI_Controller {
 		$i = 1;
 		$Page_tbl = $this->Page_tbl;
 
-		$result = $this->BankModel->select_query("select * from $Page_tbl");
+		$result = $this->db->query("select * from $Page_tbl");
 		$result = $result->result();
 		foreach($result as $row) {
 
