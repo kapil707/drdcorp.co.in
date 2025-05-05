@@ -159,7 +159,7 @@ class Manage_corporate_report extends CI_Controller {
 			$email = $row->email;
 			$from_date = $row->from_date;
 			$to_date = $row->to_date;
-			$email_status = $row->email_status;
+			$message_status = $row->message_status;
 			$subject = $row->subject;
 			$message = $row->message;
 			
@@ -176,7 +176,7 @@ class Manage_corporate_report extends CI_Controller {
 				'email' => $email,
 				'from_date'=>$from_date,
 				'to_date'=>$to_date,
-				'email_status'=>$email_status,
+				'message_status'=>$message_status,
 				'subject'=>$subject,
 				'message'=>$message,
 			);

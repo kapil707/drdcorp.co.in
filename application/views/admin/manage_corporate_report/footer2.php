@@ -19,7 +19,7 @@ $(document).ready(function(){
 			{ data: 'email', title: 'Email' },
 			{ data: 'from_date', title: 'From Date' },
 			{ data: 'to_date', title: 'To Date' },
-			{ data: 'email_status', title: 'Status' },
+			{ data: 'message_status', title: 'Status' },
 			{ data: 'subject', title: 'Subject' },
 			{ data: 'message', title: 'Message' },
 			/*{
