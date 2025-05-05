@@ -47,7 +47,7 @@ class ExeCorporateReport extends CI_Controller
 
 				$insert_time = date('Y-m-d,H:i');
 
-				$email_send_time = date("YmdHi", strtotime('+10 minutes', time()));
+				$email_send_time = date("YmdHi", strtotime('+5 minutes', time()));
 
 				$dt = array(
 					'report_type' => $report_type,
