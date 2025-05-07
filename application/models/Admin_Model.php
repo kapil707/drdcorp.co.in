@@ -99,10 +99,10 @@ class Admin_Model extends CI_Model
 		$row = $query->row();
 		if(empty($row->id))
 		{
-			$this->session->set_flashdata("message","<p class='font-bold  alert alert-warning m-b-sm'>$page_title you Not Permission to open the page !</p>");
+			/*$this->session->set_flashdata("message","<p class='font-bold alert alert-warning m-b-sm'>$page_title you Not Permission to open the page !</p>");
 			$this->session->set_flashdata("message_footer","yes");
 			$this->session->set_flashdata("message_type","error");
-			$this->session->set_flashdata("full_message","$page_title you Not Permission to open the page !");
+			$this->session->set_flashdata("full_message","$page_title you Not Permission to open the page !");*/
 			redirect('admin/dashboard');
 		}
 	}
