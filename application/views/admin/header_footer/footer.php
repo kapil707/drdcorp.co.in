@@ -302,3 +302,13 @@ function notify(pgtype)
 
 </body>
 </html>
+
+<?php 
+$this->session->keep_flashdata('message');
+$this->session->keep_flashdata('message_footer');
+$this->session->keep_flashdata('message_type');
+$this->session->keep_flashdata('full_message');
+$this->session->keep_flashdata('message1');
+$this->session->keep_flashdata('message2');
+$this->session->keep_flashdata('user_type1');
+?>
