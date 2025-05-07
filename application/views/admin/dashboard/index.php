@@ -1,4 +1,4 @@
-	<?= $this->session->flashdata('message'); ?>
+	<?= $this->session->keep_flashdata('message'); ?>
 	<?php /*
 	if($this->session->userdata('user_type')!="") { ?>
 		<div class="wrapper wrapper-content">
