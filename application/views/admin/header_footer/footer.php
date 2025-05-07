@@ -302,4 +302,3 @@ function notify(pgtype)
 
 </body>
 </html>
-<?php $this->session->keep_flashdata(); ?>
