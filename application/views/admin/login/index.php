@@ -34,7 +34,7 @@
                     <input type="password" class="form-control" placeholder="Password" required name="password">
                 </div>
                 <div class="form-group">
-					<?=  $this->session->keep_flashdata('message1'); ?>
+					<?=  $this->session->flashdata('message1'); ?>
               	</div>
                 <button type="submit" class="btn btn-primary block full-width m-b" name="Submit" value="Submit">Login</button>
                 <a data-toggle="modal" href="#" data-target="#myModal4"><small>Forgot password?</small></a>

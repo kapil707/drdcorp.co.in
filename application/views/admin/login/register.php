@@ -51,7 +51,7 @@
                     <input type="text" class="form-control" placeholder="Name" required="" name="name" value="<?= set_value('name'); ?>" id="username">
 
                 </div>
-$this->session->keep_flashdata
+
                 <div class="form-group">
 
                 	<?= form_error('name'); ?>

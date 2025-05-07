@@ -13,7 +13,7 @@
                             Select User Type                      	
                         </option>
                         <?php
-						$user_type = $this->session->keep_flashdata('user_type1');
+						$user_type = $this->session->flashdata('user_type1');
 						$user_id = $this->session->userdata("user_id");
 						$result1 = $this->db->query("select * from tbl_user_type where user_id='$user_id' and status=1")->result();
                         foreach($result1 as $row1)

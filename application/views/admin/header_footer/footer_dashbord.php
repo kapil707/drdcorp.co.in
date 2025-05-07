@@ -62,30 +62,30 @@
 				  "hideMethod": "fadeOut"
 				};
 				<?php
-				if($this->session->keep_flashdata('message_footer')!="")
+				if($this->session->flashdata('message_footer')!="")
 				{
-					if($this->session->keep_flashdata('message_type')=="success")
+					if($this->session->flashdata('message_type')=="success")
 					{ 
 						?>
-							toastr.success('<?= $this->session->keep_flashdata('full_message'); ?>');
+							toastr.success('<?= $this->session->flashdata('full_message'); ?>');
 						<?php 
 					} 
-					if($this->session->keep_flashdata('message_type')=="info")
+					if($this->session->flashdata('message_type')=="info")
 					{ 
 						?>
-							toastr.info('<?= $this->session->keep_flashdata('full_message'); ?>');
+							toastr.info('<?= $this->session->flashdata('full_message'); ?>');
 						<?php
 					}
-					if($this->session->keep_flashdata('message_type')=="warning")
+					if($this->session->flashdata('message_type')=="warning")
 					{ 
 						?>
-							toastr.warning('<?= $this->session->keep_flashdata('full_message'); ?>');
+							toastr.warning('<?= $this->session->flashdata('full_message'); ?>');
 						<?php
 					}						
-					if($this->session->keep_flashdata('message_type')=="error")
+					if($this->session->flashdata('message_type')=="error")
 					{
 						?>
-							toastr.error('<?= $this->session->keep_flashdata('full_message'); ?>');
+							toastr.error('<?= $this->session->flashdata('full_message'); ?>');
 						<?php
 					}
 				}?>
@@ -301,3 +301,4 @@ function notify(pgtype)
 
 </body>
 </html>
+<?php $this->session->keep_flashdata(); ?>
