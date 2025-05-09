@@ -75,7 +75,7 @@ class Api01 extends CI_Controller {
 			'time'=>$time,
 			'datetime'=>$datetime,
 		);
-		//$this->BankModel->insert_fun("tbl_sms", $dt);
+		$this->BankModel->insert_fun("tbl_sms", $dt);
 		$response = array(
             'success' => "1",
             'message' => 'Data add successfully',
@@ -122,7 +122,7 @@ class Api01 extends CI_Controller {
 			'time'=>$time,
 			'datetime'=>$datetime,
 		);
-		//$this->BankModel->insert_fun("tbl_sms", $dt);
+		$this->BankModel->insert_fun("tbl_sms", $dt);
 		$response = array(
             'success' => "1",
             'message' => 'Data add successfully',
