@@ -61,6 +61,7 @@
 				<table class="table table-striped table-bordered table-hover dataTables-example21">
 					<thead>
 						<tr>
+							<th>ID</th>
 							<th>Account Number</th>
 							<th>Branch Number</th>
 							<th>Statement Date</th>
