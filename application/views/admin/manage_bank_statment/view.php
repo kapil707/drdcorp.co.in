@@ -58,10 +58,9 @@
 		</div>
 		<div class="col-xs-12">
 			<div class="table-responsive">
-				<table class="table table-striped table-bordered table-hover dataTables-example3">
+				<table class="table table-striped table-bordered table-hover dataTables-example">
 					<thead>
 						<tr>
-							<th>ID</th>
 							<th>Account Number</th>
 							<th>Branch Number</th>
 							<th>Statement Date</th>
@@ -84,9 +83,6 @@
 					$i = 1;			
 					foreach ($result as $row) { ?>
 						<tr class="tr_css_<?php echo $row->id; ?>">
-							<td>
-								<?php echo $i++; ?>
-							</td>
 							<td>
 								<?php echo $row->account_no; ?>
 							</td>
