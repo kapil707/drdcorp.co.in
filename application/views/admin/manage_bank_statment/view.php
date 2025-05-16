@@ -61,6 +61,7 @@
 				<table class="table table-striped table-bordered table-hover dataTables-example21">
 					<thead>
 						<tr>
+							<th>Id</th>
 							<th>Account Number</th>
 							<th>Branch Number</th>
 							<th>Statement Date</th>
@@ -82,6 +83,9 @@
 					<?php				
 					foreach ($result as $row) { ?>
 						<tr class="tr_css_<?php echo $row->id; ?>">
+							<td>
+								<?php echo $row->id; ?>
+							</td>
 							<td>
 								<?php echo $row->account_no; ?>
 							</td>
