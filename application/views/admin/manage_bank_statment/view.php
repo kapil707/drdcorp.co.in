@@ -80,11 +80,12 @@
 						</tr>
 					</thead>
 					<tbody>
-					<?php				
+					<?php
+					$i = 1;			
 					foreach ($result as $row) { ?>
 						<tr class="tr_css_<?php echo $row->id; ?>">
 							<td>
-								<?php echo $row->id; ?>
+								<?php echo $i++; ?>
 							</td>
 							<td>
 								<?php echo $row->account_no; ?>
