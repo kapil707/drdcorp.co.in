@@ -168,7 +168,7 @@ class BankModel extends CI_Model
 		];
 		$sheet->getStyle('A11:P11')->applyFromArray($borderStyle);
 		
-		$query = $this->BankModel->select_query("SELECT s.*,p.final_chemist as chemist_id,p.invoice_text as invoice_number from tbl_statment as s left JOIN tbl_bank_processing as p on p.upi_no=s.customer_reference where s.date BETWEEN '$start_date' AND '$end_date'");
+		$query = $this->BankModel->select_query("SELECT s.*,p.final_chemist as chemist_id,p.invoice_text as invoice_number from tbl_statment as s left JOIN tbl_bank_processing as p on p.upi_no=s.customer_reference where s.date BETWEEN '$start_date' AND '$end_date' order by s.id asc");
 		$result = $query->result();
 		$rowCount = 12;
 		$fileok=0;
@@ -296,7 +296,7 @@ class BankModel extends CI_Model
 		];
 		$sheet->getStyle('A11:P11')->applyFromArray($borderStyle);
 		
-		$query = $this->BankModel->select_query("SELECT s.*,p.final_chemist as chemist_id,p.invoice_text as invoice_number from tbl_statment as s left JOIN tbl_bank_processing as p on p.upi_no=s.customer_reference where s.date BETWEEN '$start_date' AND '$end_date'");
+		$query = $this->BankModel->select_query("SELECT s.*,p.final_chemist as chemist_id,p.invoice_text as invoice_number from tbl_statment as s left JOIN tbl_bank_processing as p on p.upi_no=s.customer_reference where s.date BETWEEN '$start_date' AND '$end_date' order by s.id asc");
 		$result = $query->result();
 		$rowCount = 12;
 		$fileok=0;
@@ -414,7 +414,7 @@ class BankModel extends CI_Model
 		];
 		$sheet->getStyle('A11:Q11')->applyFromArray($borderStyle);
 
-		$query = $this->BankModel->select_query("SELECT s.*,p.final_chemist as chemist_id,p.invoice_text as invoice_number from tbl_statment as s left JOIN tbl_bank_processing as p on p.upi_no=s.customer_reference where s.date BETWEEN '$start_date' AND '$end_date'");
+		$query = $this->BankModel->select_query("SELECT s.*,p.final_chemist as chemist_id,p.invoice_text as invoice_number from tbl_statment as s left JOIN tbl_bank_processing as p on p.upi_no=s.customer_reference where s.date BETWEEN '$start_date' AND '$end_date' order by s.id asc");
 		$result = $query->result();
 		$rowCount = 2;
 		$fileok=0;
@@ -533,7 +533,7 @@ class BankModel extends CI_Model
 		];
 		$sheet->getStyle('A11:Q11')->applyFromArray($borderStyle);
 
-		$query = $this->BankModel->select_query("SELECT s.*,p.final_chemist as chemist_id,p.invoice_text as invoice_number from tbl_statment as s left JOIN tbl_bank_processing as p on p.upi_no=s.customer_reference where s.date BETWEEN '$start_date' AND '$end_date'");
+		$query = $this->BankModel->select_query("SELECT s.*,p.final_chemist as chemist_id,p.invoice_text as invoice_number from tbl_statment as s left JOIN tbl_bank_processing as p on p.upi_no=s.customer_reference where s.date BETWEEN '$start_date' AND '$end_date' order by s.id asc");
 		$result = $query->result();
 		$rowCount = 2;
 		$fileok=0;
