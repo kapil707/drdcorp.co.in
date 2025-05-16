@@ -157,7 +157,7 @@
 	<script>
         $(document).ready(function(){
             $('.dataTables-example3').DataTable({
-				"order": [[0, "desc"]],
+				"order": [[0, "asc"]],
                 pageLength: 25,
                 responsive: true,
                 dom: '<"html5buttons"B>lTfgitp',
