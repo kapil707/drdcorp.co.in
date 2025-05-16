@@ -58,7 +58,7 @@
 		</div>
 		<div class="col-xs-12">
 			<div class="table-responsive">
-				<table class="table table-striped table-bordered table-hover dataTables-example21">
+				<table class="table table-striped table-bordered table-hover dataTables-example">
 					<thead>
 						<tr>
 							<th>Id</th>
