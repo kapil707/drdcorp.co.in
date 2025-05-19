@@ -35,6 +35,16 @@ class CronjobBank extends CI_Controller
 		} else {
 			$amount = "Amount not found";
 		}
+		
+		if($amount=="Amount not found")
+		{
+			$pattern = '/Rs. (\w+)/';
+			if (preg_match($pattern, $message_body, $matches)) {
+				$amount = $matches[1];
+			} else {
+				$amount = "Amount not found";
+			}
+		}
 
 		$pattern = '/(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})/';
 		if (preg_match($pattern, $message_body, $matches)) {
