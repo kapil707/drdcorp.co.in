@@ -36,6 +36,7 @@ class CronjobBank extends CI_Controller
 			$amount = "Amount not found";
 		}
 
+		//new added by 2025-05-19
 		if($amount=="Amount not found")
 		{
 			$pattern = '/Rs\.?([0-9,]+)/';
@@ -83,6 +84,18 @@ class CronjobBank extends CI_Controller
 		} else {
 			$orderid = "orderid not found";
 		}
+
+		//new added by 2025-05-19
+		if($from_text=="Remitter")
+		{
+			$pattern = '/received from Remitter ID bearing\s+(\S+)/';
+			if (preg_match($pattern, $message_body, $matches)) {
+				$from_text = $matches[1];
+			} else {
+				$from_text = "n/a";
+			}
+		}
+
 		echo "<br>Amount : ".$amount." From : ".$from_text."<br>";
 
 		die();
