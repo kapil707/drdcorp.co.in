@@ -25,6 +25,57 @@ class CronjobBank extends CI_Controller
 	}
 
 	public function testing(){
+
+		$sms_text = $message_body = "Rs.38500 received from Remitter ID bearing CITIN25563340500 has been successfully credited to D. R. DISTRIBUTORS PVT LTD's account with Citibank on 12/05/25. Thank you!";
+		$message_body = str_replace(",","",$message_body);
+		
+		$pattern = '/INR (\w+)/';
+		if (preg_match($pattern, $message_body, $matches)) {
+			$amount = $matches[1];
+		} else {
+			$amount = "Amount not found";
+		}
+
+		$pattern = '/(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})/';
+		if (preg_match($pattern, $message_body, $matches)) {
+			$getdate = $matches[1];
+		} else {
+			$getdate = "Date not found";
+		}
+
+		// Regex pattern to extract time
+		$pattern = "/(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})/";
+
+		// Extracting time using preg_match
+		if (preg_match($pattern, $message_body, $matches)) {
+			$gettime = $matches[0];
+		} else {
+			$gettime = "Time not found.";
+		}
+
+		$pattern = '/received from (\S+)/';
+		if (preg_match($pattern, $message_body, $matches)) {
+			$from_text = $matches[1];
+		} else {
+			$from_text = "Received from information not found";
+		}
+
+		$pattern = '/UPI Ref No\. (\w+)/';
+		if (preg_match($pattern, $message_body, $matches)) {
+			$upi_no = $matches[1];
+		} else {
+			$upi_no = "UPI reference number not found";
+		}
+
+		$pattern = '/OrderId (\w+)/';
+		if (preg_match($pattern, $message_body, $matches)) {
+			$orderid = $matches[1];
+		} else {
+			$orderid = "orderid not found";
+		}
+		echo "<br>Amount : ".$amount." From : ".$from_text."<br>";
+
+		die();
 		
 		$text = "'+91-9810350383 510818340185 FROM TERA HI TERA PHAR MACY U O DHAN GURU NANAK SEWA MISSION 9300966180 C ITI0000 7217 STOP CHECK PART '";
 		$upi_no = "AUBLH09821432415";
