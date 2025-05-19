@@ -90,13 +90,13 @@ class CronjobBank extends CI_Controller
 		{
 			$pattern = '/received from Remitter ID bearing\s+(\S+)/';
 			if (preg_match($pattern, $message_body, $matches)) {
-				$from_text = $matches[1];
+				$upi_no = $orderid = $matches[1];
 			} else {
 				$from_text = "n/a";
 			}
 		}
 
-		echo "<br>Amount : ".$amount." From : ".$from_text."<br>";
+		echo "<br>Amount : ".$amount." From : ".$from_text." upi_no : ".$upi_no." orderid : ".$orderid."<br>";
 
 		die();
 		
