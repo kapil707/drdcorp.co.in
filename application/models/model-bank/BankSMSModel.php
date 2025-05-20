@@ -176,11 +176,11 @@ class BankSMSModel extends CI_Model
 
 			$from_chemist = "";
 			$chemist_id = "";
-			$newrow = $this->BankModel->select_query("SELECT tbl_bank_processing.from_text,tbl_bank_processing.from_text_find_chemist FROM `tbl_statment` left join tbl_bank_processing on tbl_statment.customer_reference=tbl_bank_processing.upi_no WHERE tbl_statment.narrative like '%$upi_no%'");
+			$newrow = $this->BankModel->select_query("SELECT tbl_bank_processing.from_text,tbl_bank_processing.final_chemist FROM `tbl_statment` left join tbl_bank_processing on tbl_statment.customer_reference=tbl_bank_processing.upi_no WHERE tbl_statment.narrative like '%$upi_no%'");
 			$newrow = $newrow->row();
 			if(!empty($newrow)){
 				$from_chemist 	= $newrow->from_text;
-				$chemist_id 	= $newrow->from_text_find_chemist;
+				$chemist_id 	= $newrow->final_chemist;
 			}
 
 			echo "<br>Amount : ".$amount." From : ".$from_text." upi_no : ".$upi_no." orderid : ".$orderid." from_chemist : ".$from_chemist." chemist_id : ".$chemist_id;
