@@ -183,8 +183,7 @@ class BankSMSModel extends CI_Model
 				$chemist_id 	= $newrow->from_text_find_chemist;
 			}
 
-
-			echo "<br>Amount : ".$amount." From : ".$from_text." upi_no : ".$upi_no." orderid : ".$orderid;
+			echo "<br>Amount : ".$amount." From : ".$from_text." upi_no : ".$upi_no." orderid : ".$orderid." from_chemist : ".$from_chemist." chemist_id : ".$chemist_id;
 		}
 	}
 }	
