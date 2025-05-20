@@ -168,7 +168,7 @@ class BankSMSModel extends CI_Model
 			{
 				$pattern = '/received from Remitter ID bearing\s+(\S+)/';
 				if (preg_match($pattern, $message_body, $matches)) {
-					$upi_no = $orderid = $matches[1];
+					$from_text = $upi_no = $orderid = $matches[1];
 				} else {
 					$from_text = "n/a";
 				}
