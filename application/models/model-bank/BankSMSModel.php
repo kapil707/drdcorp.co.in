@@ -166,7 +166,7 @@ class BankSMSModel extends CI_Model
 			//new added by 2025-05-19
 			if($from_text=="Remitter")
 			{
-				preg_match('/(CITIN[0-9]+)/', $message, $remitterMatch);
+				$pattern = '/(CITIN[0-9]+)/';
 				if (preg_match($pattern, $message_body, $matches)) {
 					$from_text = $upi_no = $orderid = $matches[1];
 				} else {
