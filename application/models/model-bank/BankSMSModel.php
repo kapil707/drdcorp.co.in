@@ -101,7 +101,7 @@ class BankSMSModel extends CI_Model
 
 	public function get_sms_again(){
 		
-		$result = $this->BankModel->select_query("select * from tbl_sms WHERE `upi_no`='UPI reference number not found' and status=1 limit 5");
+		$result = $this->BankModel->select_query("select * from tbl_sms WHERE `upi_no`='UPI reference number not found' and status=1 limit 10");
 		$result = $result->result();
 		foreach($result as $row){
 			$sms_text = $message_body = $row->message_body;
@@ -174,14 +174,33 @@ class BankSMSModel extends CI_Model
 				}
 			}
 
-			$from_chemist = "";
-			$chemist_id = "";
+			$status 		= 1;
+			$from_chemist 	= "";
+			$chemist_id 	= "";
 			$newrow = $this->BankModel->select_query("SELECT tbl_bank_processing.from_text,tbl_bank_processing.final_chemist FROM `tbl_statment` left join tbl_bank_processing on tbl_statment.customer_reference=tbl_bank_processing.upi_no WHERE tbl_statment.narrative like '%$upi_no%'");
 			$newrow = $newrow->row();
 			if(!empty($newrow)){
 				$from_chemist 	= $newrow->from_text;
 				$chemist_id 	= $newrow->final_chemist;
+				if(!empty($chemist_id)){
+					$status = 2; // agar chemist mil jata ha to 
+				}
 			}
+			
+			if($amount=="Amount not found" && $upi_no=="UPI reference number not found")
+			{
+				$status = 3; //jab kuch be nahi mila tab
+			}
+
+			$id = $row->id;
+			$where = array('id'=>$id);
+			$dt = array(
+				'status'=>$status,
+				'amount'=>$amount,
+				'upi_no'=>$upi_no,
+				'set_chemist'=>$chemist_id,
+			);
+			$this->BankModel->edit_fun("tbl_sms", $dt,$where);
 
 			echo "<br>Amount : ".$amount." From : ".$from_text." upi_no : ".$upi_no." orderid : ".$orderid." from_chemist : ".$from_chemist." chemist_id : ".$chemist_id;
 		}
