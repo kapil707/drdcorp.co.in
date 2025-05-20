@@ -174,6 +174,16 @@ class BankSMSModel extends CI_Model
 				}
 			}
 
+			if($from_text=="n/a")
+			{
+				$pattern = '/bearing\s+(\d+)/';
+				if (preg_match($pattern, $message_body, $matches)) {
+					$from_text = $upi_no = $orderid = $matches[1];
+				} else {
+					$from_text = "n/a";
+				}
+			}
+
 			$status 		= 1;
 			$from_chemist 	= "";
 			$chemist_id 	= "";
