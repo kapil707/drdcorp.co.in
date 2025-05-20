@@ -24,6 +24,11 @@ class CronjobBank extends CI_Controller
 		$this->BankWhatsAppModel->whatsapp_update_reply_message();
 	}
 
+	public function get_sms_again(){
+		echo "get_sms_again";
+		$this->BankSMSModel->get_sms_again();
+	}
+
 	public function testing(){
 
 		$sms_text = $message_body = "Rs.38500 received from Remitter ID bearing CITIN25563340500 has been successfully credited to D. R. DISTRIBUTORS PVT LTD's account with Citibank on 12/05/25. Thank you!";

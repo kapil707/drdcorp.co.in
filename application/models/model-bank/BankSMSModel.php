@@ -17,7 +17,7 @@ class BankSMSModel extends CI_Model
 		$result = $result->result();
 		foreach($result as $row){
 			echo $sms_text = $message_body = $row->message_body;
-			$message_body = str_replace(",","",$row->message_body);
+			$message_body = str_replace(",","",$message_body);
 			
 			$pattern = '/INR (\w+)/';
 			if (preg_match($pattern, $message_body, $matches)) {
@@ -96,6 +96,85 @@ class BankSMSModel extends CI_Model
 				'upi_no'=>$upi_no,
 			);
 			$this->BankModel->edit_fun("tbl_sms", $dt,$where);
+		}
+	}
+
+	public function get_sms_again(){
+		
+		$result = $this->BankModel->select_query("select * from tbl_sms WHERE `upi_no`='UPI reference number not found' and status=1 limit 5");
+		$result = $result->result();
+		foreach($result as $row){
+			$sms_text = $message_body = $row->message_body;
+			$message_body = str_replace(",","",$message_body);
+			
+			$pattern = '/INR (\w+)/';
+			if (preg_match($pattern, $message_body, $matches)) {
+				$amount = $matches[1];
+			} else {
+				$amount = "Amount not found";
+			}
+
+			//new added by 2025-05-19
+			if($amount=="Amount not found")
+			{
+				$pattern = '/Rs\.?([0-9,]+)/';
+				if (preg_match($pattern, $message_body, $matches)) {
+					$amount = $matches[1];
+				} else {
+					$amount = "Amount not found";
+				}
+			}
+
+			$pattern = '/(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})/';
+			if (preg_match($pattern, $message_body, $matches)) {
+				$getdate = $matches[1];
+			} else {
+				$getdate = "Date not found";
+			}
+
+			// Regex pattern to extract time
+			$pattern = "/(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})/";
+
+			// Extracting time using preg_match
+			if (preg_match($pattern, $message_body, $matches)) {
+				$gettime = $matches[0];
+			} else {
+				$gettime = "Time not found.";
+			}
+
+			$pattern = '/received from (\S+)/';
+			if (preg_match($pattern, $message_body, $matches)) {
+				$from_text = $matches[1];
+			} else {
+				$from_text = "Received from information not found";
+			}
+
+			$pattern = '/UPI Ref No\. (\w+)/';
+			if (preg_match($pattern, $message_body, $matches)) {
+				$upi_no = $matches[1];
+			} else {
+				$upi_no = "UPI reference number not found";
+			}
+
+			$pattern = '/OrderId (\w+)/';
+			if (preg_match($pattern, $message_body, $matches)) {
+				$orderid = $matches[1];
+			} else {
+				$orderid = "orderid not found";
+			}
+
+			//new added by 2025-05-19
+			if($from_text=="Remitter")
+			{
+				$pattern = '/received from Remitter ID bearing\s+(\S+)/';
+				if (preg_match($pattern, $message_body, $matches)) {
+					$upi_no = $orderid = $matches[1];
+				} else {
+					$from_text = "n/a";
+				}
+			}
+
+			echo "<br>Amount : ".$amount." From : ".$from_text." upi_no : ".$upi_no." orderid : ".$orderid;
 		}
 	}
 }	
