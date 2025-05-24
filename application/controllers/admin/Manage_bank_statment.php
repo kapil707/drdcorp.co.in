@@ -354,11 +354,11 @@ class Manage_bank_statment extends CI_Controller {
 							'payment_details'=>$payment_details1,
 							'formet'=>$myformet,
 						);
-						//print_r($dt);
+						print_r($dt);
 						$this->BankModel->insert_statment("tbl_statment", $dt);
 					}
 				}
-				redirect(base_url()."admin/$page_controllers/view3");
+				//redirect(base_url()."admin/$page_controllers/view3");
 			}
 		}
 
