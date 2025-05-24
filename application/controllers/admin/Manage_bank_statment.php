@@ -263,8 +263,7 @@ class Manage_bank_statment extends CI_Controller {
 				redirect(base_url()."admin/$page_controllers/view2");
 			}
 
-		
-			if($formet==3){
+			if($formet==3 || $formet==4){
 				$date 					= "A";  // value date
 				$statment_date 			= "B";
 				$currency 				= "C";
@@ -308,7 +307,12 @@ class Manage_bank_statment extends CI_Controller {
 						$narrative1 = $worksheet->getCell($narrative.$row)->getValue(); //m
 						$payment_details1 = $worksheet->getCell($payment_details.$row)->getValue(); //n
 
-						$date1 = DateTime::createFromFormat('d/m/Y', $date1)->format('Y-m-d');
+						if($formet==3){
+							$date1 = DateTime::createFromFormat('d/m/Y', $date1)->format('Y-m-d');
+						}
+						if($formet==4){
+							$date1 = DateTime::createFromFormat('d-m-Y', $date1)->format('Y-m-d');
+						}
 						//$date1 = DateTime::createFromFormat('d M Y', $date1)->format('Y-m-d');
 						//$date1 = date('Y-m-d', strtotime($date1));
 						//die();
