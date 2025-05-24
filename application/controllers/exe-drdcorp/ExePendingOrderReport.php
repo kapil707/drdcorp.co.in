@@ -47,7 +47,7 @@ class ExePendingOrderReport extends CI_Controller
 					'insert_time' => $insert_time,
 				);
 
-				if (!empty($code)) {
+				if (!empty($acno)) {
 					// Check karo agar record already exist karta hai
 					//$existing_record = $this->CorporateReport->CheckRecoreds("tbl_corporate_report", array('code' => $code));
 			
