@@ -39,16 +39,7 @@
 								Formet 2
 							</option>
 							<option value="3">
-								Formet 3 (d/m/Y) <?php echo date('d/m/Y'); ?>
-							</option>
-							<option value="4">
-								Formet 4 (d m Y) <?php echo date('d m Y'); ?>
-							</option>
-							<option value="5">
-								Formet 5 (d F Y) <?php echo date('d F Y'); ?>
-							</option>
-							<option value="6">
-								Formet 6 (d-F-Y) <?php echo date('d-F-Y'); ?>
+								Formet 3
 							</option>
 						</Select>
                     </div>
