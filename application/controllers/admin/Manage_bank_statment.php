@@ -317,6 +317,12 @@ class Manage_bank_statment extends CI_Controller {
 						if($formet==4){
 							$date1 = DateTime::createFromFormat('d m Y', $date1)->format('Y-m-d');
 						}
+
+						if($formet==4){
+							$date1 = DateTime::createFromFormat('d F Y', $date1)->format('Y-m-d');
+						}
+						
+						$formet = 3;
 						
 						//change only for this
 						$amount1 = str_replace(',', '', $amount1);
