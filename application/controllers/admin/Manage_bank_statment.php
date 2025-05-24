@@ -318,7 +318,7 @@ class Manage_bank_statment extends CI_Controller {
 							$date1 = DateTime::createFromFormat('d m Y', $date1)->format('Y-m-d');
 						}
 
-						if($formet==4){
+						if($formet==5){
 							$date1 = DateTime::createFromFormat('d F Y', $date1)->format('Y-m-d');
 						}
 						
