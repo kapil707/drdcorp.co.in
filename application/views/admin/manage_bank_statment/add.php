@@ -42,7 +42,7 @@
 								Formet 3 (d/m/Y) <?php echo date('d/m/Y'); ?>
 							</option>
 							<option value="4">
-								Formet 4 (d-m-Y) <?php echo date('d-m-Y'); ?>
+								Formet 4 (d m Y) <?php echo date('d m Y'); ?>
 							</option>
 						</Select>
                     </div>
