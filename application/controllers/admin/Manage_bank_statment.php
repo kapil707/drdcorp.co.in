@@ -321,6 +321,10 @@ class Manage_bank_statment extends CI_Controller {
 						if($formet==5){
 							$date1 = DateTime::createFromFormat('d F Y', $date1)->format('Y-m-d');
 						}
+
+						if($formet==6){
+							$date1 = DateTime::createFromFormat('d-F-Y', $date1)->format('Y-m-d');
+						}
 						
 						$myformet = 3;
 
@@ -350,11 +354,11 @@ class Manage_bank_statment extends CI_Controller {
 							'payment_details'=>$payment_details1,
 							'formet'=>$myformet,
 						);
-						print_r($dt);
+						//print_r($dt);
 						$this->BankModel->insert_statment("tbl_statment", $dt);
 					}
 				}
-				//redirect(base_url()."admin/$page_controllers/view3");
+				redirect(base_url()."admin/$page_controllers/view3");
 			}
 		}
 

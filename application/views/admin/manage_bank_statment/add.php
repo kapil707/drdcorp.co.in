@@ -47,6 +47,9 @@
 							<option value="5">
 								Formet 5 (d F Y) <?php echo date('d F Y'); ?>
 							</option>
+							<option value="6">
+								Formet 6 (d-F-Y) <?php echo date('d-F-Y'); ?>
+							</option>
 						</Select>
                     </div>
                     <div class="help-inline col-sm-12 has-error">
