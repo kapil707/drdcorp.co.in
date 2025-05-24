@@ -322,8 +322,8 @@ class Manage_bank_statment extends CI_Controller {
 							$date1 = DateTime::createFromFormat('d F Y', $date1)->format('Y-m-d');
 						}
 						
-						$formet = 3;
-						
+						$myformet = 3;
+
 						//change only for this
 						$amount1 = str_replace(',', '', $amount1);
 
@@ -348,7 +348,7 @@ class Manage_bank_statment extends CI_Controller {
 							'type'=>$type1,
 							'branch_name'=>$branch_name1,
 							'payment_details'=>$payment_details1,
-							'formet'=>$formet,
+							'formet'=>$myformet,
 						);
 						$this->BankModel->insert_statment("tbl_statment", $dt);
 					}
