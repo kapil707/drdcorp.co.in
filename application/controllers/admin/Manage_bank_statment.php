@@ -263,7 +263,7 @@ class Manage_bank_statment extends CI_Controller {
 				redirect(base_url()."admin/$page_controllers/view2");
 			}
 
-			if($formet==3 || $formet==4){
+			if($formet==3 || $formet==4 || $formet==5 || $formet==6){
 				$date 					= "A";  // value date
 				$statment_date 			= "B";
 				$currency 				= "C";
