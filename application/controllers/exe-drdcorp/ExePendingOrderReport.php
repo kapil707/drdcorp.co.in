@@ -61,7 +61,7 @@ class ExePendingOrderReport extends CI_Controller
 					//}
 				}
 			}
-			$commaSeparatedString = implode(',', $code_array);
+			$commaSeparatedString = implode(',', $acno_array);
 			// Response dena
 			echo json_encode(["return_values" => $commaSeparatedString,"status" => "success", "message" => "Data received successfully"]);
 		} else {
