@@ -307,14 +307,12 @@ class Manage_bank_statment extends CI_Controller {
 						$narrative1 = $worksheet->getCell($narrative.$row)->getValue(); //m
 						$payment_details1 = $worksheet->getCell($payment_details.$row)->getValue(); //n
 
-						echo $date1;die();
-
 						if($formet==3){
 							$date1 = DateTime::createFromFormat('d/m/Y', $date1)->format('Y-m-d');
 						}
 
 						if($formet==4){
-							$date1 = DateTime::createFromFormat('d-m-Y', $date1)->format('Y-m-d');
+							$date1 = DateTime::createFromFormat('d m Y', $date1)->format('Y-m-d');
 						}
 						
 						//change only for this
