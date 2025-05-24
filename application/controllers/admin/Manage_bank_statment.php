@@ -461,7 +461,7 @@ class Manage_bank_statment extends CI_Controller {
 		if ($timestamp) {
 			return date('Y-m-d', $timestamp);
 		} else {
-			return null; // invalid date
+			return $input_date; // invalid date
 		}
 	}
 	
