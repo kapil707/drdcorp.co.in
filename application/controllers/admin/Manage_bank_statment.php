@@ -307,14 +307,16 @@ class Manage_bank_statment extends CI_Controller {
 						$narrative1 = $worksheet->getCell($narrative.$row)->getValue(); //m
 						$payment_details1 = $worksheet->getCell($payment_details.$row)->getValue(); //n
 
-						if($formet==3){
+						$date1 = $this->convertToYmd($date1);
+
+						/*if($formet==3){
 							$date1 = DateTime::createFromFormat('d/m/Y', $date1)->format('Y-m-d');
-						}
+						}*/
 
 						echo $date1;
 						die();
 
-						if($formet==4){
+						/*if($formet==4){
 							$date1 = DateTime::createFromFormat('d m Y', $date1)->format('Y-m-d');
 						}
 
@@ -324,7 +326,7 @@ class Manage_bank_statment extends CI_Controller {
 
 						if($formet==6){
 							$date1 = DateTime::createFromFormat('d-F-Y', $date1)->format('Y-m-d');
-						}
+						}*/
 						
 						$myformet = 3;
 
@@ -452,6 +454,15 @@ class Manage_bank_statment extends CI_Controller {
 		$this->load->view("admin/$Page_view/view",$data);
 		$this->load->view("admin/header_footer/footer",$data);
 		$this->load->view("admin/$Page_view/footer2",$data);
+	}
+
+	function convertToYmd($input_date) {
+		$timestamp = strtotime($input_date);
+		if ($timestamp) {
+			return date('Y-m-d', $timestamp);
+		} else {
+			return null; // invalid date
+		}
 	}
 	
 	public function view1()
