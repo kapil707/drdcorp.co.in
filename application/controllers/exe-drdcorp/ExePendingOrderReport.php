@@ -9,7 +9,6 @@ class ExePendingOrderReport extends CI_Controller
 	}
 	public function upload()
 	{
-		die();
 		// Data ko read karna (input stream se)
 		$inputData = file_get_contents("php://input");
 
