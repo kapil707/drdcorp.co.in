@@ -84,7 +84,11 @@ class BankSMSModel extends CI_Model
 					'from_sms'=>1,
 					'sms_text'=>$sms_text,
 				);
-				$this->BankModel->insert_fun("tbl_bank_processing", $dt);
+				$row1 = $this->BankModel->select_query("select * from tbl_bank_processing where upi_no='$upi_no");
+				$row1 = $row1->row();
+				if(empty($row1->id)){
+					$this->BankModel->insert_fun("tbl_bank_processing", $dt);
+				}
 			}
 
 			/****************************************************** */

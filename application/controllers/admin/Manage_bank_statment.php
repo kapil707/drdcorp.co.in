@@ -181,7 +181,11 @@ class Manage_bank_statment extends CI_Controller {
 								'payment_details'=>$payment_details1,
 								'formet'=>$formet,
 							);
-							$this->BankModel->insert_statment("tbl_statment", $dt);
+							$row1 = $this->BankModel->select_query("select id from tbl_statment where customer_reference='$customer_reference");
+							$row1 = $row1->row();
+							if(empty($row1->id)){
+								$this->BankModel->insert_statment("tbl_statment", $dt);
+							}
 						}
 					//}
 				}
@@ -256,8 +260,11 @@ class Manage_bank_statment extends CI_Controller {
 							'narrative'=>$narrative1,
 							'formet'=>$formet,
 						);
-						$this->BankModel->insert_statment("tbl_statment", $dt);
-						
+						$row1 = $this->BankModel->select_query("select id from tbl_statment where customer_reference='$customer_reference");
+						$row1 = $row1->row();
+						if(empty($row1->id)){
+							$this->BankModel->insert_statment("tbl_statment", $dt);
+						}						
 					}
 				}
 				redirect(base_url()."admin/$page_controllers/view2");
@@ -355,7 +362,11 @@ class Manage_bank_statment extends CI_Controller {
 							'formet'=>$formet,
 						);
 						//print_r($dt);
-						$this->BankModel->insert_statment("tbl_statment", $dt);
+						$row1 = $this->BankModel->select_query("select id from tbl_statment where customer_reference='$customer_reference");
+						$row1 = $row1->row();
+						if(empty($row1->id)){
+							$this->BankModel->insert_statment("tbl_statment", $dt);
+						}
 					}
 				}
 				redirect(base_url()."admin/$page_controllers/view3");
