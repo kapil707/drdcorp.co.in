@@ -9,6 +9,7 @@ class ExePendingOrderReport extends CI_Controller
 	}
 	public function upload()
 	{
+		die();
 		// Data ko read karna (input stream se)
 		$inputData = file_get_contents("php://input");
 
@@ -25,13 +26,16 @@ class ExePendingOrderReport extends CI_Controller
 			// Example: Data ko print karna (ya log karna)
 			//file_put_contents("log.txt", print_r($data, true), FILE_APPEND);
 
-			$acno_array = array();
+			$compcode = $acno = "";
+			//$acno_array = array();
 			foreach ($data as $record) {
-				$acno_array[] = $record['acno'];
+				//$acno_array[] = $record['acno'];
 				
-				$uname 	= $record['uname'];
-				$uemail = $record['uemail'];
-				$acno 	= $record['acno'];
+				$uname 		= $record['uname'];
+				$uemail 	= $record['uemail'];
+				$umobile 	= $record['umobile'];
+				$acno 		= $record['acno'];
+				$compcode 	= $record['compcode'];
 				$company_full_name = $record['company_full_name'];
 
 				$insert_time = date('Y-m-d,H:i');
@@ -41,7 +45,9 @@ class ExePendingOrderReport extends CI_Controller
 				$dt = array(
 					'uname' => $uname,
 					'uemail' => $uemail,
+					'umobile' => $umobile,
 					'acno' => $acno,
+					'compcode' => $compcode,
 					'company_full_name' => $company_full_name,
 					'email_send_time' => $email_send_time,
 					'insert_time' => $insert_time,
@@ -61,9 +67,13 @@ class ExePendingOrderReport extends CI_Controller
 					//}
 				}
 			}
-			$commaSeparatedString = implode(',', $acno_array);
+			//$commaSeparatedString = implode(',', $acno_array);
 			// Response dena
-			echo json_encode(["return_values" => $commaSeparatedString,"status" => "success", "message" => "Data received successfully"]);
+			if(!empty($acno) && !empty($compcode)){
+				echo json_encode(["acno" => $acno,"compcode" => $compcode,"status" => "success", "message" => "Data received successfully"]);
+			}else{
+				echo json_encode(["code" => "error","status" => "error", "message" => "Invalid data"]);
+			}
 		} else {
 			// Agar data valid nahi hai to error response dena
 			echo json_encode(["code" => "error","status" => "error", "message" => "Invalid data"]);
