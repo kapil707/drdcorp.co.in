@@ -32,7 +32,7 @@ class CronjobCorporateReport extends CI_Controller
 		$email = $this->phpmailer_lib->load();
 
 		$email->isSMTP();
-		$email->SMTPAuth   = 3; 
+		$email->SMTPAuth   = true;
 		$email->SMTPSecure = "ssl";  //tls
 		$email->Host       = "smtp.gmail.com";
 		$email->Port       = 465;
