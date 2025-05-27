@@ -416,7 +416,6 @@ class CronjobBank extends CI_Controller
 			if (!empty($check_sms)) {
 				echo "get_sms<br>";
 				$this->BankSMSModel->get_sms();
-				die();
 			}else{
 				$check_statment = $this->BankModel->select_row("tbl_statment", array('status' => 0));
 				if (!empty($check_statment)) {

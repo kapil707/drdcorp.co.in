@@ -84,7 +84,13 @@ class BankSMSModel extends CI_Model
 					'from_sms'=>1,
 					'sms_text'=>$sms_text,
 				);
-				$this->BankModel->insert_fun("tbl_bank_processing", $dt);
+				try{
+					$this->BankModel->insert_fun("tbl_bank_processing", $dt);
+				} catch (Exception $e) {
+					// Catch error
+					echo 'Email could not be sent. Mailer Error: ' . $email->ErrorInfo;
+					$message_status = 'Email could not be sent. Mailer Error: ';
+				}
 			}
 
 			/****************************************************** */
