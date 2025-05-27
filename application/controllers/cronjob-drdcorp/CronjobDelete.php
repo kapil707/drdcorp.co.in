@@ -15,5 +15,7 @@ class CronjobDelete extends CI_Controller
 		$where = ['date <' => $day15];
 		$this->BankModel->delete_fun("tbl_bank_processing", $where);
 		$this->BankModel->delete_fun("tbl_statment", $where);
+
+		echo "Working Delete Old Records";
 	}
 }
