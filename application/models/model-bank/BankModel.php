@@ -180,7 +180,9 @@ class BankModel extends CI_Model
 				$parts = explode("||", $invoice);
 				foreach($parts as $invoice) {
 					preg_match('/GstvNo:([\w-]+)/', $invoice, $matches);
-					$gstvNo.= $matches[1].',';
+					if(!empty($matches[1])){
+						$gstvNo.= $matches[1].',';
+					}
 				}
 				$gstvNo = substr($gstvNo, 0, -2);
 			}
