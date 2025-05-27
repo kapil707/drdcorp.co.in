@@ -33,9 +33,11 @@ class CronjobCorporateReport extends CI_Controller
 
 		$email->isSMTP();
 		$email->SMTPAuth   = true;
-		$email->SMTPSecure = "ssl";  //tls
 		$email->Host       = "smtp.gmail.com";
-		$email->Port       = 465;
+		
+		$email->SMTPSecure = '';
+		$email->Port = 25;
+		
 		$email->Username   = 'application@drdindia.com'; // Gmail address
 		$email->Password   = 'hazv osqk egvj vbma';    // Gmail App Password
 
