@@ -36,7 +36,7 @@ class CronjobCorporateReport extends CI_Controller
 		$email->Host       = "smtp.gmail.com";
 		$email->Port       = 465;
 		$email->Username   = 'application@drdindia.com'; // Gmail address
-		$email->Password   = 'medical@2023';    // Gmail App Password
+		$email->Password   = 'hazv osqk egvj vbma';    // Gmail App Password
 
 		$email->SetFrom('application@drdindia.com', 'Your Name');
 		$email->AddReplyTo('kapildrd@gmail.com', 'Your Name');
