@@ -29,26 +29,7 @@ class CronjobCorporateReport extends CI_Controller
 	public function test_email()
 	{
 		$email = $this->phpmailer_lib->load();
-		
-		$subject = "drd local test_email3 new 2025-04-15";
-		$message = $this->get_body();
-		
-		$addreplyto 		= "vipul@drdindia.com";
-		$addreplyto_name 	= "Vipul Gupta";
-		$server_email 		= "report@drdcorp.co.in";
-		$server_email_name 	= "DRD Corporate Report";
-		$user_email 		= "kapil707sharma@gmail.com";
-		$email_bcc 			= "kapildrd@gmail.com";
-		
-		$email->AddReplyTo($addreplyto,$addreplyto_name);
-		$email->SetFrom($server_email,$server_email_name);
-		$email->AddAddress($user_email);
-		$email->addBcc($email_bcc);
-		
-		$email->Subject   	= $subject;
-		$email->Body 		= $message . time();
 
-		// SMTP configuration
 		$email->isSMTP();
 		$email->Host       = 'smtp.gmail.com';
 		$email->SMTPAuth   = true;
@@ -57,13 +38,21 @@ class CronjobCorporateReport extends CI_Controller
 		$email->SMTPSecure = 'tls';
 		$email->Port       = 587;
 
+		$email->SetFrom('application2@drdindia.com', 'Your Name');
+		$email->AddReplyTo('kapildrd@gmail.com', 'Your Name');
+		$email->AddAddress('kapil707sharma@gmail.com'); // Recipient
+
+		$email->Subject = 'Test Email via Gmail SMTP';
+		$email->Body    = nl2br("Hello,\nThis is a test email sent via Gmail SMTP.\n\n" . time());
 		$email->IsHTML(true);
-		if($email->send()){
+
+		if($email->send()) {
 			echo 'Message has been sent';
-		}else{
+		} else {
 			echo 'Message could not be sent.';
 			echo 'Mailer Error: ' . $email->ErrorInfo;
 		}
+		
 		echo "<pre>";
 		print_r($email);
 	}
