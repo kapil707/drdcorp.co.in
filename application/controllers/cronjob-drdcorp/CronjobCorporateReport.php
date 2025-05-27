@@ -46,6 +46,9 @@ class CronjobCorporateReport extends CI_Controller
 		$email->Subject = 'Test Email via Gmail SMTP';
 		$email->Body    = "Hello,\nThis is a test email sent via Gmail SMTP." . time();
 
+		$email->SMTPDebug = 2; // Verbose debug output
+		$email->Debugoutput = 'html';
+
 		$email->IsHTML(true);
 		if($email->send()) {
 			echo 'Message has been sent';
