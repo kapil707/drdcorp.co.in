@@ -31,14 +31,12 @@ class CronjobCorporateReport extends CI_Controller
 		$email = $this->phpmailer_lib->load();
 
 		$email->isSMTP();
-		$email->IsSMTP();
 		$email->SMTPAuth   = 3; 
 		$email->SMTPSecure = "ssl";  //tls
 		$email->Host       = "smtp.gmail.com";
 		$email->Port       = 465;
 		$email->Username   = 'application@drdindia.com'; // Gmail address
 		$email->Password   = 'medical@2023';    // Gmail App Password
-
 
 		$email->SetFrom('application@drdindia.com', 'Your Name');
 		$email->AddReplyTo('kapildrd@gmail.com', 'Your Name');
