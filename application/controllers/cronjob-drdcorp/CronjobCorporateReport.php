@@ -51,14 +51,12 @@ class CronjobCorporateReport extends CI_Controller
 
 		// SMTP configuration
 		$email->isSMTP();
-		$email->SMTPAuth   	= 3; 
-		$email->SMTPSecure 	= "tls";  //tls
-		$email->Host     	= "smtp.gmail.com";
-		//$email->Username	= "application2@drdindia.com";
-		//$email->Password	= "drd@oct23";
-		$email->Username	= "application@drdindia.com";
-		$email->Password   	= "medical@2023";
-		$email->Port     	= 587;
+		$email->SMTPAuth   = 3; 
+		$email->SMTPSecure = "tls";  //tls
+		$email->Host     = "smtp.gmail.com";
+		$email->Username   = "application2@drdindia.com";
+		$email->Password   = "drd@oct23";
+		$email->Port     = 587;
 
 		if($email->send()){
 			echo 'Message has been sent';
@@ -73,25 +71,35 @@ class CronjobCorporateReport extends CI_Controller
 	public function test_email2()
 	{
 		$email = $this->phpmailer_lib->load();
+		
+		$subject = "drd local test_email2 new 2025-04-28";
+		$message = $this->get_body();
+		
+		$addreplyto 		= "vipul@drdindia.com";
+		$addreplyto_name 	= "Vipul DRD";
+		$server_email 		= "report@drdcorp.co.in";
+		//$server_email 	= "send@drdindia.com";
+		$server_email_name 	= "DRD TEST";
+		$email1 			= "kapil707sharma@gmail.com";
+		
+		$email->AddReplyTo($addreplyto,$addreplyto_name);
+		$email->SetFrom($server_email,$server_email_name);
+		$email->AddAddress($email1);
+		
+		$email->Subject   	= $subject;
+		$email->Body 		= $message . time();
 
-		$email->isSMTP();
-		$email->Host       = 'mail.drdcorp.co.in';
-		$email->SMTPAuth   = true;
-		$email->Username   = 'report@drdcorp.co.in'; // actual credentials
-		$email->Password   = 'Kapil1234!@#$';
-		$email->Port       = 25;
-		$email->SMTPSecure = ''; // use 'tls' if 587, 'ssl' if 465, or '' for 25
-		$email->SMTPAutoTLS = false;
+		//$email->addAttachment(FCPATH.'email_files/ChemistWiseReport-2025-04-28-366-daily-946-722-C11.xlsx');
 
-		$email->SetFrom('report@drdcorp.co.in', 'DRD TEST');
-		$email->AddReplyTo('vipul@drdindia.com', 'Vipul DRD');
-		$email->AddAddress('kapil707sharma@gmail.com');
-		$email->Subject = "drd local test_email2 new 2025-04-28";
-		$email->Body    = "drd local test_email2 new 2025-04-28";
 		$email->IsHTML(true);
 
-		$email->SMTPDebug = 2; // or 3 for more details
-		//$email->Debugoutput = 'html';
+		$email->isSMTP();
+		$email->Host       = 'mail.drdcorp.co.in'; // SMTP Server
+		$email->SMTPAuth   = false; // Enable SMTP Authentication
+		$email->Username   = 'report@drdcorp.co.in'; // SMTP Username
+		$email->Password   = 'Kapil1234!@#$'; // SMTP Password
+		$email->SMTPSecure = false; // Use SSL (as your SMTP port is 465)
+		$email->Port       = 25; // SMTP Port
 
 		if($email->send()){
 			echo 'Message has been sent';
@@ -99,7 +107,6 @@ class CronjobCorporateReport extends CI_Controller
 			echo 'Message could not be sent.';
 			echo 'Mailer Error: ' . $email->ErrorInfo;
 		}
-
 		echo "<pre>";
 		print_r($email);
 	}
