@@ -12,6 +12,6 @@ class CronjobDelete extends CI_Controller
 
 		$day15 = date("Y-m-d", strtotime("-15 days"));
 		$where = ['date <' => $day15];
-		$this->BankModel->delete_fun("tbl_bank_processing1", $where);
+		$this->BankModel->delete_fun("tbl_bank_processing", $where);
 	}
 }
