@@ -50,12 +50,12 @@ class CronjobCorporateReport extends CI_Controller
 
 		// SMTP configuration
 		$email->isSMTP();
-		$email->SMTPAuth   = 3; 
-		$email->SMTPSecure = "tls";  //tls
-		$email->Host     = "smtp.gmail.com";
-		$email->Username   = "application2@drdindia.com";
-		$email->Password   = "drd@oct23";
-		$email->Port     = 587;
+		$email->Host       = 'smtp.gmail.com';
+		$email->SMTPAuth   = true;
+		$email->Username   = 'application2@drdindia.com'; // Gmail address
+		$email->Password   = 'drd@oct23';    // Gmail App Password
+		$email->SMTPSecure = 'tls';
+		$email->Port       = 587;
 
 		$email->IsHTML(true);
 		if($email->send()){
