@@ -36,18 +36,18 @@ class CronjobCorporateReport extends CI_Controller
 		$email->SMTPSecure = "ssl";  //tls
 		$email->Host       = "smtp.gmail.com";
 		$email->Port       = 465;
-		$email->Username   = 'application2@drdindia.com'; // Gmail address
-		$email->Password   = 'drd@oct23';    // Gmail App Password
+		$email->Username   = 'application@drdindia.com'; // Gmail address
+		$email->Password   = 'medical@2023';    // Gmail App Password
 
 
-		$email->SetFrom('application2@drdindia.com', 'Your Name');
+		$email->SetFrom('application@drdindia.com', 'Your Name');
 		$email->AddReplyTo('kapildrd@gmail.com', 'Your Name');
 		$email->AddAddress('kapil707sharma@gmail.com'); // Recipient
 
 		$email->Subject = 'Test Email via Gmail SMTP';
-		$email->Body    = nl2br("Hello,\nThis is a test email sent via Gmail SMTP.\n\n" . time());
-		$email->IsHTML(true);
+		$email->Body    = "Hello,\nThis is a test email sent via Gmail SMTP." . time();
 
+		$email->IsHTML(true);
 		if($email->send()) {
 			echo 'Message has been sent';
 		} else {
