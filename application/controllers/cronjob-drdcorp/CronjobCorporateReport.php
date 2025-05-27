@@ -54,8 +54,10 @@ class CronjobCorporateReport extends CI_Controller
 		$email->SMTPAuth   = 3; 
 		$email->SMTPSecure = "tls";  //tls
 		$email->Host     = "smtp.gmail.com";
-		$email->Username   = "application2@drdindia.com";
-		$email->Password   = "drd@oct23";
+		//$email->Username   = "application2@drdindia.com";
+		//$email->Password   = "drd@oct23";
+		$email->Username   = "application@drdindia.com";
+		$email->Password   = "medical@2023";
 		$email->Port     = 587;
 
 		if($email->send()){

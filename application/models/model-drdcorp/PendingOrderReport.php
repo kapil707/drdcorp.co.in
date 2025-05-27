@@ -45,7 +45,6 @@ class PendingOrderReport extends CI_Model
 
 	function sendReport() {
 
-		
 		$email_send_time = date("YmdHi");
 
 		$this->db->select('*');
