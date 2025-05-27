@@ -411,6 +411,7 @@ class CronjobBank extends CI_Controller
 		if (!empty($whatsapp_find_upi_amount)) {
 			echo "whatsapp_find_upi_amount<br>";
 			$this->BankWhatsAppModel->whatsapp_find_upi_amount();
+			die();
 		}else{
 			$check_sms = $this->BankModel->select_row("tbl_sms", array('status' => 0));
 			if (!empty($check_sms)) {
