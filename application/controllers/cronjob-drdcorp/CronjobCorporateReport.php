@@ -93,6 +93,13 @@ class CronjobCorporateReport extends CI_Controller
 		$email->SMTPDebug = 2; // or 3 for more details
 		$email->Debugoutput = 'html';
 
+		if($email->send()){
+			echo 'Message has been sent';
+		}else{
+			echo 'Message could not be sent.';
+			echo 'Mailer Error: ' . $email->ErrorInfo;
+		}
+
 		echo "<pre>";
 		print_r($email);
 	}
