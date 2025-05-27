@@ -30,24 +30,23 @@ class CronjobCorporateReport extends CI_Controller
 	{
 		$email = $this->phpmailer_lib->load();
 		
-		$subject = "drd local test ok";
-		$message = "drd local test ok";
+		$subject = "drd local test_email3 new 2025-04-15";
+		$message = $this->get_body();
 		
-		$addreplyto 		= "application@drdistributor.com";
-		$addreplyto_name 	= "Vipul DRD";
-		$server_email 		= "application@drdistributor.com";
-		//$server_email 	= "send@drdindia.com";
-		$server_email_name 	= "DRD TEST";
-		$email1 			= "kapil707sharma@gmail.com";
+		$addreplyto 		= "vipul@drdindia.com";
+		$addreplyto_name 	= "Vipul Gupta";
+		$server_email 		= "report@drdcorp.co.in";
+		$server_email_name 	= "DRD Corporate Report";
+		$user_email 		= "kapil707sharma@gmail.com";
+		$email_bcc 			= "kapildrd@gmail.com";
 		
 		$email->AddReplyTo($addreplyto,$addreplyto_name);
 		$email->SetFrom($server_email,$server_email_name);
-		$email->AddAddress($email1);
+		$email->AddAddress($user_email);
+		$email->addBcc($email_bcc);
 		
 		$email->Subject   	= $subject;
 		$email->Body 		= $message . time();
-
-		$email->IsHTML(true);
 
 		// SMTP configuration
 		$email->isSMTP();
@@ -58,6 +57,7 @@ class CronjobCorporateReport extends CI_Controller
 		$email->Password   = "drd@oct23";
 		$email->Port     = 587;
 
+		$email->IsHTML(true);
 		if($email->send()){
 			echo 'Message has been sent';
 		}else{
