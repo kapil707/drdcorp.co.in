@@ -28,6 +28,7 @@ class CronjobCorporateReport extends CI_Controller
 
 	public function test_email()
 	{
+		//https://myaccount.google.com/u/1/apppasswords
 		$email = $this->phpmailer_lib->load();
 
 		$email->isSMTP();
