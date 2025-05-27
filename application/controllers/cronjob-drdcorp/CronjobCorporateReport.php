@@ -31,12 +31,14 @@ class CronjobCorporateReport extends CI_Controller
 		$email = $this->phpmailer_lib->load();
 
 		$email->isSMTP();
-		$email->Host       = 'smtp.gmail.com';
-		$email->SMTPAuth   = true;
+		$email->IsSMTP();
+		$email->SMTPAuth   = 3; 
+		$email->SMTPSecure = "ssl";  //tls
+		$email->Host       = "smtp.gmail.com";
+		$email->Port       = 465;
 		$email->Username   = 'application2@drdindia.com'; // Gmail address
 		$email->Password   = 'drd@oct23';    // Gmail App Password
-		$email->SMTPSecure = 'tls';
-		$email->Port       = 587;
+
 
 		$email->SetFrom('application2@drdindia.com', 'Your Name');
 		$email->AddReplyTo('kapildrd@gmail.com', 'Your Name');
@@ -52,7 +54,7 @@ class CronjobCorporateReport extends CI_Controller
 			echo 'Message could not be sent.';
 			echo 'Mailer Error: ' . $email->ErrorInfo;
 		}
-		
+
 		echo "<pre>";
 		print_r($email);
 	}
