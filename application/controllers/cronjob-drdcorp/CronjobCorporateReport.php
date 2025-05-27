@@ -87,11 +87,11 @@ class CronjobCorporateReport extends CI_Controller
 		$email->AddReplyTo('vipul@drdindia.com', 'Vipul DRD');
 		$email->AddAddress('kapil707sharma@gmail.com');
 		$email->Subject = "drd local test_email2 new 2025-04-28";
-		$email->Body    = nl2br("drd local test_email2 new 2025-04-28\n\n" . time());
+		$email->Body    = "drd local test_email2 new 2025-04-28";
 		$email->IsHTML(true);
 
-		$email->SMTPDebug = 2; // or 3 for more details
-		$email->Debugoutput = 'html';
+		//$email->SMTPDebug = 2; // or 3 for more details
+		//$email->Debugoutput = 'html';
 
 		if($email->send()){
 			echo 'Message has been sent';
