@@ -90,7 +90,7 @@ class CronjobCorporateReport extends CI_Controller
 		$email->Body    = "drd local test_email2 new 2025-04-28";
 		$email->IsHTML(true);
 
-		//$email->SMTPDebug = 2; // or 3 for more details
+		$email->SMTPDebug = 2; // or 3 for more details
 		//$email->Debugoutput = 'html';
 
 		if($email->send()){
