@@ -213,8 +213,8 @@ class PendingOrderReport extends CI_Model
 		$email->isSMTP();
 		$email->Host       = 'mail.drdcorp.co.in'; // SMTP Server
 		$email->SMTPAuth   = true; // Enable SMTP Authentication
-		$email->Username   = 'report@drdcorp.co.in'; // SMTP Username
-		$email->Password   = 'Kapil1234!@#$'; // SMTP Password
+		$email->Username   = ''; // SMTP Username
+		$email->Password   = ''; // SMTP Password
 		$email->SMTPSecure = 'ssl'; // Use SSL (as your SMTP port is 465)
 		$email->Port       = 465; // SMTP Port
 
