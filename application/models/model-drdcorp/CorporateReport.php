@@ -171,11 +171,11 @@ class CorporateReport extends CI_Model
 				$email->addAttachment(FCPATH.$file_attachment3);
 			}
 
-			$email->isSMTP();
-			$email->Host       = 'localhost';   // Use local mail server
-			$email->SMTPAuth   = false;         // No authentication
-			$email->SMTPSecure = false;         // No encryption
-			$email->Port       = 25;            // Default mail port
+			//$email->isSMTP();
+			//$email->Host       = 'localhost';   // Use local mail server
+			//$email->SMTPAuth   = false;         // No authentication
+			//$email->SMTPSecure = false;         // No encryption
+			//$email->Port       = 25;            // Default mail port
 
 			if($email->send()){
 				$message_status = 'Message has been sent';
