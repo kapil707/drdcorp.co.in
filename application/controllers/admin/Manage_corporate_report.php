@@ -148,13 +148,15 @@ class Manage_corporate_report extends CI_Controller {
 		$i = 1;
 		$Page_tbl = $this->Page_tbl;
 
-		$result = $this->db->query("select * from `tbl_corporate_report` WHERE 1")->result();
-		print_r($result);
-		die();
+		$query = $this->db->query("select * from `tbl_corporate_report`");
+		$result = $query->result();
 		foreach($result as $row) {
 
 			$sr_no = $i++;
 			$id = $row->id;
+
+			echo $id;
+			die();
 			
 			$name = $row->name;
 			$email = $row->email;
@@ -164,8 +166,7 @@ class Manage_corporate_report extends CI_Controller {
 			$subject = $row->subject;
 			$message = $row->message;
 
-			echo $name;
-			die();
+			
 			
 			/*$time = $row->insert_time;
 			if(empty($time)){
