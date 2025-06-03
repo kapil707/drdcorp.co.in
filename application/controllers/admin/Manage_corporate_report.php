@@ -146,9 +146,8 @@ class Manage_corporate_report extends CI_Controller {
 		$jsonArray = array();
 		$items = "";
 		$i = 1;
-		echo $Page_tbl = $this->Page_tbl;
+		$Page_tbl = $this->Page_tbl;
 
-		die();
 		$result = $this->db->query("select * from $Page_tbl");
 		$result = $result->result();
 		foreach($result as $row) {
@@ -163,6 +162,9 @@ class Manage_corporate_report extends CI_Controller {
 			$message_status = $row->message_status;
 			$subject = $row->subject;
 			$message = $row->message;
+
+			echo $name;
+			die();
 			
 			/*$time = $row->insert_time;
 			if(empty($time)){
