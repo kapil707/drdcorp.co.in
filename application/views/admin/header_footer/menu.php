@@ -121,14 +121,14 @@
 				</ul>
 			</li>
 			<?php } 
-			$menu = $this->db->query("select DISTINCT tbl_permission_settings.page_type,sorting_order from tbl_permission_settings,tbl_permission_page where tbl_permission_settings.page_type=tbl_permission_page.page_type and user_type='$user_type' and (tbl_permission_settings.page_type='manage_user_chemist' or tbl_permission_settings.page_type='manage_user_corporate' or tbl_permission_settings.page_type='manage_user_salesman' or tbl_permission_settings.page_type='manage_user_chemist_request' or tbl_permission_settings.page_type='manage_user_active') GROUP BY tbl_permission_settings.page_type,sorting_order order by sorting_order asc")->result();
+			$menu = $this->db->query("select DISTINCT tbl_permission_settings.page_type,sorting_order from tbl_permission_settings,tbl_permission_page where tbl_permission_settings.page_type=tbl_permission_page.page_type and user_type='$user_type' and (tbl_permission_settings.page_type='manage_corporate_report') GROUP BY tbl_permission_settings.page_type,sorting_order order by sorting_order asc")->result();
 			if(!empty($menu)){
 			?>
 			<li <?php foreach($menu as $mymenu){ if($Page_menu==$mymenu->page_type) { ?> class="active" <?php } }?>>
 				<a href="#">
 					<span class="nav-label">
 						<i class="fa fa-th-large"></i>
-						Manage User
+						Manage Report
 					</span><span class="fa arrow"></span>
 				</a>
 				<ul class="nav nav-second-level collapse">
