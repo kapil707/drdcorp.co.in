@@ -149,9 +149,9 @@ class Manage_corporate_report extends CI_Controller {
 		$Page_tbl = $this->Page_tbl;
 
 		$result = $this->db->query("select * from `tbl_corporate_report` WHERE 1");
-		$result = $result->result();
 		print_r($result);
 		die();
+		$result = $result->result();
 		foreach($result as $row) {
 
 			$sr_no = $i++;
