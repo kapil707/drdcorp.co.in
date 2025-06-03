@@ -148,54 +148,59 @@ class Manage_corporate_report extends CI_Controller {
 		$i = 1;
 		$Page_tbl = $this->Page_tbl;
 
-		$query = $this->db->query("select * from `tbl_corporate_report` where email_status=1");
-		$result = $query->result();
-		foreach($result as $row) {
+		if(!empty($_REQUEST)){
+			$from_date 	= $_REQUEST["from_date"];
+			$to_date	= $_REQUEST['to_date'];
 
-			$sr_no = $i++;
-			$id = $row->id;
-			
-			$name = $row->name;
-			$email = $row->email;
-			$from_date = $row->from_date;
-			$to_date = $row->to_date;
-			$message_status = $row->message_status;
-			$subject = $row->subject;
-			$message = $row->message;
+			$query = $this->db->query("select * from `tbl_corporate_report` WHERE $Page_tbl.from_date BETWEEN '$from_date' AND '$to_date'");
+			$result = $query->result();
+			foreach($result as $row) {
 
-			
-			
-			/*$time = $row->insert_time;
-			if(empty($time)){
-				$time = time();
+				$sr_no = $i++;
+				$id = $row->id;
+				
+				$name = $row->name;
+				$email = $row->email;
+				$from_date = $row->from_date;
+				$to_date = $row->to_date;
+				$message_status = $row->message_status;
+				$subject = $row->subject;
+				$message = $row->message;
+
+				
+				
+				/*$time = $row->insert_time;
+				if(empty($time)){
+					$time = time();
+				}
+				$datetime = date("d-M-y @ H:i:s", $time);*/
+
+				$dt = array(
+					'sr_no' => $sr_no,
+					'id' => $id,
+					'name' => $name,
+					'email' => $email,
+					'from_date'=>$from_date,
+					'to_date'=>$to_date,
+					'message_status'=>$message_status,
+					'subject'=>$subject,
+					'message'=>$message,
+				);
+				$jsonArray[] = $dt;
 			}
-			$datetime = date("d-M-y @ H:i:s", $time);*/
-
-			$dt = array(
-				'sr_no' => $sr_no,
-				'id' => $id,
-				'name' => $name,
-				'email' => $email,
-				'from_date'=>$from_date,
-				'to_date'=>$to_date,
-				'message_status'=>$message_status,
-				'subject'=>$subject,
-				'message'=>$message,
-			);
-			$jsonArray[] = $dt;
-		}
-		if(!empty($jsonArray)){
-			$items = $jsonArray;
-			$response = array(
-				'success' => "1",
-				'message' => 'Data load successfully',
-				'items' => $items,
-			);
-		}else{
-			$response = array(
-				'success' => "0",
-				'message' => '502 error',
-			);
+			if(!empty($jsonArray)){
+				$items = $jsonArray;
+				$response = array(
+					'success' => "1",
+					'message' => 'Data load successfully',
+					'items' => $items,
+				);
+			}else{
+				$response = array(
+					'success' => "0",
+					'message' => '502 error',
+				);
+			}
 		}
 		
         // Send JSON response
