@@ -152,8 +152,6 @@ class Manage_corporate_report extends CI_Controller {
 			$from_date 	= $_REQUEST["from_date"];
 			$to_date	= $_REQUEST['to_date'];
 
-			echo "select * from $Page_tbl WHERE $Page_tbl.from_date BETWEEN '$from_date' AND '$to_date'";
-
 			$query = $this->db->query("select * from $Page_tbl WHERE $Page_tbl.from_date BETWEEN '$from_date' AND '$to_date'");
 			$result = $query->result();
 			foreach($result as $row) {
@@ -168,8 +166,6 @@ class Manage_corporate_report extends CI_Controller {
 				$message_status = $row->message_status;
 				$subject = $row->subject;
 				$message = $row->message;
-
-				
 				
 				/*$time = $row->insert_time;
 				if(empty($time)){
