@@ -148,7 +148,7 @@ class Manage_corporate_report extends CI_Controller {
 		$i = 1;
 		$Page_tbl = $this->Page_tbl;
 
-		$query = $this->db->query("select * from `tbl_corporate_report`");
+		$query = $this->db->query("select * from `tbl_corporate_report` where message_status=1");
 		$result = $query->result();
 		foreach($result as $row) {
 
