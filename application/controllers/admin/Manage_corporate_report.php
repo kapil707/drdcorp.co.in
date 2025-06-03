@@ -150,6 +150,8 @@ class Manage_corporate_report extends CI_Controller {
 
 		$result = $this->db->query("select * from $Page_tbl");
 		$result = $result->result();
+		print_r($result);
+		die();
 		foreach($result as $row) {
 
 			$sr_no = $i++;
