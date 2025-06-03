@@ -146,8 +146,9 @@ class Manage_corporate_report extends CI_Controller {
 		$jsonArray = array();
 		$items = "";
 		$i = 1;
-		$Page_tbl = $this->Page_tbl;
+		echo $Page_tbl = $this->Page_tbl;
 
+		die();
 		$result = $this->db->query("select * from $Page_tbl");
 		$result = $result->result();
 		foreach($result as $row) {
