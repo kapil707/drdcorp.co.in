@@ -152,7 +152,9 @@ class Manage_corporate_report extends CI_Controller {
 			$from_date 	= $_REQUEST["from_date"];
 			$to_date	= $_REQUEST['to_date'];
 
-			$query = $this->db->query("select * from `tbl_corporate_report` WHERE $Page_tbl.from_date BETWEEN '$from_date' AND '$to_date'");
+			echo "select * from $Page_tbl WHERE $Page_tbl.from_date BETWEEN '$from_date' AND '$to_date'";
+
+			$query = $this->db->query("select * from $Page_tbl WHERE $Page_tbl.from_date BETWEEN '$from_date' AND '$to_date'");
 			$result = $query->result();
 			foreach($result as $row) {
 
