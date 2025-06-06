@@ -220,7 +220,7 @@ class Manage_bank_cheque extends CI_Controller {
 		$end_date 	= $end_date->format('Y-m-d');
 
 
-		$query = $this->BankModel->select_query("SELECT s.*,p.final_chemist as chemist_id,p.invoice_text as invoice_number,p.id as pid from tbl_statment as s left JOIN tbl_bank_processing as p on p.upi_no=s.customer_reference where s.date BETWEEN '$start_date' AND '$end_date' order by s.id asc");
+		$query = $this->BankModel->select_query("SELECT * from $Page_tbl where date BETWEEN '$start_date' AND '$end_date' order by id asc");
 		$data["result"] = $query->result();
 
 		$this->load->view("admin/header_footer/header",$data);
