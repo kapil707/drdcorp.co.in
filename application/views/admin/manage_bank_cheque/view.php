@@ -26,131 +26,68 @@
 			</button>
 		</div>		
 		<div class="col-xs-2">
-			<a href="<?= base_url()?>admin/<?= $Page_name?>/statment_excel_file?date-range=<?= $date_range ?>" class="btn btn-info">Download Statment</a>
+			
 		</div>
 	</form>
-	<div class="col-xs-4">
-		<a href="view">
-            <button class="btn btn-info">
-                All formet
-            </button>
-        </a>
-		<a href="view1">
-            <button class="btn btn-info">
-                formet 1
-            </button>
-        </a>
-		<a href="view2">
-            <button class="btn btn-info">
-                formet 2
-            </button>
-        </a>
-		<a href="view3">
-            <button class="btn btn-info">
-                formet 3
-            </button>
-        </a>
+	<div class="col-xs-12">
+		<div class="table-responsive">
+			<table class="table table-striped table-bordered table-hover dataTables-example">
+				<thead>
+					<tr>
+						<th>Party Code</th>
+						<th>Party Name</th>
+						<th>Date</th>
+						<th>Bank Name</th>
+						<th>Ifsc Code</th>
+						<th>Amount In Words</th>
+						<th>Amount</th>
+						<th>Reciever</th>
+						<th>Account Number</th>
+						<th>Cheque Number</th>
+					</tr>
+				</thead>
+				<tbody>
+				<?php
+				$i = 1;			
+				foreach ($result as $row) { ?>
+					<tr class="tr_css_<?php echo $row->id; ?>">
+						<td>
+							<?php echo $row->party_code; ?>
+						</td>
+						<td>
+							<?php echo $row->party_name; ?>
+						</td>
+						<td>
+							<?php echo $row->date; ?>
+						</td>
+						<td>
+							<?php echo $row->bank_name; ?>
+						</td>
+						<td>
+							<?php echo $row->ifsc_code; ?>
+						</td>
+						<td>
+							<?php echo $row->amount_in_words; ?>
+						</td>
+						<td>
+							<?php echo $row->amount_in_digits; ?>
+						</td>
+						<!-- <td>
+							<?php echo date('m/d/Y', strtotime($row->date)); ?>
+						</td> -->
+						<td>
+							<?php echo $row->reciever; ?>
+						</td>
+						<td>
+							<?php echo $row->account_number; ?>
+						</td>
+						<td>
+							<?php echo $row->cheque_number; ?>
+						</td>
+					</tr>
+					<?php } ?>
+				</tbody>
+			</table>
+		</div>
 	</div>
-	<form method="post">
-		<div class="col-sm-6">&nbsp;</div>
-		<div class="col-xs-2">
-			<input type="submit" name="checkbox-submit" value="Submit Checkbox" class="btn btn-info">
-		</div>
-		<div class="col-xs-12">
-			<div class="table-responsive">
-				<table class="table table-striped table-bordered table-hover dataTables-example">
-					<thead>
-						<tr>
-							<th>Account Number</th>
-							<th>Branch Number</th>
-							<th>Statement Date</th>
-							<th>Closing Ledger Balance</th>
-							<th>Calculated Balances</th>
-							<th>Amount</th>
-							<th>Entry Date</th>
-							<th>Value Date</th>
-							<th>Bank Reference</th>
-							<th>Customer Reference</th>
-							<th>Narrative</th>
-							<th>Transaction Description</th>
-							<th>Chemist</th>
-							<th>Invoice</th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-					<?php
-					$i = 1;			
-					foreach ($result as $row) { ?>
-						<tr class="tr_css_<?php echo $row->id; ?>">
-							<td>
-								<?php echo $row->account_no; ?>
-							</td>
-							<td>
-								<?php echo $row->branch_no; ?>
-							</td>
-							<td>
-								<?php echo $row->statment_date; ?>
-							</td>
-							<td>
-								<?php echo $row->closing_ledger_balance; ?>
-							</td>
-							<td>
-								<?php echo $row->calculated_balances; ?>
-							</td>
-							<td>
-								<?php echo $row->amount; ?>
-							</td>
-							<td>
-								<?php echo $row->enter_date; ?>
-							</td>
-							<td>
-								<?php echo date('m/d/Y', strtotime($row->date)); ?>
-							</td>
-							<td>
-								<?php echo $row->bank_reference; ?>
-							</td>
-							<td>
-								<?php echo $row->customer_reference; ?>
-							</td>
-							<td>
-								<?php echo $row->narrative; ?>
-							</td>
-							<td>
-								<?php echo $row->transaction_description; ?>
-							</td>
-							<td>
-								<?php echo $row->chemist_id; ?>
-							</td>
-							<td>
-								<?php 
-								$gstvNo = "";
-								$invoice = $row->invoice_number; 
-								if(!empty($invoice)){
-									$parts = explode("||", $invoice);
-									foreach($parts as $invoice) {
-										preg_match('/GstvNo:([\w-]+)/', $invoice, $matches);
-										$gstvNo.= $matches[1].',';
-									}
-									$gstvNo = substr($gstvNo, 0, -2);
-								}
-								echo $gstvNo;
-								?>
-							</td>
-							<td>
-								<?php /*if($row->done_status==1 && $row->checkbox_done_status==0 && $row->download_easysol==0){ ?>
-								<label><input type="checkbox" name="checkbox[]" value="<?php echo $row->customer_reference; ?>">Checkbox</label>
-								<?php } ?>
-								<?php if($row->done_status==1 && $row->checkbox_done_status==1 && $row->download_easysol==0){ ?>
-									<input type="hidden" name="upi_no" value="<?php echo $row->customer_reference; ?>">
-									<input type="submit" name="checkbox-delete" value="Delete" class="btn btn-danger">
-								<?php } */?>
-							</td>
-						</tr>
-						<?php } ?>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</form>
 </div>
