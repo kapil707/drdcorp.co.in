@@ -100,7 +100,7 @@
 				</ul>
 			</li>
 			<?php } 
-			$menu = $this->db->query("select DISTINCT tbl_permission_settings.page_type,sorting_order from tbl_permission_settings,tbl_permission_page where tbl_permission_settings.page_type=tbl_permission_page.page_type and user_type='$user_type' and (tbl_permission_settings.page_type='manage_bank_statment' or tbl_permission_settings.page_type='manage_bank_chemist' or tbl_permission_settings.page_type='manage_bank_whatsapp' or tbl_permission_settings.page_type='manage_bank_sms' or tbl_permission_settings.page_type='manage_bank_processing' or tbl_permission_settings.page_type='manage_bank_invoice' or tbl_permission_settings.page_type='manage_bank_user_chemist') GROUP BY tbl_permission_settings.page_type,sorting_order order by sorting_order asc")->result();
+			$menu = $this->db->query("select DISTINCT tbl_permission_settings.page_type,sorting_order from tbl_permission_settings,tbl_permission_page where tbl_permission_settings.page_type=tbl_permission_page.page_type and user_type='$user_type' and (tbl_permission_settings.page_type='manage_bank_statment' or tbl_permission_settings.page_type='manage_bank_chemist' or tbl_permission_settings.page_type='manage_bank_whatsapp' or tbl_permission_settings.page_type='manage_bank_sms' or tbl_permission_settings.page_type='manage_bank_processing' or tbl_permission_settings.page_type='manage_bank_invoice' or tbl_permission_settings.page_type='manage_bank_user_chemist' or tbl_permission_settings.page_type='manage_bank_cheque') GROUP BY tbl_permission_settings.page_type,sorting_order order by sorting_order asc")->result();
 			if(!empty($menu)){
 			?>
 			<li <?php foreach($menu as $mymenu){ if($Page_menu==$mymenu->page_type) { ?> class="active" <?php } }?>>
