@@ -108,7 +108,7 @@ class Manage_bank_cheque extends CI_Controller {
 
 			$start_row 				= "2";
 
-			$upload_path = "uploads/manage_bank_statment/myfile/";
+			$upload_path = "uploads/$page_controllers/myfile/";
 			$excelFile = $upload_path.$filename;
 			$i=1;
 			if(file_exists($excelFile))
