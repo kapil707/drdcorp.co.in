@@ -155,7 +155,7 @@ class Manage_bank_cheque extends CI_Controller {
 						/*$row1 = $this->BankModel->select_query("select id from tbl_statment where customer_reference='$customer_reference'");
 						$row1 = $row1->row();
 						if(empty($row1->id)){*/
-							$this->BankModel->insert_statment($Page_tbl, $dt);
+							$this->BankModel->insert_fun($Page_tbl, $dt);
 						//}
 					}
 				//}
