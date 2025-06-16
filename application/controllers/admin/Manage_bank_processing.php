@@ -147,6 +147,8 @@ class Manage_bank_processing extends CI_Controller {
 
 	public function add_final_chemist()
 	{
+		$user_id = $this->session->userdata("user_id");
+
 		$id 			= $_POST["id"];
 		$final_chemist	= $_POST["chemist_id"];
 		if(!empty($id) && !empty($final_chemist)){
@@ -163,6 +165,7 @@ class Manage_bank_processing extends CI_Controller {
 				$dt = array(
 					'final_chemist'=>$final_chemist,
 					'final_status'=>'4',
+					'final_user_id'=>$user_id,
 				);
 				$this->BankModel->edit_fun("tbl_bank_processing", $dt,$where);
 			}
