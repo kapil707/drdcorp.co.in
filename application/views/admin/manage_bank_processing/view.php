@@ -580,7 +580,7 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 											$final_user_query = $this->db->query("SELECT * FROM `tbl_user` where id='$final_user_id'");
 											$final_user_row = $final_user_query->row();
 											echo $final_user_row->name;
-										}
+										} ?>
 									</div>
 								</div>
 								
