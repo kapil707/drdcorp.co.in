@@ -573,8 +573,14 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 										<span class="text_find_match_not cancel_final_chemist_<?= ($row_id); ?>" onclick="cancel_final_chemist('<?= ($row_id); ?>')" style="margin-left:10px;display:none;float: left;">
 											Cancel <i class="fa fa-times" aria-hidden="true"></i>
 										</span>
-
-										test
+										&nbsp;
+										<?php
+										$final_user_id = $entry->final_user_id;
+										if($final_user_id!=0){
+											$final_user_query = $this->db->query("SELECT * FROM `tbl_user` where id='$final_user_id'");
+											$final_user_row = $final_user_query->row();
+											echo $final_user_row->name;
+										}
 									</div>
 								</div>
 								
