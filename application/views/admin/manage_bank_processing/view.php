@@ -423,12 +423,11 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 										<?php 
 										if($row_process_status!=0){ ?>
 											<br>
-											<b class="text_find_match blink_me_white edit_from_text_chemist_id_<?= ($row_id); ?>" onclick="edit_from_text_chemist_id('<?= ($row_id); ?>')">
 											<?php if(empty($textbox_final_chemist) && empty($row_from_text_find_chemist)){ ?>
-												Add Chemist 
-												<?php } else { ?>
-												Edit Chemist 
-											<?php } ?><i class="fa fa-pencil" aria-hidden="true"></i></b>
+											<b class="text_find_match blink_me_white edit_from_text_chemist_id_<?= ($row_id); ?>" onclick="edit_from_text_chemist_id('<?= ($row_id); ?>')">Add Chemist <i class="fa fa-pencil" aria-hidden="true"></i></b>
+											<?php } else { ?>
+											<b class="text_find_match_edit edit_from_text_chemist_id_<?= ($row_id); ?>" onclick="edit_from_text_chemist_id('<?= ($row_id); ?>')">Edit <i class="fa fa-pencil" aria-hidden="true"></i></b>
+											<?php }
 
 											<input type="hidden" value="<?php echo $row_from_text ?>" class="text_from_text_<?= ($row_id); ?>" placeholder='Set Chemist'>
 
