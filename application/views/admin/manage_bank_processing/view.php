@@ -421,8 +421,7 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 										<?= ($row_from_text); ?>
 
 										<?php 
-										if($row_process_status!=0){
-											if(empty($textbox_final_chemist) && empty($row_from_text_find_chemist)){ ?>
+										if($row_process_status!=0){ ?>
 											<br>
 											<b class="text_find_match blink_me_white edit_from_text_chemist_id_<?= ($row_id); ?>" onclick="edit_from_text_chemist_id('<?= ($row_id); ?>')">
 											<?php if(empty($textbox_final_chemist) && empty($row_from_text_find_chemist)){ ?>
