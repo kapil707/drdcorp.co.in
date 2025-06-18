@@ -438,6 +438,7 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 												Cancel <i class="fa fa-times" aria-hidden="true"></i>
 											</b>
 										<?php } ?>
+										test
 										<?php } ?>
 									</div>
 									<div class="td_div">
