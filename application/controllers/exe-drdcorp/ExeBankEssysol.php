@@ -22,47 +22,34 @@ class ExeBankEssysol extends CI_Controller
 		foreach ($result as $row) {
 
 			// These values will represent the last processed row's details
-			$order_id = $row->id;
-			$user_type = $row->user_type;
+			$id = $row->id;
+			$vdt = $row->vdt;
+			$amount = $row->amount;
 			$chemist_id = $row->chemist_id;
-			$salesman_id = $row->salesman_id;
-			$remarks = $row->remarks;
-			$date = $row->date;
-			$time = $row->time;
-			$total_line = (int)$row->items_total;
-
-			$acno = $row->code;
-			$slcd = $row->slcd;
+			$bacno = $row->bacno;
+			$mode = $row->mode;
+			$chqno = $row->chqno;
+			$rcptno = $row->rcptno;
+			$upi_no = $row->upi_no;
+			$bank_reference = $row->bank_reference;
+			$bname = $row->bname;
+			$invoice = $row->invoice;
+			//$total_line = (int)$row->items_total;
 			
-			/************************************************************ */
-			$result1 = $this->db->query("SELECT * from tbl_cart where order_id='$order_id'")->result();	
-			foreach ($result1 as $row1) {		
-				$dt = array(
-					'online_id' => $row1->id,
-					'i_code' => $row1->i_code,
-					'item_code' => $row1->item_code,
-					'quantity' => $row1->quantity,
-					'sale_rate' => $row1->sale_rate,
-				);
-				$jsonArray_lines[] = $dt;
-			}
-			/************************************************************ */
-		}
 
-		// If result is not empty, proceed to fetch chemist details
-		if (!empty($result)) {
-			// Final order details
 			$dt = array(
-				'order_id' => $order_id,
+				'id' => $id,
+				'vdt' => $vdt,
+				'amount' => $amount,
 				'chemist_id' => $chemist_id,
-				'salesman_id' => $salesman_id,
-				'user_type' => $user_type,
-				'acno' => $acno,
-				'slcd' => $slcd,
-				'remarks' => $remarks,
-				'date' => $date,
-				'time' => $time,
-				'total_line' => $total_line,
+				'bacno' => $bacno,
+				'mode' => $mode,
+				'chqno' => $chqno,
+				'rcptno' => $rcptno,
+				'upi_no' => $upi_no,
+				'bank_reference' => $bank_reference,
+				'bname' => $bname,
+				'invoice' => $invoice,
 			);
 			$jsonArray[] = $dt;
 
