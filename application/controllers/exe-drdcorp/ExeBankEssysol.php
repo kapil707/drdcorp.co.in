@@ -35,7 +35,6 @@ class ExeBankEssysol extends CI_Controller
 			$bname = $row->bname;
 			$invoice = $row->invoice;
 			//$total_line = (int)$row->items_total;
-			
 
 			$dt = array(
 				'id' => $id,
@@ -62,5 +61,14 @@ class ExeBankEssysol extends CI_Controller
 		// Send JSON response
 		header('Content-Type: application/json');
 		echo json_encode($response);
+	}
+
+	public function update($id='',$essysol_id=''){
+
+		if(!empty($id) && !empty($essysol_id)){
+			$dt = array('essysol_id' => $essysol_id,'status' => 1); 
+			$where = array('id' => $id);
+			$this->BankModel->edit_fun("tbl_bank_essysol", $dt, $where);
+		}
 	}
 }
