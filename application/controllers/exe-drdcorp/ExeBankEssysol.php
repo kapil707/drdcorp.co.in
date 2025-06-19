@@ -52,21 +52,13 @@ class ExeBankEssysol extends CI_Controller
 				'invoice' => $invoice,
 			);
 			$jsonArray[] = $dt;
-
-			// Prepare the response structure
-			$response = array(
-				'success' => "1",
-				'message' => 'Data load successfully',
-				'items' => $jsonArray,
-			);
-		} else {
-			// If no result found, prepare an empty response
-			$response = array(
-				'success' => "0",
-				'message' => 'No data found',
-				'items' => "",
-			);
 		}
+		// Prepare the response structure
+		$response = array(
+			'success' => "1",
+			'message' => 'Data load successfully',
+			'items' => $jsonArray,
+		);
 		// Send JSON response
 		header('Content-Type: application/json');
 		echo json_encode($response);
