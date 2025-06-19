@@ -58,7 +58,6 @@ class ExeBankEssysol extends CI_Controller
 				'success' => "1",
 				'message' => 'Data load successfully',
 				'items' => $jsonArray,
-				'items_other' => $jsonArray_lines,
 			);
 		} else {
 			// If no result found, prepare an empty response
@@ -66,7 +65,6 @@ class ExeBankEssysol extends CI_Controller
 				'success' => "0",
 				'message' => 'No data found',
 				'items' => "",
-				'items_other' => "",
 			);
 		}
 		// Send JSON response
