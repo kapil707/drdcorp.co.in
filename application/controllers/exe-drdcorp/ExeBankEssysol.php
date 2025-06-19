@@ -17,7 +17,7 @@ class ExeBankEssysol extends CI_Controller
 		$date = date("Y-m-d");
 		$download_time = date("YmdHi");
 
-		$result = $this->BankModel->select_query("SELECT * from tbl_bank_essysol where status=0 limit 1");
+		$result = $this->BankModel->select_query("SELECT * from tbl_bank_essysol where status=0");
 		$result = $result->result();
 		foreach ($result as $row) {
 
