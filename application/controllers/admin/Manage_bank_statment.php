@@ -465,7 +465,21 @@ class Manage_bank_statment extends CI_Controller {
 						}
 						$gstvNo = substr($gstvNo, 0, -2);
 					}
-					echo $gstvNo;
+					/************************************ */
+					$dt = $dt = array(
+						'vdt'=>$vdt,
+						'amount'=>$amount,
+						'chemist_id'=>$chemist_id,
+						'bacno'=>$bacno,
+						'mode'=>$mode,
+						'chqno'=>$chqno,
+						'rcptno'=>$rcptno,
+						'upi_no'=>$upi_no,
+						'bank_reference'=>$bank_reference,
+						'bname'=>$bname,
+						'invoice'=>$gstvNo,
+						'status'=>0,);
+					$this->BankModel->insert_statment("tbl_bank_essysol", $dt);
 				}
 			}
 		}
