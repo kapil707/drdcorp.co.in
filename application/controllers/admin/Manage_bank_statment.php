@@ -438,14 +438,36 @@ class Manage_bank_statment extends CI_Controller {
 				$where = array(
 					'upi_no' => $upi_no,
 				);
-				print_r($where);
-				// $dt = array(
-				// 	'checkbox_done_status' => '1',
-				// );
-				// $this->BankModel->edit_fun("tbl_bank_processing", $dt,$where);
-			}
+				$dt = array(
+					'final_status' => '5',
+				);
+				$this->BankModel->edit_fun("tbl_bank_processing", $dt,$where);
 
-			die();
+				$query = $this->BankModel->select_query("select * from tbl_bank_processing where upi_no='$upi_no'");
+				$row = $query->row();
+				if(!empty($row)){
+					$vdt = $row->date;
+					$amount = $row->amount;
+					$chemist_id = $row->final_chemist;
+					$bacno = "9972";
+					$mode = "T";
+					$chqno = "RTGS";
+					$rcptno = $upi_no;
+					$bank_reference = "";
+					$bname = "";
+					$gstvNo = "";
+					$invoice = $row->invoice_text; 
+					if(!empty($invoice)){
+						$parts = explode("||", $invoice);
+						foreach($parts as $invoice) {
+							preg_match('/GstvNo:([\w-]+)/', $invoice, $matches);
+							$gstvNo.= $matches[1].',';
+						}
+						$gstvNo = substr($gstvNo, 0, -2);
+					}
+					echo $gstvNo;
+				}
+			}
 		}
 		
 		if(isset($_POST["checkbox-delete"])){
