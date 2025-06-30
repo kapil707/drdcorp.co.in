@@ -441,7 +441,7 @@ class Manage_bank_statment extends CI_Controller {
 				$dt = array(
 					'final_status' => '5',
 				);
-				$this->BankModel->edit_fun("tbl_bank_processing", $dt,$where);
+				//$this->BankModel->edit_fun("tbl_bank_processing", $dt,$where);
 
 				$query = $this->BankModel->select_query("select * from tbl_bank_processing where upi_no='$upi_no'");
 				$row = $query->row();
