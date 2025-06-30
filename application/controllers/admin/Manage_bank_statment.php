@@ -438,10 +438,12 @@ class Manage_bank_statment extends CI_Controller {
 				$where = array(
 					'upi_no' => $upi_no,
 				);
-				$dt = array(
-					'checkbox_done_status' => '1',
-				);
-				$this->BankModel->edit_fun("tbl_bank_processing", $dt,$where);
+				print_r($where);
+				die();
+				// $dt = array(
+				// 	'checkbox_done_status' => '1',
+				// );
+				// $this->BankModel->edit_fun("tbl_bank_processing", $dt,$where);
 			}
 		}
 		
