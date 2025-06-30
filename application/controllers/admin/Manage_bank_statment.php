@@ -466,7 +466,7 @@ class Manage_bank_statment extends CI_Controller {
 						$gstvNo = substr($gstvNo, 0, -2);
 					}
 					/************************************ */
-					$dt = $dt = array(
+					$dt = array(
 						'vdt'=>$vdt,
 						'amount'=>$amount,
 						'chemist_id'=>$chemist_id,
@@ -479,7 +479,7 @@ class Manage_bank_statment extends CI_Controller {
 						'bname'=>$bname,
 						'invoice'=>$gstvNo,
 						'status'=>0,);
-					$this->BankModel->insert_statment("tbl_bank_essysol", $dt);
+					$this->BankModel->insert_fun("tbl_bank_essysol", $dt);
 				}
 			}
 		}
