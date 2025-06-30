@@ -439,12 +439,13 @@ class Manage_bank_statment extends CI_Controller {
 					'upi_no' => $upi_no,
 				);
 				print_r($where);
-				die();
 				// $dt = array(
 				// 	'checkbox_done_status' => '1',
 				// );
 				// $this->BankModel->edit_fun("tbl_bank_processing", $dt,$where);
 			}
+
+			die();
 		}
 		
 		if(isset($_POST["checkbox-delete"])){
