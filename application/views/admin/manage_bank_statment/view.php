@@ -138,13 +138,13 @@
 								?>
 							</td>
 							<td>
-								<?php /*if($row->done_status==1 && $row->checkbox_done_status==0 && $row->download_easysol==0){ ?>
+								<?php if($row->done_status==1 && $row->checkbox_done_status==0 && $row->download_easysol==0){ ?>
 								<label><input type="checkbox" name="checkbox[]" value="<?php echo $row->customer_reference; ?>">Checkbox</label>
 								<?php } ?>
 								<?php if($row->done_status==1 && $row->checkbox_done_status==1 && $row->download_easysol==0){ ?>
 									<input type="hidden" name="upi_no" value="<?php echo $row->customer_reference; ?>">
 									<input type="submit" name="checkbox-delete" value="Delete" class="btn btn-danger">
-								<?php } */?>
+								<?php } ?>
 							</td>
 						</tr>
 						<?php } ?>
