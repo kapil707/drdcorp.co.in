@@ -138,7 +138,7 @@
 								?>
 							</td>
 							<td>
-								<?php if($row->done_status==1 && $row->checkbox_done_status==0 && $row->download_easysol==0){ ?>
+								<?php if(!empty($row->chemist_id) && $row->final_status==4){ ?>
 								<label><input type="checkbox" name="checkbox[]" value="<?php echo $row->customer_reference; ?>">Checkbox</label>
 								<?php } ?>
 								<?php if($row->done_status==1 && $row->checkbox_done_status==1 && $row->download_easysol==0){ ?>
