@@ -132,7 +132,7 @@
 										preg_match('/GstvNo:([\w-]+)/', $invoice, $matches);
 										$gstvNo.= $matches[1].',';
 									}
-									$gstvNo = substr($gstvNo, 0, -2);
+									$gstvNo = substr($gstvNo, 0, -1);
 								}
 								echo $gstvNo;
 								?>
