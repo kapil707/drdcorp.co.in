@@ -25,12 +25,15 @@ class HookTest extends CI_Controller
         $from = isset($data['from']) ? $data['from'] : '';
         $body = isset($data['body']) ? $data['body'] : '';
 
+        $media_id = isset($data['media']['id']) ? $data['media']['id'] : null;
+
         // Step 5: Prepare data for insert
         $save_data = [
             'message_id' => $id,
             'receiver_to' => $to,
             'receiver_from' => $from,
-            'message_body' => $body
+            'message_body' => $body,
+            'media_id' => $media_id
         ];
 
         // Step 6: Save to database
