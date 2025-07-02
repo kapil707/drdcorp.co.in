@@ -4,6 +4,8 @@ class HookTest extends CI_Controller
 {
 	public function __construct(){
 		parent::__construct();
+        //Load model
+        $this->load->model('BankWebhookModel');
 	}
 
 	public function upload(){
@@ -31,7 +33,7 @@ class HookTest extends CI_Controller
 
         // Step 6: Save to database
         if ($id && $to && $body) {
-            $this->Webhook_model->insert_message($save_data);
+            $this->BankWebhookModel->insert_message($save_data);
         }
 
         // Response
