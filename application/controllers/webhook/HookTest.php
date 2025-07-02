@@ -5,7 +5,7 @@ class HookTest extends CI_Controller
 	public function __construct(){
 		parent::__construct();
         //Load model
-        $this->load->model('BankWebhookModel');
+        $this->load->model('model-bank/BankWebhookModel');
 	}
 
 	public function upload(){
