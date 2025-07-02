@@ -35,6 +35,8 @@ class HookTest extends CI_Controller
         if ($id && $to && $body) {
             $this->BankWebhookModel->insert_message($save_data);
         }
+        
+        file_put_contents(APPPATH . 'logs/'.$id.'.txt', $data_array);
 
         // Response
         http_response_code(200);
