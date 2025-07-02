@@ -23,7 +23,7 @@ class HookTest extends CI_Controller
         $id   = isset($data['id']) ? $data['id'] : '';
         $to   = isset($data['to']) ? $data['to'] : '';
         $from = isset($data['from']) ? $data['from'] : '';
-        $body = isset($data['body']) ? $data['body'] : '';
+        $body = isset($data['body']) ? $data['body'] : null;
 
         $media_id = isset($data['media']['id']) ? $data['media']['id'] : null;
         $quoted_wid = isset($data['quoted']['wid']) ? $data['quoted']['wid'] : null;
