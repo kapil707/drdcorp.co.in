@@ -8,25 +8,34 @@ class HookTest extends CI_Controller
 
 	public function upload(){
 
-		// Step 1: Raw input from webhook
+		// Step 1: Raw input
         $raw_input = file_get_contents("php://input");
 
-        // Step 2: Try decoding JSON if expected
-        $data = json_decode($raw_input, true);
+        // Step 2: Decode JSON
+        $data_array = json_decode($raw_input, true);
 
-        file_put_contents(APPPATH . 'logs/webhook_log_' . date('Ymd_His') . '.txt', print_r($data, true));
-        if (isset($data['data'])) {
-			foreach ($data['data'] as $message) {
-                // Step 3: Log the input (for debugging)
-                file_put_contents(APPPATH . 'logs/new_webhook_log_' . date('Ymd_His') . '.txt', print_r($message, true));
-            }
+        // Step 3: Extract 'data' section
+        $data = isset($data_array['data']) ? $data_array['data'] : [];
+
+        // Step 4: Extract required fields
+        $id   = isset($data['id']) ? $data['id'] : '';
+        $to   = isset($data['to']) ? $data['to'] : '';
+        $body = isset($data['body']) ? $data['body'] : '';
+
+        // Step 5: Prepare data for insert
+        $save_data = [
+            'id' => $id,
+            'receiver_to' => $to,
+            'message_body' => $body
+        ];
+
+        // Step 6: Save to database
+        if ($id && $to && $body) {
+            $this->Webhook_model->insert_message($save_data);
         }
 
-        // Step 4: Process the data (optional)
-        // You can access values like: $data['order_id'], etc.
-
-        // Step 5: Send response
+        // Response
         http_response_code(200);
-        echo "Webhook received successfully.";
+        echo "Data received and stored.";
 	}
 }
