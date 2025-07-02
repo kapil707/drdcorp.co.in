@@ -26,7 +26,7 @@ class HookTest extends CI_Controller
 
         // Step 5: Prepare data for insert
         $save_data = [
-            'id' => $id,
+            'message_id' => $id,
             'receiver_to' => $to,
             'message_body' => $body
         ];
