@@ -59,7 +59,7 @@ class HookTest extends CI_Controller
 
 // --- REPLACE THIS SECTION WITH HOW CODINGTER 3.0 HANDLES URL INPUT ---
 // Example: If the URL is passed as a query parameter or similar
-$image_url = 'https://api.wassi.chat/v1/chat/66faf180345d460e9984e4ac/files/6864ef25d62c68fa8bb725ed/download?token=531fe5caf0e132bdb6000bf01ed66d8cfb75b53606cc8f6eed32509d99d74752f47f288db155557e'; // REPLACE with the actual image URL input
+$image_url = 'https://drdcorp.co.in/uploads/test.jpeg'; // REPLACE with the actual image URL input
 // You might get this from a specific Codingter input method.
 // For instance, if it's a command-line argument or a specific UI input field.
 // --- END OF REPLACE SECTION ---
