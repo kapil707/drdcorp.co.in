@@ -51,157 +51,168 @@ class HookTest extends CI_Controller
 	}
 
     public function test($mykey){
-        // Assume this is the PHP file you're running in Codingter 3.0
-        // Let's say you're getting the image file via some input mechanism
-        // In a real web application, this would come from $_FILES array.
-        // For Codingter 3.0, you might have a specific function to get input.
 
-        // Placeholder for getting the image file content or path in Codingter 3.0
-        // You need to replace this with how Codingter 3.0 handles file uploads.
-        // For example, it might provide the file content directly, or a temporary path.
+// Assume this is the PHP file you're running in Codingter 3.0
+// We'll receive the image URL as an input.
+// For a web application, this might come from $_GET or $_POST.
+// For Codingter 3.0, you'll need to adapt how you receive this input.
 
-        // --- REPLACE THIS SECTION WITH HOW CODINGTER 3.0 HANDLES FILE INPUT ---
-        // Example 1: If Codingter 3.0 gives you the raw image data (binary string)
-        $image_data_base64 = ''; // Base64 encoded image data from Codingter 3.0 input
-        // Example 2: If Codingter 3.0 gives you a temporary file path
-        $uploaded_image_path = 'https://api.wassi.chat/v1/chat/66faf180345d460e9984e4ac/files/6864ef25d62c68fa8bb725ed/download?token=531fe5caf0e132bdb6000bf01ed66d8cfb75b53606cc8f6eed32509d99d74752f47f288db155557e'; // Example path, replace with actual.
-        // To read the content from a path:
-        if (file_exists($uploaded_image_path)) {
-            $image_data_base64 = base64_encode(file_get_contents($uploaded_image_path));
-        } else {
-            // Handle error: image file not found
-            echo json_encode(['error' => 'Image file not found at: ' . $uploaded_image_path]);
-            exit;
-        }
-        // --- END OF REPLACE SECTION ---
+// --- REPLACE THIS SECTION WITH HOW CODINGTER 3.0 HANDLES URL INPUT ---
+// Example: If the URL is passed as a query parameter or similar
+$image_url = 'https://api.wassi.chat/v1/chat/66faf180345d460e9984e4ac/files/6864ef25d62c68fa8bb725ed/download?token=531fe5caf0e132bdb6000bf01ed66d8cfb75b53606cc8f6eed32509d99d74752f47f288db155557e'; // REPLACE with the actual image URL input
+// You might get this from a specific Codingter input method.
+// For instance, if it's a command-line argument or a specific UI input field.
+// --- END OF REPLACE SECTION ---
 
+if (empty($image_url)) {
+    header('Content-Type: application/json');
+    echo json_encode(['error' => 'Image URL not provided.']);
+    exit;
+}
 
-        // --- OCR using Google Cloud Vision API (via cURL) ---
-        // You will need a Google Cloud Project with the Vision API enabled
-        // and an API Key. Replace 'YOUR_GOOGLE_CLOUD_API_KEY' with your actual key.
-        // This key should be kept secure.
+// --- Fetch Image Content from URL ---
+$ch_fetch = curl_init($image_url);
+curl_setopt($ch_fetch, CURLOPT_RETURNTRANSFER, true); // Return the transfer as a string
+curl_setopt($ch_fetch, CURLOPT_FOLLOWLOCATION, true); // Follow redirects
+curl_setopt($ch_fetch, CURLOPT_FAILONERROR, true); // Fail on HTTP errors (4xx, 5xx)
+curl_setopt($ch_fetch, CURLOPT_TIMEOUT, 10); // Timeout after 10 seconds
 
-        $google_cloud_api_key = $mykey;
-        $api_endpoint = 'https://vision.googleapis.com/v1/images:annotate?key=' . $google_cloud_api_key;
+$image_content = curl_exec($ch_fetch);
+$http_status = curl_getinfo($ch_fetch, CURLINFO_HTTP_CODE);
+$curl_error = curl_error($ch_fetch);
+curl_close($ch_fetch);
 
-        $request_body = json_encode([
-            'requests' => [
+if ($image_content === false || $http_status >= 400) {
+    header('Content-Type: application/json');
+    echo json_encode([
+        'error' => 'Failed to fetch image from URL.',
+        'url' => $image_url,
+        'http_status' => $http_status,
+        'curl_error' => $curl_error
+    ]);
+    exit;
+}
+
+// Base64 encode the image content for the Vision API
+$image_data_base64 = base64_encode($image_content);
+
+// --- OCR using Google Cloud Vision API (via cURL) ---
+// You will need a Google Cloud Project with the Vision API enabled
+// and an API Key. Replace 'YOUR_GOOGLE_CLOUD_API_KEY' with your actual key.
+// This key should be kept secure.
+
+$google_cloud_api_key = 'YOUR_GOOGLE_CLOUD_API_KEY'; // <<< REMEMBER TO REPLACE THIS
+$api_endpoint = 'https://vision.googleapis.com/v1/images:annotate?key=' . $google_cloud_api_key;
+
+$request_body = json_encode([
+    'requests' => [
+        [
+            'image' => [
+                'content' => $image_data_base64 // Base64 encoded image data
+            ],
+            'features' => [
                 [
-                    'image' => [
-                        'content' => $image_data_base64 // Base64 encoded image data
-                    ],
-                    'features' => [
-                        [
-                            'type' => 'TEXT_DETECTION'
-                        ]
-                    ]
+                    'type' => 'TEXT_DETECTION'
                 ]
             ]
-        ]);
+        ]
+    ]
+]);
 
-        $ch = curl_init($api_endpoint);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $request_body);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            'Content-Type: application/json',
-            'Content-Length: ' . strlen($request_body)
-        ]);
+$ch_ocr = curl_init($api_endpoint);
+curl_setopt($ch_ocr, CURLOPT_CUSTOMREQUEST, "POST");
+curl_setopt($ch_ocr, CURLOPT_POSTFIELDS, $request_body);
+curl_setopt($ch_ocr, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch_ocr, CURLOPT_HTTPHEADER, [
+    'Content-Type: application/json',
+    'Content-Length: ' . strlen($request_body)
+]);
 
-        $response = curl_exec($ch);
-        $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
+$response = curl_exec($ch_ocr);
+$http_code = curl_getinfo($ch_ocr, CURLINFO_HTTP_CODE);
+curl_close($ch_ocr);
 
-        $text_from_image = null;
-        if ($http_code === 200) {
-            $api_response = json_decode($response, true);
-            if (isset($api_response['responses'][0]['fullTextAnnotation']['text'])) {
-                $text_from_image = $api_response['responses'][0]['fullTextAnnotation']['text'];
-            } elseif (isset($api_response['responses'][0]['textAnnotations'][0]['description'])) {
-                // Sometimes fullTextAnnotation might not be present, but textAnnotations[0] holds the overall text
-                $text_from_image = $api_response['responses'][0]['textAnnotations'][0]['description'];
-            }
-        } else {
-            // Handle API error
-            header('Content-Type: application/json');
-            echo json_encode([
-                'error' => 'OCR API request failed',
-                'http_code' => $http_code,
-                'api_response' => json_decode($response, true)
-            ]);
-            exit;
-        }
+$text_from_image = null;
+if ($http_code === 200) {
+    $api_response = json_decode($response, true);
+    if (isset($api_response['responses'][0]['fullTextAnnotation']['text'])) {
+        $text_from_image = $api_response['responses'][0]['fullTextAnnotation']['text'];
+    } elseif (isset($api_response['responses'][0]['textAnnotations'][0]['description'])) {
+        // Sometimes fullTextAnnotation might not be present, but textAnnotations[0] holds the overall text
+        $text_from_image = $api_response['responses'][0]['textAnnotations'][0]['description'];
+    }
+} else {
+    // Handle API error
+    header('Content-Type: application/json');
+    echo json_encode([
+        'error' => 'OCR API request failed',
+        'http_code' => $http_code,
+        'api_response' => json_decode($response, true)
+    ]);
+    exit;
+}
 
-        if ($text_from_image === null) {
-            header('Content-Type: application/json');
-            echo json_encode(['error' => 'No text detected in the image or failed to parse OCR response.']);
-            exit;
-        }
+if ($text_from_image === null) {
+    header('Content-Type: application/json');
+    echo json_encode(['error' => 'No text detected in the image or failed to parse OCR response.']);
+    exit;
+}
 
-        // --- Text Extraction Logic (Same as before) ---
-        function extract_info_from_text($text_input) {
-            $transaction_id = null;
-            $amount = null;
-            $date = null;
-            $ifsc_code = null;
-            $account_number = null;
+// --- Text Extraction Logic (Same as before) ---
+function extract_info_from_text($text_input) {
+    $transaction_id = null;
+    $amount = null;
+    $date = null;
+    $ifsc_code = null;
+    $account_number = null;
 
-            // Example for transaction_id
-            if (preg_match('/Transaction ID\s+(T\d{17})/', $text_input, $matches)) {
-                $transaction_id = $matches[1];
-            }
+    // Example for transaction_id
+    if (preg_match('/Transaction ID\s+(T\d{17})/', $text_input, $matches)) {
+        $transaction_id = $matches[1];
+    }
 
-            // Example for amount (looking for "₹" followed by numbers with commas/dots)
-            if (preg_match('/₹(\d{1,3}(?:,\d{3})*(?:\.\d+)?)/', $text_input, $matches)) {
-                $amount = $matches[1];
-            } elseif (preg_match('/INR\s*([\d,.]+)/', $text_input, $matches)) { // Alternative for INR
-                $amount = $matches[1];
-            }
+    // Example for amount (looking for "₹" followed by numbers with commas/dots)
+    if (preg_match('/₹(\d{1,3}(?:,\d{3})*(?:\.\d+)?)/', $text_input, $matches)) {
+        $amount = $matches[1];
+    } elseif (preg_match('/INR\s*([\d,.]+)/', $text_input, $matches)) { // Alternative for INR
+        $amount = $matches[1];
+    }
 
-            // Example for date (looking for "dd Mon YYYY")
-            if (preg_match('/\b(\d{2} (?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4})\b/', $text_input, $matches)) {
-                $date = $matches[1];
-            } elseif (preg_match('/\b(\d{2}\/\d{2}\/\d{4})\b/', $text_input, $matches)) { // dd/mm/yyyy
-                $date = $matches[1];
-            } elseif (preg_match('/\b(\d{2}-\d{2}-\d{4})\b/', $text_input, $matches)) { // dd-mm-yyyy
-                $date = $matches[1];
-            }
-
-
-            // Example for account_number (looking for "XXXXXXXXXX1710" or similar masked numbers)
-            // Prioritize patterns like XXXXXXXX1710 or explicit "A/c No.:"
-            if (preg_match('/(X{8,10}\d{4})/', $text_input, $matches)) {
-                $account_number = $matches[1];
-            } elseif (preg_match('/Account No\.\s*:\s*(\d+)/i', $text_input, $matches)) { // Case-insensitive "Account No.:"
-                $account_number = $matches[1];
-            } elseif (preg_match('/A\/c No\.\s*:\s*(\d+)/i', $text_input, $matches)) { // Case-insensitive "A/c No.:"
-                $account_number = $matches[1];
-            }
+    // Example for date (looking for "dd MonYYYY" or "dd/mm/yyyy")
+    if (preg_match('/\b(\d{2} (?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4})\b/', $text_input, $matches)) {
+        $date = $matches[1];
+    } elseif (preg_match('/\b(\d{2}\/\d{2}\/\d{4})\b/', $text_input, $matches)) { // dd/mm/yyyy
+        $date = $matches[1];
+    } elseif (preg_match('/\b(\d{2}-\d{2}-\d{4})\b/', $text_input, $matches)) { // dd-mm-yyyy
+        $date = $matches[1];
+    }
 
 
-            // IFSC Code is often 11 characters, alphanumeric, first 4 are alphabetic.
-            // Example regex for IFSC: [A-Z]{4}0[A-Z0-9]{6}
-            // As it's not in your image, it will likely remain null.
-            // If it were present, you might add:
-            // if (preg_match('/[A-Z]{4}0[A-Z0-9]{6}/', $text_input, $matches)) {
-            //     $ifsc_code = $matches[0];
-            // }
+    // Example for account_number (looking for "XXXXXXXXXX1710" or similar masked numbers)
+    // Prioritize patterns like XXXXXXXX1710 or explicit "A/c No.:"
+    if (preg_match('/(X{8,10}\d{4})/', $text_input, $matches)) {
+        $account_number = $matches[1];
+    } elseif (preg_match('/Account No\.\s*:\s*(\d+)/i', $text_input, $matches)) { // Case-insensitive "Account No.:"
+        $account_number = $matches[1];
+    } elseif (preg_match('/A\/c No\.\s*:\s*(\d+)/i', $text_input, $matches)) { // Case-insensitive "A/c No.:"
+        $account_number = $matches[1];
+    }
 
-            $result = [
-                "transaction_id" => $transaction_id,
-                "amount" => $amount,
-                "date" => $date,
-                "ifsc_code" => $ifsc_code,
-                "account_number" => $account_number
-            ];
+    $result = [
+        "transaction_id" => $transaction_id,
+        "amount" => $amount,
+        "date" => $date,
+        "ifsc_code" => $ifsc_code,
+        "account_number" => $account_number
+    ];
 
-            return json_encode($result, JSON_PRETTY_PRINT);
-        }
+    return json_encode($result, JSON_PRETTY_PRINT);
+}
 
-        // Execute the extraction
-        $json_output = extract_info_from_text($text_from_image);
+// Execute the extraction
+$json_output = extract_info_from_text($text_from_image);
 
-        header('Content-Type: application/json');
-        echo $json_output;
+header('Content-Type: application/json');
+echo $json_output;
     }
 }
