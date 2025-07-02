@@ -101,7 +101,7 @@ $image_data_base64 = base64_encode($image_content);
 // and an API Key. Replace 'YOUR_GOOGLE_CLOUD_API_KEY' with your actual key.
 // This key should be kept secure.
 
-$google_cloud_api_key = 'YOUR_GOOGLE_CLOUD_API_KEY'; // <<< REMEMBER TO REPLACE THIS
+$google_cloud_api_key = $mykey; // <<< REMEMBER TO REPLACE THIS
 $api_endpoint = 'https://vision.googleapis.com/v1/images:annotate?key=' . $google_cloud_api_key;
 
 $request_body = json_encode([
