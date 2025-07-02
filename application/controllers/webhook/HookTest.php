@@ -22,12 +22,14 @@ class HookTest extends CI_Controller
         // Step 4: Extract required fields
         $id   = isset($data['id']) ? $data['id'] : '';
         $to   = isset($data['to']) ? $data['to'] : '';
+        $from = isset($data['from']) ? $data['from'] : '';
         $body = isset($data['body']) ? $data['body'] : '';
 
         // Step 5: Prepare data for insert
         $save_data = [
             'message_id' => $id,
             'receiver_to' => $to,
+            'receiver_from' => $from,
             'message_body' => $body
         ];
 
