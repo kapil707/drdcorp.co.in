@@ -14,8 +14,12 @@ class HookTest extends CI_Controller
         // Step 2: Try decoding JSON if expected
         $data = json_decode($raw_input, true);
 
-        // Step 3: Log the input (for debugging)
-        file_put_contents(APPPATH . 'logs/webhook_log_' . date('Ymd_His') . '.txt', print_r($data, true));
+        if (isset($data['data'])) {
+			foreach ($data['data'] as $message) {
+                // Step 3: Log the input (for debugging)
+                file_put_contents(APPPATH . 'logs/new_webhook_log_' . date('Ymd_His') . '.txt', print_r($message, true));
+            }
+        }
 
         // Step 4: Process the data (optional)
         // You can access values like: $data['order_id'], etc.
