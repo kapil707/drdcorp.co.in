@@ -39,7 +39,7 @@ class HookTest extends CI_Controller
         ];
 
         // Step 6: Save to database
-        if ($id && $to && $body) {
+        if ($id && $to) {
             $this->BankWebhookModel->insert_message($save_data);
         }
         
