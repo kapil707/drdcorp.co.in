@@ -139,7 +139,7 @@
 							</td>
 							<td>
 								<?php if(empty($row->essysol_id2)){ ?>
-								<label><input type="checkbox" name="checkbox[]" value="<?php echo $row->customer_reference; ?>">Checkbox</label>
+									<label><input type="checkbox" name="checkbox[]" value="<?php echo $row->customer_reference; ?>">Checkbox</label>
 								<?php } else {?>
 								 	<input type="hidden" name="upi_no" value="<?php echo $row->customer_reference; ?>">
 									<input type="submit" name="checkbox-delete" value="Delete" class="btn btn-danger">
