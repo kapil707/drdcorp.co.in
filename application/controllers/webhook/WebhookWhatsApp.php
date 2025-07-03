@@ -28,6 +28,7 @@ class WebhookWhatsApp extends CI_Controller
         $media_id = isset($data['media']['id']) ? $data['media']['id'] : null;
         $quoted_wid = isset($data['quoted']['wid']) ? $data['quoted']['wid'] : null;
 
+        $date = date('Y-m-d');
         // Step 5: Prepare data for insert
         $save_data = [
             'message_id' => $id,
@@ -36,6 +37,7 @@ class WebhookWhatsApp extends CI_Controller
             'message_body' => $body,
             'media_id' => $media_id,
             'reply_id' => $quoted_wid,
+            'date'=>$date,
         ];
 
         // Step 6: Save to database
