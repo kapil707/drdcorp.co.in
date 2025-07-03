@@ -145,7 +145,7 @@
 										echo "Essysol Id : ".$row->essysol_id;
 									} else { ?>
 								 	<input type="hidden" name="essysol_id2" value="<?php echo $row->essysol_id2 ?>">
-									<input type="submit" name="checkbox-delete" value="Delete" class="btn btn-danger">
+									<input type="submit" name="checkbox-delete" value="Delete" class="btn btn-danger" onclick="if (confirm('Delete this entry!')) return true; else return false;">
 								<?php } }?>
 							</td>
 						</tr>
