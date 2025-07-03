@@ -103,6 +103,7 @@ class HookTest extends CI_Controller
 
             $text = str_replace("Here's a transcription of the visible text in the image:", '', $text);
 
+            $transaction_id = "";
             $upi_no = "";
 			$amount = "0.0";
 			//********amount********** */
@@ -180,6 +181,49 @@ class HookTest extends CI_Controller
 				}
 			}
 
+            /************************************************** */
+            if(empty($transaction_id)){
+                preg_match('/UPI transaction ID:\s*(\d+)/', $text, $matches);
+                if (!empty($matches[1])) {
+                    $transaction_id = $matches[1];
+                }
+            }
+
+            if(empty($transaction_id)){
+                preg_match('/Transaction ID:\s*([\w\d]+)/', $text, $matches);
+                if (!empty($matches[1])) {
+                    $transaction_id = $matches[1];
+                }
+            }
+
+            if(empty($transaction_id)){
+                preg_match('/\*\*Transaction ID:\*\*\s*(\d+)/', $text, $matches);
+                if (!empty($matches[1])) {
+                    $transaction_id = $matches[1];
+                }
+            }
+
+            if(empty($transaction_id)){
+                preg_match('/Transaction ID\**\s*T?([A-Z0-9]{22,})/i', $text, $matches);
+                if (!empty($matches[1])) {
+                    $transaction_id = $matches[1];
+                }
+            }
+
+            if(empty($transaction_id)){
+                preg_match('/Transaction ID\s*\n*([\w\d]+)/', $text, $matches);
+                if (!empty($matches[1])) {
+                    $transaction_id = $matches[1];
+                }
+            }
+
+            if(empty($transaction_id)){
+                preg_match('/\*\*Transaction ID\*\*\s*(\S+)/', $text, $matches);
+                if (!empty($matches[1])) {
+                    $transaction_id = $matches[1];
+                }
+            }
+
 			$type = 0;
 			/************************************************** */
 			// Regular Expression to extract UTR No.
@@ -199,21 +243,12 @@ class HookTest extends CI_Controller
 					//echo "UTR Number: " . $matches[1];
 				}
 			}
-            $transaction_id = "";
+           
 			if(empty($upi_no)){
 				preg_match('/UPI transaction ID:\s*(\d+)/', $text, $matches);
 				if (!empty($matches[1])) {
-					$transaction_id = $upi_no = $matches[1];
+					$upi_no = $matches[1];
 					$type = 3;
-					//echo "UTR Number: " . $matches[1];
-				}
-			}
-
-			if(empty($upi_no)){
-				preg_match('/Transaction ID:\s*([\w\d]+)/', $text, $matches);
-				if (!empty($matches[1])) {
-					$transaction_id = $upi_no = $matches[1];
-					$type = 4;
 					//echo "UTR Number: " . $matches[1];
 				}
 			}
@@ -296,36 +331,6 @@ class HookTest extends CI_Controller
 
 			if(empty($upi_no)){
 				// Regex se Transaction ID extract karna
-				preg_match('/\*\*Transaction ID:\*\*\s*(\d+)/', $text, $matches);
-				if (!empty($matches[1])) {
-					$transaction_id = $upi_no = $matches[1];
-					$type = 13;
-					//echo "UTR Number: " . $upi_no;
-				} 
-			}
-
-            if(empty($upi_no)){
-				// Regex se Transaction ID extract karna
-				preg_match('/Transaction ID\**\s*T?([A-Z0-9]{22,})/i', $text, $matches);
-				if (!empty($matches[1])) {
-					$transaction_id = $upi_no = $matches[1];
-					$type = 13;
-					//echo "UTR Number: " . $upi_no;
-				} 
-			}            
-
-			if(empty($upi_no)){
-				// Regex se Transaction ID extract karna
-				preg_match('/Transaction ID\s*\n*([\w\d]+)/', $text, $matches);
-				if (!empty($matches[1])) {
-					$transaction_id = $upi_no = $matches[1];
-					$type = 14;
-					//echo "UTR Number: " . $upi_no;
-				} 
-			}
-
-			if(empty($upi_no)){
-				// Regex se Transaction ID extract karna
 				preg_match('/\*\*Reference Number:\*\*\s*([\w\d]+)/', $text, $matches);
 				if (!empty($matches[1])) {
 					$upi_no = $matches[1];
@@ -360,16 +365,6 @@ class HookTest extends CI_Controller
 				if (!empty($matches[1])) {
 					$upi_no = $matches[1];
 					$type = 18;
-					//echo "UTR Number: " . $upi_no;
-				} 
-			}
-
-			if(empty($upi_no)){
-				// Regex se Transaction ID extract karna
-				preg_match('/\*\*Transaction ID\*\*\s*(\S+)/', $text, $matches);
-				if (!empty($matches[1])) {
-					$transaction_id = $upi_no = $matches[1];
-					$type = 19;
 					//echo "UTR Number: " . $upi_no;
 				} 
 			}
