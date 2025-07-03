@@ -193,7 +193,7 @@
 								<td><?php echo $gemini_text; ?></td>
 								<td>
 									<?php if(!empty($media_id)) { ?>
-									<b data-toggle="modal" data-target="#myModal" onclick="get_full_image('https://api.wassi.chat<?php echo $media_id; ?>?token=531fe5caf0e132bdb6000bf01ed66d8cfb75b53606cc8f6eed32509d99d74752f47f288db155557e')">	<img src="https://api.wassi.chat<?php echo $media_id; ?>?token=531fe5caf0e132bdb6000bf01ed66d8cfb75b53606cc8f6eed32509d99d74752f47f288db155557e" width="100px">
+									<b data-toggle="modal" data-target="#myModal" onclick="get_full_image('https://api.wassi.chat/v1/chat/66faf180345d460e9984e4ac/files/<?php echo $media_id; ?>/download?token=531fe5caf0e132bdb6000bf01ed66d8cfb75b53606cc8f6eed32509d99d74752f47f288db155557e')">	<img src="https://api.wassi.chat/v1/chat/66faf180345d460e9984e4ac/files/<?php echo $media_id; ?>/download?token=531fe5caf0e132bdb6000bf01ed66d8cfb75b53606cc8f6eed32509d99d74752f47f288db155557e" width="100px">
 									</b>
 									<?php } ?>
 									<br>
