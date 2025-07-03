@@ -95,13 +95,13 @@ class HookTest extends CI_Controller
             $data = json_decode($response, true);
 
             if (isset($data['candidates'][0]['content']['parts'][0]['text'])) {
-                echo $text = $data['candidates'][0]['content']['parts'][0]['text'];
+                $text = $data['candidates'][0]['content']['parts'][0]['text'];
             } else {
-                echo $text = "Error or no text found:";
-                print_r($data);
+                $text = "Error or no text found:";
             }
 
             $text = str_replace("Here's a transcription of the visible text in the image:", '', $text);
+            print_r($text);
 
             $transaction_id = "";
             $upi_no = "";
