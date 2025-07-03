@@ -144,7 +144,7 @@
 									if(!empty($row->essysol_id)){
 										echo "Essysol Id : ".$row->essysol_id;
 									} else { ?>
-								 	<input type="text" name="essysol_id2" value="<?php echo $row->essysol_id2 ?>">
+								 	<input type="hidden" name="essysol_id2" value="<?php echo $row->essysol_id2 ?>">
 									<input type="submit" name="checkbox-delete" value="Delete" class="btn btn-danger">
 								<?php } }?>
 							</td>
