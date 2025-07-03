@@ -138,13 +138,14 @@
 								?>
 							</td>
 							<td>
-								<?php if(!empty($row->chemist_id) && $row->final_status==4){ ?>
+								<?php if(empty($row->essysol_id2)){ ?>
 								<label><input type="checkbox" name="checkbox[]" value="<?php echo $row->customer_reference; ?>">Checkbox</label>
+								<?php } else {?>
+								 	<input type="hidden" name="upi_no" value="<?php echo $row->customer_reference; ?>">
+									<input type="submit" name="checkbox-delete" value="Delete" class="btn btn-danger">
 								<?php } ?>
 								<?php if(!empty($row->essysol_id)){ ?>
 									<?php echo $row->essysol_id; ?>
-									<input type="hidden" name="upi_no" value="<?php echo $row->customer_reference; ?>">
-									<input type="submit" name="checkbox-delete" value="Delete" class="btn btn-danger">
 								<?php } ?>
 							</td>
 						</tr>
