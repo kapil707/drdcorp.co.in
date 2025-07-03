@@ -138,7 +138,7 @@
 				<tbody>
 					<?php
 						foreach ($result as $message) {
-							$body = $message->body ? $message->body : "Body not found";
+							$message_body = $message->message_body ? $message->message_body : "Body not found";
 
 							$reply_body = $message->reply_body ? $message->reply_body : "";
 							if($reply_body)
@@ -147,10 +147,6 @@
 							}
 
 							$date = $message->date ? $message->date : "Date not found";
-
-							$extracted_text = $message->extracted_text ? $message->extracted_text : "extracted_text not found";
-							
-							$vision_text = $message->vision_text ? $message->vision_text : "vision_text not found";
 
 							$from_number = $message->from_number ? $message->from_number : "Date not found";
 							
@@ -191,8 +187,8 @@
 									<?php echo $from_number; ?>
 								</td>
 								<td>
-									<?php echo $body; ?><br>
-									<b><?php echo $reply_body ;?></b>
+									<?php echo $message_body; ?><br>
+									<b><?php echo $reply_body;?></b>
 								</td>
 								<td><?php echo $gemini_text; ?></td>
 								<td>
