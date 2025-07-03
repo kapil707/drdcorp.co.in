@@ -174,7 +174,7 @@
 								$chemist_id = $message->set_chemist;
 							}
 
-							$gemini_text = str_replace("\n", "<br>", $row->gemini_text);
+							$gemini_text = str_replace("\n", "<br>", $rowmessage->gemini_text);
 							?>
 							<tr>
 								<td>
