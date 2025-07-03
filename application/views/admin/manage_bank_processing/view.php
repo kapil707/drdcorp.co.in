@@ -239,6 +239,8 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 				<?php
 				$i= 1;
 				foreach ($result as $entry) {
+					$row_final_status 	= $entry->final_status;
+
 					$tr_style = "";
 					/********************************************** */
 					$row_id = $entry->id;
@@ -421,7 +423,7 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 										<?= ($row_from_text); ?>
 
 										<?php 
-										if($row_process_status!=0){ ?>
+										if($row_process_status!=0 && $row_final_status!=5){ ?>
 											<br>
 											<?php if(empty($textbox_final_chemist) && empty($row_from_text_find_chemist)){ ?>
 											<b class="text_find_match blink_me_white edit_from_text_chemist_id_<?= ($row_id); ?>" onclick="edit_from_text_chemist_id('<?= ($row_id); ?>')">Add Chemist <i class="fa fa-pencil" aria-hidden="true"></i></b>
@@ -440,7 +442,7 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 											<b class="text_find_match_not cancel_from_text_chemist_id_<?= ($row_id); ?>" onclick="cancel_from_text_chemist_id('<?= ($row_id); ?>')" style="display:none">
 												Cancel <i class="fa fa-times" aria-hidden="true"></i>
 											</b>
-										<?php } ?>
+										<?php } }?>
 									</div>
 									<div class="td_div">
 										<b>Find  : </b> 
