@@ -1,11 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class HookTest extends CI_Controller
+class WebhookWhatsApp extends CI_Controller
 {
 	public function __construct(){
 		parent::__construct();
         //Load model
-        $this->load->model("model-bank/BankModel");
         $this->load->model('model-bank/BankWebhookModel');
 	}
 
