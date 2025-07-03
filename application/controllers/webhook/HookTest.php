@@ -231,6 +231,13 @@ class HookTest extends CI_Controller
                 }
             }
 
+            if(empty($transaction_id)){
+                preg_match('/Txn ID\**\s*([A-Z0-9]+(?:\s*[a-z0-9]+)?)/i', $text, $matches);
+                if (!empty($matches[1])) {
+                    $transaction_id = $matches[1];
+                }
+            }
+
 			$type = 0;
 			/************************************************** */
 			// Regular Expression to extract UTR No.
