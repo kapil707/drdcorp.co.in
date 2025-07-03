@@ -138,7 +138,8 @@
 								?>
 							</td>
 							<td>
-								<?php if(empty($row->essysol_id2)){ ?>
+								<label><input type="checkbox" name="checkbox[]" value="<?php echo $row->customer_reference; ?>">Checkbox</label>
+								<!-- <?php if(empty($row->essysol_id2)){ ?>
 									<label><input type="checkbox" name="checkbox[]" value="<?php echo $row->customer_reference; ?>">Checkbox</label>
 								<?php } else {
 									if(!empty($row->essysol_id)){
@@ -146,7 +147,7 @@
 									} else { ?>
 								 	<input type="hidden" name="essysol_id2" value="<?php echo $row->essysol_id2 ?>">
 									<input type="submit" name="checkbox-delete" value="Delete" class="btn btn-danger" onclick="if (confirm('Delete this entry!')) return true; else return false;">
-								<?php } }?>
+								<?php } }?> -->
 							</td>
 						</tr>
 						<?php } ?>
