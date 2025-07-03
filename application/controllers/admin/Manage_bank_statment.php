@@ -487,12 +487,12 @@ class Manage_bank_statment extends CI_Controller {
 		}
 		
 		if(isset($_POST["checkbox-delete"])){
-			echo $essysol_id2 = $_POST['essysol_id2'];
-			die();
+			$essysol_id2 = $_POST['essysol_id2'];
 			$query = $this->BankModel->select_query("select bank_processing_id from tbl_bank_essysol where id='$essysol_id2'");
 			$row = $query->row();
 			if(!empty($row->bank_processing_id)){
-
+				echo $row->bank_processing_id;
+				die();
 				$where = array('id' => $row->bank_processing_id,);
 				$dt = array('final_status' => '4',);
 				$this->BankModel->edit_fun("tbl_bank_processing", $dt,$where);
