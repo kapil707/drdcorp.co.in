@@ -435,9 +435,9 @@ class Manage_bank_statment extends CI_Controller {
 			// Print the IDs of selected checkbox
 			foreach ($selectedCheckboxes as $upi_no) {
 				
-				$query = $this->BankModel->select_query("select id from tbl_bank_essysol where upi_no='$upi_no'");
-				$row1 = $query->row();
-				if(empty($row1->id)){
+				// $query = $this->BankModel->select_query("select id from tbl_bank_essysol where upi_no='$upi_no'");
+				// $row1 = $query->row();
+				// if(empty($row1->id)){
 					//echo $upi_no;
 					$where = array(
 						'upi_no' => $upi_no,
@@ -488,7 +488,7 @@ class Manage_bank_statment extends CI_Controller {
 						$this->BankModel->insert_fun("tbl_bank_essysol", $dt);
 					}
 				}
-			}
+			//}
 		}
 		
 		if(isset($_POST["checkbox-delete"])){
