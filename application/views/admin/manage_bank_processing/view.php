@@ -543,7 +543,7 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 											echo " || <b>Set : $entry->whatsapp_set_chemist </b>";
 										} ?>
 									</div>
-									<div class="td_div1">
+									<div class="td_div1">xxx
 										<span class="span_final_chemist_id_<?= ($row_id); ?>">
 
 											<?php if(empty($textbox_final_chemist) && empty($row_from_text_find_chemist)){
