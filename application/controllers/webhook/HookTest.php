@@ -364,6 +364,16 @@ class HookTest extends CI_Controller
 				} 
 			}
 
+            if(empty($upi_no)){
+				// Regex se Transaction ID extract karna
+				preg_match('/UPI Reference Number[:\s]+([\d\s]+)/i', $text, $matches);
+				if (!empty($matches[1])) {
+					$upi_no = $matches[1];
+					$type = 20;
+					//echo "UTR Number: " . $upi_no;
+				} 
+			}
+
 			$amount = str_replace([",", ".00"], "", $amount);
 			$amount = trim($amount);
 
