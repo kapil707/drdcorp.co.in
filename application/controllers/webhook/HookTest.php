@@ -55,7 +55,7 @@ class HookTest extends CI_Controller
 
         $apiKey = $this->Scheme_Model->get_website_data("gemini_apikey");
 
-        $query = $this->BankModel->select_query("SELECT * FROM `webhook_messages` where media_id!='' and status=0 limit 10");
+        $query = $this->BankModel->select_query("SELECT * FROM `webhook_messages` where media_id!='' and status=0 limit 1");
 	    $result = $query->result();
         foreach($result as $row) {
 
