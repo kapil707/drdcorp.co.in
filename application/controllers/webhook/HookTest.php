@@ -54,7 +54,7 @@ class HookTest extends CI_Controller
     public function test(){
 
         $apiKey = $this->Scheme_Model->get_website_data("gemini_apikey");
-        
+
         $query = $this->BankModel->select_query("SELECT * FROM `webhook_messages` where media_id!='' and status=0 limit 1");
 	    $row = $query->row();
         if(!empty($row->id)){
@@ -101,6 +101,7 @@ class HookTest extends CI_Controller
                 print_r($data);
             }
 
+            $text = preg_replace('/^Here\'?s a transcription of the visible text in the image:\s*/i', '', $text);
             $where = array('id'=>$row->id);
             $dt = array('status'=>'1','gemini_text'=>$text);
             $this->BankWebhookModel->update_message($dt,$where);
