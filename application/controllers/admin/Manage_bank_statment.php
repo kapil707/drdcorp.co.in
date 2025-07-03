@@ -491,13 +491,13 @@ class Manage_bank_statment extends CI_Controller {
 			$query = $this->BankModel->select_query("select bank_processing_id from tbl_bank_essysol where id='$essysol_id2' and status=0");
 			$row = $query->row();
 			if(!empty($row->bank_processing_id)){
-				
-				$where = array('id' => $row->bank_processing_id,);
-				$dt = array('final_status' => '4',);
-				$this->BankModel->edit_fun("tbl_bank_processing", $dt,$where);
 
 				$where2 = array('id' => $essysol_id2,);
 				$this->BankModel->delete_fun("tbl_bank_essysol",$where2);
+
+				$where = array('id' => $row->bank_processing_id,);
+				$dt = array('final_status' => '4',);
+				$this->BankModel->edit_fun("tbl_bank_processing", $dt,$where);				
 			}
 		}
 
