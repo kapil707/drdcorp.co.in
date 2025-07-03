@@ -51,105 +51,89 @@
             </button>
         </a>
 	</div>
-	<form method="post">
-		<div class="col-sm-6">&nbsp;</div>
-		<div class="col-xs-2">
-			<input type="submit" name="checkbox-submit" value="Submit Checkbox" class="btn btn-info">
-		</div>
-		<div class="col-xs-12">
-			<div class="table-responsive">
-				<table class="table table-striped table-bordered table-hover dataTables-example21">
-					<thead>
-						<tr>
-							<th>Account Number</th>
-							<th>Branch Number</th>
-							<th>Statement Date</th>
-							<th>Closing Ledger Balance</th>
-							<th>Calculated Balances</th>
-							<th>Amount</th>
-							<th>Entry Date</th>
-							<th>Value Date</th>
-							<th>Bank Reference</th>
-							<th>Customer Reference</th>
-							<th>Narrative</th>
-							<th>Transaction Description</th>
-							<th>Chemist</th>
-							<th>Invoice</th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-					<?php				
-					foreach ($result as $row) { ?>
-						<tr class="tr_css_<?php echo $row->id; ?>">
-							<td>
-								<?php echo $row->account_no; ?>
-							</td>
-							<td>
-								<?php echo $row->branch_no; ?>
-							</td>
-							<td>
-								<?php echo $row->statment_date; ?>
-							</td>
-							<td>
-								<?php echo $row->closing_ledger_balance; ?>
-							</td>
-							<td>
-								<?php echo $row->calculated_balances; ?>
-							</td>
-							<td>
-								<?php echo $row->amount; ?>
-							</td>
-							<td>
-								<?php echo $row->enter_date; ?>
-							</td>
-							<td>
-								<?php echo date('m/d/Y', strtotime($row->date)); ?>
-							</td>
-							<td>
-								<?php echo $row->bank_reference; ?>
-							</td>
-							<td>
-								<?php echo $row->customer_reference; ?>
-							</td>
-							<td>
-								<?php echo $row->narrative; ?>
-							</td>
-							<td>
-								<?php echo $row->transaction_description; ?>
-							</td>
-							<td>
-								<?php echo $row->chemist_id; ?>
-							</td>
-							<td>
-								<?php 
-								$gstvNo = "";
-								$invoice = $row->invoice_number; 
-								if(!empty($invoice)){
-									$parts = explode("||", $invoice);
-									foreach($parts as $invoice) {
-										preg_match('/GstvNo:([\w-]+)/', $invoice, $matches);
-										$gstvNo.= $matches[1].',';
-									}
-									$gstvNo = substr($gstvNo, 0, -2);
+	<div class="col-xs-12">
+		<div class="table-responsive">
+			<table class="table table-striped table-bordered table-hover dataTables-example21">
+				<thead>
+					<tr>
+						<th>Account Number</th>
+						<th>Branch Number</th>
+						<th>Statement Date</th>
+						<th>Closing Ledger Balance</th>
+						<th>Calculated Balances</th>
+						<th>Amount</th>
+						<th>Entry Date</th>
+						<th>Value Date</th>
+						<th>Bank Reference</th>
+						<th>Customer Reference</th>
+						<th>Narrative</th>
+						<th>Transaction Description</th>
+						<th>Chemist</th>
+						<th>Invoice</th>
+					</tr>
+				</thead>
+				<tbody>
+				<?php				
+				foreach ($result as $row) { ?>
+					<tr class="tr_css_<?php echo $row->id; ?>">
+						<td>
+							<?php echo $row->account_no; ?>
+						</td>
+						<td>
+							<?php echo $row->branch_no; ?>
+						</td>
+						<td>
+							<?php echo $row->statment_date; ?>
+						</td>
+						<td>
+							<?php echo $row->closing_ledger_balance; ?>
+						</td>
+						<td>
+							<?php echo $row->calculated_balances; ?>
+						</td>
+						<td>
+							<?php echo $row->amount; ?>
+						</td>
+						<td>
+							<?php echo $row->enter_date; ?>
+						</td>
+						<td>
+							<?php echo date('m/d/Y', strtotime($row->date)); ?>
+						</td>
+						<td>
+							<?php echo $row->bank_reference; ?>
+						</td>
+						<td>
+							<?php echo $row->customer_reference; ?>
+						</td>
+						<td>
+							<?php echo $row->narrative; ?>
+						</td>
+						<td>
+							<?php echo $row->transaction_description; ?>
+						</td>
+						<td>
+							<?php echo $row->chemist_id; ?>
+						</td>
+						<td>
+							<?php 
+							$gstvNo = "";
+							$invoice = $row->invoice_number; 
+							if(!empty($invoice)){
+								$parts = explode("||", $invoice);
+								foreach($parts as $invoice) {
+									preg_match('/GstvNo:([\w-]+)/', $invoice, $matches);
+									$gstvNo.= $matches[1].',';
 								}
-								echo $gstvNo;
-								?>
-							</td>
-							<td>
-								<?php /*if($row->done_status==1 && $row->checkbox_done_status==0 && $row->download_easysol==0){ ?>
-								<label><input type="checkbox" name="checkbox[]" value="<?php echo $row->customer_reference; ?>">Checkbox</label>
-								<?php } ?>
-								<?php if($row->done_status==1 && $row->checkbox_done_status==1 && $row->download_easysol==0){ ?>
-									<input type="hidden" name="upi_no" value="<?php echo $row->customer_reference; ?>">
-									<input type="submit" name="checkbox-delete" value="Delete" class="btn btn-danger">
-								<?php } */?>
-							</td>
-						</tr>
-						<?php } ?>
-					</tbody>
-				</table>
-			</div>
+								$gstvNo = substr($gstvNo, 0, -2);
+							}
+							echo $gstvNo;
+							?>
+						</td>
+					</tr>
+					<?php } ?>
+				</tbody>
+			</table>
 		</div>
-	</form>
+	</div>
 </div>

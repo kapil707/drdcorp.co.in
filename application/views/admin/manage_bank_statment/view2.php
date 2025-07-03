@@ -51,16 +51,11 @@
             </button>
         </a>
 	</div>
-	<form method="post">
-		<div class="col-sm-6">&nbsp;</div>
-		<div class="col-xs-2">
-			<input type="submit" name="checkbox-submit" value="Submit Checkbox" class="btn btn-info">
-		</div>
-		<div class="col-xs-12">
-			<div class="table-responsive">
-            <table class="table table-striped table-bordered table-hover dataTables-example21">
-                <thead>
-                    <tr>
+	<div class="col-xs-12">
+		<div class="table-responsive">
+			<table class="table table-striped table-bordered table-hover dataTables-example21">
+				<thead>
+					<tr>
 						<th>Value Date</th>
 						<th>Account Number</th>
 						<th>Account Name</th>
@@ -77,9 +72,8 @@
 						<th>Narrative</th>
 						<th>Chemist</th>
 						<th>Invoice</th>
-						<th></th>
-                    </tr>
-                </thead>
+					</tr>
+				</thead>
 				<tbody>
 				<?php				
 				foreach ($result as $row) { ?>
@@ -144,20 +138,10 @@
 							echo $gstvNo;
 							?>
 						</td>
-						<td>
-							<?php /*if($row->done_status==1 && $row->checkbox_done_status==0 && $row->download_easysol==0){ ?>
-							<label><input type="checkbox" name="checkbox[]" value="<?php echo $row->customer_reference; ?>">Checkbox</label>
-							<?php } ?>
-							<?php if($row->done_status==1 && $row->checkbox_done_status==1 && $row->download_easysol==0){ ?>
-								<input type="hidden" name="upi_no" value="<?php echo $row->customer_reference; ?>">
-								<input type="submit" name="checkbox-delete" value="Delete" class="btn btn-danger">
-							<?php } */?>
-							</td>
-						</tr>
-						<?php } ?>
-					</tbody>
-				</table>
-			</div>
+					</tr>
+					<?php } ?>
+				</tbody>
+			</table>
 		</div>
-	</form>
+	</div>
 </div>
