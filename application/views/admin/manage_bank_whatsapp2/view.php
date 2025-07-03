@@ -158,7 +158,7 @@
 							
 							$row_id = $message->id;
 
-							$screenshot_image = $message->screenshot_image ? $message->screenshot_image : "screenshot_image not found";
+							$media_id = $message->media_id;
 
 							$timestamp = $message->timestamp ? $message->timestamp : "timestamp not found";
 							
