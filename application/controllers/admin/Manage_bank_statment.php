@@ -457,7 +457,7 @@ class Manage_bank_statment extends CI_Controller {
 						$bacno = "9972";
 						$mode = "T";
 						$chqno = "RTGS";
-						$rcptno = $upi_no;
+						$rcptno = $row->from_text_find_match;
 						$bank_reference = "";
 						$bname = "";
 						$gstvNo = "";
