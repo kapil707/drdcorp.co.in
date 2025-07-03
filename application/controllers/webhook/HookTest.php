@@ -306,7 +306,7 @@ class HookTest extends CI_Controller
 
             if(empty($upi_no)){
 				// Regex se Transaction ID extract karna
-				preg_match('Transaction ID', $text, $matches);
+				preg_match('/Transaction ID\**\s*T?([A-Z0-9]{22,})/i', $text, $matches);
 				if (!empty($matches[1])) {
 					$transaction_id = $upi_no = $matches[1];
 					$type = 13;
