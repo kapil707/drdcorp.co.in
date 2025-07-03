@@ -199,11 +199,11 @@ class HookTest extends CI_Controller
 					//echo "UTR Number: " . $matches[1];
 				}
 			}
-
+            $transaction_id = "";
 			if(empty($upi_no)){
 				preg_match('/UPI transaction ID:\s*(\d+)/', $text, $matches);
 				if (!empty($matches[1])) {
-					$upi_no = $matches[1];
+					$transaction_id = $upi_no = $matches[1];
 					$type = 3;
 					//echo "UTR Number: " . $matches[1];
 				}
@@ -212,7 +212,7 @@ class HookTest extends CI_Controller
 			if(empty($upi_no)){
 				preg_match('/Transaction ID:\s*([\w\d]+)/', $text, $matches);
 				if (!empty($matches[1])) {
-					$upi_no = $matches[1];
+					$transaction_id = $upi_no = $matches[1];
 					$type = 4;
 					//echo "UTR Number: " . $matches[1];
 				}
@@ -298,7 +298,7 @@ class HookTest extends CI_Controller
 				// Regex se Transaction ID extract karna
 				preg_match('/\*\*Transaction ID:\*\*\s*(\d+)/', $text, $matches);
 				if (!empty($matches[1])) {
-					$upi_no = $matches[1];
+					$transaction_id = $upi_no = $matches[1];
 					$type = 13;
 					//echo "UTR Number: " . $upi_no;
 				} 
@@ -308,7 +308,7 @@ class HookTest extends CI_Controller
 				// Regex se Transaction ID extract karna
 				preg_match('/Transaction ID\s*\n*([\w\d]+)/', $text, $matches);
 				if (!empty($matches[1])) {
-					$upi_no = $matches[1];
+					$transaction_id = $upi_no = $matches[1];
 					$type = 14;
 					//echo "UTR Number: " . $upi_no;
 				} 
@@ -358,7 +358,7 @@ class HookTest extends CI_Controller
 				// Regex se Transaction ID extract karna
 				preg_match('/\*\*Transaction ID\*\*\s*(\S+)/', $text, $matches);
 				if (!empty($matches[1])) {
-					$upi_no = $matches[1];
+					$transaction_id = $upi_no = $matches[1];
 					$type = 19;
 					//echo "UTR Number: " . $upi_no;
 				} 
@@ -375,12 +375,13 @@ class HookTest extends CI_Controller
 			}
 
 			$amount = str_replace([",", ".00"], "", $amount);
+
+            $transaction_id = trim($transaction_id);
+			$upi_no = trim($upi_no);
 			$amount = trim($amount);
 
-			$upi_no = trim($upi_no);
-
             $where = array('id'=>$row->id);
-            $dt = array('status'=>'1','gemini_text'=>$text,'upi_no'=>$upi_no,'amount'=>$amount);
+            $dt = array('status'=>'1','gemini_text'=>$text,'transaction_id'=>$transaction_id,'upi_no'=>$upi_no,'amount'=>$amount);
             $this->BankWebhookModel->update_message($dt,$where);
         }
     }
