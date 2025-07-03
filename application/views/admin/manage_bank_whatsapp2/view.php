@@ -122,7 +122,7 @@
 							Body
 						</th>
 						<th>
-							Vision Text
+							Gemini Text
                         </th>
 						<th>
 							Image<br>UPI No
@@ -178,8 +178,7 @@
 								$chemist_id = $message->set_chemist;
 							}
 
-							$extracted_text = str_replace("\n", "<br>", $extracted_text);
-							$vision_text = str_replace("\n", "<br>", $vision_text);
+							$gemini_text = str_replace("\n", "<br>", $row->gemini_text);
 							?>
 							<tr>
 								<td>
@@ -195,7 +194,7 @@
 									<?php echo $body; ?><br>
 									<b><?php echo $reply_body ;?></b>
 								</td>
-								<td><?php echo $vision_text; ?></td>
+								<td><?php echo $gemini_text; ?></td>
 								<td>
 									<?php if(!empty($media_id)) { ?>
 									<b data-toggle="modal" data-target="#myModal" onclick="get_full_image('https://api.wassi.chat<?php echo $media_id; ?>?token=531fe5caf0e132bdb6000bf01ed66d8cfb75b53606cc8f6eed32509d99d74752f47f288db155557e')">	<img src="https://api.wassi.chat<?php echo $media_id; ?>?token=531fe5caf0e132bdb6000bf01ed66d8cfb75b53606cc8f6eed32509d99d74752f47f288db155557e" width="100px">
