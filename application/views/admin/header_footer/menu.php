@@ -290,6 +290,8 @@
 					</li>
 					<li><a href="<?= base_url()?>admin/manage_website/add/icon">Icon</a>
 					</li>
+					<li><a href="<?= base_url()?>admin/manage_website/add/gemini_apikey">Gemini ApiKey</a>
+					</li>
 					<?php } }?>
 				</ul>
 			</li>
