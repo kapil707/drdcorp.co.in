@@ -153,21 +153,23 @@ class Manage_bank_processing extends CI_Controller {
 		$final_chemist	= $_POST["chemist_id"];
 		if(!empty($id) && !empty($final_chemist)){
 
-			$query = $this->BankModel->select_query("SELECT * FROM `tbl_bank_processing` where id='$id'");
+			$query = $this->BankModel->select_query("SELECT * FROM `tbl_bank_processing` where id='$id' and final_status!=5");
 			$row = $query->row();
-			$upi_no = $row->upi_no;
-			
-			/********************************************* */			
-			if(!empty($upi_no)){
-				$where = array(
-					'upi_no' => $upi_no,
-				);
-				$dt = array(
-					'final_chemist'=>$final_chemist,
-					'final_status'=>'4',
-					'final_user_id'=>$user_id,
-				);
-				$this->BankModel->edit_fun("tbl_bank_processing", $dt,$where);
+			if(!empty($row->upi_no)){
+				$upi_no = $row->upi_no;
+				
+				/********************************************* */			
+				if(!empty($upi_no)){
+					$where = array(
+						'upi_no' => $upi_no,
+					);
+					$dt = array(
+						'final_chemist'=>$final_chemist,
+						'final_status'=>'4',
+						'final_user_id'=>$user_id,
+					);
+					$this->BankModel->edit_fun("tbl_bank_processing", $dt,$where);
+				}
 			}
 		}
 	}
