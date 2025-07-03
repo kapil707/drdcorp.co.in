@@ -495,7 +495,7 @@ class Manage_bank_statment extends CI_Controller {
 			$this->BankModel->edit_fun("tbl_bank_processing", $dt,$where);
 		}
 
-		$query = $this->BankModel->select_query("SELECT s.*,p.final_chemist as chemist_id,p.invoice_text as invoice_number,p.id as pid,p.final_status from tbl_statment as s left JOIN tbl_bank_processing as p on p.upi_no=s.customer_reference where s.date BETWEEN '$start_date' AND '$end_date' order by s.id asc");
+		$query = $this->BankModel->select_query("SELECT be.essysol_id,be.status as essysol_status,s.*,p.final_chemist as chemist_id,p.invoice_text as invoice_number,p.id as pid,p.final_status from tbl_statment as s left JOIN tbl_bank_processing as p on p.upi_no=s.customer_reference left join tbl_bank_essysol as be on p.upi_no=be.upi_no where s.date BETWEEN '$start_date' AND '$end_date' order by s.id asc");
 		$data["result"] = $query->result();
 
 		$this->load->view("admin/header_footer/header",$data);
