@@ -543,7 +543,7 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 											echo " || <b>Set : $entry->whatsapp_set_chemist </b>";
 										} ?>
 									</div>
-									<div class="td_div1">xxx
+									<div class="td_div1">
 										<span class="span_final_chemist_id_<?= ($row_id); ?>">
 
 											<?php if(empty($textbox_final_chemist) && empty($row_from_text_find_chemist)){
@@ -567,7 +567,7 @@ $duble_tick = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" cla
 											<?php echo $row_final_chemist ?>
 										</span>
 										
-										<?php if($row_final_chemist!=5){ ?>
+										<?php if($row_final_status!=5){ ?>
 										<span class="text_find_match_edit edit_final_chemist_<?= ($row_id); ?>" onclick="edit_final_chemist('<?= ($row_id); ?>')" <?php if(empty($row_final_chemist)) { ?>style="display:none" <?php } ?>>
 											Edit <i class="fa fa-pencil" aria-hidden="true"></i>
 										</span>
