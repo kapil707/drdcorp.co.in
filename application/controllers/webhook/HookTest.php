@@ -382,6 +382,8 @@ class HookTest extends CI_Controller
 
             $where = array('id'=>$row->id);
             $dt = array('status'=>'1','gemini_text'=>$text,'transaction_id'=>$transaction_id,'upi_no'=>$upi_no,'amount'=>$amount);
+
+            print_r($dt);
             $this->BankWebhookModel->update_message($dt,$where);
         }
     }
