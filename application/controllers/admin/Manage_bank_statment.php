@@ -441,11 +441,12 @@ class Manage_bank_statment extends CI_Controller {
 				$dt = array(
 					'final_status' => '5',
 				);
-				//$this->BankModel->edit_fun("tbl_bank_processing", $dt,$where);
+				$this->BankModel->edit_fun("tbl_bank_processing", $dt,$where);
 
 				$query = $this->BankModel->select_query("select * from tbl_bank_processing where upi_no='$upi_no'");
 				$row = $query->row();
 				if(!empty($row)){
+					$bank_processing_id = $row->id;
 					$vdt = $row->date;
 					$amount = $row->amount;
 					$chemist_id = $row->final_chemist;
@@ -478,6 +479,7 @@ class Manage_bank_statment extends CI_Controller {
 						'bank_reference'=>$bank_reference,
 						'bname'=>$bname,
 						'invoice'=>$gstvNo,
+						'bank_processing_id'=>$bank_processing_id,
 						'status'=>0,);
 					$this->BankModel->insert_fun("tbl_bank_essysol", $dt);
 				}
@@ -485,14 +487,20 @@ class Manage_bank_statment extends CI_Controller {
 		}
 		
 		if(isset($_POST["checkbox-delete"])){
-			$upi_no = $_POST['upi_no'];
-			$where = array(
-				'upi_no' => $upi_no,
-			);
-			$dt = array(
-				'checkbox_done_status' => '0',
-			);
-			$this->BankModel->edit_fun("tbl_bank_processing", $dt,$where);
+			$essysol_id2 = $_POST['essysol_id2'];
+
+			$query = $this->BankModel->select_query("select bank_processing_id from tbl_bank_essysol where id='$essysol_id2'");
+			$row = $query->row();
+			if(!empty($row->bank_processing_id)){
+
+				$where = array('id' => $row->bank_processing_id,);
+				$dt = array('final_status' => '4',);
+				$this->BankModel->edit_fun("tbl_bank_processing", $dt,$where);
+
+			}
+
+			$where = array('id' => $essysol_id2,);
+			$this->BankModel->delete_fun("tbl_bank_processing",$where);
 		}
 
 		$query = $this->BankModel->select_query("SELECT be.essysol_id,be.status as essysol_status,be.id as essysol_id2,s.*,p.final_chemist as chemist_id,p.invoice_text as invoice_number,p.id as pid,p.final_status from tbl_statment as s left JOIN tbl_bank_processing as p on p.upi_no=s.customer_reference left join tbl_bank_essysol as be on p.upi_no=be.upi_no where s.date BETWEEN '$start_date' AND '$end_date' order by s.id asc");
