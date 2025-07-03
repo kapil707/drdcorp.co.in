@@ -434,54 +434,59 @@ class Manage_bank_statment extends CI_Controller {
 
 			// Print the IDs of selected checkbox
 			foreach ($selectedCheckboxes as $upi_no) {
-				//echo $upi_no;
-				$where = array(
-					'upi_no' => $upi_no,
-				);
-				$dt = array(
-					'final_status' => '5',
-				);
-				$this->BankModel->edit_fun("tbl_bank_processing", $dt,$where);
-
-				$query = $this->BankModel->select_query("select * from tbl_bank_processing where upi_no='$upi_no'");
-				$row = $query->row();
-				if(!empty($row)){
-					$bank_processing_id = $row->id;
-					$vdt = $row->date;
-					$amount = $row->amount;
-					$chemist_id = $row->final_chemist;
-					$bacno = "9972";
-					$mode = "T";
-					$chqno = "RTGS";
-					$rcptno = $upi_no;
-					$bank_reference = "";
-					$bname = "";
-					$gstvNo = "";
-					$invoice = $row->invoice_text; 
-					if(!empty($invoice)){
-						$parts = explode("||", $invoice);
-						foreach($parts as $invoice) {
-							preg_match('/GstvNo:([\w-]+)/', $invoice, $matches);
-							$gstvNo.= $matches[1].',';
-						}
-						$gstvNo = substr($gstvNo, 0, -1);
-					}
-					/************************************ */
+				
+				$query = $this->BankModel->select_query("select id from tbl_bank_essysol where upi_no='$upi_no'");
+				$row1 = $query->row();
+				if(empty($row1->id)){
+					//echo $upi_no;
+					$where = array(
+						'upi_no' => $upi_no,
+					);
 					$dt = array(
-						'vdt'=>$vdt,
-						'amount'=>$amount,
-						'chemist_id'=>$chemist_id,
-						'bacno'=>$bacno,
-						'mode'=>$mode,
-						'chqno'=>$chqno,
-						'rcptno'=>$rcptno,
-						'upi_no'=>$upi_no,
-						'bank_reference'=>$bank_reference,
-						'bname'=>$bname,
-						'invoice'=>$gstvNo,
-						'bank_processing_id'=>$bank_processing_id,
-						'status'=>0,);
-					$this->BankModel->insert_fun("tbl_bank_essysol", $dt);
+						'final_status' => '5',
+					);
+					$this->BankModel->edit_fun("tbl_bank_processing", $dt,$where);
+
+					$query = $this->BankModel->select_query("select * from tbl_bank_processing where upi_no='$upi_no'");
+					$row = $query->row();
+					if(!empty($row)){
+						$bank_processing_id = $row->id;
+						$vdt = $row->date;
+						$amount = $row->amount;
+						$chemist_id = $row->final_chemist;
+						$bacno = "9972";
+						$mode = "T";
+						$chqno = "RTGS";
+						$rcptno = $upi_no;
+						$bank_reference = "";
+						$bname = "";
+						$gstvNo = "";
+						$invoice = $row->invoice_text; 
+						if(!empty($invoice)){
+							$parts = explode("||", $invoice);
+							foreach($parts as $invoice) {
+								preg_match('/GstvNo:([\w-]+)/', $invoice, $matches);
+								$gstvNo.= $matches[1].',';
+							}
+							$gstvNo = substr($gstvNo, 0, -1);
+						}
+						/************************************ */
+						$dt = array(
+							'vdt'=>$vdt,
+							'amount'=>$amount,
+							'chemist_id'=>$chemist_id,
+							'bacno'=>$bacno,
+							'mode'=>$mode,
+							'chqno'=>$chqno,
+							'rcptno'=>$rcptno,
+							'upi_no'=>$upi_no,
+							'bank_reference'=>$bank_reference,
+							'bname'=>$bname,
+							'invoice'=>$gstvNo,
+							'bank_processing_id'=>$bank_processing_id,
+							'status'=>0,);
+						$this->BankModel->insert_fun("tbl_bank_essysol", $dt);
+					}
 				}
 			}
 		}
