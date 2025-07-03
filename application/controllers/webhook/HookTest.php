@@ -52,7 +52,7 @@ class HookTest extends CI_Controller
 
     public function test(){
 
-        $query = $this->BankModel->select_query("SELECT * FROM `webhook_messages` where media_id!='' and status=0 ");
+        $query = $this->BankModel->select_query("SELECT * FROM `webhook_messages` where media_id!='' and status=0 limit 1");
 	    $row = $query->row();
         if(!empty($row->id)){
 
