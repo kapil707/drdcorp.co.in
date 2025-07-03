@@ -106,80 +106,92 @@ class HookTest extends CI_Controller
             $transaction_id = "";
             $upi_no = "";
 			$amount = "0.0";
+
+            // Find all ₹ amounts
+            preg_match_all('/₹?\s?([\d,]+)(?:\.\d{2})?/', $text, $matches);
+
+            // Clean and select the highest amount
+            $amount = array_map(function($val) {
+                return (int) str_replace(',', '', $val);
+            }, $matches[1]);
+
+            // Heuristic: choose the largest ₹ value
+            $amount = !empty($amount) ? max($amount) : null;
+
 			//********amount********** */
 			// Regular Expression to extract amount.
-			preg_match('/[₹\?]([\d,]+)/', $text, $matches);
-			// Check if match is found
-			if (!empty($matches[1])) {
-				$amount = $matches[1];
-			}
-			if($amount == "0.0"){
-				preg_match('/[₹\?]([\d,]+(?:\.\d{1,2})?)/', $text, $matches);
-				// Check if match is found
-				if (!empty($matches[1])) {
-					$amount = $matches[1];
-				}
-			}
-			if($amount == "0.0"){
-				preg_match('/Amount:\s*([\d,]+)/', $text, $matches);
-				// Check if match is found
-				if (!empty($matches[1])) {
-					$amount = $matches[1];
-				}
-			}
-			if($amount == "0.0"){
-				preg_match('/\*\*Transfer Amount:\*\* ([\d,]+\.\d{2})/', $text, $matches);
-				// Check if match is found
-				if (!empty($matches[1])) {
-					$amount = $matches[1];
-				}
-			}
-			if($amount == "0.0"){
-				preg_match('/\*\*Transfer Amount:\*\* ([\d,]+\.\d{2})/', $text, $matches);
-				// Check if match is found
-				if (!empty($matches[1])) {
-					$amount = $matches[1];
-				}
-			}
-			if($amount == "0.0"){
-				preg_match_all('/\?[\s]*([\d,.]+)/', $text, $matches);
+			// preg_match('/[₹\?]([\d,]+)/', $text, $matches);
+			// // Check if match is found
+			// if (!empty($matches[1])) {
+			// 	$amount = $matches[1];
+			// }
+			// if($amount == "0.0"){
+			// 	preg_match('/[₹\?]([\d,]+(?:\.\d{1,2})?)/', $text, $matches);
+			// 	// Check if match is found
+			// 	if (!empty($matches[1])) {
+			// 		$amount = $matches[1];
+			// 	}
+			// }
+			// if($amount == "0.0"){
+			// 	preg_match('/Amount:\s*([\d,]+)/', $text, $matches);
+			// 	// Check if match is found
+			// 	if (!empty($matches[1])) {
+			// 		$amount = $matches[1];
+			// 	}
+			// }
+			// if($amount == "0.0"){
+			// 	preg_match('/\*\*Transfer Amount:\*\* ([\d,]+\.\d{2})/', $text, $matches);
+			// 	// Check if match is found
+			// 	if (!empty($matches[1])) {
+			// 		$amount = $matches[1];
+			// 	}
+			// }
+			// if($amount == "0.0"){
+			// 	preg_match('/\*\*Transfer Amount:\*\* ([\d,]+\.\d{2})/', $text, $matches);
+			// 	// Check if match is found
+			// 	if (!empty($matches[1])) {
+			// 		$amount = $matches[1];
+			// 	}
+			// }
+			// if($amount == "0.0"){
+			// 	preg_match_all('/\?[\s]*([\d,.]+)/', $text, $matches);
 
-				if (!empty($matches[1])) {
-					$amount = !empty($matches[1][0]) ? $matches[1][0] : $matches[1][1] ?? '0.0';
-				}
-			}
+			// 	if (!empty($matches[1])) {
+			// 		$amount = !empty($matches[1][0]) ? $matches[1][0] : $matches[1][1] ?? '0.0';
+			// 	}
+			// }
 
-			if($amount == "0.0"){
-				preg_match('/Rs ([\d,]+\.?\d{0,2})/', $text, $matches);
-				// Check if match is found
-				if (!empty($matches[1])) {
-					$amount = $matches[1];
-				}
-			}
+			// if($amount == "0.0"){
+			// 	preg_match('/Rs ([\d,]+\.?\d{0,2})/', $text, $matches);
+			// 	// Check if match is found
+			// 	if (!empty($matches[1])) {
+			// 		$amount = $matches[1];
+			// 	}
+			// }
 
-			if($amount == "0.0"){
-				preg_match('/INR ([\d,]+\.?\d{0,2})/', $text, $matches);
-				// Check if match is found
-				if (!empty($matches[1])) {
-					$amount = $matches[1];
-				}
-			}
+			// if($amount == "0.0"){
+			// 	preg_match('/INR ([\d,]+\.?\d{0,2})/', $text, $matches);
+			// 	// Check if match is found
+			// 	if (!empty($matches[1])) {
+			// 		$amount = $matches[1];
+			// 	}
+			// }
 
-			if($amount == "0.0"){
-				preg_match('/\bRs\.\s?(\d{1,3}(?:,\d{3})*\.\d{2})\b/', $text, $matches);
-				// Check if match is found
-				if (!empty($matches[1])) {
-					$amount = $matches[1];
-				}
-			}
+			// if($amount == "0.0"){
+			// 	preg_match('/\bRs\.\s?(\d{1,3}(?:,\d{3})*\.\d{2})\b/', $text, $matches);
+			// 	// Check if match is found
+			// 	if (!empty($matches[1])) {
+			// 		$amount = $matches[1];
+			// 	}
+			// }
 
-			if($amount == "0.0"){
-				preg_match('/\b(\d{1,3}(?:,\d{3})*\.\d{2})\b/', $text, $matches);
-				// Check if match is found
-				if (!empty($matches[1])) {
-					$amount = $matches[1];
-				}
-			}
+			// if($amount == "0.0"){
+			// 	preg_match('/\b(\d{1,3}(?:,\d{3})*\.\d{2})\b/', $text, $matches);
+			// 	// Check if match is found
+			// 	if (!empty($matches[1])) {
+			// 		$amount = $matches[1];
+			// 	}
+			// }
 
             /************************************************** */
             if(empty($transaction_id)){
