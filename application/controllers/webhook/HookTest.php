@@ -56,8 +56,8 @@ class HookTest extends CI_Controller
         $apiKey = $this->Scheme_Model->get_website_data("gemini_apikey");
 
         $query = $this->BankModel->select_query("SELECT * FROM `webhook_messages` where media_id!='' and status=0 limit 10");
-	    $row = $query->row();
-        if(!empty($row->id)){
+	    $result = $query->result();
+        foreach($result as $row) {
 
             $image_url = 'https://api.wassi.chat/v1/chat/66faf180345d460e9984e4ac/files/'.$row->media_id.'/download?token=531fe5caf0e132bdb6000bf01ed66d8cfb75b53606cc8f6eed32509d99d74752f47f288db155557e';
 
