@@ -251,7 +251,7 @@ class HookTest extends CI_Controller
             }
 
             if(empty($transaction_id)){
-                preg_match('/Transaction ID\s*:\s*([A-Z0-9 ]{5,})/i', $text, $matches);
+                preg_match('/Transaction ID[:\s]*([A-Z0-9 ]{10,})/i', $text, $matches);
                 if (!empty($matches[1])) {
                     $transaction_id = $matches[1];
                 }
