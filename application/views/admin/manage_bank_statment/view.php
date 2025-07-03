@@ -140,13 +140,13 @@
 							<td>
 								<?php if(empty($row->essysol_id2)){ ?>
 									<label><input type="checkbox" name="checkbox[]" value="<?php echo $row->customer_reference; ?>">Checkbox</label>
-								<?php } else {?>
+								<?php } else {
+									if(!empty($row->essysol_id)){
+										echo "Essysol Id : ".$row->essysol_id;
+									} else { ?>
 								 	<input type="hidden" name="upi_no" value="<?php echo $row->customer_reference; ?>">
 									<input type="submit" name="checkbox-delete" value="Delete" class="btn btn-danger">
-								<?php } ?>
-								<?php if(!empty($row->essysol_id)){ ?>
-									<?php echo $row->essysol_id; ?>
-								<?php } ?>
+								<?php } }?>
 							</td>
 						</tr>
 						<?php } ?>
