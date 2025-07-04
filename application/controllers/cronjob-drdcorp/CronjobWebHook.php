@@ -52,7 +52,11 @@ class CronjobWebHook extends CI_Controller
 		$response = curl_exec($ch);
 		curl_close($ch);
 
-		$data = json_decode($response, true);
+		$clean_json = trim($response);
+		$clean_json = preg_replace('/^json|$/', '', $clean_json); // remove markdown
+
+		// Step 2: Decode the JSON into a PHP array
+		$data = json_decode(trim($clean_json), true);
 
 		print_r($data);
 	}
