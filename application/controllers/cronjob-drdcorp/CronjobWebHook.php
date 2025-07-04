@@ -55,17 +55,7 @@ class CronjobWebHook extends CI_Controller
 		$data = json_decode($response, true);
 
 		print_r($data);
-
-		$status = "0";
-		if (isset($data['candidates'][0]['content']['parts'][0]['text'])) {
-			$text = $data['candidates'][0]['content']['parts'][0]['text'];
-			$status = "1";
-		} else {
-			$text = "Error or no text found";
-			$status = "2";
-		}
-		echo $text;
-    }
+	}
 
 	public function get_gemini_response(){
 
