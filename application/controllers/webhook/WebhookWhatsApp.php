@@ -37,7 +37,7 @@ class WebhookWhatsApp extends CI_Controller
             'receiver_to' => $to,
             'receiver_from' => $from,
             'receiver_fromnumber' => $fromnumber,
-            'message_body' => $body,
+            'body' => $body,
             'timestamp' => $timestamp,
             'media_id' => $media_id,
             'reply_id' => $quoted_wid,

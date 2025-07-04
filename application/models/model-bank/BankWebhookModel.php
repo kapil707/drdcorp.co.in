@@ -18,4 +18,26 @@ class BankWebhookModel extends CI_Model {
 			return false;
 		}
 	}
+
+	public function update_webhook_reply_message(){
+		
+		$result = $this->BankModel->select_query("SELECT reply.body AS reply_body, wm.id as whatsapp_id FROM tbl_whatsapp_message AS wm LEFT JOIN tbl_bank_processing AS bp ON bp.whatsapp_id = wm.id LEFT JOIN tbl_whatsapp_message AS reply ON reply.reply_id = wm.message_id WHERE wm.reply_status=0 and reply.body!=''");
+		$result = $result->result();
+		foreach($result as $row) {
+			if($row->reply_body){
+
+				$whatsapp_id 	= $row->whatsapp_id;
+				$reply_body 	= trim($row->reply_body);
+
+				$where = array(
+					'id' => $whatsapp_id,
+				);
+				$dt = array(
+					'reply_body'=>$reply_body,
+					'reply_status'=>1,
+				);
+				$this->BankModel->edit_fun("tbl_whatsapp_message", $dt,$where);
+			}
+		}
+	}
 }
