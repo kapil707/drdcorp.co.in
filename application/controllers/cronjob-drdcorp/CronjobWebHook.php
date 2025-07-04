@@ -37,7 +37,8 @@ class CronjobWebHook extends CI_Controller
                             ]
                         ],
                         [
-                            "text" => "From this document text, extract the following in JSON: transaction_id, amount, date, account_number, ifsc_code,utr,upi. Return only valid JSON:"
+                            //"text" => "Extract all readable text from this image."
+							"text" => "From this document text, extract the following in JSON: transaction_id, amount, date, account_number, ifsc_code,utr,upi ref. no. Return only valid JSON:"
                         ]
                     ]
                 ]]
@@ -65,9 +66,6 @@ class CronjobWebHook extends CI_Controller
                 $text = "Error or no text found";
 				$status = "2";
             }
-
-            $text = str_replace("Here's a transcription of the visible text in the image:", '', $text);
-            print_r($text);
 
             $transaction_id = "";
             $upi_no = "";
