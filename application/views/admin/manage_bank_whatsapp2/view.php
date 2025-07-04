@@ -156,7 +156,7 @@
 
 							$media_id = $message->media_id;
 
-							$timestamp = $message->timestamp ? $message->timestamp : "timestamp not found";
+							$timestamp = $message->timestamp ? $message->timestamp : "";
 							
 							$chemist_id = "";
 							if(!empty($message->find_chemist))
@@ -181,7 +181,9 @@
 									<?php echo $id; ?>
 								</td>
 								<td>
-									<?php echo date('d-M-y \a\t H:i:s', $timestamp); ?>
+									<?php 
+									if(!empty($timestamp)){
+									echo date('d-M-y \a\t H:i:s', $timestamp); }?>
 								</td>
 								<td>
 									<?php echo $receiver_fromnumber; ?>
