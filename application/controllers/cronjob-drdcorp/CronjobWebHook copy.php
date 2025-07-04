@@ -14,59 +14,6 @@ class CronjobWebHook extends CI_Controller
 		$this->BankWebhookModel->update_webhook_reply_message();
 	}
 
-	public function test(){
-
-        $apiKey = $this->Scheme_Model->get_website_data("gemini_apikey");
-
-        $image_url = 'https://api.wassi.chat/v1/chat/66faf180345d460e9984e4ac/files/68675f97ddc86bce8a188962/download?token=531fe5caf0e132bdb6000bf01ed66d8cfb75b53606cc8f6eed32509d99d74752f47f288db155557e';
-
-        $imageData = base64_encode(file_get_contents($image_url));
-
-		$payload = [
-			"contents" => [[
-				"role" => "user",
-				"parts" => [
-					[
-						"inline_data" => [
-							"mime_type" => "image/jpeg",
-							"data" => $imageData
-						]
-					],
-					[
-						//"text" => "Extract all readable text from this image."
-						"text" => "From this document text, extract the following in JSON: 'transaction_id, amount, date, account_number, ifsc_code,utr,upi ref. no' Return only valid JSON:"
-					]
-				]
-			]]
-		];
-
-		$url = "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=" . $apiKey;
-
-		$ch = curl_init($url);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
-		curl_setopt($ch, CURLOPT_HTTPHEADER, [
-			'Content-Type: application/json'
-		]);
-
-		$response = curl_exec($ch);
-		curl_close($ch);
-
-		$data = json_decode($response, true);
-
-		print_r($data);
-
-		$status = "0";
-		if (isset($data['candidates'][0]['content']['parts'][0]['text'])) {
-			$text = $data['candidates'][0]['content']['parts'][0]['text'];
-			$status = "1";
-		} else {
-			$text = "Error or no text found";
-			$status = "2";
-		}
-		echo $text;
-    }
-
 	public function get_gemini_response(){
 
         $apiKey = $this->Scheme_Model->get_website_data("gemini_apikey");
