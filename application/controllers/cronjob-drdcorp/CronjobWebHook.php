@@ -57,10 +57,13 @@ class CronjobWebHook extends CI_Controller
 
             $data = json_decode($response, true);
 
+			$status = "0";
             if (isset($data['candidates'][0]['content']['parts'][0]['text'])) {
                 $text = $data['candidates'][0]['content']['parts'][0]['text'];
+				$status = "1";
             } else {
-                $text = "Error or no text found:";
+                $text = "Error or no text found";
+				$status = "2";
             }
 
             $text = str_replace("Here's a transcription of the visible text in the image:", '', $text);
@@ -392,7 +395,7 @@ class CronjobWebHook extends CI_Controller
 			$amount = trim($amount);
 
             $where = array('id'=>$row->id);
-            $dt = array('status'=>'1','gemini_text'=>$text,'transaction_id'=>$transaction_id,'upi_no'=>$upi_no,'amount'=>$amount);
+            $dt = array('status'=>$status,'gemini_text'=>$text,'transaction_id'=>$transaction_id,'upi_no'=>$upi_no,'amount'=>$amount);
 
             print_r($dt);
             $this->BankWebhookModel->update_message($dt,$where);
