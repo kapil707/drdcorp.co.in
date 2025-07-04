@@ -37,7 +37,7 @@ class CronjobWebHook extends CI_Controller
                             ]
                         ],
                         [
-                            "text" => "From this document text, extract the following in JSON: transaction_id, amount, date, account_number, ifsc_code,utr. Return only valid JSON:"
+                            "text" => "From this document text, extract the following in JSON: transaction_id, amount, date, account_number, ifsc_code,utr,upi. Return only valid JSON:"
                         ]
                     ]
                 ]]
