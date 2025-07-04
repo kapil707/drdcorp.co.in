@@ -23,7 +23,9 @@ class WebhookWhatsApp extends CI_Controller
         $id   = isset($data['id']) ? $data['id'] : '';
         $to   = isset($data['to']) ? $data['to'] : '';
         $from = isset($data['from']) ? $data['from'] : '';
+        $fromNumber = isset($data['fromNumber']) ? $data['fromNumber'] : '';
         $body = isset($data['body']) ? $data['body'] : null;
+        $timestamp = isset($data['timestamp']) ? $data['timestamp'] : '';
 
         $media_id = isset($data['media']['id']) ? $data['media']['id'] : null;
         $quoted_wid = isset($data['quoted']['wid']) ? $data['quoted']['wid'] : null;
@@ -34,7 +36,9 @@ class WebhookWhatsApp extends CI_Controller
             'message_id' => $id,
             'receiver_to' => $to,
             'receiver_from' => $from,
+            'receiver_fromNumber' => $fromNumber,
             'message_body' => $body,
+            'timestamp' => $timestamp,
             'media_id' => $media_id,
             'reply_id' => $quoted_wid,
             'date'=>$date,
