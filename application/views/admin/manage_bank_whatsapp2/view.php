@@ -148,7 +148,7 @@
 
 							$date = $message->date ? $message->date : "Date not found";
 
-							$from_number = $message->from_number ? $message->from_number : "Date not found";
+							$receiver_fromnumber = $message->receiver_fromnumber ? $message->receiver_fromnumber : "Date not found";
 							
 							$id = $message->id;
 							
@@ -181,10 +181,10 @@
 									<?php echo $id; ?>
 								</td>
 								<td>
-									<?php //echo date('d-M-y \a\t H:i:s', $timestamp); ?>
+									<?php echo date('d-M-y \a\t H:i:s', $timestamp); ?>
 								</td>
 								<td>
-									<?php echo $from_number; ?>
+									<?php echo $receiver_fromnumber; ?>
 								</td>
 								<td>
 									<?php echo $message_body; ?><br>
