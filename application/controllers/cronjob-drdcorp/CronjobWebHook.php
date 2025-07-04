@@ -52,21 +52,29 @@ class CronjobWebHook extends CI_Controller
 		$response = curl_exec($ch);
 		curl_close($ch);
 
-		$clean_json = trim($response);
-		$clean_json = preg_replace('/^json|$/', '', $clean_json); // remove markdown
+		$responseArray = json_decode($response, true);
 
-		// Step 2: Decode the JSON into a PHP array
-		$data = json_decode(trim($clean_json), true);
+		// Step 1: Extract Gemini's wrapped JSON text
+		$json_block = $responseArray['candidates'][0]['content']['parts'][0]['text'] ?? '';
 
-		echo "Transaction ID: " . ($data['transaction_id'] ?? 'N/A') . "\n";
-		echo "Amount: " . ($data['amount'] ?? 'N/A') . "\n";
-		echo "Date: " . ($data['date'] ?? 'N/A') . "\n";
-		echo "Account Number: " . ($data['account_number'] ?? 'N/A') . "\n";
-		echo "IFSC Code: " . ($data['ifsc_code'] ?? 'N/A') . "\n";
-		echo "UTR: " . ($data['utr'] ?? 'N/A') . "\n";
-		echo "UPI Ref No: " . ($data['upi ref. no'] ?? 'N/A') . "\n";
+		if ($json_block) {
+			// Step 2: Strip ```json and ``` from markdown
+			$clean_json = preg_replace('/^```json|```$/', '', trim($json_block));
 
-		print_r($data);
+			// Step 3: Decode into array
+			$data = json_decode(trim($clean_json), true);
+
+			// Step 4: Output each field
+			echo "Transaction ID: " . ($data['transaction_id'] ?? 'N/A') . "\n";
+			echo "Amount: " . ($data['amount'] ?? 'N/A') . "\n";
+			echo "Date: " . ($data['date'] ?? 'N/A') . "\n";
+			echo "Account Number: " . ($data['account_number'] ?? 'N/A') . "\n";
+			echo "IFSC Code: " . ($data['ifsc_code'] ?? 'N/A') . "\n";
+			echo "UTR: " . ($data['utr'] ?? 'N/A') . "\n";
+			echo "UPI Ref No: " . ($data['upi ref. no'] ?? 'N/A') . "\n";
+		} else {
+			echo "Gemini returned no usable response.\n";
+		}
 	}
 
 	public function get_gemini_response(){
