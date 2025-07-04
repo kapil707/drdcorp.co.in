@@ -94,7 +94,7 @@
 				<tbody>
 					<?php
 						foreach ($result as $message) {
-							$message_body = $message->message_body ? $message->message_body : "Body not found";
+							$message_body = $message->body ? $message->body : "Body not found";
 
 							$reply_body = $message->reply_body ? $message->reply_body : "";
 							if($reply_body)
