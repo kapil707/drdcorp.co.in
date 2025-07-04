@@ -41,6 +41,7 @@ class WebhookWhatsApp extends CI_Controller
             'timestamp' => $timestamp,
             'media_id' => $media_id,
             'reply_id' => $quoted_wid,
+            'reply_status' => 0,
             'date'=>$date,
         ];
 

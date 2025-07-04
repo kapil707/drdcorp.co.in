@@ -52,50 +52,6 @@
 			<input type="text" id="date-range" class="form-control" name="date-range" value="<?php echo $date_range ?>">
 		</div>
 		<div class="col-md-3">
-		<?php
-		/*$parmiter = '';
-		$curl = curl_init();
-			
-			curl_setopt_array(
-				$curl,
-				array(
-					CURLOPT_URL =>"http://192.46.214.43:5000/groups",
-					CURLOPT_RETURNTRANSFER => true,
-					CURLOPT_ENCODING => '',
-					CURLOPT_MAXREDIRS => 0,
-					CURLOPT_TIMEOUT => 300,
-					CURLOPT_FOLLOWLOCATION => true,
-					CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-					CURLOPT_CUSTOMREQUEST => 'GET',
-					CURLOPT_POSTFIELDS => $parmiter,
-					CURLOPT_HTTPHEADER => array(
-						'Content-Type: application/json',
-						'Authorization: Bearer THIRTEENWOLVESWENTHUNTINGBUT10CAMEBACK'
-					),
-				)
-			);
-
-			$response = curl_exec($curl);
-			//print_r($response);
-			curl_close($curl);
-
-			$data0 = json_decode($response, true); // Convert JSON string to associative array
-			?>
-			<select class="form-control" name="select_group">
-				<?php 
-				if (isset($data0['groups'])) {
-					foreach ($data0['groups'] as $groups) {
-						if(!empty($groups)){
-							?>
-							<option value="xxxx">
-								<?php echo $groups ?>
-							</option>
-							<?php
-						}
-					}
-				}
-				?>
-			</select> */ ?>
 		</div>
 		<div class="col-md-3">
 			<button type="submit" class="btn btn-info submit_button" name="Submit">
