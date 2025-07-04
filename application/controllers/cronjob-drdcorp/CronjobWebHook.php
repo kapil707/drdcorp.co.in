@@ -37,7 +37,7 @@ class CronjobWebHook extends CI_Controller
                             ]
                         ],
                         [
-                            "text" => "Extract all readable text from this image."
+                            "text" => "From this document text, extract the following in JSON: transaction_id, amount, date, account_number, ifsc_code. Return only valid JSON:"
                         ]
                     ]
                 ]]
