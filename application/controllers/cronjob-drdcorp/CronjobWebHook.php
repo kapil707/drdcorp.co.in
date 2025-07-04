@@ -58,6 +58,14 @@ class CronjobWebHook extends CI_Controller
 		// Step 2: Decode the JSON into a PHP array
 		$data = json_decode(trim($clean_json), true);
 
+		echo "Transaction ID: " . ($data['transaction_id'] ?? 'N/A') . "\n";
+		echo "Amount: " . ($data['amount'] ?? 'N/A') . "\n";
+		echo "Date: " . ($data['date'] ?? 'N/A') . "\n";
+		echo "Account Number: " . ($data['account_number'] ?? 'N/A') . "\n";
+		echo "IFSC Code: " . ($data['ifsc_code'] ?? 'N/A') . "\n";
+		echo "UTR: " . ($data['utr'] ?? 'N/A') . "\n";
+		echo "UPI Ref No: " . ($data['upi ref. no'] ?? 'N/A') . "\n";
+
 		print_r($data);
 	}
 
