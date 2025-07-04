@@ -36,7 +36,7 @@ class BankWebhookModel extends CI_Model {
 					'reply_body'=>$reply_body,
 					'reply_status'=>1,
 				);
-				$this->BankModel->edit_fun("tbl_whatsapp_message", $dt,$where);
+				$this->BankModel->edit_fun("webhook_messages", $dt,$where);
 			}
 		}
 	}
