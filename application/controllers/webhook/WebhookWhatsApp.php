@@ -31,6 +31,8 @@ class WebhookWhatsApp extends CI_Controller
         $quoted_wid = isset($data['quoted']['wid']) ? $data['quoted']['wid'] : null;
 
         $date = date('Y-m-d');
+        $status_time = date("YmdHi", strtotime('+2 minutes', time()));
+
         // Step 5: Prepare data for insert
         $save_data = [
             'message_id' => $id,
@@ -43,6 +45,8 @@ class WebhookWhatsApp extends CI_Controller
             'reply_id' => $quoted_wid,
             'reply_status' => 0,
             'date'=>$date,
+            'status'=>$status,
+            'status_time'=>$status_time,
         ];
 
         // Step 6: Save to database
