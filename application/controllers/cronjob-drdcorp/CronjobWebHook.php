@@ -1,12 +1,17 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class CronjobGemini extends CI_Controller 
+class CronjobWebHook extends CI_Controller 
 {
 	public function __construct(){
 		parent::__construct();
 		//Load model
         $this->load->model("model-bank/BankModel");
         $this->load->model('model-bank/BankWebhookModel');
+	}
+
+	public function update_webhook_reply_message(){
+		echo "update_webhook_reply_message";
+		$this->BankWebhookModel->update_webhook_reply_message();
 	}
 
 	public function get_gemini_response(){
