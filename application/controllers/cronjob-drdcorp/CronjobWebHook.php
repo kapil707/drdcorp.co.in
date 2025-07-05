@@ -54,10 +54,10 @@ class CronjobWebHook extends CI_Controller
 
 		$responseArray = json_decode($response, true);
 
-		print_r($responseArray);
-
 		// Step 1: Extract Gemini's wrapped JSON text
 		$json_block = $responseArray['candidates'][0]['content']['parts'][0]['text'] ?? '';
+
+		print_r($json_block);
 
 		if ($json_block) {
 			// Step 2: Strip ```json and ``` from markdown
