@@ -56,8 +56,9 @@ class CronjobWebHook extends CI_Controller
 		// Step 1: Extract Gemini's wrapped JSON text
 		$json_block = $responseArray['candidates'][0]['content']['parts'][0]['text'] ?? '';
 
-		//print_r($responseArray);
+		print_r($responseArray);
 
+		die();
 		if ($json_block) {
 			// Step 2: Strip ```json and ``` from markdown
 			$clean_json = preg_replace('/^```json|```$/', '', trim($json_block));
