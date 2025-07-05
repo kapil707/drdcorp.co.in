@@ -33,8 +33,8 @@ class CronjobWebHook extends CI_Controller
 						]
 					],
 					[
-						//"text" => "Extract all readable text from this image."
-						"text" => "i need to get all text in this image and this feilds get in json format 'transaction_id, amount, date, account number, ifsc code,utr,upi ref. no'"
+						"text" => "Extract all readable text from this image.",
+						"json" => "this feilds get in json format 'transaction_id, amount, date, account number, ifsc code,utr,upi ref. no'"
 					]
 				]
 			]]
@@ -57,7 +57,7 @@ class CronjobWebHook extends CI_Controller
 		// Step 1: Extract Gemini's wrapped JSON text
 		$json_block = $responseArray['candidates'][0]['content']['parts'][0]['text'] ?? '';
 
-		print_r($json_block);
+		print_r($responseArray);
 
 		if ($json_block) {
 			// Step 2: Strip ```json and ``` from markdown
