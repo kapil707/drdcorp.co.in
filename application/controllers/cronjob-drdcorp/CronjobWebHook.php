@@ -56,7 +56,7 @@ class CronjobWebHook extends CI_Controller
 		// Step 1: Extract Gemini's wrapped JSON text
 		$json_block = $responseArray['candidates'][0]['content']['parts'][0]['text'] ?? '';
 
-		print_r($responseArray);
+		//print_r($responseArray);
 
 		if ($json_block) {
 			// Step 2: Strip ```json and ``` from markdown
@@ -65,6 +65,7 @@ class CronjobWebHook extends CI_Controller
 			// Step 3: Decode into array
 			$data = json_decode(trim($clean_json), true);
 
+			echo $gemini_text = ($data['all text in image'] ?? 'N/A');
 			// Step 4: Output each field
 			echo "Transaction ID: " . ($data['transaction_id'] ?? 'N/A') . "\n";
 			echo "Amount: " . ($data['amount'] ?? 'N/A') . "\n";
