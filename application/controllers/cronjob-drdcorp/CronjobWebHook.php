@@ -74,7 +74,7 @@ class CronjobWebHook extends CI_Controller
 			echo "Account Number: " . ($data['account_number'] ?? 'N/A') . "\n";
 			echo "IFSC Code: " . ($data['ifsc_code'] ?? 'N/A') . "\n";
 			echo "UTR: " . ($data['utr'] ?? 'N/A') . "\n";
-			echo "UPI Ref No: " . ($data['upi ref. no'] ?? 'N/A') . "\n";
+			echo "UPI Ref No: " . ($data['upi ref. no.'] ?? 'N/A') . "\n";
 		} else {
 			echo "Gemini returned no usable response.\n";
 		}
@@ -153,7 +153,7 @@ class CronjobWebHook extends CI_Controller
 				$account_number = ($data['account_number'] ?? 'N/A');
 				$ifsc_code = ($data['ifsc_code'] ?? 'N/A');
 				$utr = ($data['utr'] ?? 'N/A');
-				$upi_no =($data['upi ref. no'] ?? 'N/A');
+				$upi_no =($data['upi ref. no.'] ?? 'N/A');
 				$status = 1;
 			} else {
 				echo "Gemini returned no usable response.\n";
