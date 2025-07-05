@@ -102,7 +102,7 @@ class CronjobWebHook extends CI_Controller
                         ],
                         [
                             //"text" => "Extract all readable text from this image."
-							"text" => "From this document text, extract the following in JSON: 'transaction_id, amount, date, account_number, ifsc_code,utr,upi ref. no' Return only valid JSON:"
+							"text" => "Extract the following fields from the image and return them as a valid JSON object with only these keys: all text in image,transaction_id, amount, date, account_number, ifsc_code, utr, upi ref. no. Do not include any explanation or extra text. Only return the JSON object."
                         ]
                     ]
                 ]]
@@ -143,6 +143,7 @@ class CronjobWebHook extends CI_Controller
 				// Step 3: Decode into array
 				$data = json_decode(trim($clean_json), true);
 
+				$gemini_text = ($data['all text in image'] ?? 'N/A');
 				// Step 4: Output each field
 				$transaction_id = ($data['transaction_id'] ?? 'N/A');
 				$amount = ($data['amount'] ?? 'N/A');
@@ -167,7 +168,7 @@ class CronjobWebHook extends CI_Controller
 			$upi_no = trim($upi_no);
 
             $where = array('id'=>$row->id);
-            $dt = array('status'=>$status,'gemini_text'=>$text,'transaction_id'=>$transaction_id,'amount'=>$amount,'account_number'=>$account_number,'ifsc_code'=>$ifsc_code,'upi_no'=>$upi_no,);
+            $dt = array('status'=>$status,'gemini_text'=>$gemini_text,'transaction_id'=>$transaction_id,'amount'=>$amount,'account_number'=>$account_number,'ifsc_code'=>$ifsc_code,'upi_no'=>$upi_no,);
 
             print_r($dt);
             $this->BankWebhookModel->update_message($dt,$where);
