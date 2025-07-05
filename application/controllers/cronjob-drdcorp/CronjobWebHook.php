@@ -18,7 +18,7 @@ class CronjobWebHook extends CI_Controller
 
         $apiKey = $this->Scheme_Model->get_website_data("gemini_apikey");
 
-        $image_url = 'https://api.wassi.chat/v1/chat/66faf180345d460e9984e4ac/files/68688797ddc86bce8a1dce70/download?token=531fe5caf0e132bdb6000bf01ed66d8cfb75b53606cc8f6eed32509d99d74752f47f288db155557e';
+        $image_url = 'https://api.wassi.chat/v1/chat/66faf180345d460e9984e4ac/files/6868943eddc86bce8a1de6d5/download?token=531fe5caf0e132bdb6000bf01ed66d8cfb75b53606cc8f6eed32509d99d74752f47f288db155557e';
 
         $imageData = base64_encode(file_get_contents($image_url));
 
