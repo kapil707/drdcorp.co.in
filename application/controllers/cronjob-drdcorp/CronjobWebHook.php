@@ -33,7 +33,7 @@ class CronjobWebHook extends CI_Controller
 						]
 					],
 					[
-						"text" => "Extract the following fields from the image and return them as a valid JSON object with only these keys: transaction_id, amount, date, account_number, ifsc_code, utr, upi ref. no. Do not include any explanation or extra text. Only return the JSON object."
+						"text" => "Extract the following fields from the image and return them as a valid JSON object with only these keys: all text in image,transaction_id, amount, date, account_number, ifsc_code, utr, upi ref. no. Do not include any explanation or extra text. Only return the JSON object."
 					]
 				]
 			]]
