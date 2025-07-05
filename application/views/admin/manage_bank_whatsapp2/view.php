@@ -157,10 +157,10 @@
 									<br>
 									<?php if(!empty($message->transaction_id)){ ?>
 										<b>Transaction Id </b>: <?php echo $message->transaction_id; ?>
-									<?php } ?>
+									<?php } ?><br>
 									<?php if(!empty($message->utr)){ ?>
 										<b>UTR </b>: <?php echo $message->utr; ?>
-									<?php } ?>
+									<?php } ?><br>
 									<?php if(!empty($message->upi_no)){ ?>
 										<b>UPI No </b>: <?php echo $message->upi_no; ?>
 									<?php } ?>
