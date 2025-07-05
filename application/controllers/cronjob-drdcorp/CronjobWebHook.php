@@ -169,7 +169,7 @@ class CronjobWebHook extends CI_Controller
 			$upi_no = trim($upi_no);
 
             $where = array('id'=>$row->id);
-            $dt = array('status'=>$status,'gemini_text'=>$gemini_text,'transaction_id'=>$transaction_id,'amount'=>$amount,'account_number'=>$account_number,'ifsc_code'=>$ifsc_code,'upi_no'=>$upi_no,);
+            $dt = array('status'=>$status,'gemini_text'=>$gemini_text,'transaction_id'=>$transaction_id,'amount'=>$amount,'account_number'=>$account_number,'ifsc_code'=>$ifsc_code,'utr'=>$utr,'upi_no'=>$upi_no,);
 
             print_r($dt);
             $this->BankWebhookModel->update_message($dt,$where);
